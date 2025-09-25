@@ -1,0 +1,10 @@
+
+<h2 class=" text-2xl text-center">Comparador de discos</h2>
+<section class="flex  flex-row-reverse justify-between
+px-50 m-10">
+<!-- (discoEnviar)="recibirDiscoDeseado($event)" -->
+<disco-deseado-component ></disco-deseado-component>
+<!-- (discoEnviar)="recibirDiscoExistente($event)" -->
+  <disco-existente-component ></disco-existente-component>
+  <button class='btn btn-primary' (click)="enviarDiscos()">Buscar</button>
+</section>

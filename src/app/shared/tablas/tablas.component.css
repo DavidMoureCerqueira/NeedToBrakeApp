@@ -1,0 +1,32 @@
+/* .container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, fr);
+  border:2px solid chartreuse;
+  border-radius: 5px;
+
+}
+
+*/
+
+div div{
+
+   display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+
+}
+
+input[type="text"]{
+  font-size: medium;
+  max-width:100px;
+  background-color: rgb(180, 171, 171);
+  padding:0.15rem 0.30rem 0.15rem 0.30rem;
+  border-radius: 0.5rem;
+  color:black
+}
+
+div label{
+  font-size: larger;
+}
