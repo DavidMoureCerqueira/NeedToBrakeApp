@@ -9,35 +9,35 @@ import { Disco } from '../../interfaces/disco';
   selector: 'tablas-discos-component',
   imports: [DiscoDeseadoComponent, DiscoExistenteComponent],
   templateUrl: './tablas-discos.component.html',
+  styleUrl: './tablas-discos.component.css',
+
 
 })
 export class TablasDiscosComponent {
-  @ViewChild(DiscoDeseadoComponent)discoDeseadoLector!:DiscoDeseadoComponent
-  @ViewChild(DiscoExistenteComponent)discoExistenteLector!:DiscoExistenteComponent
-  constructor() { }
 
-  discService=inject(DiscoService);
-  discoDeseado:Disco={};
-  discoExistente:Disco={};
 
-  // recibirDiscoDeseado(disco: Disco){
-  //   this.discoDeseado=disco
+  discService = inject(DiscoService);
+  discoDeseado: Disco = {};
+  discoExistente: Disco = {};
 
-  //     console.log("Disco deseado recibido en padre",disco)
-  // }
+  recibirDiscoDeseado(disco: Disco) {
+    this.discoDeseado = disco
+  }
 
-  // recibirDiscoExistente(disco: Disco){
-  //   this.discoExistente=disco
-  //       console.log("Disco actual recibido en padre",disco)
-  // }
+  recibirDiscoExistente(disco: Disco) {
+    this.discoExistente = disco
+  }
 
   enviarDiscos() {
-    this.discoDeseado=(this.discoDeseadoLector.lectorDisco())
-    this.discoExistente=(this.discoExistenteLector.lectorDisco())
-
-    //if(!this.discoDeseado||!this.discoExistente) return;
+    if (!this.discoDeseado || !this.discoExistente) return;
     this.discService.searchDataBase(this.discoExistente, this.discoDeseado)
 
-   }
+  }
+
+  igualarDatosVacios() {
+    console.log('padre')
+    this.discService.igualarDatos(this.discoExistente, this.discoDeseado);
+  }
+
 
 }

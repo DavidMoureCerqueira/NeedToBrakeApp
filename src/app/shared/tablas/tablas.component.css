@@ -16,6 +16,7 @@ div div{
   align-items: flex-start;
   flex-direction: column;
 
+
 }
 
 input[type="text"]{
@@ -29,4 +30,5 @@ input[type="text"]{
 
 div label{
   font-size: larger;
+  padding: 0.5rem;
 }

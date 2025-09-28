@@ -10,34 +10,14 @@ import { Disco } from '../../../interfaces/disco';
 })
 export class DiscoExistenteComponent {
 
-    @ViewChild(TablasComponent)lector!:TablasComponent
+    disco!:Disco
+    discoEnviar=output<Disco>();
 
-//   disco!:Disco
-//   discoEnviar=output<Disco>();
+    recibirDisco(disco:Disco){
+      this.disco=disco
+      this.discoEnviar.emit(disco)
 
-
-// // crearDisco():Disco{
-// //     return this.disco ?? {}
-// //   }
-
-lectorDisco(){
-  const discoCreado:Disco = this.lector.crearDisco();
-  // this.recibirDisco(discoCreado);
-
-  console.log("Lector de disco: ", discoCreado)
-  return discoCreado;
-}
-
-
-
-
-
-// recibirDisco(disco:Disco){
-//   this.disco=disco
-//   this.discoEnviar.emit(disco)
-//   console.log("DiscoEnviado", disco)
-// }
-
+    }
 
 }
 

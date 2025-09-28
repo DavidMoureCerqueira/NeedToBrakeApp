@@ -1,4 +1,4 @@
-<div class="grid grid-cols-2 grid-rows-2 border-2 rounded-2xl border-blue-500 p-4 rounded-tl-none">
+<div class="grid grid-cols-2 grid-rows-2 border-2 rounded-2xl border-blue-500 p-4  rounded-tl-none">
 
   <div>
     <label for="Diametro">Diametro</label>
@@ -6,7 +6,7 @@
     id="Diametro"
     type="text"
     placeholder="Medida A"
-    (input)="diametro.set(+discDiametro.value)"
+    (input)="disco.diametro.set(+discDiametro.value)"
     #discDiametro
     />
   </div>
@@ -17,7 +17,7 @@
     id="Espesor"
     type="text"
     placeholder="Medida B"
-    (input)="espesor.set(+discEspesor.value)"
+    (input)="disco.espesor.set(+discEspesor.value)"
     #discEspesor
     />
   </div>
@@ -28,7 +28,7 @@
     id="Ancho"
     type="text"
     placeholder="Medida D"
-    (input)="ancho.set(+discAncho.value)"
+    (input)="disco.ancho.set(+discAncho.value)"
     #discAncho
     />
   </div>
@@ -39,7 +39,7 @@
     id="Patron"
     type="text"
     placeholder="Medida E"
-    (input)="patron.set(+discPatron.value)"
+    (input)="disco.patron.set(+discPatron.value)"
     #discPatron
     />
   </div>
@@ -50,7 +50,7 @@
     id="Agujeros"
     type="text"
     placeholder="Medida F"
-    (input)="agujeros.set(+discAgujeros.value)"
+    (input)="disco.agujeros.set(+discAgujeros.value)"
     #discAgujeros
     />
   </div>
@@ -61,7 +61,7 @@
     id="Buje"
     type="text"
     placeholder="Medida G"
-    (input)="buje.set(+discBuje.value)"
+    (input)="disco.buje.set(+discBuje.value)"
     #discBuje
     />
   </div>
@@ -72,7 +72,7 @@
     id="Interior"
     type="text"
     placeholder="Medida H"
-    (input)="interior.set(+discDiametroInterior.value)"
+    (input)="disco.interior.set(+discDiametroInterior.value)"
     #discDiametroInterior
     />
   </div>
@@ -83,9 +83,9 @@
     id="DiametroTornillo"
     type="text"
     placeholder="Medida I"
-    (input)="diametroTornillo.set(+discDiametroTornillos.value)"
+    (input)="disco.diametroTornillo.set(+discDiametroTornillos.value)"
     #discDiametroTornillos
     />
   </div>
-    <button class="btn " (click)="crearDisco()">Crear Disco</button>
+    <!-- <button class="btn " (click)="crearDisco()">Crear Disco</button> -->
 </div>
