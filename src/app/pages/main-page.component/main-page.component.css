@@ -1,4 +1,60 @@
-h3{
-      text-shadow: -5px 5px 5px black;
-    -webkit-text-stroke: 0.5px rgb(236, 105, 18);
+.header-section {
+  background-image: url('/images/fondoHeader.jpg');
+  background-position: center;
+  background-size: cover;
+  height: 15vh;
+  min-width: 100vw;
+  display: flex;
+
+  justify-content: space-evenly;
+  align-items: center;
+
 }
+
+.logo {
+  width: 15rem;
+  height: 10rem;
+}
+
+.header-section h3 {
+  font-size: clamp(1.1rem, 2.5vw, 2rem);
+  font-style: italic;
+  color: rgb(241, 3, 3);
+  text-shadow: -5px 5px 5px black;
+  -webkit-text-stroke: 0.1px rgb(236, 105, 18);
+}
+
+.main-section {
+  min-height: 75vh;
+  height: auto;
+  background-image: url('/images/fondo_comparador.jpg');
+
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  align-items: center;
+
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.main-tables {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 2rem;
+}
+
+.footer-section {
+  height: 10vh;
+  background-color: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  padding: 0 1rem;
+}
+

@@ -1,91 +1,52 @@
-<div class="grid grid-cols-2 grid-rows-2 border-2 rounded-2xl border-blue-500 p-4  rounded-tl-none">
+<div class=" contenedor">
 
-  <div>
+  <div class="item">
     <label for="Diametro">Diametro</label>
-    <input
-    id="Diametro"
-    type="text"
-    placeholder="Medida A"
-    (input)="disco.diametro.set(+discDiametro.value)"
-    #discDiametro
+    <input id="Diametro" type="text" placeholder="Medida A"
+    [value]="disco().diametro ?? ''"
+    (input)="actualizarDisco('diametro',$event)"
     />
   </div>
-
-  <div>
+<!-- (input)="disco().diametro.set(+discDiametro.value)" #discDiametro  -->
+  <!-- <div class="item">
     <label for="Espesor">Espesor</label>
-    <input
-    id="Espesor"
-    type="text"
-    placeholder="Medida B"
-    (input)="disco.espesor.set(+discEspesor.value)"
-    #discEspesor
-    />
+    <input id="Espesor" type="text" placeholder="Medida B" [value]="disco().espesor() || ''"
+      (input)="disco.espesor.set(+discEspesor.value)" #discEspesor />
   </div>
 
-  <div>
+  <div class="item">
     <label for="Ancho">Ancho Total</label>
-    <input
-    id="Ancho"
-    type="text"
-    placeholder="Medida D"
-    (input)="disco.ancho.set(+discAncho.value)"
-    #discAncho
-    />
+    <input id="Ancho" type="text" placeholder="Medida D" [value]="disco().ancho() || ''"
+      (input)="disco.ancho.set(+discAncho.value)" #discAncho />
   </div>
 
-  <div>
+  <div class="item">
     <label for="Patron">Patron Tornillos</label>
-    <input
-    id="Patron"
-    type="text"
-    placeholder="Medida E"
-    (input)="disco.patron.set(+discPatron.value)"
-    #discPatron
-    />
+    <input id="Patron" type="text" placeholder="Medida E" [value]="disco().patron() || ''"
+      (input)="disco.patron.set(+discPatron.value)" #discPatron />
   </div>
 
-  <div>
-    <label for="Agujeros">Numero Agujeros</label>
-    <input
-    id="Agujeros"
-    type="text"
-    placeholder="Medida F"
-    (input)="disco.agujeros.set(+discAgujeros.value)"
-    #discAgujeros
-    />
+  <div class="item">
+    <label for="Agujeros">Nª Agujeros</label>
+    <input id="Agujeros" type="text" placeholder="Medida F"     [value]="disco().agujeros() || ''" (input)="disco.agujeros.set(+discAgujeros.value)"
+      #discAgujeros />
   </div>
 
-  <div>
-    <label for="Buje">Diametro Buje</label>
-    <input
-    id="Buje"
-    type="text"
-    placeholder="Medida G"
-    (input)="disco.buje.set(+discBuje.value)"
-    #discBuje
-    />
+  <div class="item">
+    <label for="Buje">Ø Buje</label>
+    <input id="Buje" type="text" placeholder="Medida G"     [value]="disco().buje() || ''" (input)="disco().buje.set(+discBuje.value)" #discBuje />
   </div>
 
-  <div>
-    <label for="Interior">Diametro Interior</label>
-    <input
-    id="Interior"
-    type="text"
-    placeholder="Medida H"
-    (input)="disco.interior.set(+discDiametroInterior.value)"
-    #discDiametroInterior
-    />
+  <div class="item">
+    <label for="Interior">Ø Interior</label>
+    <input id="Interior" type="text" placeholder="Medida H"    [value]="disco().interior() || ''" (input)="disco().interior.set(+discDiametroInterior.value)"
+      #discDiametroInterior />
   </div>
 
-  <div>
-    <label for="DiametroTornillo">Diametro Tornillo</label>
-    <input
-    id="DiametroTornillo"
-    type="text"
-    placeholder="Medida I"
-    (input)="disco.diametroTornillo.set(+discDiametroTornillos.value)"
-    #discDiametroTornillos
-    />
-  </div>
-    <!-- <button class="btn " (click)="crearDisco()">Crear Disco</button> -->
+  <div class="item">
+    <label for="DiametroTornillo">Ø Tornillo</label>
+    <input id="DiametroTornillo" type="text" placeholder="Medida I"     [value]="disco.diametroTornillo() || ''"
+      (input)="disco.diametroTornillo.set(+discDiametroTornillos.value)" #discDiametroTornillos />
+  </div> -->
+  <!-- <button class="btn " (click)="crearDisco()">Crear Disco</button> -->
 </div>

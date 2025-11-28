@@ -1,3 +1,18 @@
+section {
+  background-color: green;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 2px solid rgb(43, 43, 65);
+}
+
+section>h3:first-child {
+
+  font-size: larger;
+  padding: 0.5rem;
+  background-color: #0e5528;
+  text-align: center;
+
+}
 
 .contenedor {
 
@@ -27,7 +42,7 @@
 }
 
 
-input[type="text"] {
+input[type="number"] {
   font-size: medium;
   max-width: 100px;
   background-color: rgb(180, 171, 171);
@@ -40,3 +55,4 @@ input[type="text"] {
   font-size: larger;
 
 }
+

@@ -1,4 +1,4 @@
-import { Component,  computed,  effect,  output, signal } from '@angular/core';
+import { Component, computed, effect, input, output, signal } from '@angular/core';
 import { Disco } from '../../interfaces/disco';
 
 @Component({
@@ -10,36 +10,42 @@ import { Disco } from '../../interfaces/disco';
 
 })
 export class TablasComponent {
-  discoCreado=output<Disco>();
+  discoCreado = input.required<Disco>();
+  discoModificado= output<Disco>()
+  disco = signal<Disco>({
+    diametro: 0,
+    espesor: 0,
+    ancho: 0,
+    patron: 0,
+    numeroagujeros: 0,
+    diametroBuje: 0,
+    diametroInterior: 0,
+    diametroTornillo: 0
+  })
 
-  disco={
-    diametro:signal(0),
-    espesor:signal(0),
-    ancho:signal(0),
-    patron:signal(0),
-    agujeros:signal(0),
-    buje:signal(0),
-    interior:signal(0),
-    diametroTornillo:signal(0)
-  }
+  constructor() {
 
-  discoCompleto=computed(()=>({
-    diametro:this.disco.diametro(),
-    espesor:this.disco.espesor(),
-    ancho:this.disco.ancho(),
-    patron:this.disco.patron(),
-    agujeros:this.disco.agujeros(),
-    buje:this.disco.buje(),
-    interior:this.disco.interior(),
-    diametroTornillo:this.disco.diametroTornillo(),
-  }))
-  constructor(){
-
-    effect(()=>{
-      this.discoCreado.emit(this.discoCompleto())
+    effect(() => {
+      this.disco.set(this.discoCreado())
     });
 
   }
 
 
+  actualizarDisco(campo: keyof Disco, event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+
+    // Convertir el valor a un número. Si no es válido, se usa 0 como fallback.
+    const valorParseado = parseFloat(inputElement.value);
+    const nuevoValor = isNaN(valorParseado) ? 0 : valorParseado;
+
+    // 💡 Actualización de la señal usando la clave dinámica [campo]
+    this.disco.update(discoActual => ({
+      ...discoActual,          // Mantiene los valores de las otras propiedades
+      [campo]: nuevoValor      // Actualiza solo la propiedad especificada
+    }));
+    this.discoModificado.emit(this.disco())
+  }
 }
+
+

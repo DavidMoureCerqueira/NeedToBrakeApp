@@ -1,3 +1,27 @@
-/* section:first-of-type{
-  background-image: url(/public/images/fondo_comparador.jpg);
-} */
+.tables {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+
+}
+
+.btn {
+  padding: 1rem;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+
+@media (width<=770px) {
+
+  .tables {
+    display: flex;
+    flex-flow: column wrap;
+  }
+
+}

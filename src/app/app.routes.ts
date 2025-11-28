@@ -8,6 +8,10 @@ export const routes: Routes = [
 
     component:MainPageComponent
   },
+  {
+    path:'**',
+    redirectTo:''
+  }
 
 
 ];

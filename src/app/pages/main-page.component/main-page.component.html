@@ -1,10 +1,14 @@
-    <header class=" h-80 w-full bg-[url('/images/fondoHeader.jpg')] bg-cover bg-center flex justify-between items-center" >
+<header class=" header-section">
 
-        <img class="w-300px h-200px" [src]="imageLogoPath" alt="logo" >
+  <img class="logo" [src]="imageLogoPath" alt="logo">
 
-        <h3 class="mr-60 text-5xl italic text-red-500 " >Power without brakes is useless</h3>
-
-      </header>
-      <section>
-        <tablas-discos-component></tablas-discos-component>
-      </section>
+  <h3>Power without brakes is useless</h3>
+</header>
+<main class="main-section">
+  <tablas-discos-component class="main-tables"></tablas-discos-component>
+</main>
+<footer class="footer-section">
+  <aside>
+    <p>Copyright ©  - All right reserved by ACME Industries Ltd</p>
+  </aside>
+</footer>

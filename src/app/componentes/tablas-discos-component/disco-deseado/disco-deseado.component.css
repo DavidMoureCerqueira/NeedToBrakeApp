@@ -1,3 +1,17 @@
+section {
+  background-color: #0e7490;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 2px solid rgb(43, 43, 65);
+  /* "bg-cyan-700 pt-0.5 rounded-2xl */
+}
+
+section>h3:first-child {
+  font-size: larger;
+  padding: 0.5rem;
+  background-color: #1D4ED8;
+  text-align: center;
+}
 
 .contenedor {
 
@@ -27,7 +41,7 @@
 }
 
 
-input[type="text"] {
+input[type="number"] {
   font-size: medium;
   max-width: 100px;
   background-color: rgb(180, 171, 171);
