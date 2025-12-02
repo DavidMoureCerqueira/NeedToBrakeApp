@@ -3,12 +3,13 @@ import { Component, inject, ViewChild, output, signal } from '@angular/core';
 import { DiscoDeseadoComponent } from "./disco-deseado/disco-deseado.component";
 import { DiscoExistenteComponent } from "./disco-existente/disco-existente.component";
 import { DiscoService } from '../../services/disco.service';
+import { DiscoIlustracion } from "../disco-ilustracion/disco-ilustracion";
 
 
 
 @Component({
   selector: 'tablas-discos-component',
-  imports: [DiscoDeseadoComponent, DiscoExistenteComponent],
+  imports: [DiscoDeseadoComponent, DiscoExistenteComponent, DiscoIlustracion],
   templateUrl: './tablas-discos.component.html',
   styleUrl: './tablas-discos.component.css',
 
