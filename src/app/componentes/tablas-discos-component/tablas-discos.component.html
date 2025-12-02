@@ -1,18 +1,17 @@
-
 <!-- <h2 class=" mt-10 text-emerald-700 text-3xl text-center">Comparador de discos</h2> -->
 
 
-  <section class="tables">
+<section class="tables">
 
   <disco-existente-component (discoEnviar)="recibirDiscoExistente($event)"></disco-existente-component>
+  <div class="flex flex-col wrap gap-5">
+    <button class="btn bg-pink-600 self-center " (click)="igualarDatosVacios()">Igualar</button>
+    <disco-ilustracion [discoIlustrado]=" discoDeseado()"></disco-ilustracion>
+  </div>
 
-  <button class="btn bg-pink-600 self-center "(click)="igualarDatosVacios()">Igualar</button>
-
-  <disco-deseado-component
-  (discoDeseadoInputeado)="recibirDiscoDeseado($event)"
-  [discoModificado]=" discoDeseado()"
-  ></disco-deseado-component>
-<!-- (discoEnviar)="recibirDiscoDeseado($event)" -->
+  <disco-deseado-component (discoDeseadoInputeado)="recibirDiscoDeseado($event)"
+    [discoModificado]=" discoDeseado()"></disco-deseado-component>
+  <!-- (discoEnviar)="recibirDiscoDeseado($event)" -->
   <!-- [discoRecibido]="discoDeseadoInput" -->
-  </section>
+</section>
 <button class='btn btn-primary ' (click)="enviarDiscos()">Buscar</button>

@@ -1,0 +1,85 @@
+.plano-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px; /* opcional */
+}
+
+/* .plano {
+  width: 100%;
+  height: auto;
+} */
+  .imagen {
+
+    height: auto;
+    width: 550px;
+    border-radius: 2rem;
+  }
+.medida {
+  position: absolute;
+  font-size: 15px;
+  font-weight: bold;
+  color: white;  /* o el color que quieras */
+}
+
+/* Ahora las posiciones en % en vez de px */
+.medida-A { top: 80%; left: 26%; }
+.medida-B { top: 80%; left: 32%; }
+.medida-C { top: 80%; left: 38.5%; }
+.medida-D { top: 80%; left: 44.75%; }
+.medida-E { top: 80%; left: 51%; }
+.medida-F { top: 80%; left: 57.5%; }
+.medida-G { top: 80%; left: 64.5%; }
+.medida-H { top: 80%; left: 71.5%; }
+.medida-I { top: 80%; left: 78%; }
+
+@media (width<=600px){
+  .medida{
+    font-size: 14px;
+  }
+}
+@media (width<=562px){
+  .medida{
+    font-size: 13px;
+  }
+}
+@media (width<=504px){
+  .medida{
+    font-size: 12px;
+  }
+}
+@media (width<=468px){
+  .medida{
+    font-size: 11px;
+
+  }
+}
+@media (width<=430px){
+  .medida{
+    font-size: 10px;
+
+  }
+}
+@media (width<=408px){
+  .medida{
+    font-size: 9px;
+
+  }
+}
+@media (width<=376px){
+  .medida{
+    font-size: 9px;
+
+  }
+}
+@media (width<=376px){
+  .medida{
+    font-size: 8px;
+
+  }
+}
+@media (width<=335px){
+  .medida{
+    font-size: 7px;
+
+  }
+}
