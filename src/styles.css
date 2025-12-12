@@ -2,10 +2,11 @@
 @import "tailwindcss";
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: light --default, dark --prefersdark, cupcake;
+  themes: aqua --default, dark --prefersdark ;
+/* business */
 }
 *{
 margin: 0;
-padding: 0;
+/* padding: 0; */
 box-sizing: border-box;
 }

@@ -1,12 +1,32 @@
 <div class="plano-container">
   <img class='imagen plano' src=" /images/ilustracion.png" alt="Reference-Image">
-  <p class="medida medida-A">{{discoIlustrado().diametro || ''}}</p>
-  <p class="medida medida-B">{{discoIlustrado().espesor|| ''}}</p>
-  <p class="medida medida-C"></p>
-  <p class="medida medida-D">{{discoIlustrado().ancho || ''}}</p>
-  <p class="medida medida-E">{{discoIlustrado().patron || ''}}</p>
-  <p class="medida medida-F">{{discoIlustrado().numeroagujeros || ''}}</p>
-  <p class="medida medida-G">{{discoIlustrado().diametroBuje || ''}}</p>
-  <p class="medida medida-H">{{discoIlustrado().diametroInterior || ''}}</p>
-  <p class="medida medida-I">{{discoIlustrado().diametroTornillo || ''}}</p>
+  <table>
+    <thead>
+
+      <tr>
+        <th>A</th>
+        <th>B</th>
+        <th>C</th>
+        <th>D</th>
+        <th>E</th>
+        <th>F</th>
+        <th>G</th>
+        <th>H</th>
+        <th>I</th>
+      </thead>
+      <tbody>
+
+        <tr>
+          <td>{{discoIlustrado().diametro || '-'}}</td>
+          <td>{{discoIlustrado().espesor|| '-'}}</td>
+          <td></td>
+          <td>{{discoIlustrado().ancho || '-'}}</td>
+          <td>{{discoIlustrado().patron || '-'}}</td>
+          <td>{{discoIlustrado().numeroagujeros || '-'}}</td>
+          <td>{{discoIlustrado().diametroBuje || '-'}}</td>
+          <td>{{discoIlustrado().diametroInterior || '-'}}</td>
+          <td>{{discoIlustrado().diametroTornillo || '-'}}</td>
+        </tr>
+      </tbody>
+  </table>
 </div>

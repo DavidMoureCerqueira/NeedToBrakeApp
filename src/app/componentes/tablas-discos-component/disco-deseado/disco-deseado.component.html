@@ -23,14 +23,14 @@
     </div>
 
     <div class="item">
-      <label for="Patron">Patron Tornillos</label>
+      <label for="Patron">Patron Agujeros</label>
       <input id="Patron" type="number" placeholder="Medida E"
         [value]="disco().patron || ''"
         (input)="actualizarDisco('patron',$event.target.value)"  />
     </div>
 
     <div class="item">
-      <label for="Agujeros">Nª Agujeros</label>
+      <label for="Agujeros">Nº Agujeros</label>
       <input id="Agujeros" type="number" placeholder="Medida F"
         [value]="disco().numeroagujeros || ''"
         (input)="actualizarDisco('numeroagujeros',$event.target.value)" />
