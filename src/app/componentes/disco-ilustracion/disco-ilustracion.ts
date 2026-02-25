@@ -14,18 +14,18 @@ export class DiscoIlustracion {
   //  imageIlustration :string="/images/ilustracion.png";
 
   //   disco = signal<Disco>({
-  //   diametro: 0,
-  //   espesor: 0,
-  //   ancho: 0,
-  //   patron: 0,
-  //   numeroagujeros: 0,
-  //   diametroBuje: 0,
-  //   diametroInterior: 0,
-  //   diametroTornillo: 0
+  //   diameter: 0,
+  //   height: 0,
+  //   thicknessNew: 0,
+  //   pcd: 0,
+  //   holes: 0,
+  //   centerbore: 0,
+  //   diameterInterior: 0,
+  //   diameterTornillo: 0
   // })
-  discoIlustrado=input.required<Disco>({})
+  discoIlustrado = input.required<Disco>({})
 
   // recibirDisco(){
   //   this.disco.set(this.discoIlustrado())
   // }
- }
+}

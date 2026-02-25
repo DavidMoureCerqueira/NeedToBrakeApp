@@ -1,0 +1,53 @@
+@if (listDiscPerCar().length>0) {
+
+<div class=" h-50 overflow-scroll">
+  <table class="table table-pin-rows table-zebra">
+    <!-- head -->
+    <thead>
+      <tr class="text-center">
+
+
+        <th>Diámetro</th>
+        <th>Altura</th>
+        <th>Patron</th>
+        <th>Diámetro Buje</th>
+        <th>Espesor Nuevo</th>
+        <th>Estilo</th>
+        <!-- <th>Espesor Mínimo</th> -->
+        <th>Eje</th>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Versión</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <!-- row 1 -->
+
+      <!-- row 2 -->
+      @for (discCar of listProcessed(); track discCar.car.version_id) {
+      <tr class="text-center hover:bg-base-300 cursor-pointer" [routerLink]="['/disc-detail',discCar.car.version_id]">
+
+        @for (discFor of discCar.disc|keyvalue :customOrder; track discFor.key) {
+          @if (discFor.key!=="RotorThicknessMin" && discFor.key!=='PCD' && discFor.key!=="RotorHoles") {
+
+            <td>{{discFor.value ||'No disponible'}}</td>
+          }
+
+
+        }
+        @for (car of discCar.car | keyvalue ; track car.key) {
+        @if (car.key!='version_id') {
+        <td>{{car.value||'No disponible'}}</td>
+
+        }
+        }
+
+      </tr>
+      }
+
+    </tbody>
+  </table>
+</div>
+
+}

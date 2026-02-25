@@ -1,6 +1,6 @@
-import { Disco } from './../../../interfaces/disco';
-import { Component, effect, input, output, signal, ViewChild } from '@angular/core';
-import { TablasComponent } from "../../../shared/tablas/tablas.component";
+import { Disco } from '../../../interfaces/disco';
+import { Component, effect, input, output, signal } from '@angular/core';
+
 
 
 @Component({
@@ -13,36 +13,39 @@ import { TablasComponent } from "../../../shared/tablas/tablas.component";
 export class DiscoExistenteComponent {
 
   disco = signal<Disco>({
-    diametro: 0,
-    espesor: 0,
-    ancho: 0,
-    patron: 0,
-    numeroagujeros: 0,
-    diametroBuje: 0,
-    diametroInterior: 0,
-    diametroTornillo: 0
+    axle: null,
+    style: null,
+    diameter: 0,
+    height: 0,
+    thicknessNew: 0,
+    thicknessMin: 0,
+    pcd: 0,
+    holes: 0,
+    centerbore: 0,
+    diameterInterior: 0,
+    diameterTornillo: 0
   })
 
   discoEnviar = output<Disco>();
 
-  actualizarDisco(campo:keyof Disco, nuevoValorTexto:string){
-    const valorParseado=parseFloat(nuevoValorTexto);
-    const nuevoValor=isNaN(valorParseado)? 0:valorParseado;
-    this.disco.update(discoActual=>({
+  actualizarDisco(campo: keyof Disco, nuevoValorTexto: string) {
+    const valorParseado = parseFloat(nuevoValorTexto);
+    const nuevoValor = isNaN(valorParseado) ? 0 : valorParseado;
+    this.disco.update(discoActual => ({
       ...discoActual,
-      [campo]:nuevoValor
+      [campo]: nuevoValor
     }))
     this.discoEnviar.emit(this.disco())
   }
 
-// constructor() {
-//     // 💡 El effect se ejecuta:
-//     // 1. Inmediatamente al inicio (inicialización)
-//     // 2. Cada vez que el valor de this.discoCreado() cambie (sincronización)
-//     effect(() => {
-//       this.disco.set(this.disco());
-//     });
-//   }
+  // constructor() {
+  //     // 💡 El effect se axlecuta:
+  //     // 1. Inmediatamente al inicio (inicialización)
+  //     // 2. Cada vez que el valor de this.discoCreado() cambie (sincronización)
+  //     effect(() => {
+  //       this.disco.set(this.disco());
+  //     });
+  //   }
 
 
 }

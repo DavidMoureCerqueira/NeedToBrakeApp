@@ -1,57 +1,42 @@
-<section >
+<section>
   <h3> Disco Actual</h3>
- <div class=" contenedor">
+  <div class=" contenedor">
 
-  <div class="item">
-    <label for="diametro">Diametro</label>
-    <input id="diametro" type="number" placeholder="Medida A"
-     (input)="actualizarDisco('diametro',$event.target.value)"
-    />
-  </div>
+    <div class="item">
+      <label for="diameter">Diameter</label>
+      <input id="diameter" type="number" placeholder="Medida A"
+        (input)="actualizarDisco('diameter',$event.target.value)" />
+    </div>
 
- <div class="item">
-    <label for="espesor">Espesor</label>
-    <input id="espesor" type="number" placeholder="Medida B"
-      (input)="actualizarDisco('espesor',$event.target.value)" />
-  </div>
+    <div class="item">
+      <label for="height">Height</label>
+      <input id="height" type="number" placeholder="Medida B" (input)="actualizarDisco('height',$event.target.value)" />
+    </div>
 
-  <div class="item">
-    <label for="ancho">Ancho Total</label>
-    <input id="ancho" type="number" placeholder="Medida D"
-    (input)="actualizarDisco('ancho',$event.target.value)"  />
-  </div>
+    <div class="item">
+      <label for="thicknessNew">ThicknessNew Total</label>
+      <input id="thicknessNew" type="number" placeholder="Medida D"
+        (input)="actualizarDisco('thicknessNew',$event.target.value)" />
+    </div>
 
-  <div class="item">
-    <label for="patron">Patron Agujeros</label>
-    <input id="patron" type="number" placeholder="Medida E"
-    (input)="actualizarDisco('patron',$event.target.value)"/>
-  </div>
+    <div class="item">
+      <label for="pcd">Bolt Path</label>
+      <input id="pcd" type="number" placeholder="Medida E" (input)="actualizarDisco('pcd',$event.target.value)" />
+    </div>
 
-  <div class="item">
-    <label for="agujeros">Nº Agujeros</label>
-    <input id="agujeros" type="number" placeholder="Medida F"
-    (input)="actualizarDisco('numeroagujeros',$event.target.value)"
-/>
-  </div>
+    <div class="item">
+      <label for="agujeros">Nº Holes</label>
+      <input id="agujeros" type="number" placeholder="Medida F"
+        (input)="actualizarDisco('holes',$event.target.value)" />
+    </div>
 
-  <div class="item">
-    <label for="buje">Ø Buje</label>
-    <input id="buje" type="number" placeholder="Medida G"
-    (input)="actualizarDisco('diametroBuje',$event.target.value)"/>
-  </div>
+    <div class="item">
+      <label for="buje">Ø CenterBore</label>
+      <input id="buje" type="number" placeholder="Medida G"
+        (input)="actualizarDisco('centerbore',$event.target.value)" />
+    </div>
 
-  <div class="item">
-    <label for="interior">Ø Interior</label>
-    <input id="interior" type="number" placeholder="Medida H"
-    (input)="actualizarDisco('diametroInterior',$event.target.value)"/>
+    <!-- <button class="btn " (click)="crearDisco()">Crear Disco</button> -->
   </div>
-
-  <div class="item">
-    <label for="diametroTornillo">Ø Tornillo</label>
-    <input id="diametroTornillo" type="number" placeholder="Medida I"
-    (input)="actualizarDisco('diametroTornillo',$event.target.value)"/>
-  </div>
- <!-- <button class="btn " (click)="crearDisco()">Crear Disco</button> -->
-</div>
 
 </section>

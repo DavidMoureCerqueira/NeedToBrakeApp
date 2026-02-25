@@ -1,5 +1,4 @@
 import { Component, effect, input, output, signal, ViewChild } from '@angular/core';
-import { TablasComponent } from "../../../shared/tablas/tablas.component";
 import { Disco } from '../../../interfaces/disco';
 
 @Component({
@@ -14,18 +13,21 @@ export class DiscoDeseadoComponent {
 
 
   disco = signal<Disco>({
-    diametro: 0,
-    espesor: 0,
-    ancho: 0,
-    patron: 0,
-    numeroagujeros: 0,
-    diametroBuje: 0,
-    diametroInterior: 0,
-    diametroTornillo: 0
+    axle: null,
+    style: null,
+    diameter: 0,
+    height: 0,
+    thicknessNew: 0,
+    thicknessMin: 0,
+    pcd: 0,
+    holes: 0,
+    centerbore: 0,
+    diameterInterior: 0,
+    diameterTornillo: 0
   })
 
   discoDeseadoInputeado = output<Disco>({})
-  discoModificado=input.required<Disco>({})
+  discoModificado = input.required<Disco>({})
 
 
   actualizarDisco(campo: keyof Disco, nuevoValorTexto: string): void {
@@ -40,11 +42,11 @@ export class DiscoDeseadoComponent {
       ...discoActual,          // Mantiene los valores de las otras propiedades
       [campo]: nuevoValor      // Actualiza solo la propiedad especificada
     }));
-    this. discoDeseadoInputeado.emit(this.disco())
+    this.discoDeseadoInputeado.emit(this.disco())
   }
-  constructor(){
+  constructor() {
 
-    effect(()=>{
+    effect(() => {
       this.disco.set(this.discoModificado())
     })
 
