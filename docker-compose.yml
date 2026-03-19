@@ -1,0 +1,33 @@
+# services:
+#   mysql-db:
+#     image: ghcr.io/servercontainers/mysql
+#     container_name: NTB_Database_SQL
+#     restart: always
+#     environment:
+#       MYSQL_ROOT_PASSWORD: root_password
+#       MYSQL_DATABASE: NTB_DB
+#       MYSQL_USER: user_develop
+#       MYSQL_PASSWORD: user_password
+#     ports:
+#       - "3306:3306"
+#     volumes:
+#       - mysql_data:/var/lib/mysql
+# volumes:
+#   mysql_data:
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: ntb_database
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: user_password
+      MYSQL_DATABASE: NTB_DB
+      MYSQL_USER: user_develop
+      MYSQL_PASSWORD: user_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_ntb:/var/lib/mysql
+volumes:
+  db_ntb:
