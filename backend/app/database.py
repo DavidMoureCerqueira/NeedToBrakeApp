@@ -1,6 +1,9 @@
 import os
+from typing import Annotated
 
-from sqlmodel import SQLModel, Session, create_engine
+from fastapi import Depends
+from sqlmodel import SQLModel, Session, create_engine, select
+from models.models import Brand
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
@@ -14,6 +17,10 @@ def get_session():
         yield session
 
 
+SessionDep = Annotated[Session, Depends(get_session)]
+# Annotated es un tipo que proporciona una instrucción para obtener ese tipo
+
+
 def init_db():
     from models.models import Brand
     from models.models import Model
@@ -21,3 +28,12 @@ def init_db():
     from models.models import Disc
 
     SQLModel.metadata.create_all(engine)
+
+
+def check_data_exists() -> bool:
+    """It is used to check if its needed to make the initial seeding"""
+    with Session(engine) as session:
+        exist_data = session.exec(select(Brand)).first()
+        if exist_data:
+            return True
+        return False
