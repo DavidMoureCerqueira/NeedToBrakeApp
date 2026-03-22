@@ -1,10 +1,10 @@
 from sqlmodel import Relationship, SQLModel, Field
 
 """
-#   Ya SQLModel hace la función de "interfaz" de tipado para objetos personalizados, y de estructura de tabla para SQL,
-    se coloca el id como nulo, para evitar que Pydantic falle en caso de no recibirlo en algún momento.
-    De nuevo el id como "opcional" hace que SQL entienda que es autoincremental y que no haga falta referenciarlo
-
+    SQLModel works as an interface for typing for custom objects and table-structure for SQL.
+    ID needs to be setted as Null to avoid Pydantic to fail in case ID is not used and 
+    SQL gets it as optional and after being primary key, 
+    it is automatically autoincremental in case that it is not provided
 """
 
 
