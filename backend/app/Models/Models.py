@@ -15,7 +15,7 @@ class Brand(SQLModel, table=True):
 
 
 class Model(SQLModel, table=True):
-    id: int | None = Field(default=None, primary_key=True, auto_increment=True)
+    id: int | None = Field(default=None, primary_key=True)
     name: str | None = Field(index=True)
     brand_id: int = Field(foreign_key="brand.id")
     brand: "Brand" = Relationship(back_populates="models")
@@ -23,7 +23,7 @@ class Model(SQLModel, table=True):
 
 
 class Version(SQLModel, table=True):
-    id: int | None = Field(default=None, primary_key=True, auto_increment=True)
+    id: int | None = Field(default=None, primary_key=True)
     name: str | None = Field(index=True)
     engine: float | None = Field(index=True)
     bhp: float | None = Field(index=True)
@@ -34,7 +34,7 @@ class Version(SQLModel, table=True):
 
 
 class Disc(SQLModel, table=True):
-    id: int | None = Field(default=None, primary_key=True, auto_increment=True)
+    id: int | None = Field(default=None, primary_key=True)
     position: str | None = Field(default=None, index=True)
     style: str | None = Field(default=None, index=True)
     diameter: float | None = Field(default=None, index=True)
