@@ -1,5 +1,5 @@
 from contextlib import asynccontextmanager
-
+from routes.cascade_router import router as cascade_router
 from fastapi import FastAPI
 
 
@@ -18,6 +18,8 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="NeedToBrake-Backend", lifespan=lifespan)
+
+app.include_router(router=cascade_router, prefix="/cascade")
 
 
 @app.get("/")
