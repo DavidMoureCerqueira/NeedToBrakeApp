@@ -2,20 +2,29 @@ from typing import List
 
 from sqlmodel import Session
 
+from services.mapper import transform_duple_data_to_DiscoReadFull
 from models.models import DiscoReadFull
-from repository.parent_selector_repository import get_all_disc_by_model_id
+from repository.parent_selector_repository import (
+    get_all_disc_by_model_id,
+    get_all_disc_by_version_id,
+)
 
 
 def get_all_disc_by_model_from_db(
     session: Session, model_id: int
 ) -> List[DiscoReadFull]:
-    data = get_all_disc_by_model_id(session, model_id=model_id)
-    all_disc = []
-    for disc_obj, version_obj, model_obj, brand_obj in data:
-        model_obj.brand = brand_obj
-        version_obj.model = model_obj
-        disc_obj.version = version_obj
-        all_disc.append(disc_obj)
-    if all_disc:
-        return all_disc
-    return None
+    data = get_all_disc_by_model_id(session=session, model_id=model_id)
+    all_disc_formatted = transform_duple_data_to_DiscoReadFull(data)
+    if all_disc_formatted:
+        return all_disc_formatted
+    return []
+
+
+def get_all_disc_by_version_from_db(
+    session: Session, version_id: int
+) -> List[DiscoReadFull]:
+    data = get_all_disc_by_version_id(session=session, version_id=version_id)
+    all_disc_formatted = transform_duple_data_to_DiscoReadFull(data)
+    if all_disc_formatted:
+        return all_disc_formatted
+    return []
