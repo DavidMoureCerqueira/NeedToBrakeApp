@@ -33,7 +33,7 @@ class VersionBase(SQLModel):
 
 class DiscBase(SQLModel):
     position: str | None = Field(default=None, index=True)
-    holes: str | None = Field(default=None, index=True)
+    holes: int | None = Field(default=None, index=True)
     style: str | None = Field(default=None, index=True)
     diameter: float | None = Field(default=None, index=True)
     height: float | None = Field(default=None, index=True)
@@ -90,7 +90,7 @@ class DiscoReadFull(DiscBase):
 
 class DiscFilters(BaseModel):
     position: str | None = None
-    holes: str | None = None
+    holes: int | None = None
     style: str | None = None
     diameter: float | None = None
     height: float | None = None

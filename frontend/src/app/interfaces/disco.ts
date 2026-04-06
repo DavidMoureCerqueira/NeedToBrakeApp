@@ -1,7 +1,6 @@
-
 export interface Disco {
   [key: string]: number | string | null;
-  axle: string | null;
+  position: string | null;
   style: string | null;
   diameter: number | null;
   height: number | null;
@@ -10,7 +9,4 @@ export interface Disco {
   pcd: number | null;
   holes: number | null;
   centerbore: number | null;
-
-
-
 }

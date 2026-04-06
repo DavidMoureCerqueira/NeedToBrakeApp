@@ -6,14 +6,10 @@ import { Disco } from '../../../interfaces/disco';
   imports: [],
   templateUrl: './disco-deseado.component.html',
   styleUrl: './disco-deseado.component.css',
-
 })
 export class DiscoDeseadoComponent {
-
-
-
   disco = signal<Disco>({
-    axle: null,
+    position: null,
     style: null,
     diameter: 0,
     height: 0,
@@ -23,34 +19,27 @@ export class DiscoDeseadoComponent {
     holes: 0,
     centerbore: 0,
     diameterInterior: 0,
-    diameterTornillo: 0
-  })
+    diameterTornillo: 0,
+  });
 
-  discoDeseadoInputeado = output<Disco>({})
-  discoModificado = input.required<Disco>({})
-
+  discoDeseadoInputeado = output<Disco>({});
+  discoModificado = input.required<Disco>({});
 
   actualizarDisco(campo: keyof Disco, nuevoValorTexto: string): void {
-
-
     // Convertir el valor a un número. Si no es válido, se usa 0 como fallback.
     const valorParseado = parseFloat(nuevoValorTexto);
     const nuevoValor = isNaN(valorParseado) ? 0 : valorParseado;
 
     // 💡 Actualización de la señal usando la clave dinámica [campo]
-    this.disco.update(discoActual => ({
-      ...discoActual,          // Mantiene los valores de las otras propiedades
-      [campo]: nuevoValor      // Actualiza solo la propiedad especificada
+    this.disco.update((discoActual) => ({
+      ...discoActual, // Mantiene los valores de las otras propiedades
+      [campo]: nuevoValor, // Actualiza solo la propiedad especificada
     }));
-    this.discoDeseadoInputeado.emit(this.disco())
+    this.discoDeseadoInputeado.emit(this.disco());
   }
   constructor() {
-
     effect(() => {
-      this.disco.set(this.discoModificado())
-    })
-
+      this.disco.set(this.discoModificado());
+    });
   }
-
-
 }

@@ -1,28 +1,27 @@
 <!-- <h2 class=" mt-10 text-emerald-700 text-3xl text-center">Comparador de discos</h2> -->
 
-
 <section class="tables">
   <div class="disco-visual">
-    <disco-existente-component (discoEnviar)="recibirDiscoExistente($event)"></disco-existente-component>
-    <disco-ilustracion [discoIlustrado]=" discoExistente()"></disco-ilustracion>
+    <disco-existente-component
+      (discoEnviar)="recibirDiscoExistente($event)"
+    ></disco-existente-component>
+    <disco-ilustracion [discoIlustrado]="discoExistente()"></disco-ilustracion>
   </div>
   <div class="botones-container">
-    <button class="btn btn-secondary self-center " (click)="igualarDatosVacios()">Igualar</button>
-    <button class='btn btn-primary self-center' (click)="enviarDiscos()">Buscar</button>
+    <button class="btn btn-secondary self-center" (click)="igualarDatosVacios()">Igualar</button>
+    <button class="btn btn-primary self-center" (click)="enviarDiscos()">Buscar</button>
     <!-- <input type="checkbox" value="business" class="checkbox theme-controller" /> -->
   </div>
   <div class="disco-visual">
-    <disco-deseado-component (discoDeseadoInputeado)="recibirDiscoDeseado($event)"
-      [discoModificado]=" discoDeseado()"></disco-deseado-component>
-    <disco-ilustracion [discoIlustrado]=" discoDeseado()"></disco-ilustracion>
+    <disco-deseado-component
+      (discoDeseadoInputeado)="recibirDiscoDeseado($event)"
+      [discoModificado]="discoDeseado()"
+    ></disco-deseado-component>
+    <disco-ilustracion [discoIlustrado]="discoDeseado()"></disco-ilustracion>
   </div>
   <!-- (discoEnviar)="recibirDiscoDeseado($event)" -->
   <!-- [discoRecibido]="discoDeseadoInput" -->
 </section>
 <section>
-  <listado-discos
-  [listDiscPerCar]="listDiscCar()">
-
-  </listado-discos>
-
+  <listado-discos [listDiscPerCar]="listDiscCar()"> </listado-discos>
 </section>
