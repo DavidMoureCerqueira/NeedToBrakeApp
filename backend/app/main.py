@@ -1,6 +1,7 @@
 from contextlib import asynccontextmanager
 from routes.cascade_router import router as cascade_router
 from routes.parent_selector_router import router as parent_selector_router
+from routes.filter_router import router as filter_selector_router
 from fastapi import FastAPI
 
 
@@ -22,6 +23,7 @@ app = FastAPI(title="NeedToBrake-Backend", lifespan=lifespan)
 
 app.include_router(router=cascade_router, prefix="/cascade")
 app.include_router(router=parent_selector_router, prefix="/parent-selector")
+app.include_router(router=filter_selector_router, prefix="/filter")
 
 
 @app.get("/")

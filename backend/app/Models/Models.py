@@ -1,3 +1,4 @@
+from pydantic import BaseModel
 from sqlmodel import Relationship, SQLModel, Field
 
 """
@@ -8,8 +9,8 @@ from sqlmodel import Relationship, SQLModel, Field
 """
 
 """
-    We define the Base model to avoid repeating code, and allowing us to have an schema 
-    that allows us to return the full data of a disc including the full car it belongs
+    I define the Base model to avoid repeating code, to allow me to have an schema 
+    to return the full data of a disc including the full car that it belongs
 """
 
 
@@ -32,6 +33,7 @@ class VersionBase(SQLModel):
 
 class DiscBase(SQLModel):
     position: str | None = Field(default=None, index=True)
+    holes: str | None = Field(default=None, index=True)
     style: str | None = Field(default=None, index=True)
     diameter: float | None = Field(default=None, index=True)
     height: float | None = Field(default=None, index=True)
@@ -84,3 +86,14 @@ class DiscoReadFull(DiscBase):
     id: int
     version: VersionRead
     model_config = {"from_attributes": True}
+
+
+class DiscFilters(BaseModel):
+    position: str | None = None
+    holes: str | None = None
+    style: str | None = None
+    diameter: float | None = None
+    height: float | None = None
+    thickness: float | None = None
+    center_bore: float | None = None
+    pcd: float | None = None
