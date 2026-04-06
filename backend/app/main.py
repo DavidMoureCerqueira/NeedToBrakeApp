@@ -3,8 +3,7 @@ from routes.cascade_router import router as cascade_router
 from routes.parent_selector_router import router as parent_selector_router
 from routes.filter_router import router as filter_selector_router
 from fastapi import FastAPI
-
-
+from fastapi.middleware.cors import CORSMiddleware
 from utils.seed import load_json_data
 from database import check_data_exists, init_db, engine
 
@@ -20,6 +19,19 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="NeedToBrake-Backend", lifespan=lifespan)
+
+origins = [
+    "http://localhost:4200",
+    "http://127.0.0.1:4200",
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 app.include_router(router=cascade_router, prefix="/cascade")
 app.include_router(router=parent_selector_router, prefix="/parent-selector")
