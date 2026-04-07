@@ -1,7 +1,5 @@
 from typing import List
-
 from fastapi import APIRouter, HTTPException
-
 from models.models import Brand, Model, Version
 from database import SessionDep
 from services.cascade_service import (

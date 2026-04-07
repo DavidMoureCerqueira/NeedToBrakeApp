@@ -1,20 +1,16 @@
-import { tap } from 'rxjs';
-import { Disco } from './../../interfaces/disco';
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-
-import { KeyValuePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CarDisc } from '../../interfaces/car-disc';
 
 @Component({
   selector: 'listado-discos',
-  imports: [KeyValuePipe, RouterLink],
+  imports: [RouterLink],
   templateUrl: './listado-discos.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListadoDiscos {
   listDiscPerCar = input.required<CarDisc[] | []>();
-
+  hasData = computed(() => this.listDiscPerCar().length > 0);
   listProcessed = computed(() => {
     let data = this.listDiscPerCar();
     let consolidedData = data.map((discAsociation) => {
