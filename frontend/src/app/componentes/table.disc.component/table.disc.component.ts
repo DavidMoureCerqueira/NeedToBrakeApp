@@ -1,12 +1,11 @@
-import { Disc } from '../../interfaces/disco';
 import { Component, inject, output, signal } from '@angular/core';
-
 import { DiscoService } from '../../services/disc.service';
 import { DiscIlustrationComponent } from '../disc.ilustration.component/disc.ilustration.component';
 import { ListDiscComponent } from '../list.disc.component/list.disc.component';
-import { CarDisc } from '../../interfaces/car-disc';
+import { CarDisc } from '../../interfaces/car.disc';
 import { DesiredDiscComponent } from './desired.disc.component/desired.disc.component';
 import { DiscoExistenteComponent } from './existing.disc.component/existing.disc.component';
+import { DiscClean } from '../../interfaces/disc.clean';
 // import { carDisco } from '../../interfaces/coche-disco';
 
 @Component({
@@ -22,31 +21,28 @@ import { DiscoExistenteComponent } from './existing.disc.component/existing.disc
 })
 export class TableDiscComponent {
   discService = inject(DiscoService);
-  discoVacio: Disc = {
-    position: null,
-    style: null,
+  discoVacio: DiscClean = {
+    position: '',
+    style: '',
     diameter: 0,
     height: 0,
-    thicknessNew: 0,
-    thicknessMin: 0,
+    thickness: 0,
     pcd: 0,
     holes: 0,
-    centerbore: 0,
-    diameterInterior: 0,
-    diameterTornillo: 0,
+    centerBore: 0,
   };
 
-  discoDeseado = signal<Disc>(this.discoVacio);
+  discoDeseado = signal<DiscClean>(this.discoVacio);
 
-  discoExistente = signal<Disc>(this.discoVacio);
+  discoExistente = signal<DiscClean>(this.discoVacio);
 
   listDiscCar = signal<CarDisc[] | []>([]);
 
-  recibirDiscoDeseado(disco: Disc) {
+  recibirDiscoDeseado(disco: DiscClean) {
     this.discoDeseado.set(disco);
   }
 
-  recibirDiscoExistente(disco: Disc) {
+  recibirDiscoExistente(disco: DiscClean) {
     this.discoExistente.set(disco);
   }
 
@@ -63,7 +59,6 @@ export class TableDiscComponent {
   }
 
   igualarDatosVacios() {
-    console.log('igualar');
     const discoModificado = this.discService.igualarDatos(
       this.discoExistente(),
       this.discoDeseado(),

@@ -6,7 +6,7 @@ export interface CarsDiscDatabase {
   style: string;
   diameter: number;
   height: number;
-  thickness: string;
+  thickness: number;
   center_bore: number;
   pcd: number;
   version_id: number;

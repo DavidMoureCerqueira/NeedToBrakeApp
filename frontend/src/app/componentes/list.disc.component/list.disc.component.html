@@ -17,7 +17,7 @@
           </tr>
         </thead>
         <tbody>
-          @for (item of listProcessed(); track item.car.version.id) {
+          @for (item of listDiscPerCar(); track item.car.version.id) {
             <tr
               class="text-center hover:bg-base-300 cursor-pointer transition-colors"
               [routerLink]="['/disc-detail', item.car.version.id]"

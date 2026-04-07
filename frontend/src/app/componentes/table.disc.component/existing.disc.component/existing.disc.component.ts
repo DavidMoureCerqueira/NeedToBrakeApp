@@ -1,4 +1,4 @@
-import { Disc } from '../../../interfaces/disco';
+import { DiscClean } from '../../../interfaces/disc.clean';
 import { Component, effect, input, output, signal } from '@angular/core';
 
 @Component({
@@ -8,38 +8,26 @@ import { Component, effect, input, output, signal } from '@angular/core';
   styleUrl: './existing.disc.component.css',
 })
 export class DiscoExistenteComponent {
-  disco = signal<Disc>({
-    position: null,
-    style: null,
+  disc = signal<DiscClean>({
+    position: '',
+    style: '',
     diameter: 0,
     height: 0,
-    thicknessNew: 0,
-    thicknessMin: 0,
+    thickness: 0,
     pcd: 0,
     holes: 0,
-    centerbore: 0,
-    diameterInterior: 0,
-    diameterTornillo: 0,
+    centerBore: 0,
   });
 
-  discoEnviar = output<Disc>();
+  discoEnviar = output<DiscClean>();
 
-  actualizarDisco(campo: keyof Disc, nuevoValorTexto: string) {
+  actualizarDisco(campo: keyof DiscClean, nuevoValorTexto: string) {
     const valorParseado = parseFloat(nuevoValorTexto);
     const nuevoValor = isNaN(valorParseado) ? 0 : valorParseado;
-    this.disco.update((discoActual) => ({
-      ...discoActual,
+    this.disc.update((actualDisc) => ({
+      ...actualDisc,
       [campo]: nuevoValor,
     }));
-    this.discoEnviar.emit(this.disco());
+    this.discoEnviar.emit(this.disc());
   }
-
-  // constructor() {
-  //     // 💡 El effect se axlecuta:
-  //     // 1. Inmediatamente al inicio (inicialización)
-  //     // 2. Cada vez que el valor de this.discoCreado() cambie (sincronización)
-  //     effect(() => {
-  //       this.disco.set(this.disco());
-  //     });
-  //   }
 }

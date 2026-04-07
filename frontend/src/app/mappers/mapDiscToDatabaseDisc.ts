@@ -1,6 +1,6 @@
-import { Disc } from '../interfaces/disco';
+import { DiscClean } from '../interfaces/disc.clean';
 
-export function mapperDiscoToBDSearch(disco: Disc): any {
+export function mapperDiscoToBDSearch(disco: DiscClean): any {
   const searchDisc: any = {};
 
   if (disco.position) searchDisc.position = disco.position;
@@ -8,8 +8,8 @@ export function mapperDiscoToBDSearch(disco: Disc): any {
   if (disco.style) searchDisc.style = disco.style;
   if (disco.diameter) searchDisc.diameter = disco.diameter;
   if (disco.height) searchDisc.height = disco.height;
-  if (disco.thicknessNew) searchDisc.thickness = disco.thicknessNew;
-  if (disco.centerbore) searchDisc.center_bore = disco.centerbore;
+  if (disco.thickness) searchDisc.thickness = disco.thickness;
+  if (disco.centerBore) searchDisc.center_bore = disco.centerBore;
   if (disco.pcd) searchDisc.pcd = disco.pcd;
   console.log(searchDisc);
   return searchDisc;

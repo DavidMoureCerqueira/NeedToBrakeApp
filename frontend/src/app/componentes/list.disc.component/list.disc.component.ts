@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { CarDisc } from '../../interfaces/car-disc';
+import { CarDisc } from '../../interfaces/car.disc';
 
 @Component({
   selector: 'list-disc',
@@ -11,16 +11,17 @@ import { CarDisc } from '../../interfaces/car-disc';
 export class ListDiscComponent {
   listDiscPerCar = input.required<CarDisc[] | []>();
   hasData = computed(() => this.listDiscPerCar().length > 0);
+
   listProcessed = computed(() => {
-    let data = this.listDiscPerCar();
-    let consolidedData = data.map((discAsociation) => {
+    const data = this.listDiscPerCar();
+    const consolidedData = data.map((discAsociation) => {
       const pcdBase = discAsociation.disc.pcd ?? '';
       const holes = discAsociation.disc.holes ?? '';
       const pcd =
         pcdBase && holes
-          ? `${discAsociation.disc.pcd ?? ''}x${discAsociation.disc.holes ?? ''}`
+          ? `${discAsociation.disc.holes ?? ''}x${discAsociation.disc.pcd ?? ''}`
           : '';
-      let pcdObj = {
+      const pcdObj = {
         pcdConsolided: pcd,
       };
       return { ...discAsociation, disc: { ...discAsociation.disc, ...pcdObj } };
@@ -28,16 +29,15 @@ export class ListDiscComponent {
     return consolidedData;
   });
   readonly Order = [
-    'RotorDiameter',
-    'RotorHeight',
-    'PCD',
-    'RotorHoles',
+    'diameter',
+    'height',
+    'pcd',
+    'holes',
     'pcdConsolided',
-    'Centerbore',
-    'RotorThicknessNew',
-    'RotorThicknessMin',
-    'RotorStyle',
-    'RotorAxle',
+    'centerBore',
+    'thickness',
+    'style',
+    'position',
   ];
   customOrder = (param1: any, param2: any) => {
     return this.Order.indexOf(param1.key) - this.Order.indexOf(param2.key);

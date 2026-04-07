@@ -1,43 +1,69 @@
 <section>
   <h3>Disco Objetivo</h3>
-  <div class=" contenedor">
-
+  <div class="contenedor">
     <div class="item">
       <label for="diameter">Diameter</label>
-      <input id="diameter" type="number" placeholder="Medida A" [value]="disco().diameter || ''"
-        (input)="actualizarDisco('diameter',$event.target.value)" />
+      <input
+        id="diameter"
+        type="number"
+        placeholder="Medida A"
+        [value]="disco().diameter || ''"
+        (input)="actualizarDisco('diameter', $event.target.value)"
+      />
     </div>
     <div class="item">
       <label for="height">Height</label>
-      <input id="height" type="number" placeholder="Medida B" [value]="disco().height || ''"
-        (input)="actualizarDisco('height',$event.target.value)" />
+      <input
+        id="height"
+        type="number"
+        placeholder="Medida B"
+        [value]="disco().height || ''"
+        (input)="actualizarDisco('height', $event.target.value)"
+      />
     </div>
 
     <div class="item">
       <label for="thicknessNew">ThicknessN</label>
-      <input id="thicknessNew" type="number" placeholder="Medida D" [value]="disco().thicknessNew || ''"
-        (input)="actualizarDisco('thicknessNew',$event.target.value)" />
+      <input
+        id="thicknessNew"
+        type="number"
+        placeholder="Medida D"
+        [value]="disco().thickness || ''"
+        (input)="actualizarDisco('thicknessNew', $event.target.value)"
+      />
     </div>
 
     <div class="item">
       <label for="pcd">PCD</label>
-      <input id="pcd" type="number" placeholder="Medida E" [value]="disco().pcd || ''"
-        (input)="actualizarDisco('pcd',$event.target.value)" />
+      <input
+        id="pcd"
+        type="number"
+        placeholder="Medida E"
+        [value]="disco().pcd || ''"
+        (input)="actualizarDisco('pcd', $event.target.value)"
+      />
     </div>
 
     <div class="item">
       <label for="Agujeros">Nº Holes</label>
-      <input id="Agujeros" type="number" placeholder="Medida F" [value]="disco().holes || ''"
-        (input)="actualizarDisco('holes',$event.target.value)" />
+      <input
+        id="Agujeros"
+        type="number"
+        placeholder="Medida F"
+        [value]="disco().holes || ''"
+        (input)="actualizarDisco('holes', $event.target.value)"
+      />
     </div>
 
     <div class="item">
       <label for="Buje">Ø Centerbore</label>
-      <input id="Buje" type="number" placeholder="Medida G" [value]="disco().centerbore || ''"
-        (input)="actualizarDisco('centerbore',$event.target.value)" />
+      <input
+        id="Buje"
+        type="number"
+        placeholder="Medida G"
+        [value]="disco().centerBore || ''"
+        (input)="actualizarDisco('centerbore', $event.target.value)"
+      />
     </div>
-
-
   </div>
-
 </section>
