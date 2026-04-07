@@ -2,6 +2,7 @@ from contextlib import asynccontextmanager
 from routes.cascade_router import router as cascade_router
 from routes.parent_selector_router import router as parent_selector_router
 from routes.filter_router import router as filter_selector_router
+from routes.disc_router import router as disc_router
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from utils.seed import load_json_data
@@ -36,6 +37,7 @@ app.add_middleware(
 app.include_router(router=cascade_router, prefix="/cascade")
 app.include_router(router=parent_selector_router, prefix="/parent-selector")
 app.include_router(router=filter_selector_router, prefix="/filter")
+app.include_router(router=disc_router, prefix="/disc")
 
 
 @app.get("/")
