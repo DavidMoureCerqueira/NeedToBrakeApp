@@ -7,6 +7,8 @@ import { mapperDiscoToBDSearch } from '../mappers/mapDiscToDatabaseDisc';
 import { mapperCarDiscDatabaseToCarDiscCleanArray } from '../mappers/mapCarDiscDatabaseToCarDiscClean';
 
 import { DiscClean } from '../interfaces/disc.clean';
+import { DiscDatabase } from '../interfaces/disc.database';
+import { mapDiscDataBaseToDisc } from '../mappers/mapDiscDatabaseToDisc';
 
 const API_URL = 'http://localhost:8000';
 
@@ -18,16 +20,21 @@ export class DiscoService {
 
   constructor() {}
 
-  buscarPorMedidas(disco: DiscClean): Observable<CarDisc[]> {
+  discByFilter(disc: DiscClean): Observable<CarDisc[]> {
     const url = `${API_URL}/filter/disc`;
-    const discBD = mapperDiscoToBDSearch(disco);
+    const discBD = mapperDiscoToBDSearch(disc);
     console.log(discBD);
 
     return this.http
       .post<CarsDiscDatabase[]>(url, discBD)
       .pipe(map((resp) => mapperCarDiscDatabaseToCarDiscCleanArray(resp)));
   }
-  igualarDatos(discoExistente: DiscClean, discoDeseado: Partial<DiscClean>) {
+  getDiscByID(id: number): Observable<DiscClean> {
+    const url = `${API_URL}/disc/${id}`;
+    return this.http.get<DiscDatabase>(url).pipe(map((resp) => mapDiscDataBaseToDisc(resp)));
+  }
+
+  matchDiscs(discoExistente: DiscClean, discoDeseado: Partial<DiscClean>) {
     const discoModificado: DiscClean = { ...discoExistente };
     (Object.entries(discoDeseado) as [keyof DiscClean, string | number][]).forEach(
       ([key, valor]) => {

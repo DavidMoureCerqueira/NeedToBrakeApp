@@ -28,18 +28,4 @@ export class ListDiscComponent {
     });
     return consolidedData;
   });
-  readonly Order = [
-    'diameter',
-    'height',
-    'pcd',
-    'holes',
-    'pcdConsolided',
-    'centerBore',
-    'thickness',
-    'style',
-    'position',
-  ];
-  customOrder = (param1: any, param2: any) => {
-    return this.Order.indexOf(param1.key) - this.Order.indexOf(param2.key);
-  };
 }

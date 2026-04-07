@@ -47,7 +47,7 @@ export class TableDiscComponent {
   }
 
   enviarDiscos() {
-    this.discService.buscarPorMedidas(this.discoDeseado()).subscribe({
+    this.discService.discByFilter(this.discoDeseado()).subscribe({
       next: (data) => {
         console.log('Comunicacion Correcta', data);
         this.listDiscCar.set(data);
@@ -59,10 +59,7 @@ export class TableDiscComponent {
   }
 
   igualarDatosVacios() {
-    const discoModificado = this.discService.igualarDatos(
-      this.discoExistente(),
-      this.discoDeseado(),
-    );
+    const discoModificado = this.discService.matchDiscs(this.discoExistente(), this.discoDeseado());
     this.discoDeseado.set(discoModificado);
   }
 }

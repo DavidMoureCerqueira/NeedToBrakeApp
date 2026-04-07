@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { MainPageComponent } from './pages/main-page.component/main-page.component';
-import { DiscoDetailComponent } from './componentes/disc.detail.component/disc.detail.component';
+import { MainPageComponent } from './pages/main.page.component/main.page.component';
+import { DiscComparisonPageComponent } from './pages/disc.comparison.page.component/disc.comparison.page.component';
 
 export const routes: Routes = [
   {
@@ -10,7 +10,7 @@ export const routes: Routes = [
   },
   {
     path: 'disc-detail/:id',
-    component: DiscoDetailComponent,
+    component: DiscComparisonPageComponent,
   },
   {
     path: '**',
