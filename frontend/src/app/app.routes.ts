@@ -1,22 +1,19 @@
 import { Routes } from '@angular/router';
 import { MainPageComponent } from './pages/main-page.component/main-page.component';
-import { DiscoDetail as DiscoDetailComponent } from './componentes/disco-detail/disco-detail';
+import { DiscoDetailComponent } from './componentes/disc-detail/disc-detail';
 
 export const routes: Routes = [
-
   {
-    path:'',
+    path: '',
 
-    component:MainPageComponent
+    component: MainPageComponent,
   },
   {
-    path:'disc-detail/:id',
-    component:DiscoDetailComponent
+    path: 'disc-detail/:id',
+    component: DiscoDetailComponent,
   },
   {
-    path:'**',
-    redirectTo:''
+    path: '**',
+    redirectTo: '',
   },
-
-
 ];

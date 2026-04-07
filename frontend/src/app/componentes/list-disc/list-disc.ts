@@ -3,12 +3,12 @@ import { RouterLink } from '@angular/router';
 import { CarDisc } from '../../interfaces/car-disc';
 
 @Component({
-  selector: 'listado-discos',
+  selector: 'list-disc',
   imports: [RouterLink],
-  templateUrl: './listado-discos.html',
+  templateUrl: './list-disc.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ListadoDiscos {
+export class ListDiscComponent {
   listDiscPerCar = input.required<CarDisc[] | []>();
   hasData = computed(() => this.listDiscPerCar().length > 0);
   listProcessed = computed(() => {

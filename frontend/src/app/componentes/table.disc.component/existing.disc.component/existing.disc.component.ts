@@ -1,14 +1,14 @@
-import { Disco } from '../../../interfaces/disco';
+import { Disc } from '../../../interfaces/disco';
 import { Component, effect, input, output, signal } from '@angular/core';
 
 @Component({
-  selector: 'disco-existente-component',
+  selector: 'existing-disc',
   imports: [],
-  templateUrl: './disco-existente.component.html',
-  styleUrl: './disco-existente.component.css',
+  templateUrl: './existing.disc.component.html',
+  styleUrl: './existing.disc.component.css',
 })
 export class DiscoExistenteComponent {
-  disco = signal<Disco>({
+  disco = signal<Disc>({
     position: null,
     style: null,
     diameter: 0,
@@ -22,9 +22,9 @@ export class DiscoExistenteComponent {
     diameterTornillo: 0,
   });
 
-  discoEnviar = output<Disco>();
+  discoEnviar = output<Disc>();
 
-  actualizarDisco(campo: keyof Disco, nuevoValorTexto: string) {
+  actualizarDisco(campo: keyof Disc, nuevoValorTexto: string) {
     const valorParseado = parseFloat(nuevoValorTexto);
     const nuevoValor = isNaN(valorParseado) ? 0 : valorParseado;
     this.disco.update((discoActual) => ({

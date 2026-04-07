@@ -1,6 +1,6 @@
-import { Disco } from '../interfaces/disco';
+import { Disc } from '../interfaces/disco';
 
-export function mapperDiscoToBDSearch(disco: Disco): any {
+export function mapperDiscoToBDSearch(disco: Disc): any {
   const searchDisc: any = {};
 
   if (disco.position) searchDisc.position = disco.position;

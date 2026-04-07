@@ -1,5 +1,5 @@
 import { CarDisc } from '../interfaces/car-disc';
-import { CarsDiscDatabase } from '../interfaces/cars-discs-database';
+import { CarsDiscDatabase } from '../interfaces/cars.discs.database';
 
 export function mapperCarDiscDatabaseToCarDiscClean(db: CarsDiscDatabase): CarDisc {
   const car = {

@@ -1,4 +1,4 @@
-import { VersionDatabase } from './version-database';
+import { VersionDatabase } from './version.database';
 
 export interface CarsDiscDatabase {
   position: string;

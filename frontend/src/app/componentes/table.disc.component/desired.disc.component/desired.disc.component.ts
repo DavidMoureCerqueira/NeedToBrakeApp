@@ -1,14 +1,14 @@
 import { Component, effect, input, output, signal, ViewChild } from '@angular/core';
-import { Disco } from '../../../interfaces/disco';
+import { Disc } from '../../../interfaces/disco';
 
 @Component({
-  selector: 'disco-deseado-component',
+  selector: 'desired-disc',
   imports: [],
-  templateUrl: './disco-deseado.component.html',
-  styleUrl: './disco-deseado.component.css',
+  templateUrl: './desired.disc.component.html',
+  styleUrl: './desired.disc.component.css',
 })
-export class DiscoDeseadoComponent {
-  disco = signal<Disco>({
+export class DesiredDiscComponent {
+  disco = signal<Disc>({
     position: null,
     style: null,
     diameter: 0,
@@ -22,10 +22,10 @@ export class DiscoDeseadoComponent {
     diameterTornillo: 0,
   });
 
-  discoDeseadoInputeado = output<Disco>({});
-  discoModificado = input.required<Disco>({});
+  discoDeseadoInputeado = output<Disc>({});
+  discoModificado = input.required<Disc>({});
 
-  actualizarDisco(campo: keyof Disco, nuevoValorTexto: string): void {
+  actualizarDisco(campo: keyof Disc, nuevoValorTexto: string): void {
     // Convertir el valor a un número. Si no es válido, se usa 0 como fallback.
     const valorParseado = parseFloat(nuevoValorTexto);
     const nuevoValor = isNaN(valorParseado) ? 0 : valorParseado;

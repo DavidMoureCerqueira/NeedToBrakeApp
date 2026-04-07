@@ -1,4 +1,4 @@
-import { ModelDatabase } from './model-database';
+import { ModelDatabase } from './model.database';
 
 export interface VersionDatabase {
   id: number;

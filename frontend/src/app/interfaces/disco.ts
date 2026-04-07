@@ -1,4 +1,4 @@
-export interface Disco {
+export interface Disc {
   [key: string]: number | string | null;
   position: string | null;
   style: string | null;

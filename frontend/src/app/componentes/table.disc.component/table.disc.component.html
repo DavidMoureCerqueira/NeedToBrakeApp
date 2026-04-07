@@ -2,23 +2,21 @@
 
 <section class="tables">
   <div class="disco-visual">
-    <disco-existente-component
-      (discoEnviar)="recibirDiscoExistente($event)"
-    ></disco-existente-component>
-    <disco-ilustracion [discoIlustrado]="discoExistente()"></disco-ilustracion>
+    <existing-disc (discoEnviar)="recibirDiscoExistente($event)"></existing-disc>
+    <disc-ilustration [discoIlustrado]="discoExistente()"></disc-ilustration>
   </div>
   <div class="botones-container">
     <button class="btn btn-secondary self-center" (click)="igualarDatosVacios()">Igualar</button>
     <button class="btn btn-primary self-center" (click)="enviarDiscos()">Buscar</button>
   </div>
   <div class="disco-visual">
-    <disco-deseado-component
+    <desired-disc
       (discoDeseadoInputeado)="recibirDiscoDeseado($event)"
       [discoModificado]="discoDeseado()"
-    ></disco-deseado-component>
-    <disco-ilustracion [discoIlustrado]="discoDeseado()"></disco-ilustracion>
+    ></desired-disc>
+    <disc-ilustration [discoIlustrado]="discoDeseado()"></disc-ilustration>
   </div>
 </section>
 <section>
-  <listado-discos [listDiscPerCar]="listDiscCar()"> </listado-discos>
+  <list-disc [listDiscPerCar]="listDiscCar()"> </list-disc>
 </section>
