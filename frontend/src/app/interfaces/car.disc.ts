@@ -1,7 +1,7 @@
 import { CarClean } from './car';
-import { DiscClean } from './disc.clean';
+import { Disc } from './disc';
 
 export interface CarDisc {
   car: CarClean;
-  disc: DiscClean;
+  disc: Disc;
 }

@@ -1,7 +1,7 @@
 import { CarDisc } from '../interfaces/car.disc';
 import { CarsDiscDatabase } from '../interfaces/cars.discs.database';
 
-export function mapperCarDiscDatabaseToCarDiscClean(db: CarsDiscDatabase): CarDisc {
+export function mapperCarDiscDatabaseToCarDisc(db: CarsDiscDatabase): CarDisc {
   const car = {
     brand: {
       id: db.version.model.brand.id,
@@ -20,6 +20,7 @@ export function mapperCarDiscDatabaseToCarDiscClean(db: CarsDiscDatabase): CarDi
     },
   };
   const disc = {
+    id: db.id,
     position: db.position,
     holes: db.holes,
     style: db.style,
@@ -32,5 +33,5 @@ export function mapperCarDiscDatabaseToCarDiscClean(db: CarsDiscDatabase): CarDi
   return { car, disc };
 }
 export function mapperCarDiscDatabaseToCarDiscCleanArray(data: CarsDiscDatabase[]): CarDisc[] {
-  return data.map((singleData) => mapperCarDiscDatabaseToCarDiscClean(singleData));
+  return data.map((singleData) => mapperCarDiscDatabaseToCarDisc(singleData));
 }

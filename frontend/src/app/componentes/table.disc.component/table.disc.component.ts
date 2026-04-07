@@ -47,9 +47,9 @@ export class TableDiscComponent {
   }
 
   enviarDiscos() {
+    this.discService.saveExistingDisc(this.discoExistente());
     this.discService.discByFilter(this.discoDeseado()).subscribe({
       next: (data) => {
-        console.log('Comunicacion Correcta', data);
         this.listDiscCar.set(data);
       },
       error(error) {

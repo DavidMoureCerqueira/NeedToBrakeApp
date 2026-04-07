@@ -17,10 +17,10 @@
           </tr>
         </thead>
         <tbody>
-          @for (item of listDiscPerCar(); track item.car.version.id) {
+          @for (item of listDiscPerCar(); track item.disc.id) {
             <tr
               class="text-center hover:bg-base-300 cursor-pointer transition-colors"
-              [routerLink]="['/disc-detail', item.car.version.id]"
+              [routerLink]="['/disc-detail', item.disc.id]"
             >
               <td>{{ item.disc.diameter }}mm</td>
               <td>{{ item.disc.height }}mm</td>

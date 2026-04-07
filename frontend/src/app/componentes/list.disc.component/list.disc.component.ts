@@ -17,6 +17,7 @@ export class ListDiscComponent {
     const consolidedData = data.map((discAsociation) => {
       const pcdBase = discAsociation.disc.pcd ?? '';
       const holes = discAsociation.disc.holes ?? '';
+
       const pcd =
         pcdBase && holes
           ? `${discAsociation.disc.holes ?? ''}x${discAsociation.disc.pcd ?? ''}`

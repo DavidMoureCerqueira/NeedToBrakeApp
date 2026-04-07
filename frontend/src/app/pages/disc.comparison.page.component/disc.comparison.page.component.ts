@@ -1,21 +1,40 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DiscoService } from '../../services/disc.service';
+import { DiscClean } from '../../interfaces/disc.clean';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-disc.comparison.component',
-  imports: [],
+  imports: [JsonPipe],
 
-  template: `<p>disc.comparison.component works!</p>`,
+  templateUrl: './disc.comparison.page.component.html',
   styleUrl: './disc.comparison.page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DiscComparisonPageComponent {
   constructor() {}
+  desiredDisc = signal<DiscClean | null>(null);
+  existingDisc = signal<DiscClean | null>(null);
   private route = inject(ActivatedRoute);
   private service = inject(DiscoService);
-  id = signal(this.route.snapshot.paramMap.get('id'));
+  id = signal(Number(this.route.snapshot.paramMap.get('id')));
+
   ngOnInit() {
     console.log(this.id());
+    if (!this.id()) {
+      console.error('ID on URL not valid');
+      return;
+    }
+    this.service.getDiscByID(this.id()).subscribe({
+      next: (data) => {
+        this.desiredDisc.set(data);
+        console.log(data);
+      },
+      error: () => {
+        console.log('No ha sido posible recuperar el disco');
+      },
+    });
+    this.existingDisc.set(this.service.retrieveExistingDisc());
   }
 }

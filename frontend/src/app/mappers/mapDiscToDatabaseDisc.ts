@@ -1,6 +1,6 @@
 import { DiscClean } from '../interfaces/disc.clean';
 
-export function mapperDiscoToBDSearch(disco: DiscClean): any {
+export function mapperDiscoToDataBaseSearch(disco: DiscClean): any {
   const searchDisc: any = {};
 
   if (disco.position) searchDisc.position = disco.position;
@@ -11,6 +11,6 @@ export function mapperDiscoToBDSearch(disco: DiscClean): any {
   if (disco.thickness) searchDisc.thickness = disco.thickness;
   if (disco.centerBore) searchDisc.center_bore = disco.centerBore;
   if (disco.pcd) searchDisc.pcd = disco.pcd;
-  console.log(searchDisc);
+
   return searchDisc;
 }
