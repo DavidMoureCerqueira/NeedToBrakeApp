@@ -2,8 +2,8 @@ import { Disc } from '../../interfaces/disco';
 import { Component, inject, output, signal } from '@angular/core';
 
 import { DiscoService } from '../../services/disc.service';
-import { DiscIlustrationComponent } from '../disco-ilustracion/disc-ilustration';
-import { ListDiscComponent } from '../list-disc/list-disc';
+import { DiscIlustrationComponent } from '../disc.ilustration.component/disc.ilustration.component';
+import { ListDiscComponent } from '../list.disc.component/list.disc.component';
 import { CarDisc } from '../../interfaces/car-disc';
 import { DesiredDiscComponent } from './desired.disc.component/desired.disc.component';
 import { DiscoExistenteComponent } from './existing.disc.component/existing.disc.component';

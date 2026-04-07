@@ -5,7 +5,7 @@ import { CarDisc } from '../../interfaces/car-disc';
 @Component({
   selector: 'list-disc',
   imports: [RouterLink],
-  templateUrl: './list-disc.html',
+  templateUrl: './list.disc.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListDiscComponent {

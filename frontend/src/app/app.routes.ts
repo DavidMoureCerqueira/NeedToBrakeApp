@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { MainPageComponent } from './pages/main-page.component/main-page.component';
-import { DiscoDetailComponent } from './componentes/disc-detail/disc-detail';
+import { DiscoDetailComponent } from './componentes/disc.detail.component/disc.detail.component';
 
 export const routes: Routes = [
   {

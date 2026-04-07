@@ -5,7 +5,7 @@ import { FooterComponent } from '../../shared/footer-component/footer-component'
 @Component({
   selector: 'disc-detail',
   imports: [HeaderComponent, FooterComponent],
-  templateUrl: './disc-detail.html',
+  templateUrl: './disc.detail.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DiscoDetailComponent {}

@@ -4,8 +4,8 @@ import { Disc } from '../../interfaces/disco';
 @Component({
   selector: 'disc-ilustration',
   imports: [],
-  templateUrl: './disc-ilustration.html',
-  styleUrl: './disc-ilustration.css',
+  templateUrl: './disc.ilustration.component.html',
+  styleUrl: './disc.ilustration.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DiscIlustrationComponent {
