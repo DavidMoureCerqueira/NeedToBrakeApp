@@ -63,9 +63,9 @@ def extract_disc_data(prefix: str, item: Dict[str, Any]) -> Dict[str, Any]:
         "Holes",
         "Diameter",
         "Height",
-        "Thickness_New",
+        "thickness",
         "PCD",
-        "CenterBore",
+        "center_bore",
     ]
     data = {}
     for key in DISC_KEYS:
@@ -74,9 +74,9 @@ def extract_disc_data(prefix: str, item: Dict[str, Any]) -> Dict[str, Any]:
 
         try:
             if db_key == "style":
-                data[db_key] = str(value)
+                data[db_key] = str(value) if value else None
             else:
-                data[db_key] = float(value or 0)
+                data[db_key] = float(value) if value is not None else None
         except (ValueError, TypeError):
             data[db_key] = None
 
