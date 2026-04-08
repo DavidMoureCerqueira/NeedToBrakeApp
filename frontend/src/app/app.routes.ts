@@ -9,7 +9,7 @@ export const routes: Routes = [
     component: MainPageComponent,
   },
   {
-    path: 'disc-detail/:id',
+    path: 'disc-comparison/:id',
     component: DiscComparisonPageComponent,
   },
   {

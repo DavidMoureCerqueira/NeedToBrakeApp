@@ -35,7 +35,8 @@
               <td class="font-bold">{{ item.car.brand.name }}</td>
               <td>{{ item.car.model.name }}</td>
               <td class="text-xs italic">
-                {{ item.car.version.name }} ({{ item.car.version.year }})
+                {{ item.car.version.name }}{{ item.car.version.engine }}
+                {{ item.car.version.bhp }} ({{ item.car.version.year }})
               </td>
             </tr>
           }
