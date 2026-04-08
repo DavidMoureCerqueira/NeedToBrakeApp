@@ -16,5 +16,9 @@
   </div>
 </section>
 <section>
-  <list-disc [listDiscPerCar]="listDiscCar()"> </list-disc>
+  <list-disc
+    [listDiscPerCar]="listDiscCar()"
+    [isError]="isError()"
+    [isLoading]="isLoading()"
+  ></list-disc>
 </section>

@@ -14,7 +14,8 @@ import { Disc } from '../../interfaces/disc';
 export class ListDiscComponent {
   listDiscPerCar = input.required<CarDisc[] | []>();
   hasData = computed(() => this.listDiscPerCar().length > 0);
-
+  isLoading = input<boolean>(false);
+  isError = input<boolean>(false);
   listProcessed = computed(() => {
     const data = this.listDiscPerCar();
     const consolidedData = data.map((discAsociation) => {

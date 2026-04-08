@@ -1,7 +1,7 @@
 <header-component></header-component>
-<h1>Disco Deseado:</h1>
-<card-disc-component></card-disc-component>
-<p>{{ desiredDisc() | json }}</p>
+
+<card-disc-component [title]="'Desired Disc'" [disc]="desiredDisc()"></card-disc-component>
+
 <h1>Disco Existente:</h1>
 <p>{{ existingDisc() | json }}</p>
 <footer-component></footer-component>

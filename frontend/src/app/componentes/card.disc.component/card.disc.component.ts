@@ -1,10 +1,15 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
+import { DiscClean } from '../../interfaces/disc.clean';
+import { KeyValuePipe, TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'card-disc-component',
-  imports: [],
+  imports: [KeyValuePipe, TitleCasePipe],
   templateUrl: './card.disc.component.html',
   styleUrl: './card.disc.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CardDiscComponent {}
+export class CardDiscComponent {
+  title = input.required<string>();
+  disc = input.required<DiscClean | null>();
+}

@@ -1,1 +1,23 @@
-<p>Card Disc</p>
+<div class="card bg-base-100 w-96 shadow-sm">
+  <figure>
+    <img
+      src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+      alt="Shoes"
+    />
+  </figure>
+  <div class="card-body">
+    <h2 class="card-title">{{ title() }}</h2>
+    <table>
+      @for (item of disc() | keyvalue; track $index) {
+        <tr class="text-justify">
+          <td>
+            <strong>{{ item.key | titlecase }}</strong>
+          </td>
+          <td>
+            {{ item.value ? item.value : 'Not available' }}
+          </td>
+        </tr>
+      }
+    </table>
+  </div>
+</div>

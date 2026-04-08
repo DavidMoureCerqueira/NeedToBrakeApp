@@ -38,6 +38,10 @@ export class TableDiscComponent {
 
   listDiscCar = signal<CarDisc[] | []>([]);
 
+  isLoading = signal<boolean>(false);
+
+  isError = signal<boolean>(false);
+
   recibirDiscoDeseado(disco: DiscClean) {
     this.discoDeseado.set(disco);
   }
@@ -47,13 +51,21 @@ export class TableDiscComponent {
   }
 
   enviarDiscos() {
+    this.isLoading.set(true);
+    this.isError.set(false);
+    this.listDiscCar.set([]);
     this.discService.saveExistingDisc(this.discoExistente());
     this.discService.discByFilter(this.discoDeseado()).subscribe({
       next: (data) => {
         this.listDiscCar.set(data);
       },
-      error(error) {
-        console.log('No hay resultados');
+      error: (error) => {
+        console.log('No hay resultados', error);
+        this.isError.set(true);
+        this.isLoading.set(false);
+      },
+      complete: () => {
+        this.isLoading.set(false);
       },
     });
   }

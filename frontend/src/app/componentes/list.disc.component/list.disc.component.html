@@ -1,50 +1,52 @@
-@if (hasData()) {
-  @if (listProcessed().length > 0) {
-    <div class="h-96 overflow-auto shadow-lg rounded-lg">
-      <table class="table table-pin-rows table-zebra w-full">
-        <thead>
-          <tr class="text-center bg-base-200">
-            <th>Diámetro</th>
-            <th>Altura</th>
-            <th>PCD / Agujeros</th>
-            <th>Buje</th>
-            <th>Espesor</th>
-            <th>Estilo</th>
-            <th>Eje</th>
-            <th>Marca</th>
-            <th>Modelo</th>
-            <th>Versión</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (item of listProcessed(); track item.disc.id) {
-            <tr
-              class="text-center hover:bg-base-300 cursor-pointer transition-colors"
-              [routerLink]="['/disc-detail', item.disc.id]"
-            >
-              <td>{{ item.disc.diameter }}mm</td>
-              <td>{{ item.disc.height }}mm</td>
-              <td>{{ item.disc.pcdConsolidated }}</td>
-              <td>{{ item.disc.centerBore }}mm</td>
-              <td>{{ item.disc.thickness }}mm</td>
-              <td>
-                <span class="badge badge-ghost">{{ item.disc.style }}</span>
-              </td>
-              <td>{{ item.disc.position }}</td>
+@if (isLoading()) {
+  <span class="loading loading-spinner loading-lg"></span>
+}
+@if (isError()) {
+  <div class="alert alert-info mt-4">
+    <span>No se encontraron resultados para esta búsqueda.</span>
+  </div>
+}
+@if (listProcessed().length > 0) {
+  <div class="h-96 overflow-auto shadow-lg rounded-lg">
+    <table class="table table-pin-rows table-zebra w-full">
+      <thead>
+        <tr class="text-center bg-base-200">
+          <th>Diámetro</th>
+          <th>Altura</th>
+          <th>PCD / Agujeros</th>
+          <th>Buje</th>
+          <th>Espesor</th>
+          <th>Estilo</th>
+          <th>Eje</th>
+          <th>Marca</th>
+          <th>Modelo</th>
+          <th>Versión</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of listProcessed(); track item.disc.id) {
+          <tr
+            class="text-center hover:bg-base-300 cursor-pointer transition-colors"
+            [routerLink]="['/disc-comparison', item.disc.id]"
+          >
+            <td>{{ item.disc.diameter }}mm</td>
+            <td>{{ item.disc.height }}mm</td>
+            <td>{{ item.disc.pcdConsolidated }}</td>
+            <td>{{ item.disc.centerBore }}mm</td>
+            <td>{{ item.disc.thickness }}mm</td>
+            <td>
+              <span class="badge badge-ghost">{{ item.disc.style }}</span>
+            </td>
+            <td>{{ item.disc.position }}</td>
 
-              <td class="font-bold">{{ item.car.brand.name }}</td>
-              <td>{{ item.car.model.name }}</td>
-              <td class="text-xs italic">
-                {{ item.car.version.versionConsolidated }}
-              </td>
-            </tr>
-          }
-        </tbody>
-      </table>
-    </div>
-  } @else {
-    <div class="alert alert-info mt-4">
-      <span>No se encontraron resultados para esta búsqueda.</span>
-    </div>
-  }
+            <td class="font-bold">{{ item.car.brand.name }}</td>
+            <td>{{ item.car.model.name }}</td>
+            <td class="text-xs italic">
+              {{ item.car.version.versionConsolidated }}
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
 }
