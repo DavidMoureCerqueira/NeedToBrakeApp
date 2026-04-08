@@ -17,14 +17,14 @@
           </tr>
         </thead>
         <tbody>
-          @for (item of listDiscPerCar(); track item.disc.id) {
+          @for (item of listProcessed(); track item.disc.id) {
             <tr
               class="text-center hover:bg-base-300 cursor-pointer transition-colors"
               [routerLink]="['/disc-detail', item.disc.id]"
             >
               <td>{{ item.disc.diameter }}mm</td>
               <td>{{ item.disc.height }}mm</td>
-              <td>{{ item.disc.pcd }} x {{ item.disc.holes }}</td>
+              <td>{{ item.disc.pcdConsolidated }}</td>
               <td>{{ item.disc.centerBore }}mm</td>
               <td>{{ item.disc.thickness }}mm</td>
               <td>
@@ -35,8 +35,7 @@
               <td class="font-bold">{{ item.car.brand.name }}</td>
               <td>{{ item.car.model.name }}</td>
               <td class="text-xs italic">
-                {{ item.car.version.name }}{{ item.car.version.engine }}
-                {{ item.car.version.bhp }} ({{ item.car.version.year }})
+                {{ item.car.version.versionConsolidated }}
               </td>
             </tr>
           }

@@ -13,10 +13,10 @@ export function mapperCarDiscDatabaseToCarDisc(db: CarsDiscDatabase): CarDisc {
     },
     version: {
       id: db.version.id,
-      name: db.version.name,
-      engine: db.version.engine,
-      bhp: db.version.bhp,
-      year: db.version.year,
+      name: db.version.name ?? '',
+      engine: db.version.engine ?? '',
+      bhp: db.version.bhp ?? '',
+      year: db.version.year ?? '',
     },
   };
   const disc = {
