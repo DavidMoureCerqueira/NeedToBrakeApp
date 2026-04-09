@@ -1,6 +1,14 @@
 <header-component></header-component>
 <div class="flex flex-row justify-evenly p-4">
-  <card-disc-component [title]="'Desired Disc'" [disc]="desiredDisc()!"></card-disc-component>
-  <card-disc-component [title]="'Actual Disc'" [disc]="existingDisc()!"></card-disc-component>
+  <card-disc-component
+    [title]="'Desired Disc'"
+    [disc]="desiredDisc()!"
+    [themeName]="'desired'"
+  ></card-disc-component>
+  <card-disc-component
+    [title]="'Actual Disc'"
+    [disc]="existingDisc()!"
+    [themeName]="'current'"
+  ></card-disc-component>
 </div>
 <footer-component></footer-component>

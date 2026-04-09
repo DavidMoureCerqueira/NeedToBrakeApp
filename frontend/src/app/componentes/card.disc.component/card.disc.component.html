@@ -1,5 +1,13 @@
-<div class="card bg-amber-900 w-96 h-120 shadow-sm overflow-hidden">
-  <div class="w-full h-[50%] flex flex-row relative">
+<div
+  class="card w-96 h-120 shadow-sm overflow-hidden"
+  [style.background]="theme().backGroundPrimary"
+  [style.border]="theme().border"
+  [style.color]="theme().text"
+>
+  <div
+    class="w-full h-[50%] flex flex-row relative"
+    [style.background]="theme().backGroundSecondary"
+  >
     @if (isWarning()) {
       <div
         class="absolute right-2 top-2 z-10 tooltip tooltip-bottom tooltip-warning"
@@ -89,10 +97,12 @@
       class="h-full w-[75%]"
       [(isWarning)]="isWarning"
       [disc]="disc()"
+      [bgColor]="theme().backGroundSecondary"
     ></konva-disc-component>
     <konva-profile-disc-component
       class="h-full w-[25%]"
       [disc]="disc()"
+      [bgColor]="theme().backGroundSecondary"
     ></konva-profile-disc-component>
   </div>
   <div class="card-body">
