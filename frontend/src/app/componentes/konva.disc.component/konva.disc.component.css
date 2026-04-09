@@ -1,3 +1,6 @@
 :host {
   display: block;
 }
+#konvaContainer {
+  min-height: 200px;
+}

@@ -1,1 +1,11 @@
-<div #konvaContainer class="w-full h-full bg-slate-900 rounded-lg shadow-inner"></div>
+@if (!isDrawable()) {
+  <div class="w-full h-full pt-[50%] absolute z-10 text-center bg-error">
+    <p>Not enough data to draw</p>
+  </div>
+}
+
+<div
+  #konvaContainer
+  [class.visibility]="!isDrawable()"
+  class="w-full h-full bg-slate-900 shadow-inner"
+></div>
