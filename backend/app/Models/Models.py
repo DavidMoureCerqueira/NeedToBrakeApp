@@ -79,7 +79,7 @@ class DiscFilters(BaseModel):
     pcd: float | None = None
 
 
-class LoginUser(BaseModel):
+class UserData(BaseModel):
     email: EmailStr
     password: str
 
