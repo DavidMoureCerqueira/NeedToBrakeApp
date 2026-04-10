@@ -23,18 +23,18 @@
     </div>
 
     <div class="item">
-      <label for="thicknessNew">ThicknessN</label>
+      <label for="thickness">Thickness</label>
       <input
-        id="thicknessNew"
+        id="thickness"
         type="number"
         placeholder="Medida D"
         [value]="disco().thickness || ''"
-        (input)="actualizarDisco('thicknessNew', $event.target.value)"
+        (input)="actualizarDisco('thickness', $event.target.value)"
       />
     </div>
 
     <div class="item">
-      <label for="pcd">PCD</label>
+      <label for="pcd">Bolt pattern</label>
       <input
         id="pcd"
         type="number"

@@ -1,7 +1,17 @@
 import { DiscClean } from '../interfaces/disc.clean';
+import { DiscSearch } from '../interfaces/disc.search';
 
-export function mapperDiscoToDataBaseSearch(disco: DiscClean): any {
-  const searchDisc: any = {};
+export function mapperDiscoToDataBaseSearch(disco: DiscClean): DiscSearch {
+  const searchDisc: DiscSearch = {
+    position: null,
+    holes: null,
+    style: null,
+    diameter: null,
+    height: null,
+    thickness: null,
+    center_bore: null,
+    pcd: null,
+  };
 
   if (disco.position) searchDisc.position = disco.position;
   if (disco.holes) searchDisc.holes = disco.holes;
