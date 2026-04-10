@@ -1,3 +1,4 @@
+from pydantic import EmailStr
 from sqlmodel import Relationship, SQLModel, Field
 
 from bcrypt import hashpw, checkpw, gensalt
@@ -28,16 +29,16 @@ class Disc(DiscBase, table=True):
 
 class User(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
-    email: str = Field(unique=True, index=True, nullable=False)
+    email: EmailStr = Field(unique=True, index=True, nullable=False)
     hashed_password: str = Field(nullable=False)
 
-    def hashPassword(self, pw: str):
-        byte_pw = pw.encode("utf-8")
-
+    @staticmethod
+    def hashPassword(password: str):
+        byte_pw = password.encode("utf-8")
         byte_hash_pw = hashpw(password=byte_pw, salt=gensalt())
-        self.hashed_password = byte_hash_pw.decode("utf-8")
+        return byte_hash_pw.decode("utf-8")
 
-    def checkPassword(self, pw: str):
-        byte_pw = pw.encode("utf-8")
+    def checkPassword(self, password: str):
+        byte_pw = password.encode("utf-8")
         byte_hash_pw = self.hashed_password.encode("utf-8")
         return checkpw(hashed_password=byte_hash_pw, password=byte_pw)

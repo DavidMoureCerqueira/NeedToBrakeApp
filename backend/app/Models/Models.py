@@ -1,4 +1,6 @@
-from pydantic import BaseModel
+from typing import Generic, Optional, TypeVar
+
+from pydantic import BaseModel, EmailStr
 from sqlmodel import Relationship, SQLModel, Field
 
 """
@@ -75,3 +77,17 @@ class DiscFilters(BaseModel):
     thickness: float | None = None
     center_bore: float | None = None
     pcd: float | None = None
+
+
+class LoginUser(BaseModel):
+    email: EmailStr
+    password: str
+
+
+T = TypeVar("T")
+
+
+class ModelResp(BaseModel, Generic[T]):
+    succes: bool = None
+    data: Optional[T] = None
+    error: Optional[str] = None
