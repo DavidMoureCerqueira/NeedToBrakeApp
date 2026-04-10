@@ -1,12 +1,26 @@
 from sqlmodel import Session
 
-from exceptions import InvalidPasswordException, UserAlreadyExistsException
+from exceptions import (
+    InvalidPasswordException,
+    UserAlreadyExistsException,
+    WrongPasswordException,
+    WrongUserException,
+)
 from models.table_models import User
 from repository.user_repository import create_user, get_user_by_email
-from models.models import LoginUser
+from models.models import UserData
 
 
-def save_user(session: Session, login_data: LoginUser) -> User:
+def singin_user(session: Session, login_data: UserData) -> User:
+    user = get_user_by_email(session=session, email=login_data.email)
+    if not user:
+        raise WrongUserException()
+    if not user.checkPassword(login_data.password):
+        raise WrongPasswordException(user.email)
+    return user
+
+
+def save_user(session: Session, login_data: UserData) -> User:
     if not checkIfValidPassword(login_data.password):
         raise InvalidPasswordException()
     user = get_user_by_email(session=session, email=login_data.email)
