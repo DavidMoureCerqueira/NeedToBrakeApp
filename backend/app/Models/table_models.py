@@ -1,5 +1,6 @@
 from sqlmodel import Relationship, SQLModel, Field
 
+from bcrypt import hashpw, checkpw, gensalt
 from models.models import BrandBase, ModelBase, VersionBase, DiscBase
 
 
@@ -23,3 +24,20 @@ class Version(VersionBase, table=True):
 class Disc(DiscBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
     version: "Version" = Relationship(back_populates="discs")
+
+
+class User(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    email: str = Field(unique=True, index=True, nullable=False)
+    hashed_password: str = Field(nullable=False)
+
+    def hashPassword(self, pw: str):
+        byte_pw = pw.encode("utf-8")
+
+        byte_hash_pw = hashpw(password=byte_pw, salt=gensalt())
+        self.hashed_password = byte_hash_pw.decode("utf-8")
+
+    def checkPassword(self, pw: str):
+        byte_pw = pw.encode("utf-8")
+        byte_hash_pw = self.hashed_password.encode("utf-8")
+        return checkpw(hashed_password=byte_hash_pw, password=byte_pw)
