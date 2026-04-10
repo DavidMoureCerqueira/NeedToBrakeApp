@@ -2,13 +2,14 @@ from typing import List
 
 from fastapi import APIRouter, HTTPException
 
+from models.models import ModelResp, UserData
 from exceptions import (
     InvalidPasswordException,
     UserAlreadyExistsException,
     WrongPasswordException,
     WrongUserException,
 )
-from models.models import UserData, ModelResp
+
 from services.user_services import save_user, singin_user
 from database import SessionDep
 
