@@ -71,7 +71,8 @@ export class KonvaDiscComponent {
       !this.disc()!.diameter ||
       !this.disc()!.centerBore ||
       !this.disc()!.pcd ||
-      !this.disc()!.holes;
+      !this.disc()!.holes ||
+      !this.disc()!.style;
     this.isWarning.set(missingData);
     this.isDrawable.set(true);
     const diameter = this.disc()!.diameter || 280;
@@ -83,9 +84,11 @@ export class KonvaDiscComponent {
 
     const centerX = this.stage.width() / 2;
     const centerY = this.stage.height() / 2;
+
     const padding = 20;
+    const MAX_REAL_DIAMETER = 420;
     const availableSpace = Math.min(this.stage.width(), this.stage.height()) - padding;
-    const scale = availableSpace / diameter;
+    const scale = availableSpace / MAX_REAL_DIAMETER;
 
     this.layer.add(DiscKonvaFactory.createDiameter(centerX, centerY, diameter, scale));
     this.layer.add(DiscKonvaFactory.createInnerCenter(centerX, centerY, pcd, scale));

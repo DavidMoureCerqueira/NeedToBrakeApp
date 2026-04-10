@@ -5,6 +5,7 @@ import { DiscClean } from '../../interfaces/disc.clean';
 import { HeaderComponent } from '../../shared/header-component/header-component';
 import { FooterComponent } from '../../shared/footer-component/footer-component';
 import { CardDiscComponent } from '../../componentes/card.disc.component/card.disc.component';
+import { DiscApiService } from '../../services/disc.api.service';
 
 @Component({
   selector: 'app-disc.comparison.component',
@@ -19,7 +20,8 @@ export class DiscComparisonPageComponent {
   desiredDisc = signal<DiscClean | null>(null);
   existingDisc = signal<DiscClean | null>(null);
   private route = inject(ActivatedRoute);
-  private service = inject(DiscoService);
+  private discService = inject(DiscoService);
+  private discApiService = inject(DiscApiService);
   id = signal(Number(this.route.snapshot.paramMap.get('id')));
 
   ngOnInit() {
@@ -28,7 +30,7 @@ export class DiscComparisonPageComponent {
       console.error('ID on URL not valid');
       return;
     }
-    this.service.getDiscByID(this.id()).subscribe({
+    this.discApiService.getDiscByID(this.id()).subscribe({
       next: (data) => {
         this.desiredDisc.set(data);
         console.log(data);
@@ -37,6 +39,6 @@ export class DiscComparisonPageComponent {
         console.log('No ha sido posible recuperar el disco');
       },
     });
-    this.existingDisc.set(this.service.retrieveExistingDisc());
+    this.existingDisc.set(this.discService.getExistingDisc());
   }
 }

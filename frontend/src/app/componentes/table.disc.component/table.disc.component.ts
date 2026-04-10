@@ -6,6 +6,7 @@ import { CarDisc } from '../../interfaces/car.disc';
 import { DesiredDiscComponent } from './desired.disc.component/desired.disc.component';
 import { DiscoExistenteComponent } from './existing.disc.component/existing.disc.component';
 import { DiscClean } from '../../interfaces/disc.clean';
+import { DiscApiService } from '../../services/disc.api.service';
 // import { carDisco } from '../../interfaces/coche-disco';
 
 @Component({
@@ -21,6 +22,7 @@ import { DiscClean } from '../../interfaces/disc.clean';
 })
 export class TableDiscComponent {
   discService = inject(DiscoService);
+  discApiService = inject(DiscApiService);
   discoVacio: DiscClean = {
     position: '',
     style: '',
@@ -55,7 +57,7 @@ export class TableDiscComponent {
     this.isError.set(false);
     this.listDiscCar.set([]);
     this.discService.saveExistingDisc(this.discoExistente());
-    this.discService.discByFilter(this.discoDeseado()).subscribe({
+    this.discApiService.discByFilter(this.discoDeseado()).subscribe({
       next: (data) => {
         this.listDiscCar.set(data);
       },

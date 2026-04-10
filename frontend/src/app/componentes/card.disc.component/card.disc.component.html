@@ -1,13 +1,10 @@
 <div
-  class="card w-96 h-120 shadow-sm overflow-hidden"
+  class="card w-96 h-140 shadow-sm overflow-hidden"
   [style.background]="theme().backGroundPrimary"
   [style.border]="theme().border"
   [style.color]="theme().text"
 >
-  <div
-    class="w-full h-[50%] flex flex-row relative"
-    [style.background]="theme().backGroundSecondary"
-  >
+  <div class="w-full h-60 flex flex-row relative" [style.background]="theme().backGroundSecondary">
     @if (isWarning()) {
       <div
         class="absolute right-2 top-2 z-10 tooltip tooltip-bottom tooltip-warning"

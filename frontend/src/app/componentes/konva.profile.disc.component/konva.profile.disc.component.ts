@@ -67,8 +67,9 @@ export class KonvaProfileDiscComponent {
     this.layer.destroyChildren();
 
     const padding = 20;
+    const MAX_REAL_DIAMETER = 420;
     const availableSpace = stageHeight - padding;
-    const scale = availableSpace / diameter;
+    const scale = availableSpace / MAX_REAL_DIAMETER;
 
     const centerX = stageWidth / 2;
     const centerY = stageHeight / 2;
