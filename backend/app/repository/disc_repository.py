@@ -1,6 +1,6 @@
 from sqlmodel import Session, select
 
-from models.models import Disc
+from models.table_models import Disc
 
 
 def get_disc_by_id(session: Session, disc_id: int) -> Disc:

@@ -1,6 +1,7 @@
 from typing import List, Tuple
 
-from models.models import Brand, Disc, DiscoReadFull, Model, Version
+from models.models import DiscoReadFull
+from models.table_models import Brand, Disc, Model, Version
 
 
 def transform_duple_data_to_DiscoReadFull(

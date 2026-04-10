@@ -2,7 +2,7 @@ import json
 from typing import Any, Dict, List
 from sqlmodel import Session, select
 from pathlib import Path
-from models.models import Brand, Disc, Model, Version
+from models.table_models import Brand, Disc, Model, Version
 from database import engine
 
 

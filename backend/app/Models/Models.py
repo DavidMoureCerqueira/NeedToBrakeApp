@@ -2,10 +2,10 @@ from pydantic import BaseModel
 from sqlmodel import Relationship, SQLModel, Field
 
 """
-    SQLModel works as an interface for typing for custom objects and table-structure for SQL.
-    ID needs to be setted as Null to avoid Pydantic to fail in case ID is not used and 
-    SQL gets it as optional and after being primary key, 
-    it is automatically autoincremental in case that it is not provided
+SQLModel works as an interface for typing for custom objects and table-structure for SQL.
+ID needs to be setted as Null to avoid Pydantic to fail in case ID is not used and
+SQL gets it as optional and after being primary key,
+it is automatically autoincremental in case that it is not provided
 """
 
 """
@@ -41,28 +41,6 @@ class DiscBase(SQLModel):
     center_bore: float | None = Field(default=None, index=True)
     pcd: float | None = Field(default=None, index=True)
     version_id: int = Field(foreign_key="version.id")
-
-
-class Brand(BrandBase, table=True):
-    id: int | None = Field(default=None, primary_key=True)
-    models: list["Model"] = Relationship(back_populates="brand")
-
-
-class Model(ModelBase, table=True):
-    id: int | None = Field(default=None, primary_key=True)
-    brand: "Brand" = Relationship(back_populates="models")
-    versions: list["Version"] = Relationship(back_populates="model")
-
-
-class Version(VersionBase, table=True):
-    id: int | None = Field(default=None, primary_key=True)
-    model: "Model" = Relationship(back_populates="versions")
-    discs: list["Disc"] = Relationship(back_populates="version")
-
-
-class Disc(DiscBase, table=True):
-    id: int | None = Field(default=None, primary_key=True)
-    version: "Version" = Relationship(back_populates="discs")
 
 
 class BrandRead(BrandBase):

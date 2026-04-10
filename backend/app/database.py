@@ -3,7 +3,7 @@ from typing import Annotated
 
 from fastapi import Depends
 from sqlmodel import SQLModel, Session, create_engine, select
-from models.models import Brand
+from models.table_models import Brand
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
@@ -22,10 +22,10 @@ SessionDep = Annotated[Session, Depends(get_session)]
 
 
 def init_db():
-    from models.models import Brand
-    from models.models import Model
-    from models.models import Version
-    from models.models import Disc
+    from models.table_models import Brand
+    from models.table_models import Model
+    from models.table_models import Version
+    from models.table_models import Disc
 
     SQLModel.metadata.create_all(engine)
 

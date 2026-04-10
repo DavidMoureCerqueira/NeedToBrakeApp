@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException
 
 from services.disc_service import get_disc_from_db
 from database import SessionDep
-from models.models import Disc
+from models.table_models import Disc
 
 
 router = APIRouter()

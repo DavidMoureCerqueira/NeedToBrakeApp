@@ -1,6 +1,6 @@
 from typing import List
 from sqlmodel import Session, select
-from models.models import Brand, Model, Version
+from models.table_models import Brand, Model, Version
 
 
 def get_all_brands(session: Session) -> List[Brand]:

@@ -2,8 +2,9 @@ from typing import List
 
 from sqlmodel import Session
 
-from services.mapper import transform_duple_data_to_DiscoReadFull
 from models.models import DiscoReadFull
+from services.mapper import transform_duple_data_to_DiscoReadFull
+
 from repository.parent_selector_repository import (
     get_all_disc_by_model_id,
     get_all_disc_by_version_id,

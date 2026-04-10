@@ -2,7 +2,7 @@ from typing import List, Tuple
 
 from sqlmodel import Session, select
 
-from models.models import Brand, Disc, DiscoReadFull, Model, Version
+from models.table_models import Brand, Disc, Model, Version
 
 
 def get_all_disc_by_model_id(
