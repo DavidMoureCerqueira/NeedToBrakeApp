@@ -5,6 +5,9 @@ from pathlib import Path
 from models.table_models import Brand, Disc, Model, Version
 from database import engine
 
+brands = {}
+models = {}
+
 
 def load_json_data():
     """This funtion is in charge of loading data from JSON into database"""
@@ -33,13 +36,14 @@ def load_json_data():
 
 def get_or_create_brand(session: Session, brand_name: str) -> Brand:
     """Looks for a brand in database to avoid duplicates"""
-    brand = session.exec(select(Brand).where(Brand.name == brand_name)).first()
-    if brand:
-        return brand
-    new_brand = Brand(name=brand_name)
-    session.add(new_brand)
-    session.flush()
-    return new_brand
+    if brand_name in brands:
+        return brands[brand_name]
+    else:
+        new_brand = Brand(name=brand_name)
+        session.add(new_brand)
+        session.flush()
+        brands[brand_name] = new_brand
+        return new_brand
 
 
 def get_or_create_model(session: Session, model_name: str, brand_id: int) -> Model:

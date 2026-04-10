@@ -22,12 +22,13 @@ SessionDep = Annotated[Session, Depends(get_session)]
 
 
 def init_db():
-    from models.table_models import Brand
-    from models.table_models import Model
-    from models.table_models import Version
-    from models.table_models import Disc
+    # from models.table_models import Brand
+    # from models.table_models import Model
+    # from models.table_models import Version
+    # from models.table_models import Disc
 
-    SQLModel.metadata.create_all(engine)
+    # SQLModel.metadata.create_all(engine)
+    pass
 
 
 def check_data_exists() -> bool:
