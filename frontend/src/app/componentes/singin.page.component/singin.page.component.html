@@ -1,1 +1,5 @@
-<p>singin.page.component works!</p>,
+<auth-form-component
+  [isRegisterForm]="false"
+  [title]="'Sign-in'"
+  (formEmitter)="onLogin($event)"
+></auth-form-component>
