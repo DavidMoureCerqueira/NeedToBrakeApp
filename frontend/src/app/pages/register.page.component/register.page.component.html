@@ -1,0 +1,39 @@
+<form
+  class="h-screen flex justify-center items-center"
+  [formGroup]="registerForm"
+  (ngSubmit)="onSave()"
+>
+  <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+    <legend class="fieldset-legend">Login</legend>
+
+    <label class="label">Username</label>
+    <input
+      type="text"
+      class="input"
+      placeholder="Username"
+      maxlength="30"
+      formControlName="userName"
+    />
+    @if (isValidField('userName')) {
+      <span class="text-warning">{{ getFieldError('userName') }}</span>
+    }
+    <label class="label">Email</label>
+    <input type="email" class="input" placeholder="Email" maxlength="30" formControlName="email" />
+    @if (isValidField('email')) {
+      <span class="text-warning">{{ getFieldError('email') }}</span>
+    }
+
+    <label class="label">Password</label>
+    <input
+      type="password"
+      class="input"
+      placeholder="Password"
+      maxlength="20"
+      formControlName="password"
+    />
+    @if (isValidField('password')) {
+      <span class="text-warning">{{ getFieldError('password') }}</span>
+    }
+    <button class="btn btn-neutral mt-4">Register</button>
+  </fieldset>
+</form>
