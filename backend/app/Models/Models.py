@@ -88,7 +88,7 @@ T = TypeVar("T")
 
 
 class ModelResp(BaseModel, Generic[T]):
-    succes: bool = None
+    success: bool = None
     data: Optional[T] = None
     error: Optional[str] = None
 

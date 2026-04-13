@@ -1,6 +1,6 @@
 from typing import List
 
-from fastapi import APIRouter, HTTPException, Request
+from fastapi import APIRouter, HTTPException, Request, status
 import jwt
 
 
@@ -25,18 +25,18 @@ router = APIRouter()
 def login(session: SessionDep, email_and_password: LoginData):
     try:
         data = save_user(session=session, login_data=email_and_password)
-        return ModelResp(succes=True, data=data)
+        return ModelResp(success=True, data=data)
     except (InvalidPasswordException, UserAlreadyExistsException) as e:
-        return ModelResp(success=False, error=e.message)
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=e.message)
 
 
 @router.post("/sign-in", response_model=ModelResp, tags=["Sign in user"])
 def sign_in(session: SessionDep, login_data: LoginData):
     try:
         data = singin_user(session=session, login_data=login_data)
-        return ModelResp(succes=True, data=data)
+        return ModelResp(success=True, data=data)
     except (WrongUserException, WrongPasswordException) as e:
-        return ModelResp(sucess=False, error=e.message)
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=e.message)
 
 
 @router.get("/profile", response_model=ModelResp, tags=["Get user profile"])
@@ -45,7 +45,12 @@ def get_my_profile(request: Request, session: SessionDep):
         user_id = get_authorization(request=request)
         user = get_user_by_id_from_db(user_id=user_id, session=session)
         return ModelResp(success=True, data=user)
-    except WrongPasswordException as e:
-        return ModelResp(success=False, error=e.message)
+    except WrongUserException as e:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=e.message)
     except HTTPException as e:
-        return ModelResp(success=False, error=e.detail)
+        raise e
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="An unexpected error occurred",
+        )

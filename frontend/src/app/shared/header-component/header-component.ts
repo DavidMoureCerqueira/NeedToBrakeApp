@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'header-component',
@@ -9,4 +10,8 @@ import { RouterLink } from '@angular/router';
 })
 export class HeaderComponent {
   imageLogoPath: string = 'images/logo.sf.png';
+  authService = inject(AuthService);
+  logOut() {
+    this.authService.logout();
+  }
 }

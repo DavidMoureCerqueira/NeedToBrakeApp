@@ -36,5 +36,17 @@
       <span class="text-warning">{{ getFieldError('password') }}</span>
     }
     <button class="btn btn-neutral mt-4">{{ title() }}</button>
+    @if (!isRegisterForm()) {
+      <p>
+        If you don't have an account you
+        <span class="underline cursor-pointer" [routerLink]="['/register']">create one</span>
+      </p>
+    } @else {
+      <p>
+        If you already have an account you can
+        <span class="underline cursor-pointer" [routerLink]="['/sign-in']"> sign-in</span>
+      </p>
+    }
+    <span class="text-warning">{{ this.error() }}</span>
   </fieldset>
 </form>

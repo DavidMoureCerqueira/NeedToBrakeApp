@@ -1,4 +1,3 @@
-import datetime
 from datetime import datetime, timezone, timedelta
 import os
 from dotenv import load_dotenv
@@ -43,3 +42,5 @@ def get_authorization(request: Request):
         raise HTTPException(status_code=401, detail="Your sesión has expired")
     except jwt.InvalidTokenError:
         raise HTTPException(status_code=401, detail="Invalid Token")
+    except Exception:
+        raise HTTPException(status_code=401, detail="Authentication failed")

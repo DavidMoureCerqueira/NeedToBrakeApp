@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, effect, inject, input, output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthForm } from '../../interfaces/authForm';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'auth-form-component',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './auth.form.component.html',
   styleUrl: './auth.form.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -13,6 +14,7 @@ export class AuthFormComponent {
   isRegisterForm = input.required<boolean>();
   title = input.required<string>();
   formEmitter = output<AuthForm>();
+  error = input<string>('');
 
   private fb = inject(FormBuilder);
 

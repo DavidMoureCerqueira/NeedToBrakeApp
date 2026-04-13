@@ -37,8 +37,15 @@
       <li><a>Search by Measurements</a></li>
     </ul>
   </div>
-  <div class="navbar-end">
-    <btn class="btn" [routerLink]="['/login']">Login</btn>
-    <a class="btn" [routerLink]="['/sign-in']">Sing up</a>
-  </div>
+  @if (!this.authService.isAuthenticated()) {
+    <div class="navbar-end">
+      <btn class="btn" [routerLink]="['/register']">Register</btn>
+      <a class="btn" [routerLink]="['/sign-in']">Sing up</a>
+    </div>
+  } @else {
+    <div class="navbar-end">
+      <p>Welcome {{ this.authService.currentUser() }}</p>
+      <button class="btn" (click)="logOut()">Log-out</button>
+    </div>
+  }
 </div>

@@ -5,21 +5,21 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'register-page-component',
+  selector: 'singin-page-component',
   imports: [AuthFormComponent],
-  templateUrl: './register.page.component.html',
-  styleUrl: './register.page.component.css',
+  templateUrl: './singin.page.component.html',
+  styleUrl: './singin.page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RegisterPageComponent {
+export class SinginPageComponent {
   authService = inject(AuthService);
   router = inject(Router);
   error = signal<string>('');
   onLogin(authFormData: AuthForm) {
     console.log('Recibido el formulario', authFormData);
-    this.authService.register(authFormData).subscribe({
+    this.authService.signin(authFormData).subscribe({
       next: (res) => {
-        console.log('User registered', res);
+        console.log('User singed-in', res);
         if (res.success && res.data) {
           this.authService.setToken(res.data.token);
           this.authService.currentUser.set(res.data.user.email);
@@ -30,7 +30,7 @@ export class RegisterPageComponent {
       },
       error: (err) => {
         this.error.set(err.error?.detail);
-        console.error('Error comunication', err);
+        console.error('Error in comunication', err);
       },
     });
   }
