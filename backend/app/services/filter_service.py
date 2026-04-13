@@ -2,7 +2,10 @@ from typing import List
 
 from sqlmodel import Session
 
-from services.mapper import transform_duple_data_to_DiscoReadFull
+
+from services.mappers.mapper_duple_to_DiscoReadFull import (
+    transform_duple_data_to_DiscoReadFull,
+)
 from repository.filter_repository import get_car_and_disc_by_filter
 from models.models import DiscFilters
 

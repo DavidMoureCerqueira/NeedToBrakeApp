@@ -2,7 +2,7 @@ from typing import List
 
 from fastapi import APIRouter, HTTPException
 
-from models.models import ModelResp, UserData
+from models.models import ModelResp, LoginData
 from exceptions import (
     InvalidPasswordException,
     UserAlreadyExistsException,
@@ -18,7 +18,7 @@ router = APIRouter()
 
 
 @router.post("/register", response_model=ModelResp, tags=["Login user"])
-def login(session: SessionDep, email_and_password: UserData):
+def login(session: SessionDep, email_and_password: LoginData):
     try:
         user = save_user(session=session, login_data=email_and_password)
         return ModelResp(succes=True, data=user)
@@ -27,7 +27,7 @@ def login(session: SessionDep, email_and_password: UserData):
 
 
 @router.post("/sign-in", response_model=ModelResp, tags=["Sign in user"])
-def sign_in(session: SessionDep, login_data: UserData):
+def sign_in(session: SessionDep, login_data: LoginData):
     try:
         user = singin_user(session=session, login_data=login_data)
         return ModelResp(succes=True, data=user)

@@ -79,7 +79,7 @@ class DiscFilters(BaseModel):
     pcd: float | None = None
 
 
-class UserData(BaseModel):
+class LoginData(BaseModel):
     email: EmailStr
     password: str
 
@@ -91,3 +91,8 @@ class ModelResp(BaseModel, Generic[T]):
     succes: bool = None
     data: Optional[T] = None
     error: Optional[str] = None
+
+
+class UserSecure(BaseModel):
+    id: int
+    email: EmailStr
