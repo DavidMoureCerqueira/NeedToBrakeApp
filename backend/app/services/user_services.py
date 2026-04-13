@@ -1,5 +1,6 @@
 from sqlmodel import Session
 
+from services.auth_service import create_JWT_token
 from services.mappers.mapper_User_to_UserData import mapper_user_without_password
 from exceptions import (
     InvalidPasswordException,
@@ -8,21 +9,22 @@ from exceptions import (
     WrongUserException,
 )
 from models.table_models import User
-from repository.user_repository import create_user, get_user_by_email
-from models.models import LoginData, UserSecure
+from repository.user_repository import create_user, get_user_by_email, get_user_by_id
+from models.models import LoginData, UserSecure, ValidationModelResponse
 
 
-def singin_user(session: Session, login_data: LoginData) -> UserSecure:
+def singin_user(session: Session, login_data: LoginData) -> ValidationModelResponse:
     user = get_user_by_email(session=session, email=login_data.email)
     if not user:
         raise WrongUserException()
     if not user.checkPassword(login_data.password):
         raise WrongPasswordException(user.email)
+    token = create_JWT_token(user.id)
 
-    return mapper_user_without_password(user)
+    return ValidationModelResponse(user=mapper_user_without_password(user), token=token)
 
 
-def save_user(session: Session, login_data: LoginData) -> UserSecure:
+def save_user(session: Session, login_data: LoginData) -> ValidationModelResponse:
     if not checkIfValidPassword(login_data.password):
         raise InvalidPasswordException()
     user = get_user_by_email(session=session, email=login_data.email)
@@ -31,7 +33,18 @@ def save_user(session: Session, login_data: LoginData) -> UserSecure:
     hashedPassword = User.hashPassword(login_data.password)
     user = User(email=login_data.email, hashed_password=hashedPassword)
     new_user = create_user(session=session, user=user)
-    return mapper_user_without_password(new_user)
+    token = create_JWT_token(new_user.id)
+
+    return ValidationModelResponse(
+        user=mapper_user_without_password(new_user), token=token
+    )
+
+
+def get_user_by_id_from_db(session: Session, user_id: int) -> UserSecure:
+    user = get_user_by_id(user_id=user_id, session=session)
+    if not user:
+        raise WrongUserException()
+    return mapper_user_without_password(user)
 
 
 def checkIfValidPassword(password: str) -> bool:

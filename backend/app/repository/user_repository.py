@@ -9,6 +9,11 @@ def get_user_by_email(session: Session, email: EmailStr) -> User:
     return user
 
 
+def get_user_by_id(session: Session, user_id: int) -> User:
+    user = session.exec(select(User).filter(User.id == int(user_id))).first()
+    return user
+
+
 def create_user(session: Session, user: User) -> User:
     session.add(user)
     session.commit()

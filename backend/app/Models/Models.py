@@ -96,3 +96,8 @@ class ModelResp(BaseModel, Generic[T]):
 class UserSecure(BaseModel):
     id: int
     email: EmailStr
+
+
+class ValidationModelResponse(BaseModel):
+    user: UserSecure
+    token: str
