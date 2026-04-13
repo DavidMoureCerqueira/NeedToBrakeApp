@@ -1,3 +1,5 @@
+import { User } from './user';
+
 export interface ModelRespAuth {
   success: boolean;
   data?: DataResp;
@@ -6,9 +8,4 @@ export interface ModelRespAuth {
 interface DataResp {
   token: string;
   user: User;
-}
-
-interface User {
-  id: number;
-  email: string;
 }

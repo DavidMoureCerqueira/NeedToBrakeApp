@@ -21,8 +21,8 @@ export class SinginPageComponent {
       next: (res) => {
         console.log('User singed-in', res);
         if (res.success && res.data) {
-          this.authService.setToken(res.data.token);
-          this.authService.currentUser.set(res.data.user.email);
+          this.authService.setSession(res.data.token, res.data.user);
+
           this.router.navigate(['/']);
         } else {
           console.log('Error!');
