@@ -3,8 +3,10 @@ from typing import List
 from fastapi import APIRouter, HTTPException, Request
 import jwt
 
-from services.auth_service import get_authorization
+
 from models.models import ModelResp, LoginData
+from services.auth_service import get_authorization
+
 from exceptions import (
     InvalidPasswordException,
     UserAlreadyExistsException,
