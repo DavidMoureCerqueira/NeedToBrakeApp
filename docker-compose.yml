@@ -5,6 +5,8 @@ services:
       - ./backend/app:/code/app
     ports:
       - "8000:80"
+    env_file:
+      - ./backend/.env
     environment:
       - DATABASE_URL=mysql+pymysql://root:user_password@db:3306/NTB_DB
     depends_on:
