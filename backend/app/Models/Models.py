@@ -82,6 +82,7 @@ class DiscFilters(BaseModel):
 class LoginData(BaseModel):
     email: EmailStr
     password: str
+    username: str
 
 
 T = TypeVar("T")
@@ -96,6 +97,8 @@ class ModelResp(BaseModel, Generic[T]):
 class UserSecure(BaseModel):
     id: int
     email: EmailStr
+    username: str
+    is_admin: bool
 
 
 class ValidationModelResponse(BaseModel):

@@ -22,9 +22,9 @@ router = APIRouter()
 
 
 @router.post("/register", response_model=ModelResp, tags=["Login user"])
-def login(session: SessionDep, email_and_password: LoginData):
+def login(session: SessionDep, loginData: LoginData):
     try:
-        data = save_user(session=session, login_data=email_and_password)
+        data = save_user(session=session, login_data=loginData)
         return ModelResp(success=True, data=data)
     except (InvalidPasswordException, UserAlreadyExistsException) as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=e.message)

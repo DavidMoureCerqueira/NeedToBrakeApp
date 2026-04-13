@@ -31,6 +31,9 @@ class User(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
     email: EmailStr = Field(unique=True, index=True, nullable=False)
     hashed_password: str = Field(nullable=False)
+    username: str = Field(unique=True, index=True, nullable=False)
+    is_admin: bool = Field(default=False)
+    is_active: bool = Field(default=True)
 
     @staticmethod
     def hashPassword(password: str):

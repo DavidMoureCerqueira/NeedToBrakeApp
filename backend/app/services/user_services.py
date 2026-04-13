@@ -31,7 +31,11 @@ def save_user(session: Session, login_data: LoginData) -> ValidationModelRespons
     if user:
         raise UserAlreadyExistsException(user.email)
     hashedPassword = User.hashPassword(login_data.password)
-    user = User(email=login_data.email, hashed_password=hashedPassword)
+    user = User(
+        email=login_data.email,
+        hashed_password=hashedPassword,
+        username=login_data.username,
+    )
     new_user = create_user(session=session, user=user)
     token = create_JWT_token(new_user.id)
 
