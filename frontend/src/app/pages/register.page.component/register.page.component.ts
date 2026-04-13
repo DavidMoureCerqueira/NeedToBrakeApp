@@ -3,6 +3,7 @@ import { AuthFormComponent } from '../../componentes/auth.form.component/auth.fo
 import { AuthForm } from '../../interfaces/authForm';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { mapUserToUserDataBase } from '../../mappers/mapUserToUserDataBase';
 
 @Component({
   selector: 'register-page-component',
@@ -17,7 +18,8 @@ export class RegisterPageComponent {
   error = signal<string>('');
   onLogin(authFormData: AuthForm) {
     console.log('Recibido el formulario', authFormData);
-    this.authService.register(authFormData).subscribe({
+
+    this.authService.register(mapUserToUserDataBase(authFormData)).subscribe({
       next: (res) => {
         console.log('User registered', res);
         if (res.success && res.data) {

@@ -3,6 +3,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { ModelRespAuth } from '../interfaces/modelResp';
 import { AuthForm } from '../interfaces/authForm';
 import { User } from '../interfaces/user';
+import { UserDataBase } from '../interfaces/user.database';
 
 @Injectable({
   providedIn: 'root',
@@ -54,7 +55,7 @@ export class AuthService {
     return !!this.token();
   }
 
-  register(data: AuthForm) {
+  register(data: UserDataBase) {
     return this.http.post<ModelRespAuth>(`${this.URL}/user/register`, data);
   }
   signin(data: AuthForm) {

@@ -79,10 +79,15 @@ class DiscFilters(BaseModel):
     pcd: float | None = None
 
 
-class LoginData(BaseModel):
+class RegisterData(BaseModel):
     email: EmailStr
     password: str
-    username: str
+    user_name: str
+
+
+class SignInData(BaseModel):
+    email: EmailStr
+    password: str
 
 
 T = TypeVar("T")

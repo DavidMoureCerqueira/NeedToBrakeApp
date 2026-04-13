@@ -1,10 +1,9 @@
 from typing import List
 
 from fastapi import APIRouter, HTTPException, Request, status
-import jwt
 
 
-from models.models import ModelResp, LoginData
+from models.models import ModelResp, RegisterData, SignInData
 from services.auth_service import get_authorization
 
 from exceptions import (
@@ -22,7 +21,7 @@ router = APIRouter()
 
 
 @router.post("/register", response_model=ModelResp, tags=["Login user"])
-def login(session: SessionDep, loginData: LoginData):
+def login(session: SessionDep, loginData: RegisterData):
     try:
         data = save_user(session=session, login_data=loginData)
         return ModelResp(success=True, data=data)
@@ -31,7 +30,7 @@ def login(session: SessionDep, loginData: LoginData):
 
 
 @router.post("/sign-in", response_model=ModelResp, tags=["Sign in user"])
-def sign_in(session: SessionDep, login_data: LoginData):
+def sign_in(session: SessionDep, login_data: SignInData):
     try:
         data = singin_user(session=session, login_data=login_data)
         return ModelResp(success=True, data=data)

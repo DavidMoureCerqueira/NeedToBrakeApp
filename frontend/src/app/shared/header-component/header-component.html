@@ -44,7 +44,7 @@
     </div>
   } @else {
     <div class="navbar-end">
-      <p>Welcome {{ this.authService.currentUser()?.email }}</p>
+      <p>Welcome {{ this.authService.currentUser()?.username }}</p>
       <button class="btn" (click)="logOut()">Log-out</button>
     </div>
   }

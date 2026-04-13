@@ -10,10 +10,10 @@ from exceptions import (
 )
 from models.table_models import User
 from repository.user_repository import create_user, get_user_by_email, get_user_by_id
-from models.models import LoginData, UserSecure, ValidationModelResponse
+from models.models import RegisterData, UserSecure, ValidationModelResponse
 
 
-def singin_user(session: Session, login_data: LoginData) -> ValidationModelResponse:
+def singin_user(session: Session, login_data: RegisterData) -> ValidationModelResponse:
     user = get_user_by_email(session=session, email=login_data.email)
     if not user:
         raise WrongUserException()
@@ -24,7 +24,7 @@ def singin_user(session: Session, login_data: LoginData) -> ValidationModelRespo
     return ValidationModelResponse(user=mapper_user_without_password(user), token=token)
 
 
-def save_user(session: Session, login_data: LoginData) -> ValidationModelResponse:
+def save_user(session: Session, login_data: RegisterData) -> ValidationModelResponse:
     if not checkIfValidPassword(login_data.password):
         raise InvalidPasswordException()
     user = get_user_by_email(session=session, email=login_data.email)
@@ -34,7 +34,7 @@ def save_user(session: Session, login_data: LoginData) -> ValidationModelRespons
     user = User(
         email=login_data.email,
         hashed_password=hashedPassword,
-        username=login_data.username,
+        username=login_data.user_name,
     )
     new_user = create_user(session=session, user=user)
     token = create_JWT_token(new_user.id)
