@@ -12,7 +12,7 @@ export function mapperDiscoToDataBaseSearch(disco: DiscClean): DiscSearch {
     center_bore: null,
     pcd: null,
   };
-
+  console.log('In Mapper:', disco);
   if (disco.position) searchDisc.position = disco.position;
   if (disco.holes) searchDisc.holes = disco.holes;
   if (disco.style) searchDisc.style = disco.style;
@@ -21,6 +21,5 @@ export function mapperDiscoToDataBaseSearch(disco: DiscClean): DiscSearch {
   if (disco.thickness) searchDisc.thickness = disco.thickness;
   if (disco.centerBore) searchDisc.center_bore = disco.centerBore;
   if (disco.pcd) searchDisc.pcd = disco.pcd;
-
   return searchDisc;
 }

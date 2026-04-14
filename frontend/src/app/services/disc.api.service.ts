@@ -16,7 +16,9 @@ const API_URL = 'http://localhost:8000';
 export class DiscApiService {
   private http = inject(HttpClient);
   constructor() {}
+
   discByFilter(disc: DiscClean): Observable<CarDisc[]> {
+    console.log(disc);
     const url = `${API_URL}/filter/disc`;
     const discBD = mapperDiscoToDataBaseSearch(disc);
     console.log(discBD);

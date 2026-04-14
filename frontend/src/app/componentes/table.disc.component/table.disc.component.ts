@@ -56,6 +56,7 @@ export class TableDiscComponent {
     this.isLoading.set(true);
     this.isError.set(false);
     this.listDiscCar.set([]);
+
     this.discService.saveExistingDisc(this.discoExistente());
     this.discApiService.discByFilter(this.discoDeseado()).subscribe({
       next: (data) => {
