@@ -3,7 +3,12 @@ from pydantic import EmailStr
 
 class UserAlreadyExistsException(Exception):
     def __init__(self, email: EmailStr):
-        self.message = f"Email {email} already registered"
+        self.message = f"Email {email} already registered."
+
+
+class UserNameAlreadyInUseException(Exception):
+    def __init__(self, user_name: str):
+        self.message = f"User name {user_name} is aready in use."
 
 
 class InvalidPasswordException(Exception):

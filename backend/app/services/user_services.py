@@ -5,11 +5,17 @@ from services.mappers.mapper_User_to_UserData import mapper_user_without_passwor
 from exceptions import (
     InvalidPasswordException,
     UserAlreadyExistsException,
+    UserNameAlreadyInUseException,
     WrongPasswordException,
     WrongUserException,
 )
 from models.table_models import User
-from repository.user_repository import create_user, get_user_by_email, get_user_by_id
+from repository.user_repository import (
+    create_user,
+    get_user_by_email,
+    get_user_by_id,
+    get_user_by_username,
+)
 from models.models import RegisterData, UserSecure, ValidationModelResponse
 
 
@@ -30,6 +36,9 @@ def save_user(session: Session, login_data: RegisterData) -> ValidationModelResp
     user = get_user_by_email(session=session, email=login_data.email)
     if user:
         raise UserAlreadyExistsException(user.email)
+    user = get_user_by_username(session=session, user_name=login_data.user_name)
+    if user:
+        raise UserNameAlreadyInUseException(login_data.user_name)
     hashedPassword = User.hashPassword(login_data.password)
     user = User(
         email=login_data.email,

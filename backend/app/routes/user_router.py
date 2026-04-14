@@ -9,6 +9,7 @@ from services.auth_service import get_authorization
 from exceptions import (
     InvalidPasswordException,
     UserAlreadyExistsException,
+    UserNameAlreadyInUseException,
     WrongPasswordException,
     WrongUserException,
 )
@@ -25,7 +26,11 @@ def login(session: SessionDep, loginData: RegisterData):
     try:
         data = save_user(session=session, login_data=loginData)
         return ModelResp(success=True, data=data)
-    except (InvalidPasswordException, UserAlreadyExistsException) as e:
+    except (
+        InvalidPasswordException,
+        UserAlreadyExistsException,
+        UserNameAlreadyInUseException,
+    ) as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=e.message)
 
 

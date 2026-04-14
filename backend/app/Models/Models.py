@@ -102,7 +102,7 @@ class ModelResp(BaseModel, Generic[T]):
 class UserSecure(BaseModel):
     id: int
     email: EmailStr
-    username: str
+    user_name: str
     is_admin: bool
 
 

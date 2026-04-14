@@ -9,6 +9,11 @@ def get_user_by_email(session: Session, email: EmailStr) -> User:
     return user
 
 
+def get_user_by_username(session: Session, user_name: str) -> User:
+    user = session.exec(select(User).filter(User.username == user_name)).first()
+    return user
+
+
 def get_user_by_id(session: Session, user_id: int) -> User:
     user = session.exec(select(User).filter(User.id == int(user_id))).first()
     return user
