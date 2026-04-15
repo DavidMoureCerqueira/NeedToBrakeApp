@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { CarDisc } from '../../interfaces/car.disc';
-import { Version } from '../../interfaces/version';
-import { DiscClean } from '../../interfaces/disc.clean';
-import { Disc } from '../../interfaces/disc';
+import { CarDisc } from '../../interfaces/disc/car.disc';
+import { Version } from '../../interfaces/cars/version';
+import { DiscClean } from '../../interfaces/disc/disc.clean';
+import { Disc } from '../../interfaces/disc/disc';
 @Component({
   selector: 'list-disc',
   imports: [RouterLink],

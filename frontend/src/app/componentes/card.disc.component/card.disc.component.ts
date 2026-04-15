@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
-import { DiscClean } from '../../interfaces/disc.clean';
+import { DiscClean } from '../../interfaces/disc/disc.clean';
 import { KeyValuePipe, TitleCasePipe } from '@angular/common';
 import { KonvaDiscComponent } from '../konva.disc.component/konva.disc.component';
 import { KonvaProfileDiscComponent } from '../konva.profile.disc.component/konva.profile.disc.component';

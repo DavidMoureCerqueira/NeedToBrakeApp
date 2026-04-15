@@ -1,4 +1,4 @@
-import { Brand } from './brand';
+import { Brand } from '../cars/brand';
 
 export interface ModelDatabase {
   id: number;

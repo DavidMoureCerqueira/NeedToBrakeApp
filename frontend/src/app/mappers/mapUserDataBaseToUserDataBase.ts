@@ -1,6 +1,6 @@
-import { User } from '../interfaces/user';
-import { UserForDataBase } from '../interfaces/user.for.database';
-import { UserFromDataBase } from '../interfaces/user.from.database';
+import { User } from '../interfaces/users/user';
+import { UserForDataBase } from '../interfaces/database.request/user.for.database';
+import { UserFromDataBase } from '../interfaces/database.responses/user.from.database';
 
 export function mapUserDataBaseToUser(user: UserFromDataBase): User {
   return {

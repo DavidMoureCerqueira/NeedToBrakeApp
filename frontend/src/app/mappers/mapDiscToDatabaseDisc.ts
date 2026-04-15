@@ -1,5 +1,5 @@
-import { DiscClean } from '../interfaces/disc.clean';
-import { DiscSearch } from '../interfaces/disc.search';
+import { DiscClean } from '../interfaces/disc/disc.clean';
+import { DiscSearch } from '../interfaces/database.request/disc.search';
 
 export function mapperDiscoToDataBaseSearch(disco: DiscClean): DiscSearch {
   const searchDisc: DiscSearch = {

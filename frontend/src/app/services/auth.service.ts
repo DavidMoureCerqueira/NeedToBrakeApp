@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { DataResp, ModelRespAuth } from '../interfaces/modelResp';
-import { AuthForm } from '../interfaces/authForm';
-import { User } from '../interfaces/user';
-import { UserForDataBase } from '../interfaces/user.for.database';
+import { ModelRespAuth } from '../interfaces/database.responses/modelResp';
+import { AuthForm } from '../interfaces/auth/authForm';
+import { User } from '../interfaces/users/user';
+import { UserForDataBase } from '../interfaces/database.request/user.for.database';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { mapUserDataBaseToUser } from '../mappers/mapUserDataBaseToUserDataBase';
-import { SessionData } from '../interfaces/session.data';
+import { SessionData } from '../interfaces/auth/session.data';
 
 @Injectable({
   providedIn: 'root',

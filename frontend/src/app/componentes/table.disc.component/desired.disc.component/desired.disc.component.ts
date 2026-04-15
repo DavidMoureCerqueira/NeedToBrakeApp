@@ -1,5 +1,5 @@
 import { Component, effect, input, output, signal, ViewChild } from '@angular/core';
-import { DiscClean } from '../../../interfaces/disc.clean';
+import { DiscClean } from '../../../interfaces/disc/disc.clean';
 
 @Component({
   selector: 'desired-disc',
@@ -23,13 +23,12 @@ export class DesiredDiscComponent {
   discoModificado = input.required<DiscClean>({});
 
   actualizarDisco(campo: keyof DiscClean, nuevoValorTexto: string): void {
-    
     const valorParseado = parseFloat(nuevoValorTexto);
     const nuevoValor = isNaN(valorParseado) ? 0 : valorParseado;
 
     this.disco.update((discoActual) => ({
-      ...discoActual, 
-      [campo]: nuevoValor, 
+      ...discoActual,
+      [campo]: nuevoValor,
     }));
     this.discoDeseadoInputeado.emit(this.disco());
   }

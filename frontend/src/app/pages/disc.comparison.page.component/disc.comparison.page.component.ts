@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DiscoService } from '../../services/disc.service';
-import { DiscClean } from '../../interfaces/disc.clean';
+import { DiscClean } from '../../interfaces/disc/disc.clean';
 import { HeaderComponent } from '../../shared/header-component/header-component';
 import { FooterComponent } from '../../shared/footer-component/footer-component';
 import { CardDiscComponent } from '../../componentes/card.disc.component/card.disc.component';

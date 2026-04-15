@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
-import { DiscClean } from '../../interfaces/disc.clean';
+import { DiscClean } from '../../interfaces/disc/disc.clean';
 
 @Component({
   selector: 'disc-ilustration',

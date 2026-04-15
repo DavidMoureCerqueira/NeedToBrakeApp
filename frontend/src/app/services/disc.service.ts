@@ -1,11 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { effect, inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { CarsDiscDatabase } from '../interfaces/cars.discs.database';
-import { CarDisc } from '../interfaces/car.disc';
+import { CarsDiscDatabase } from '../interfaces/database.responses/cars.discs.database';
+import { CarDisc } from '../interfaces/disc/car.disc';
 import { mapperCarDiscDatabaseToCarDiscCleanArray } from '../mappers/mapCarDiscDatabaseToCarDiscClean';
-import { DiscClean } from '../interfaces/disc.clean';
-import { DiscDatabase } from '../interfaces/disc.database';
+import { DiscClean } from '../interfaces/disc/disc.clean';
+import { DiscDatabase } from '../interfaces/database.responses/disc.database';
 import { mapperDiscoToDataBaseSearch } from './../mappers/mapDiscToDataBaseDisc';
 import { mapDiscDataBaseToDisc } from './../mappers/mapDiscDataBaseToDisc';
 import { LocalStorageData } from './types';

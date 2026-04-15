@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, effect, inject, input, output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthForm } from '../../interfaces/authForm';
+import { AuthForm } from '../../interfaces/auth/authForm';
 import { RouterLink } from '@angular/router';
 
 @Component({

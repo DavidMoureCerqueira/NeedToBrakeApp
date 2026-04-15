@@ -8,7 +8,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { DiscClean } from '../../interfaces/disc.clean';
+import { DiscClean } from '../../interfaces/disc/disc.clean';
 import Konva from 'konva';
 import { DiscKonvaFactory } from '../../factory/disc.konva.factory';
 

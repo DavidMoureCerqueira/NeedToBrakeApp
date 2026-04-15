@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { AuthFormComponent } from '../../componentes/auth.form.component/auth.form.component';
-import { AuthForm } from '../../interfaces/authForm';
+import { AuthForm } from '../../interfaces/auth/authForm';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 

@@ -1,4 +1,4 @@
-import { DiscClean } from '../../../interfaces/disc.clean';
+import { DiscClean } from '../../../interfaces/disc/disc.clean';
 import { Component, effect, input, output, signal } from '@angular/core';
 
 @Component({

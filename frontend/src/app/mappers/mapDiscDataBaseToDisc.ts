@@ -1,5 +1,5 @@
-import { DiscClean } from '../interfaces/disc.clean';
-import { DiscDatabase } from '../interfaces/disc.database';
+import { DiscClean } from '../interfaces/disc/disc.clean';
+import { DiscDatabase } from '../interfaces/database.responses/disc.database';
 
 export function mapDiscDataBaseToDisc(disc: DiscDatabase): DiscClean {
   return {

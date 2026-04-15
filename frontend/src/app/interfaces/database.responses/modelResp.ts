@@ -5,7 +5,7 @@ export interface ModelRespAuth {
   data?: DataResp;
   error?: string;
 }
-export interface DataResp {
+interface DataResp {
   token: string;
   user: UserFromDataBase;
 }

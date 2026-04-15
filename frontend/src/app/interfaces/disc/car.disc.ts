@@ -1,4 +1,4 @@
-import { CarClean } from './car';
+import { CarClean } from '../cars/car';
 import { Disc } from './disc';
 
 export interface CarDisc {

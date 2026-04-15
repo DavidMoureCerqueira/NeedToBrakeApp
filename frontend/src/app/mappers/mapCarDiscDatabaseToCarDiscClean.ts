@@ -1,5 +1,5 @@
-import { CarDisc } from '../interfaces/car.disc';
-import { CarsDiscDatabase } from '../interfaces/cars.discs.database';
+import { CarDisc } from '../interfaces/disc/car.disc';
+import { CarsDiscDatabase } from '../interfaces/database.responses/cars.discs.database';
 
 export function mapperCarDiscDatabaseToCarDisc(db: CarsDiscDatabase): CarDisc {
   const car = {

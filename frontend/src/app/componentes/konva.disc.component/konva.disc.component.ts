@@ -10,7 +10,7 @@ import {
   viewChild,
 } from '@angular/core';
 import Konva from 'konva';
-import { DiscClean } from '../../interfaces/disc.clean';
+import { DiscClean } from '../../interfaces/disc/disc.clean';
 import { DiscKonvaFactory } from '../../factory/disc.konva.factory';
 
 @Component({
