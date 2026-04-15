@@ -20,16 +20,13 @@ export class SinginPageComponent {
     this.authService.signin(authFormData).subscribe({
       next: (res) => {
         console.log('User singed-in', res);
-        if (res.success && res.data) {
-          this.authService.setSession(res.data.token, res.data.user);
 
-          this.router.navigate(['/']);
-        } else {
-          console.log('Error!');
-        }
+        this.authService.setSession(res.token, res.user);
+
+        this.router.navigate(['/']);
       },
       error: (err) => {
-        this.error.set(err.error?.detail);
+        this.error.set(err.error?.detail || err.message || 'Unexpected error');
         console.error('Error in comunication', err);
       },
     });

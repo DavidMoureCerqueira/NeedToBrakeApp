@@ -1,11 +1,11 @@
-import { User } from './user';
+import { UserFromDataBase } from './user.from.database';
 
 export interface ModelRespAuth {
   success: boolean;
   data?: DataResp;
   error?: string;
 }
-interface DataResp {
+export interface DataResp {
   token: string;
-  user: User;
+  user: UserFromDataBase;
 }

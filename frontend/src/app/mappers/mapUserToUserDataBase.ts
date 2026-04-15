@@ -1,7 +1,7 @@
 import { AuthForm } from '../interfaces/authForm';
-import { UserDataBase } from '../interfaces/user.database';
+import { UserForDataBase } from '../interfaces/user.for.database';
 
-export function mapUserToUserDataBase(user: AuthForm): UserDataBase {
+export function mapUserToUserDataBase(user: AuthForm): UserForDataBase {
   return {
     user_name: user.userName,
     email: user.email,

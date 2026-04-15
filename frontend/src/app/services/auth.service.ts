@@ -1,9 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { ModelRespAuth } from '../interfaces/modelResp';
+import { DataResp, ModelRespAuth } from '../interfaces/modelResp';
 import { AuthForm } from '../interfaces/authForm';
 import { User } from '../interfaces/user';
-import { UserDataBase } from '../interfaces/user.database';
+import { UserForDataBase } from '../interfaces/user.for.database';
+import { catchError, map, Observable, throwError } from 'rxjs';
+import { mapUserDataBaseToUser } from '../mappers/mapUserDataBaseToUserDataBase';
+import { SessionData } from '../interfaces/session.data';
 
 @Injectable({
   providedIn: 'root',
@@ -55,10 +58,39 @@ export class AuthService {
     return !!this.token();
   }
 
-  register(data: UserDataBase) {
-    return this.http.post<ModelRespAuth>(`${this.URL}/user/register`, data);
+  register(data: UserForDataBase): Observable<SessionData> {
+    console.log('Joined', data);
+    return this.http.post<ModelRespAuth>(`${this.URL}/user/register`, data).pipe(
+      map((res) => {
+        if (!res.success || !res.data) {
+          throw new Error(res.error || 'Authenticate failed');
+        }
+        return {
+          token: res.data!.token,
+          user: mapUserDataBaseToUser(res.data!.user),
+        };
+      }),
+      catchError((err) => {
+        console.error('Error in service', err);
+        return throwError(() => err);
+      }),
+    );
   }
-  signin(data: AuthForm) {
-    return this.http.post<ModelRespAuth>(`${this.URL}/user/sign-in`, data);
+  signin(data: AuthForm): Observable<SessionData> {
+    return this.http.post<ModelRespAuth>(`${this.URL}/user/sign-in`, data).pipe(
+      map((res) => {
+        if (!res.success || !res.data) {
+          throw new Error(res.error || 'Authenticate failed');
+        }
+        return {
+          token: res.data!.token,
+          user: mapUserDataBaseToUser(res.data!.user),
+        };
+      }),
+      catchError((err) => {
+        console.error('Error in service', err);
+        return throwError(() => err);
+      }),
+    );
   }
 }

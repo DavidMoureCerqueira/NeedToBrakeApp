@@ -22,16 +22,13 @@ export class RegisterPageComponent {
     this.authService.register(mapUserToUserDataBase(authFormData)).subscribe({
       next: (res) => {
         console.log('User registered', res);
-        if (res.success && res.data) {
-          this.authService.setSession(res.data.token, res.data.user);
 
-          this.router.navigate(['/']);
-        } else {
-          console.log('Error!');
-        }
+        this.authService.setSession(res.token, res.user);
+
+        this.router.navigate(['/']);
       },
       error: (err) => {
-        this.error.set(err.error?.detail);
+        this.error.set(err.error?.detail || err.message || 'Unexpected error');
         console.error('Error comunication', err);
       },
     });
