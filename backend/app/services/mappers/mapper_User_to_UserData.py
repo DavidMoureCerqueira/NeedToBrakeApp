@@ -5,5 +5,5 @@ from models.table_models import User
 def mapper_user_without_password(user: User) -> UserSecure:
 
     return UserSecure(
-        id=user.id, email=user.email, username=user.username, is_admin=user.is_admin
+        id=user.id, email=user.email, user_name=user.username, is_admin=user.is_admin
     )

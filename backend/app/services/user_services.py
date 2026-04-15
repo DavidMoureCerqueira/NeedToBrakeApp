@@ -16,10 +16,10 @@ from repository.user_repository import (
     get_user_by_id,
     get_user_by_username,
 )
-from models.models import RegisterData, UserSecure, ValidationModelResponse
+from models.models import RegisterData, SignInData, UserSecure, ValidationModelResponse
 
 
-def singin_user(session: Session, login_data: RegisterData) -> ValidationModelResponse:
+def singin_user(session: Session, login_data: SignInData) -> ValidationModelResponse:
     user = get_user_by_email(session=session, email=login_data.email)
     if not user:
         raise WrongUserException()
