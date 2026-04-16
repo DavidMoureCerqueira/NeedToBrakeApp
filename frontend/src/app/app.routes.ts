@@ -5,6 +5,13 @@ import { RegisterPageComponent } from './pages/register.page.component/register.
 import { SinginPageComponent } from './pages/singin.page.component/singin.page.component';
 import { authGuard } from './guards/auth-guard';
 import { ProfilePageComponent } from './pages/profile.page.component/profile.page.component';
+import {
+  provideHttpClient,
+  withInterceptors,
+  withRequestsMadeViaParent,
+} from '@angular/common/http';
+import { authInterceptor } from './auth/auth-interceptor';
+import { UserService } from './services/user.service';
 
 export const routes: Routes = [
   {
@@ -28,6 +35,10 @@ export const routes: Routes = [
     path: 'profile',
     component: ProfilePageComponent,
     canActivate: [authGuard],
+    providers: [
+      provideHttpClient(withInterceptors([authInterceptor]), withRequestsMadeViaParent()),
+      UserService,
+    ],
   },
   {
     path: '**',

@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { ModelRespAuth } from '../interfaces/database.responses/modelResp';
+import { ModelResp } from '../interfaces/database.responses/modelResp';
 import { AuthForm } from '../interfaces/auth/authForm';
 import { User } from '../interfaces/users/user';
 import { UserForDataBase } from '../interfaces/database.request/user.for.database';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, tap, throwError } from 'rxjs';
 import { mapUserDataBaseToUser } from '../mappers/mapUserDataBaseToUserDataBase';
 import { SessionData } from '../interfaces/auth/session.data';
 
@@ -60,7 +60,7 @@ export class AuthService {
 
   register(data: UserForDataBase): Observable<SessionData> {
     console.log('Joined', data);
-    return this.http.post<ModelRespAuth>(`${this.URL}/user/register`, data).pipe(
+    return this.http.post<ModelResp>(`${this.URL}/user/register`, data).pipe(
       map((res) => {
         if (!res.success || !res.data) {
           throw new Error(res.error || 'Authenticate failed');
@@ -77,7 +77,7 @@ export class AuthService {
     );
   }
   signin(data: AuthForm): Observable<SessionData> {
-    return this.http.post<ModelRespAuth>(`${this.URL}/user/sign-in`, data).pipe(
+    return this.http.post<ModelResp>(`${this.URL}/user/sign-in`, data).pipe(
       map((res) => {
         if (!res.success || !res.data) {
           throw new Error(res.error || 'Authenticate failed');

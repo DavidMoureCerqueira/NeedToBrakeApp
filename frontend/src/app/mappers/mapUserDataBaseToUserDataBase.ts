@@ -7,6 +7,6 @@ export function mapUserDataBaseToUser(user: UserFromDataBase): User {
     username: user.user_name,
     email: user.email,
     id: user.id,
-    isAdmin: user.isAdmin,
+    isAdmin: user.is_admin,
   };
 }
