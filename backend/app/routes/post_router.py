@@ -1,9 +1,8 @@
 from fastapi import APIRouter, HTTPException, Query, Request, status
-
-
-from models.table_models import Post
+from models.models import PostCreate
+from models.models import ModelResp
 from services.post_service import get_latest_post, save_post
-from models.models import ModelResp, PostCreate, PostPaginationResponse
+
 from services.auth_service import get_authorization
 
 
