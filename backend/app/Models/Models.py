@@ -1,7 +1,11 @@
-from typing import Generic, Optional, TypeVar
+from datetime import datetime, timezone
+from typing import TYPE_CHECKING, Generic, List, Optional, TypeVar
 
 from pydantic import BaseModel, EmailStr
 from sqlmodel import Relationship, SQLModel, Field
+
+if TYPE_CHECKING:
+    from models.table_models import Post
 
 """
 SQLModel works as an interface for typing for custom objects and table-structure for SQL.
@@ -43,6 +47,26 @@ class DiscBase(SQLModel):
     center_bore: float | None = Field(default=None, index=True)
     pcd: float | None = Field(default=None, index=True)
     version_id: int = Field(foreign_key="version.id")
+
+
+class PostBase(SQLModel):
+    title: str = Field()
+    content: str = Field()
+    date: datetime = Field(
+        default_factory=lambda: datetime.now(timezone.utc), index=True
+    )
+    user_id: int | None = Field(
+        default=None, index=True, foreign_key="user.id", ondelete="SET NULL"
+    )
+    version_id: int | None = Field(
+        foreign_key="version.id", index=True, ondelete="CASCADE"
+    )
+
+
+class PostCreate(BaseModel):
+    title: str
+    content: str
+    version_id: int | None = None
 
 
 class BrandRead(BrandBase):
@@ -109,3 +133,17 @@ class UserSecure(BaseModel):
 class ValidationModelResponse(BaseModel):
     user: UserSecure
     token: str
+
+
+T = TypeVar("T")
+
+
+class ItemsWithTotal(BaseModel, Generic[T]):
+    items: List[T]
+    total: int
+
+
+class PostPaginationResponse(ItemsWithTotal):
+    pages: int
+    page: int
+    has_next: bool

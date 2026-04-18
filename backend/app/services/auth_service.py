@@ -34,13 +34,5 @@ def get_authorization(request: Request):
     if not auth_header or not auth_header.startswith("Bearer "):
         raise HTTPException(status_code=401, detail="Unauthorized: Missing token")
     token = auth_header.split(" ")[1]
-    try:
-        user_id = decode_JWT_Token(token)
-
-        return user_id
-    except jwt.ExpiredSignatureError:
-        raise HTTPException(status_code=401, detail="Your sesión has expired")
-    except jwt.InvalidTokenError:
-        raise HTTPException(status_code=401, detail="Invalid Token")
-    except Exception:
-        raise HTTPException(status_code=401, detail="Authentication failed")
+    user_id = decode_JWT_Token(token)
+    return user_id

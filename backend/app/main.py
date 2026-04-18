@@ -1,13 +1,15 @@
 from contextlib import asynccontextmanager
+from exceptions import add_exception_handlers
 from routes.cascade_router import router as cascade_router
 from routes.parent_selector_router import router as parent_selector_router
 from routes.filter_router import router as filter_selector_router
 from routes.disc_router import router as disc_router
 from routes.user_router import router as user_router
+from routes.post_router import router as post_router
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from utils.seed import load_json_data
-from database import check_data_exists, init_db, engine
+from database import check_data_exists, init_db
 
 
 @asynccontextmanager
@@ -35,11 +37,13 @@ app.add_middleware(
 )
 
 
+add_exception_handlers(app)
 app.include_router(router=cascade_router, prefix="/cascade")
 app.include_router(router=parent_selector_router, prefix="/parent-selector")
 app.include_router(router=filter_selector_router, prefix="/filter")
 app.include_router(router=disc_router, prefix="/disc")
 app.include_router(router=user_router, prefix="/user")
+app.include_router(router=post_router, prefix="/post")
 
 
 @app.get("/")

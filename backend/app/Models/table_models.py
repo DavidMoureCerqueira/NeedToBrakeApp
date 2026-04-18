@@ -1,8 +1,10 @@
+from typing import Optional
+
 from pydantic import EmailStr
 from sqlmodel import Relationship, SQLModel, Field
 
 from bcrypt import hashpw, checkpw, gensalt
-from models.models import BrandBase, ModelBase, VersionBase, DiscBase
+from models.models import BrandBase, ModelBase, PostBase, VersionBase, DiscBase
 
 
 class Brand(BrandBase, table=True):
@@ -20,6 +22,7 @@ class Version(VersionBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
     model: "Model" = Relationship(back_populates="versions")
     discs: list["Disc"] = Relationship(back_populates="version")
+    posts: list["Post"] = Relationship(back_populates="version")
 
 
 class Disc(DiscBase, table=True):
@@ -34,6 +37,7 @@ class User(SQLModel, table=True):
     username: str = Field(unique=True, index=True, nullable=False)
     is_admin: bool = Field(default=False)
     is_active: bool = Field(default=True)
+    posts: list["Post"] = Relationship(back_populates="author")
 
     @staticmethod
     def hashPassword(password: str):
@@ -45,3 +49,11 @@ class User(SQLModel, table=True):
         byte_pw = password.encode("utf-8")
         byte_hash_pw = self.hashed_password.encode("utf-8")
         return checkpw(hashed_password=byte_hash_pw, password=byte_pw)
+
+
+class Post(PostBase, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    author: Optional["User"] = Relationship(back_populates="posts")
+    version: Optional["Version"] = Relationship(
+        back_populates="posts", sa_relationship_kwargs={"passive_deletes": True}
+    )
