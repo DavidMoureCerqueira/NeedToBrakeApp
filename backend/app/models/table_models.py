@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import List, Optional
 
 from pydantic import EmailStr
 from sqlmodel import Relationship, SQLModel, Field
@@ -23,6 +23,7 @@ class Version(VersionBase, table=True):
     model: "Model" = Relationship(back_populates="versions")
     discs: list["Disc"] = Relationship(back_populates="version")
     posts: list["Post"] = Relationship(back_populates="version")
+    in_garages: list["UserVersionGarage"] = Relationship(back_populates="version")
 
 
 class Disc(DiscBase, table=True):
@@ -37,7 +38,8 @@ class User(SQLModel, table=True):
     username: str = Field(unique=True, index=True, nullable=False)
     is_admin: bool = Field(default=False)
     is_active: bool = Field(default=True)
-    posts: list["Post"] = Relationship(back_populates="author")
+    posts: List["Post"] = Relationship(back_populates="author")
+    garage_cars: List["UserVersionGarage"] = Relationship(back_populates="user")
 
     @staticmethod
     def hashPassword(password: str):
@@ -57,3 +59,12 @@ class Post(PostBase, table=True):
     version: Optional["Version"] = Relationship(
         back_populates="posts", sa_relationship_kwargs={"passive_deletes": True}
     )
+
+
+class UserVersionGarage(SQLModel, table=True):
+    user_id: int = Field(foreign_key="user.id", primary_key=True)
+    version_id: int = Field(foreign_key="version.id", primary_key=True)
+    is_favourite: bool = Field(default=False)
+
+    user: "User" = Relationship(back_populates="garage_cars")
+    version: "Version" = Relationship(back_populates="in_garages")
