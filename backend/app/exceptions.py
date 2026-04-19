@@ -1,8 +1,10 @@
+import logging
+
 from fastapi import HTTPException, Request, status
 from fastapi.responses import JSONResponse
 from jwt import ExpiredSignatureError, InvalidTokenError, PyJWTError
 from pydantic import EmailStr
-
+from sqlalchemy.exc import SQLAlchemyError
 from models.models import ModelResp
 
 
@@ -44,6 +46,9 @@ class WrongUserException(Exception):
 class WrongPasswordException(Exception):
     def __init__(self, email: EmailStr):
         self.message = f"Password for {email} is incorrect"
+
+
+logger = logging.getLogger("uvicorn.error")
 
 
 def add_exception_handlers(app):
@@ -88,7 +93,7 @@ def add_exception_handlers(app):
             )
 
         # Si es un error de Python no controlado (un bug real)
-        print(f"DEBUG ERROR: {str(exc)}")  # Para verlo en Docker
+        logger.error(f"DEBUG ERROR: {str(exc)}")
         return JSONResponse(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             content=ModelResp(
@@ -102,4 +107,14 @@ def add_exception_handlers(app):
         return JSONResponse(
             status_code=exc.status_code,
             content=ModelResp(success=False, error=exc.detail).model_dump(),
+        )
+
+    @app.exception_handler(SQLAlchemyError)
+    async def sqlalchemy_exception_handler(request: Request, exc: SQLAlchemyError):
+        logger.error(f"Error de Base de Datos: {str(exc)}")
+        return JSONResponse(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            content=ModelResp(
+                succes=False, error="We are having a temporal error with database."
+            ),
         )

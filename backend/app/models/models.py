@@ -139,11 +139,11 @@ T = TypeVar("T")
 
 
 class ItemsWithTotal(BaseModel, Generic[T]):
-    items: List[T]
-    total: int
+    items: List[T] = []
+    total: int = 0
 
 
 class PostPaginationResponse(ItemsWithTotal):
-    pages: int
-    page: int
-    has_next: bool
+    pages: int = 0
+    page: int = 1
+    has_next: bool = False

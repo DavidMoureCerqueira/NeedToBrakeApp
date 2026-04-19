@@ -1,7 +1,12 @@
 from fastapi import APIRouter, HTTPException, Query, Request, status
 from models.models import PostCreate
 from models.models import ModelResp
-from services.post_service import get_latest_post, save_post
+from services.post_service import (
+    get_post_by_user,
+    get_post_by_version,
+    get_latest_post,
+    save_post,
+)
 
 from services.auth_service import get_authorization
 
@@ -24,9 +29,37 @@ def handle_create_post(request: Request, session: SessionDep, data: PostCreate):
     return ModelResp(success=True, data=new_post)
 
 
-@router.get("/latest", response_model=ModelResp, tags=["Gets latest post"])
-def get_events_latest_post(
-    session: SessionDep, page: int = Query(1, ge=1), limit: int = Query(1, ge=1, le=100)
+@router.get("/latest", response_model=ModelResp, tags=["Get latest post"])
+def read_latest_post(
+    session: SessionDep, page: int = Query(1, ge=1), limit: int = Query(5, ge=1, le=100)
 ):
     posts_and_data = get_latest_post(session=session, page=page, limit=limit)
+    return ModelResp(success=True, data=posts_and_data)
+
+
+@router.get(
+    "/by-version/{version_id}", response_model=ModelResp, tags=["Get post by version"]
+)
+def read_post_by_version(
+    session: SessionDep,
+    version_id: int,
+    page: int = Query(1, ge=1),
+    limit: int = Query(5, ge=1, le=100),
+):
+    posts_and_data = get_post_by_version(
+        session=session, page=page, limit=limit, version_id=version_id
+    )
+    return ModelResp(success=True, data=posts_and_data)
+
+
+@router.get("/by-user/{user_id}", response_model=ModelResp, tags=["Get post by user"])
+def read_post_by_user(
+    session: SessionDep,
+    user_id: int,
+    page: int = Query(1, ge=1),
+    limit: int = Query(5, ge=1, le=100),
+):
+    posts_and_data = get_post_by_user(
+        session=session, page=page, limit=limit, user_id=user_id
+    )
     return ModelResp(success=True, data=posts_and_data)
