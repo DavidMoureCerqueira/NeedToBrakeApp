@@ -1,3 +1,4 @@
+from datetime import datetime, timezone
 from typing import List, Optional
 
 from pydantic import EmailStr
@@ -40,6 +41,7 @@ class User(SQLModel, table=True):
     is_active: bool = Field(default=True)
     posts: List["Post"] = Relationship(back_populates="author")
     garage_cars: List["UserVersionGarage"] = Relationship(back_populates="user")
+    comments: List["Comment"] = Relationship(back_populates="author")
 
     @staticmethod
     def hashPassword(password: str):
@@ -59,6 +61,9 @@ class Post(PostBase, table=True):
     version: Optional["Version"] = Relationship(
         back_populates="posts", sa_relationship_kwargs={"passive_deletes": True}
     )
+    comments: List["Comment"] = Relationship(
+        back_populates="post", sa_relationship_kwargs={"cascade": "all, delete-orphan"}
+    )
 
 
 class UserVersionGarage(SQLModel, table=True):
@@ -68,3 +73,18 @@ class UserVersionGarage(SQLModel, table=True):
 
     user: "User" = Relationship(back_populates="garage_cars")
     version: "Version" = Relationship(back_populates="in_garages")
+
+
+class Comment(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    content: str = Field(min_length=1, max_length=750)
+    created_at: datetime = Field(
+        default_factory=lambda: datetime.now(timezone.utc), index=True
+    )
+    user_id: int = Field(
+        default=None, foreign_key="user.id", ondelete="SET NULL", nullable=True
+    )
+    post_id: int = Field(foreign_key="post.id", ondelete="CASCADE")
+
+    author: "User" = Relationship(back_populates="comments")
+    post: "Post" = Relationship(back_populates="comments")

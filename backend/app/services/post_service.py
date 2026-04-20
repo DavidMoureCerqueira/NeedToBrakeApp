@@ -10,7 +10,7 @@ from repository.post_repository import (
     create_post,
     get_latest_post_by_user_and_version,
 )
-from models.models import PostCreate, PostPaginationResponse
+from models.models import PostCreate, PaginationResponse
 
 
 def save_post(session: Session, post_data: PostCreate, user_id: int) -> Post:
@@ -31,7 +31,7 @@ def get_latest_post(
     limit: int = 10,
     version_id: int = None,
     user_id: int = None,
-) -> PostPaginationResponse:
+) -> PaginationResponse:
     offset = (limit * page) - limit
 
     posts_and_total = get_latest_post_by_user_and_version(
@@ -43,7 +43,7 @@ def get_latest_post(
     )
     pages = math.ceil(posts_and_total.total / limit)
 
-    return PostPaginationResponse(
+    return PaginationResponse(
         items=posts_and_total.items,
         total=posts_and_total.total,
         pages=pages,
@@ -54,10 +54,10 @@ def get_latest_post(
 
 def get_post_by_version(
     session: Session, version_id: int, page: int = 1, limit: int = 10
-) -> PostPaginationResponse:
+) -> PaginationResponse:
     is_post = check_post_by_version(session=session, version_id=version_id)
     if not is_post:
-        return PostPaginationResponse()
+        return PaginationResponse()
 
     return get_latest_post(
         session=session, page=page, limit=limit, version_id=version_id
@@ -66,9 +66,9 @@ def get_post_by_version(
 
 def get_post_by_user(
     session: Session, user_id: int, page: int = 1, limit: int = 10
-) -> PostPaginationResponse:
+) -> PaginationResponse:
     is_post = check_post_by_user(session=session, user_id=user_id)
     if not is_post:
-        return PostPaginationResponse()
+        return PaginationResponse()
 
     return get_latest_post(session=session, page=page, limit=limit, user_id=user_id)

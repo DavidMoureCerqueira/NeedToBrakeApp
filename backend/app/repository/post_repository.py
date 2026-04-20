@@ -36,6 +36,11 @@ def get_latest_post_by_user_and_version(
     return ItemsWithTotal[Post](items=posts, total=total_count)
 
 
+def get_post_by_id(session: Session, post_id: int):
+    post = session.exec(select(Post).where(Post.id == post_id)).first()
+    return post
+
+
 def check_post_by_version(session: Session, version_id: int) -> bool:
     is_post = not not session.exec(
         select(Post.id).where(Post.version_id == version_id)

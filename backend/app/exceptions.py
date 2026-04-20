@@ -58,7 +58,22 @@ class VersionOnUserGarageAlreadyExistsException(Exception):
         self.message = f"That version is already registered on user garage"
 
 
+class PostDoesNotExistException(Exception):
+    def __init__(self):
+        self.message = f"The post does not exists in forum"
+
+
 logger = logging.getLogger("uvicorn.error")
+
+
+class CommentNotFoundException(Exception):
+    def __init__(self):
+        self.message = f"Comment not found on database"
+
+
+class UnauthorizedCommentAccessException(Exception):
+    def __init__(self):
+        self.message = f"Not allowed to modify the comment, you are not the author "
 
 
 def add_exception_handlers(app):
@@ -91,6 +106,8 @@ def add_exception_handlers(app):
                     VersionsNotFoundException,
                     WrongUserException,
                     VersionOnUserGarageDoesNotExistsException,
+                    PostDoesNotExistException,
+                    CommentNotFoundException,
                 ),
             ):
                 status_code = status.HTTP_404_NOT_FOUND
@@ -103,6 +120,8 @@ def add_exception_handlers(app):
                 ),
             ):
                 status_code = status.HTTP_409_CONFLICT
+            if isinstance(exc, UnauthorizedCommentAccessException):
+                status_code = status.HTTP_403_FORBIDDEN
             return JSONResponse(
                 status_code=status_code,
                 content=ModelResp(success=False, error=exc.message).model_dump(),

@@ -157,7 +157,29 @@ class ItemsWithTotal(BaseModel, Generic[T]):
     total: int = 0
 
 
-class PostPaginationResponse(ItemsWithTotal):
+class PaginationResponse(ItemsWithTotal):
     pages: int = 0
     page: int = 1
     has_next: bool = False
+
+
+class UserPublic(BaseModel):
+    id: int
+    username: str
+
+
+class CommentRead(BaseModel):
+    id: int
+    content: str
+    created_at: datetime
+    author: Optional[UserPublic]
+
+
+class CommentCreate(BaseModel):
+    content: str
+    post_id: int
+
+
+class CommentModify(BaseModel):
+    content: str
+    comment_id: int
