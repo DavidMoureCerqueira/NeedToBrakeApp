@@ -16,3 +16,13 @@ def get_all_models_by_brand_id(session: Session, brand_id: int) -> List[Model]:
 def get_all_versions_by_model_id(session: Session, model_id: int) -> List[Version]:
     versions = session.exec(select(Version).filter(Version.model_id == model_id)).all()
     return versions
+
+
+def get_version_by_id(session: Session, version_id: int) -> Version:
+    version = session.exec(select(Version).where(Version.id == version_id)).first()
+    return version
+
+
+def get_model_by_id(session: Session, model_id: int) -> Model:
+    model = session.exec(select(Model).where(Model.id == model_id)).first()
+    return model

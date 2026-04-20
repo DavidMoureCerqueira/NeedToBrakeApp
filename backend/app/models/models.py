@@ -92,6 +92,14 @@ class DiscoReadFull(DiscBase):
     model_config = {"from_attributes": True}
 
 
+class UserVersionGarageRead(SQLModel):
+    user_id: int
+    version_id: int
+    is_favourite: bool
+    version: Optional[VersionRead] = None
+    model_config = {"from_attributes": True}
+
+
 class DiscFilters(BaseModel):
     position: str | None = None
     holes: int | None = None
@@ -114,6 +122,11 @@ class SignInData(BaseModel):
     password: str
 
 
+class GarageData(BaseModel):
+    user_id: int
+    version_id: int
+
+
 T = TypeVar("T")
 
 
@@ -121,6 +134,7 @@ class ModelResp(BaseModel, Generic[T]):
     success: bool = None
     data: Optional[T] = None
     error: Optional[str] = None
+    model_config = {"from_attributes": True}
 
 
 class UserSecure(BaseModel):

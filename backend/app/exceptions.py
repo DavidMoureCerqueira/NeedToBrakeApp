@@ -15,12 +15,12 @@ class BrandsNotFoundException(Exception):
 
 class ModelsNotFoundException(Exception):
     def __init__(self):
-        self.message = f"No Models found on Database for that brand"
+        self.message = f"No Models found on Database"
 
 
 class VersionsNotFoundException(Exception):
     def __init__(self):
-        self.message = f"No Version found on Database for that model"
+        self.message = f"No Version found on Database"
 
 
 class UserAlreadyExistsException(Exception):
@@ -46,6 +46,16 @@ class WrongUserException(Exception):
 class WrongPasswordException(Exception):
     def __init__(self, email: EmailStr):
         self.message = f"Password for {email} is incorrect"
+
+
+class VersionOnUserGarageDoesNotExistsException(Exception):
+    def __init__(self):
+        self.message = f"That garage item is no registered on user garage"
+
+
+class VersionOnUserGarageAlreadyExistsException(Exception):
+    def __init__(self):
+        self.message = f"That version is already registered on user garage"
 
 
 logger = logging.getLogger("uvicorn.error")
@@ -80,11 +90,17 @@ def add_exception_handlers(app):
                     ModelsNotFoundException,
                     VersionsNotFoundException,
                     WrongUserException,
+                    VersionOnUserGarageDoesNotExistsException,
                 ),
             ):
                 status_code = status.HTTP_404_NOT_FOUND
             if isinstance(
-                exc, (UserAlreadyExistsException, UserNameAlreadyInUseException)
+                exc,
+                (
+                    UserAlreadyExistsException,
+                    UserNameAlreadyInUseException,
+                    VersionOnUserGarageAlreadyExistsException,
+                ),
             ):
                 status_code = status.HTTP_409_CONFLICT
             return JSONResponse(

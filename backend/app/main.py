@@ -6,6 +6,7 @@ from routes.filter_router import router as filter_selector_router
 from routes.disc_router import router as disc_router
 from routes.user_router import router as user_router
 from routes.post_router import router as post_router
+from routes.garage_router import router as garage_router
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from utils.seed import load_json_data
@@ -44,6 +45,7 @@ app.include_router(router=filter_selector_router, prefix="/filter")
 app.include_router(router=disc_router, prefix="/disc")
 app.include_router(router=user_router, prefix="/user")
 app.include_router(router=post_router, prefix="/post")
+app.include_router(router=garage_router, prefix="/garage")
 
 
 @app.get("/")
