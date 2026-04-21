@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, input } from '@angular/core';
+import { User } from '../../interfaces/users/user';
 
 @Component({
   selector: 'profile-card-component',
@@ -7,4 +8,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './profile.card.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProfileCardComponent {}
+export class ProfileCardComponent {
+  user = input.required<User | null>();
+  constructor() {
+    effect(() => {
+      console.log(this.user());
+    });
+  }
+}

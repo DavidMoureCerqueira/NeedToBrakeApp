@@ -2,15 +2,12 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { ActivatedRoute } from '@angular/router';
 import { DiscoService } from '../../services/disc.service';
 import { DiscClean } from '../../interfaces/disc/disc.clean';
-import { HeaderComponent } from '../../shared/header-component/header-component';
-import { FooterComponent } from '../../shared/footer-component/footer-component';
 import { CardDiscComponent } from '../../componentes/card.disc.component/card.disc.component';
 import { DiscApiService } from '../../services/disc.api.service';
 
 @Component({
   selector: 'app-disc.comparison.component',
-  imports: [HeaderComponent, FooterComponent, CardDiscComponent],
-
+  imports: [CardDiscComponent],
   templateUrl: './disc.comparison.page.component.html',
   styleUrl: './disc.comparison.page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

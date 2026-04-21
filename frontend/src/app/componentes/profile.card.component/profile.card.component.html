@@ -1,1 +1,64 @@
-<p>profile.card.component works!</p>,
+<div
+  class="grid grid-cols-[repeat(2,minmax(150px,2fr))] w-80 md:grid-cols-[repeat(2,minmax(150px,2fr))] md:w-160 lg:w-220 xl:w-260 xl:gap-25 items-center justify-center gap-10"
+>
+  <div>
+    <img
+      class="w-20 h-20 md:w-40 md:h-40 lg:w-60 lg:h-60 xl:w-70 xl:h-70 rounded-full object-cover shadow-sm"
+      src="images/profile_image.webp"
+      alt="Default Avatar"
+    />
+  </div>
+  <div>
+    <h1>{{ this.user()?.username }}</h1>
+    <h2>{{ this.user()?.email }}</h2>
+  </div>
+  <table class="col-span-2 md:col-auto w-full border-collapse">
+    <thead class="block w-full">
+      <tr class="flex w-full">
+        <th colspan="2" class="w-full py-2 text-center border-b">GARAGE</th>
+      </tr>
+    </thead>
+    <tbody class="w-full xl:block xl:h-48 xl:overflow-y-auto xl:overflow-x-hidden">
+      <tr class="flex w-full border-b">
+        <td class="flex-1 p-2">fiat panda</td>
+        <td class="p-2">⭐</td>
+      </tr>
+      <tr class="flex w-full border-b">
+        <td class="flex-1 p-2">fiat panda</td>
+        <td class="p-2">⭐</td>
+      </tr>
+      <tr class="flex w-full border-b">
+        <td class="flex-1 p-2">fiat panda</td>
+        <td class="p-2">⭐</td>
+      </tr>
+      <tr class="flex w-full border-b">
+        <td class="flex-1 p-2">fiat panda</td>
+        <td class="p-2">⭐</td>
+      </tr>
+      <tr class="flex w-full border-b">
+        <td class="flex-1 p-2">fiat panda</td>
+        <td class="p-2">⭐</td>
+      </tr>
+      <tr class="flex w-full border-b">
+        <td class="flex-1 p-2">fiat panda</td>
+        <td class="p-2">⭐</td>
+      </tr>
+      <tr class="flex w-full border-b">
+        <td class="flex-1 p-2">fiat panda</td>
+        <td class="p-2">⭐</td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="col-span-2 md:col-auto">
+    <thead>
+      <tr>
+        <th colspan="2" class="text-center">POST</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>titulo post</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

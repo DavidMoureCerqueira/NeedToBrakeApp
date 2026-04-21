@@ -5,10 +5,6 @@ from main import app
 
 @pytest.fixture(scope="module")
 def client():
-    """
-    Fixture que proporciona un cliente de pruebas para FastAPI.
-    El scope='module' hace que el cliente se cree una vez por archivo de test,
-    lo cual es más eficiente.
-    """
-    with TestClient(app) as c:
+
+    with TestClient(app, raise_server_exceptions=False) as c:
         yield c

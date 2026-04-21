@@ -26,7 +26,7 @@ def test_get_brands_router_not_found(client, mocker):
     )
     response = client.get("cascade/brands")
     assert response.status_code == 404
-    assert response.json()["detail"] == BrandsNotFoundException().message
+    assert response.json()["error"] == BrandsNotFoundException().message
 
 
 def test_get_models_router_by_brand_id_succes(client, mocker):
@@ -48,7 +48,7 @@ def test_get_models_router_by_brand_id_not_found(client, mocker):
     )
     response = client.get("cascade/models/1")
     assert response.status_code == 404
-    assert response.json()["detail"] == ModelsNotFoundException().message
+    assert response.json()["error"] == ModelsNotFoundException().message
 
 
 def test_get_version_router_by_model_id_succes(client, mocker):
@@ -80,4 +80,5 @@ def test_get_version_router_by_model_id_not_found(client, mocker):
     )
     response = client.get("cascade/versions/10")
     assert response.status_code == 404
-    assert response.json()["detail"] == VersionsNotFoundException().message
+    assert response.json()["success"] is False
+    assert response.json()["error"] == VersionsNotFoundException().message
