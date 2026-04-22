@@ -17,8 +17,8 @@ from database import check_data_exists, init_db
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     init_db()
-    if not check_data_exists():
-        load_json_data()
+    # if not check_data_exists():
+    #     load_json_data()
 
     yield
     print("Connection Close")

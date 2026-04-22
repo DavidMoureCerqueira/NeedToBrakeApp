@@ -38,9 +38,9 @@ def upgrade() -> None:
     op.create_index(op.f("ix_post_date"), "post", ["date"], unique=False)
     op.create_index(op.f("ix_post_user_id"), "post", ["user_id"], unique=False)
     op.create_index(op.f("ix_post_version_id"), "post", ["version_id"], unique=False)
-    op.drop_index(op.f("username"), table_name="user")
-    op.drop_index(op.f("username_2"), table_name="user")
-    op.create_index(op.f("ix_user_username"), "user", ["username"], unique=True)
+    # op.drop_index(op.f("username"), table_name="user")
+    # op.drop_index(op.f("username_2"), table_name="user")
+    # op.create_index(op.f("ix_user_username"), "user", ["username"], unique=True)
     # ### end Alembic commands ###
 
 

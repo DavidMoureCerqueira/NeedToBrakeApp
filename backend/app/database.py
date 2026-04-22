@@ -1,13 +1,23 @@
 import os
 from typing import Annotated
 
+from dotenv import load_dotenv
 from fastapi import Depends
 from sqlmodel import SQLModel, Session, create_engine, select
 from models.table_models import Brand
 
+load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-engine = create_engine(DATABASE_URL, echo=True)
+engine = create_engine(
+    DATABASE_URL,
+    connect_args={
+        # Al poner "ssl": True, PyMySQL activa la conexión segura
+        # sin esperar parámetros extraños en la URL.
+        "ssl": {}
+    },
+    echo=True,
+)
 #  echo: Para ver las consultas en la consola
 
 

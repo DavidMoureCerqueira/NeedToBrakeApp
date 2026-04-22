@@ -7,8 +7,8 @@ services:
       - "8000:80"
     env_file:
       - ./backend/.env
-    environment:
-      - DATABASE_URL=mysql+pymysql://root:user_password@db:3306/NTB_DB
+    # environment:
+    #   - DATABASE_URL=mysql+pymysql://root:user_password@db:3306/NTB_DB
     depends_on:
       - db
   # mysql es el tipo de base de datos pymysql es la libreria sincrona

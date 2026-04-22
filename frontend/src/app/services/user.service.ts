@@ -1,10 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { catchError, map, tap, throwError, Observable } from 'rxjs';
 import { mapUserDataBaseToUser } from '../mappers/mapUserDataBaseToUserDataBase';
-import { SessionData } from '../interfaces/auth/session.data';
 import { User } from '../interfaces/users/user';
 import { UserResp } from '../interfaces/database.responses/modelResp';
+import { REQUIRES_AUTH } from '../auth/auth.context';
 
 @Injectable({
   providedIn: 'root',
@@ -18,19 +18,23 @@ export class UserService {
     console.log('Getting profile....');
 
     const url = `${this.URL}/user/profile`;
-    return this.http.get<UserResp>(url).pipe(
-      tap((data) => console.log('Recibido desde el servidor:', data)),
-      map((res) => {
-        if (!res.success || !res.data) {
-          throw new Error(res.error || 'Authenticate failed');
-        }
-        console.log('res->', res);
-        return mapUserDataBaseToUser(res.data);
-      }),
-      catchError((err) => {
-        console.error('Error in service', err);
-        return throwError(() => err);
-      }),
-    );
+    return this.http
+      .get<UserResp>(url, {
+        context: new HttpContext().set(REQUIRES_AUTH, true),
+      })
+      .pipe(
+        tap((data) => console.log('Recibido desde el servidor:', data)),
+        map((res) => {
+          if (!res.success || !res.data) {
+            throw new Error(res.error || 'Authenticate failed');
+          }
+          console.log('res->', res);
+          return mapUserDataBaseToUser(res.data);
+        }),
+        catchError((err) => {
+          console.error('Error in service', err);
+          return throwError(() => err);
+        }),
+      );
   }
 }

@@ -106,6 +106,7 @@ def insert_data_from_json(session, data: List[Dict[str, Any]]):
         return 0
 
     inserted_count = 0
+    batch_size = 100
 
     for item in data:
 
@@ -118,6 +119,15 @@ def insert_data_from_json(session, data: List[Dict[str, Any]]):
             rear_disc_valid = is_disc_data_valid(rear_disc_data)
             if not front_disc_valid and not rear_disc_valid:
                 continue
+            existing_version = session.exec(
+                select(Version).where(
+                    Version.name == item.get("SubModel"),
+                    Version.model_id == model.id,
+                    Version.year == item.get("Year"),
+                )
+            ).first()
+            if existing_version:
+                print(f"Saltando {item.get("Submodel")} porque ya existe.")
             version = Version(
                 name=item.get("SubModel"),
                 engine=float(item.get("Engine") or 0),
@@ -145,10 +155,17 @@ def insert_data_from_json(session, data: List[Dict[str, Any]]):
                 session.add(rear_disc)
                 session.flush()
             inserted_count += 1
+            if inserted_count % batch_size == 0:
+                session.commit()
+                print(
+                    f"Checkpoint: {inserted_count} registros sincronizados con Aiven..."
+                )
         except KeyError as e:
             print(f"Error: Key is not valid {e}")
         except Exception as e:
             print(f"Error processing {e}")
+            session.rollback()
+            continue
 
     session.commit()
     return inserted_count
