@@ -114,7 +114,7 @@ class DiscFilters(BaseModel):
 class RegisterData(BaseModel):
     email: EmailStr
     password: str
-    user_name: str
+    username: str
 
 
 class SignInData(BaseModel):
@@ -140,8 +140,26 @@ class ModelResp(BaseModel, Generic[T]):
 class UserSecure(BaseModel):
     id: int
     email: EmailStr
-    user_name: str
+    username: str
     is_admin: bool
+    model_config = {"from_attributes": True}
+
+
+class UserProfile(BaseModel):
+    # TODO corregir cuando se implementen mas campos en la db
+    id: int
+    email: EmailStr
+    username: str
+    is_admin: bool
+    is_owner: bool
+    country: str = "No data"
+    fav_circuite: str = "No data"
+    city: str = "No data"
+    cars: int = 0
+    posts: int = 0
+    comments: int = 0
+    driver_skill: str = "Nothing"
+    model_config = {"from_attributes": True}
 
 
 class ValidationModelResponse(BaseModel):

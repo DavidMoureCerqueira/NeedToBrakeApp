@@ -1,5 +1,6 @@
+import { ProfileFromDataBase } from './profileFromDataBase';
 import { UserFromDataBase } from './user.from.database';
-
+// TODO Fix genericos
 export interface ModelResp {
   success: boolean;
   data?: DataResp;
@@ -12,6 +13,6 @@ interface DataResp {
 
 export interface UserResp {
   success: boolean;
-  data?: UserFromDataBase;
+  data?: ProfileFromDataBase;
   error?: string;
 }

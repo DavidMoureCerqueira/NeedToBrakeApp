@@ -1,9 +1,14 @@
 <div class="flex flex-col min-h-screen">
-  <header-component></header-component>
+  @if (isNavigating()) {
+    <div class="flex items-center justify-center p-5 flex-1">
+      <app-loader-component></app-loader-component>
+    </div>
+  }
+  <header-component class="flex-none"></header-component>
 
   <main class="flex flex-col items-center justify-center p-5 flex-1">
     <router-outlet></router-outlet>
   </main>
 
-  <footer-component></footer-component>
+  <footer-component class="flex-none"></footer-component>
 </div>

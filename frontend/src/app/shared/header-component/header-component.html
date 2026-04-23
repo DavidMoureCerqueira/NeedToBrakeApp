@@ -52,7 +52,7 @@
       @if (layoutService.headerConfig().showLogout) {
         <button class="btn" (click)="logOut()">Log-out</button>
       } @else {
-        <button class="btn" [routerLink]="['/profile']">Profile</button>
+        <button class="btn" (click)="goToMyProfile()">Profile</button>
       }
     </div>
   }

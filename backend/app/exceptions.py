@@ -29,8 +29,8 @@ class UserAlreadyExistsException(Exception):
 
 
 class UserNameAlreadyInUseException(Exception):
-    def __init__(self, user_name: str):
-        self.message = f"User name {user_name} is already in use."
+    def __init__(self, username: str):
+        self.message = f"User name {username} is already in use."
 
 
 class InvalidPasswordException(Exception):

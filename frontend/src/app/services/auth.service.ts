@@ -5,8 +5,9 @@ import { AuthForm } from '../interfaces/auth/authForm';
 import { User } from '../interfaces/users/user';
 import { UserForDataBase } from '../interfaces/database.request/user.for.database';
 import { catchError, map, Observable, tap, throwError } from 'rxjs';
-import { mapUserDataBaseToUser } from '../mappers/mapUserDataBaseToUserDataBase';
+import { mapProfileDataBaseToProfile } from '../mappers/mapProfileDataBaseToProfile';
 import { SessionData } from '../interfaces/auth/session.data';
+import { mapUserDataBaseToUser } from '../mappers/mapUserDataBaseToUserDataBase';
 
 @Injectable({
   providedIn: 'root',
@@ -92,5 +93,9 @@ export class AuthService {
         return throwError(() => err);
       }),
     );
+  }
+  get currentUserId(): number | null {
+    const user = this.currentUser();
+    return user ? user.id : null;
   }
 }

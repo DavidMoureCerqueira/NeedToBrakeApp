@@ -16,7 +16,13 @@ from repository.user_repository import (
     get_user_by_id,
     get_user_by_username,
 )
-from models.models import RegisterData, SignInData, UserSecure, ValidationModelResponse
+from models.models import (
+    RegisterData,
+    SignInData,
+    UserProfile,
+    UserSecure,
+    ValidationModelResponse,
+)
 
 
 def singin_user(session: Session, login_data: SignInData) -> ValidationModelResponse:
@@ -27,7 +33,7 @@ def singin_user(session: Session, login_data: SignInData) -> ValidationModelResp
         raise WrongPasswordException(user.email)
     token = create_JWT_token(user.id)
 
-    return ValidationModelResponse(user=mapper_user_without_password(user), token=token)
+    return ValidationModelResponse(user=user, token=token)
 
 
 def save_user(session: Session, login_data: RegisterData) -> ValidationModelResponse:
@@ -36,14 +42,14 @@ def save_user(session: Session, login_data: RegisterData) -> ValidationModelResp
     user = get_user_by_email(session=session, email=login_data.email)
     if user:
         raise UserAlreadyExistsException(user.email)
-    user = get_user_by_username(session=session, user_name=login_data.user_name)
+    user = get_user_by_username(session=session, username=login_data.username)
     if user:
-        raise UserNameAlreadyInUseException(login_data.user_name)
+        raise UserNameAlreadyInUseException(login_data.username)
     hashedPassword = User.hashPassword(login_data.password)
     user = User(
         email=login_data.email,
         hashed_password=hashedPassword,
-        username=login_data.user_name,
+        username=login_data.username,
     )
     new_user = create_user(session=session, user=user)
     token = create_JWT_token(new_user.id)
@@ -53,11 +59,25 @@ def save_user(session: Session, login_data: RegisterData) -> ValidationModelResp
     )
 
 
-def get_user_by_id_from_db(session: Session, user_id: int) -> UserSecure:
+def get_user_by_id_from_db(
+    session: Session, user_id: int, user_auth: int
+) -> UserProfile:
+    # TODO corregir cuando esta validado el isOwner
+
     user = get_user_by_id(user_id=user_id, session=session)
     if not user:
         raise WrongUserException()
-    return mapper_user_without_password(user)
+    is_owner = user_auth == user.id
+    cars_count = len(user.garage_cars)
+    posts_count = len(user.posts)
+    comments_count = len(user.comments)
+    return UserProfile(
+        **user.model_dump(),
+        is_owner=is_owner,
+        cars=cars_count,
+        posts=posts_count,
+        comments=comments_count
+    )
 
 
 def checkIfValidPassword(password: str) -> bool:

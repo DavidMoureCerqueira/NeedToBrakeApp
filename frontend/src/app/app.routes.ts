@@ -6,6 +6,7 @@ import { SinginPageComponent } from './pages/singin.page.component/singin.page.c
 import { authGuard } from './guards/auth-guard';
 import { ProfilePageComponent } from './pages/profile.page.component/profile.page.component';
 import { ForumPageComponent } from './pages/forum.page.component/forum.page.component';
+import { profileResolver } from './resolver/profile-resolver';
 
 export const routes: Routes = [
   // 1. LANDING / HOME
@@ -53,13 +54,16 @@ export const routes: Routes = [
     },
   },
   {
-    path: 'profile',
+    path: 'profile/:id',
     component: ProfilePageComponent,
     canActivate: [authGuard],
     title: 'My profile - NeedToBrake',
     data: {
       searchPost: false,
       showLogout: true,
+    },
+    resolve: {
+      profile: profileResolver,
     },
   },
   {
