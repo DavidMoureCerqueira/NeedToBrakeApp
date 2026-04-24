@@ -8,8 +8,9 @@ import { mapperCarDiscDatabaseToCarDiscCleanArray } from '../mappers/mapCarDiscD
 import { DiscDatabase } from '../interfaces/database.responses/disc.database';
 import { mapDiscDataBaseToDisc } from '../mappers/mapDiscDataBaseToDisc';
 import { mapperDiscoToDataBaseSearch } from '../mappers/mapDiscToDataBaseDisc';
+import { environment } from './../../environments/environment';
 
-const API_URL = 'http://localhost:8000';
+const API_URL = environment.apiUrl;
 @Injectable({
   providedIn: 'root',
 })

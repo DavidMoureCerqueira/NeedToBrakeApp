@@ -9,13 +9,14 @@ import { mapProfileDataBaseToProfile } from '../mappers/mapProfileDataBaseToProf
 import { SessionData } from '../interfaces/auth/session.data';
 import { mapUserDataBaseToUser } from '../mappers/mapUserDataBaseToUserDataBase';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private http = inject(HttpClient);
-  private URL = 'http://localhost:8000';
+  private URL = environment.apiUrl;
   token = signal<string | null>(localStorage.getItem('token'));
   currentUser = signal<User | null>(
     localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')!) : null,

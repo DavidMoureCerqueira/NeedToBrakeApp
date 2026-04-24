@@ -6,13 +6,14 @@ import { User } from '../interfaces/users/user';
 import { UserResp } from '../interfaces/database.responses/modelResp';
 import { REQUIRES_AUTH } from '../auth/auth.context';
 import { Profile } from '../interfaces/users/profile';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   constructor() {}
-  private URL = 'http://localhost:8000';
+  private URL = environment.apiUrl;
   http = inject(HttpClient);
 
   getProfile(id: string): Observable<Profile> {
