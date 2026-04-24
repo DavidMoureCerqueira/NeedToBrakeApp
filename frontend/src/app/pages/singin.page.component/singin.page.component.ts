@@ -27,7 +27,7 @@ export class SinginPageComponent {
         this.router.navigate(['/profile', id]);
       },
       error: (err: HttpErrorResponse) => {
-        this.error.set(err.error?.detail || err.message || 'Unexpected error');
+        this.error.set(err.error.error || err.message || 'Unexpected error');
       },
     });
   }

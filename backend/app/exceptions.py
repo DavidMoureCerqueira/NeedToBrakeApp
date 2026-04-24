@@ -8,148 +8,147 @@ from sqlalchemy.exc import SQLAlchemyError
 from models.models import ModelResp
 
 
-class BrandsNotFoundException(Exception):
+class NeedToBrakeException(Exception):
+    def __init__(self, message, status_code: int = status.HTTP_400_BAD_REQUEST):
+        self.message = message
+        self.status_code = status_code
+
+
+class BrandsNotFoundException(NeedToBrakeException):
     def __init__(self):
-        self.message = f"No Brands found on Database"
+        super().__init__("No Brands found on Database.", status.HTTP_404_NOT_FOUND)
 
 
-class ModelsNotFoundException(Exception):
+class ModelsNotFoundException(NeedToBrakeException):
     def __init__(self):
-        self.message = f"No Models found on Database"
+        super().__init__("No Models found on Database.", status.HTTP_404_NOT_FOUND)
 
 
-class VersionsNotFoundException(Exception):
+class VersionsNotFoundException(NeedToBrakeException):
     def __init__(self):
-        self.message = f"No Version found on Database"
+        super().__init__("No Version found on Database.", status.HTTP_404_NOT_FOUND)
 
 
-class UserAlreadyExistsException(Exception):
+class UserAlreadyExistsException(NeedToBrakeException):
     def __init__(self, email: EmailStr):
-        self.message = f"Email {email} already registered."
+        super().__init__(f"Email {email} already registered.", status.HTTP_409_CONFLICT)
 
 
-class UserNameAlreadyInUseException(Exception):
+class UserNameAlreadyInUseException(NeedToBrakeException):
     def __init__(self, username: str):
-        self.message = f"User name {username} is already in use."
+        super().__init__(
+            f"User name {username} is already in use.", status.HTTP_409_CONFLICT
+        )
 
 
-class InvalidPasswordException(Exception):
+class InvalidPasswordException(NeedToBrakeException):
     def __init__(self):
-        self.message = f"Password needs to be 8 characters length."
+        super().__init__(
+            f"Password needs to be 8 characters length.", status.HTTP_401_UNAUTHORIZED
+        )
 
 
-class WrongUserException(Exception):
+class WrongUserException(NeedToBrakeException):
     def __init__(self):
-        self.message = f"User doesn't exist."
+        super().__init__(f"User doesn't exist.", status.HTTP_403_FORBIDDEN)
 
 
-class WrongPasswordException(Exception):
+class WrongPasswordException(NeedToBrakeException):
     def __init__(self, email: EmailStr):
-        self.message = f"Password for {email} is incorrect"
+        super().__init__(
+            f"Password for {email} is incorrect", status.HTTP_401_UNAUTHORIZED
+        )
 
 
-class VersionOnUserGarageDoesNotExistsException(Exception):
+class VersionOnUserGarageDoesNotExistsException(NeedToBrakeException):
     def __init__(self):
-        self.message = f"That garage item is no registered on user garage"
+        super().__init__(
+            "That garage item is no registered on user garage.",
+            status.HTTP_404_NOT_FOUND,
+        )
 
 
-class VersionOnUserGarageAlreadyExistsException(Exception):
+class VersionOnUserGarageAlreadyExistsException(NeedToBrakeException):
     def __init__(self):
-        self.message = f"That version is already registered on user garage"
+        super().__init__(
+            "That version is already registered on user garage.",
+            status.HTTP_409_CONFLICT,
+        )
 
 
-class PostDoesNotExistException(Exception):
+class PostDoesNotExistException(NeedToBrakeException):
     def __init__(self):
-        self.message = f"The post does not exists in forum"
+        super().__init__(
+            "The post does not exists in forum.",
+            status.HTTP_404_NOT_FOUND,
+        )
+
+
+class CommentNotFoundException(NeedToBrakeException):
+    def __init__(self):
+        super().__init__(
+            "Comment not found on database",
+            status.HTTP_404_NOT_FOUND,
+        )
+
+
+class UnauthorizedCommentAccessException(NeedToBrakeException):
+    def __init__(self):
+        super().__init__(
+            "Not allowed to modify the comment, you are not the author.",
+            status.HTTP_409_CONFLICT,
+        )
 
 
 logger = logging.getLogger("uvicorn.error")
 
 
-class CommentNotFoundException(Exception):
-    def __init__(self):
-        self.message = f"Comment not found on database"
+def create_error_response(request: Request, message: str, status_code: int):
+    response = JSONResponse(
+        status_code=status_code,
+        content=ModelResp(success=False, error=message).model_dump(),
+    )
 
+    # CORS Dinámico: Leemos el origin de la petición
+    origin = request.headers.get("origin")
+    # origins debería ser tu lista de ["http://localhost:4200", ...]
+    # Si no quieres importar la lista, puedes ser menos estricto con: if origin:
+    response.headers["Access-Control-Allow-Origin"] = origin or "*"
+    response.headers["Access-Control-Allow-Credentials"] = "true"
+    response.headers["Access-Control-Allow-Methods"] = "*"
+    response.headers["Access-Control-Allow-Headers"] = "*"
 
-class UnauthorizedCommentAccessException(Exception):
-    def __init__(self):
-        self.message = f"Not allowed to modify the comment, you are not the author "
+    return response
 
 
 def add_exception_handlers(app):
 
+    # 1. Tus excepciones personalizadas (todas caen aquí)
+    @app.exception_handler(NeedToBrakeException)
+    async def custom_exception_handler(request: Request, exc: NeedToBrakeException):
+        return create_error_response(request, exc.message, exc.status_code)
+
+    # 2. Errores de JWT
     @app.exception_handler(PyJWTError)
     async def jwt_exception_handler(request: Request, exc: PyJWTError):
-        error = "Authentication failed"
+        msg = "Authentication failed"
         if isinstance(exc, ExpiredSignatureError):
-            error = "Your session has expired"
-        elif isinstance(exc, InvalidTokenError):
-            error = "Invalid Token"
-        return JSONResponse(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            content=ModelResp(success=False, error=error).model_dump(),
-        )
+            msg = "Your session has expired"
+        return create_error_response(request, msg, status.HTTP_401_UNAUTHORIZED)
 
-    # Manejador para todas tus excepciones personalizadas
-    # Podemos capturarlas todas a la vez si heredan de Exception y tienen .message
-    @app.exception_handler(Exception)
-    async def global_exception_handler(request: Request, exc: Exception):
-        # Si es una de tus excepciones personalizadas (tienen atributo message)
-        if hasattr(exc, "message"):
-            # Determinamos el status code según el tipo de error
-            status_code = status.HTTP_400_BAD_REQUEST
-            if isinstance(
-                exc,
-                (
-                    BrandsNotFoundException,
-                    ModelsNotFoundException,
-                    VersionsNotFoundException,
-                    WrongUserException,
-                    VersionOnUserGarageDoesNotExistsException,
-                    PostDoesNotExistException,
-                    CommentNotFoundException,
-                ),
-            ):
-                status_code = status.HTTP_404_NOT_FOUND
-            if isinstance(
-                exc,
-                (
-                    UserAlreadyExistsException,
-                    UserNameAlreadyInUseException,
-                    VersionOnUserGarageAlreadyExistsException,
-                ),
-            ):
-                status_code = status.HTTP_409_CONFLICT
-            if isinstance(exc, UnauthorizedCommentAccessException):
-                status_code = status.HTTP_403_FORBIDDEN
-            return JSONResponse(
-                status_code=status_code,
-                content=ModelResp(success=False, error=exc.message).model_dump(),
-            )
-
-        # Si es un error de Python no controlado (un bug real)
-        logger.error(f"DEBUG ERROR: {str(exc)}")
-        return JSONResponse(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            content=ModelResp(
-                success=False, error="An unexpected error occurred"
-            ).model_dump(),
-        )
-
-    # Manejador para las excepciones propias de FastAPI (como raise HTTPException)
+    # 3. Errores de FastAPI (HTTPException)
     @app.exception_handler(HTTPException)
     async def http_exception_handler(request: Request, exc: HTTPException):
-        return JSONResponse(
-            status_code=exc.status_code,
-            content=ModelResp(success=False, error=exc.detail).model_dump(),
-        )
+        return create_error_response(request, exc.detail, exc.status_code)
 
+    # 4. Errores de Base de Datos
     @app.exception_handler(SQLAlchemyError)
     async def sqlalchemy_exception_handler(request: Request, exc: SQLAlchemyError):
-        logger.error(f"Error de Base de Datos: {str(exc)}")
-        return JSONResponse(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            content=ModelResp(
-                succes=False, error="We are having a temporal error with database."
-            ),
-        )
+        logger.error(f"DB Error: {str(exc)}")
+        return create_error_response(request, "Database connection error", 500)
+
+    # 5. El "Catch-all" para bugs no controlados
+    @app.exception_handler(Exception)
+    async def global_handler(request: Request, exc: Exception):
+        logger.error(f"UNEXPECTED ERROR: {str(exc)}")
+        return create_error_response(request, "An unexpected error occurred", 500)

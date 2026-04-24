@@ -28,7 +28,7 @@ export class RegisterPageComponent {
         this.router.navigate(['/']);
       },
       error: (err) => {
-        this.error.set(err.error?.detail || err.message || 'Unexpected error');
+        this.error.set(err.error.error || err.message || 'Unexpected error');
       },
     });
   }
