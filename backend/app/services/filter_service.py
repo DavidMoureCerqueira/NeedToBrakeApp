@@ -3,6 +3,7 @@ from typing import List
 from sqlmodel import Session
 
 
+from exceptions import NoDiscCompatibleWithFiltersException
 from services.mappers.mapper_duple_to_DiscoReadFull import (
     transform_duple_data_to_DiscoReadFull,
 )
@@ -16,7 +17,7 @@ def get_car_and_disc_by_filter_from_db(session: Session, filters: DiscFilters):
 
     data = get_car_and_disc_by_filter(session=session, filters=existing_filters)
 
+    if not data:
+        raise NoDiscCompatibleWithFiltersException()
     car_and_disc = transform_duple_data_to_DiscoReadFull(data)
-    if car_and_disc:
-        return car_and_disc
-    return []
+    return car_and_disc

@@ -100,6 +100,11 @@ class UnauthorizedCommentAccessException(NeedToBrakeException):
         )
 
 
+class NoDiscCompatibleWithFiltersException(NeedToBrakeException):
+    def __init__(self):
+        super().__init__("No disc for that filters", status.HTTP_404_NOT_FOUND)
+
+
 logger = logging.getLogger("uvicorn.error")
 
 
