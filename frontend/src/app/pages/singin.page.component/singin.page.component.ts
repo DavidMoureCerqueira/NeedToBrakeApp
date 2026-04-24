@@ -3,6 +3,7 @@ import { AuthFormComponent } from '../../componentes/auth.form.component/auth.fo
 import { AuthForm } from '../../interfaces/auth/authForm';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'singin-page-component',
@@ -22,12 +23,11 @@ export class SinginPageComponent {
         console.log('User singed-in', res);
 
         this.authService.setSession(res.token, res.user);
-
-        this.router.navigate(['/']);
+        const id = this.authService.currentUserId;
+        this.router.navigate(['/profile', id]);
       },
-      error: (err) => {
+      error: (err: HttpErrorResponse) => {
         this.error.set(err.error?.detail || err.message || 'Unexpected error');
-        console.error('Error in comunication', err);
       },
     });
   }

@@ -29,7 +29,6 @@ export class RegisterPageComponent {
       },
       error: (err) => {
         this.error.set(err.error?.detail || err.message || 'Unexpected error');
-        console.error('Error comunication', err);
       },
     });
   }

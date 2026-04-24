@@ -8,6 +8,7 @@ import { catchError, map, Observable, tap, throwError } from 'rxjs';
 import { mapProfileDataBaseToProfile } from '../mappers/mapProfileDataBaseToProfile';
 import { SessionData } from '../interfaces/auth/session.data';
 import { mapUserDataBaseToUser } from '../mappers/mapUserDataBaseToUserDataBase';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -60,7 +61,6 @@ export class AuthService {
   }
 
   register(data: UserForDataBase): Observable<SessionData> {
-    console.log('Joined', data);
     return this.http.post<ModelResp>(`${this.URL}/user/register`, data).pipe(
       map((res) => {
         if (!res.success || !res.data) {
@@ -70,10 +70,6 @@ export class AuthService {
           token: res.data!.token,
           user: mapUserDataBaseToUser(res.data!.user),
         };
-      }),
-      catchError((err) => {
-        console.error('Error in service', err);
-        return throwError(() => err);
       }),
     );
   }
@@ -87,10 +83,6 @@ export class AuthService {
           token: res.data!.token,
           user: mapUserDataBaseToUser(res.data!.user),
         };
-      }),
-      catchError((err) => {
-        console.error('Error in service', err);
-        return throwError(() => err);
       }),
     );
   }
