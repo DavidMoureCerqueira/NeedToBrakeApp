@@ -8,6 +8,7 @@ import { ProfilePageComponent } from './pages/profile.page.component/profile.pag
 import { ForumPageComponent } from './pages/forum.page.component/forum.page.component';
 import { profileResolver } from './resolver/profile-resolver';
 import { MaintenancePageComponent } from './pages/mantenance.page.component/maintenance.page.component';
+import { forumResolver } from './resolver/forum-resolver';
 
 export const routes: Routes = [
   // 1. LANDING / HOME
@@ -75,6 +76,9 @@ export const routes: Routes = [
       searchPost: true,
 
       actionText: 'New Post',
+    },
+    resolve: {
+      forum: forumResolver,
     },
   },
   // {

@@ -1,18 +1,19 @@
-import { ProfileFromDataBase } from './profileFromDataBase';
 import { UserFromDataBase } from './user.from.database';
-// TODO Fix genericos
-export interface ModelResp {
-  success: boolean;
-  data?: DataResp;
-  error?: string;
-}
-interface DataResp {
+
+export interface DataRespDatabase {
   token: string;
   user: UserFromDataBase;
 }
 
-export interface UserResp {
+export interface ModelRespComplete<T> {
   success: boolean;
-  data?: ProfileFromDataBase;
+  data?: T;
   error?: string;
+}
+export interface PaginatedDataDatabase<T> {
+  items: T[];
+  total: number;
+  pages: number;
+  page: number;
+  has_next: boolean;
 }

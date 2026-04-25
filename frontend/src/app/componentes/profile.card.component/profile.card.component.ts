@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, effect, input } from '@angular/core';
-import { User } from '../../interfaces/users/user';
 import { GarageComponent } from '../garage.component/garage.component';
 import { PostListComponent } from '../post.list.component/post.list.component';
+import { Profile } from '../../interfaces/users/profile';
 
 @Component({
   selector: 'profile-card-component',
@@ -11,10 +11,10 @@ import { PostListComponent } from '../post.list.component/post.list.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileCardComponent {
-  user = input.required<User | null>();
+  profile = input.required<Profile | null>();
   constructor() {
     effect(() => {
-      console.log(this.user());
+      console.log(this.profile());
     });
   }
 }

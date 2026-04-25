@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { ModelResp } from '../interfaces/database.responses/modelResp';
+import { DataRespDatabase, ModelRespComplete } from '../interfaces/database.responses/modelResp';
 import { AuthForm } from '../interfaces/auth/authForm';
 import { User } from '../interfaces/users/user';
 import { UserForDataBase } from '../interfaces/database.request/user.for.database';
@@ -62,30 +62,34 @@ export class AuthService {
   }
 
   register(data: UserForDataBase): Observable<SessionData> {
-    return this.http.post<ModelResp>(`${this.URL}/user/register`, data).pipe(
-      map((res) => {
-        if (!res.success || !res.data) {
-          throw new Error(res.error || 'Authenticate failed');
-        }
-        return {
-          token: res.data!.token,
-          user: mapUserDataBaseToUser(res.data!.user),
-        };
-      }),
-    );
+    return this.http
+      .post<ModelRespComplete<DataRespDatabase>>(`${this.URL}/user/register`, data)
+      .pipe(
+        map((res) => {
+          if (!res.success || !res.data) {
+            throw new Error(res.error || 'Authenticate failed');
+          }
+          return {
+            token: res.data!.token,
+            user: mapUserDataBaseToUser(res.data!.user),
+          };
+        }),
+      );
   }
   signin(data: AuthForm): Observable<SessionData> {
-    return this.http.post<ModelResp>(`${this.URL}/user/sign-in`, data).pipe(
-      map((res) => {
-        if (!res.success || !res.data) {
-          throw new Error(res.error || 'Authenticate failed');
-        }
-        return {
-          token: res.data!.token,
-          user: mapUserDataBaseToUser(res.data!.user),
-        };
-      }),
-    );
+    return this.http
+      .post<ModelRespComplete<DataRespDatabase>>(`${this.URL}/user/sign-in`, data)
+      .pipe(
+        map((res) => {
+          if (!res.success || !res.data) {
+            throw new Error(res.error || 'Authenticate failed');
+          }
+          return {
+            token: res.data!.token,
+            user: mapUserDataBaseToUser(res.data!.user),
+          };
+        }),
+      );
   }
   get currentUserId(): number | null {
     const user = this.currentUser();

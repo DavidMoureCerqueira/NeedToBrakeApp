@@ -152,13 +152,13 @@ class UserProfile(BaseModel):
     username: str
     is_admin: bool
     is_owner: bool
-    country: str = "No data"
-    fav_circuite: str = "No data"
-    city: str = "No data"
+    country: str = ""
+    fav_circuite: str = ""
+    city: str = ""
     cars: int = 0
     posts: int = 0
     comments: int = 0
-    driver_skill: str = "Nothing"
+    driver_skill: str = ""
     model_config = {"from_attributes": True}
 
 
