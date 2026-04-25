@@ -19,7 +19,7 @@ export class AuthFormComponent {
   private fb = inject(FormBuilder);
 
   authForm: FormGroup = this.fb.group({
-    userName: [
+    username: [
       '',
       [
         Validators.required,
@@ -54,7 +54,7 @@ export class AuthFormComponent {
   constructor() {
     effect(() => {
       if (!this.isRegisterForm()) {
-        const control = this.authForm.get('userName');
+        const control = this.authForm.get('username');
         control?.clearValidators();
         control?.clearAsyncValidators();
         control?.updateValueAndValidity();

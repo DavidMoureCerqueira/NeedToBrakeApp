@@ -21,30 +21,28 @@
         tabindex="-1"
         class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-4 shadow"
       >
-        <li><a>Search by Disc</a></li>
-        <li><a>Search by Car</a></li>
-        <li><a>Search by Measurements</a></li>
+        <li><a [routerLink]="['/']">Disc Comparer</a></li>
+        <li><a [routerLink]="['/forum']">Forum</a></li>
       </ul>
     </div>
-    <a class="pl-4 hover:cursor-pointer">
+    <a class="pl-4 hover:cursor-pointer" [routerLink]="['/']">
       <img class="w-40 h-16" [src]="imageLogoPath" alt="logo" />
     </a>
   </div>
   <div class="navbar-center hidden lg:flex">
     <ul class="menu menu-horizontal px-1">
-      <li><a>Search by Disc</a></li>
-      <li><a>Search by Car</a></li>
-      <li><a>Search by Measurements</a></li>
+      <li><a [routerLink]="['/']">Disc Comparer</a></li>
+      <li><a [routerLink]="['/forum']">Forum</a></li>
     </ul>
   </div>
   @if (!this.authService.isAuthenticated()) {
-    <div class="navbar-end">
+    <div class="navbar-end flex flex-row gap-5">
       <btn class="btn" [routerLink]="['/register']">Register</btn>
       <a class="btn" [routerLink]="['/sign-in']">Sing In</a>
     </div>
   }
   @if (this.authService.isAuthenticated()) {
-    <div class="navbar-end">
+    <div class="navbar-end flex flex-row gap-5">
       <p>Welcome {{ this.authService.currentUser()?.username }}</p>
       @if (layoutService.headerConfig().actionText) {
         <button class="btn">{{ layoutService.headerConfig().actionText }}</button>

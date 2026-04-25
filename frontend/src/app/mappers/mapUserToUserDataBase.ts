@@ -3,7 +3,7 @@ import { UserForDataBase } from '../interfaces/database.request/user.for.databas
 
 export function mapUserToUserDataBase(user: AuthForm): UserForDataBase {
   return {
-    username: user.userName,
+    username: user.username,
     email: user.email,
     password: user.password,
   };
