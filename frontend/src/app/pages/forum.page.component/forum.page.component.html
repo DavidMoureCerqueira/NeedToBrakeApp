@@ -1,23 +1,4 @@
 <div class="p-6">
-  <!-- Pagination -->
-  <div class="join flex flex-row items-center justify-evenly">
-    <button
-      class="join-item btn"
-      [disabled]="forum().page === 1"
-      (click)="getItemsByPage(forum().page - 1)"
-    >
-      Prev
-    </button>
-    <span class="join-item"> {{ forum().page }} of {{ forum().pages }} </span>
-    <button
-      class="join-item btn"
-      [disabled]="!forum().hasNext"
-      (click)="getItemsByPage(forum().page + 1)"
-    >
-      Next
-    </button>
-  </div>
-  <!--  -->
   <div class="flex flex-col gap-4 w-full">
     @for (post of forum().items; track post.id) {
       <div
@@ -57,5 +38,11 @@
         </div>
       </div>
     }
+    <!-- Pagination -->
+    <app-pagination-component
+      [pagination]="{ currentPage: forum().page, pages: forum().pages, hasNext: forum().hasNext }"
+      (pageChanger)="getItemsByPage($event)"
+    ></app-pagination-component>
+    <!--  -->
   </div>
 </div>

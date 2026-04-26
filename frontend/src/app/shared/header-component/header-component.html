@@ -44,10 +44,8 @@
   @if (this.authService.isAuthenticated()) {
     <div class="navbar-end flex flex-row gap-5">
       <p>Welcome {{ this.authService.currentUser()?.username }}</p>
-      @if (layoutService.headerConfig().actionText) {
-        <button class="btn">{{ layoutService.headerConfig().actionText }}</button>
-      }
-      @if (layoutService.headerConfig().showLogout) {
+
+      @if (isProfile()) {
         <button class="btn" (click)="logOut()">Log-out</button>
       } @else {
         <button class="btn" (click)="goToMyProfile()">Profile</button>

@@ -9,6 +9,9 @@ import { ForumPageComponent } from './pages/forum.page.component/forum.page.comp
 import { profileResolver } from './resolver/profile-resolver';
 import { MaintenancePageComponent } from './pages/mantenance.page.component/maintenance.page.component';
 import { forumResolver } from './resolver/forum-resolver';
+import { PostCreationComponent } from './pages/post.creation.component/post.creation.component';
+import path from 'path';
+import { PostDetailComponent } from './pages/post.detail.component/post.detail.component';
 
 export const routes: Routes = [
   // 1. LANDING / HOME
@@ -60,36 +63,34 @@ export const routes: Routes = [
     component: ProfilePageComponent,
     canActivate: [authGuard],
     title: 'My profile - NeedToBrake',
-    data: {
-      searchPost: false,
-      showLogout: true,
-    },
     resolve: {
       profile: profileResolver,
     },
   },
   {
     path: 'forum',
-    component: ForumPageComponent,
-    title: 'Forum - NeedToBrake',
-    data: {
-      searchPost: true,
+    children: [
+      {
+        path: '',
+        component: ForumPageComponent,
+        title: 'Forum - NeedToBrake',
+        resolve: {
+          forum: forumResolver,
+        },
+      },
 
-      actionText: 'New Post',
-    },
-    resolve: {
-      forum: forumResolver,
-    },
+      {
+        path: 'post/:id',
+        component: PostDetailComponent,
+        title: 'Post detail - NeedToBrake',
+      },
+      {
+        path: 'post/create',
+        component: PostCreationComponent,
+        title: 'Write your experience - NeedToBrake',
+      },
+    ],
   },
-  // {
-  //   path: 'forum/post/:id',
-  //   component: ForumPageComponent,
-  //   data: {
-  //     title: 'Forum - NeedToBrake',
-  //     searchPost: false,
-  //     actionText: 'Back to forum',
-  //   },
-  // },
   {
     path: 'maintenance',
     component: MaintenancePageComponent,
