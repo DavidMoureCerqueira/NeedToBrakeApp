@@ -11,7 +11,7 @@ import { MaintenancePageComponent } from './pages/maintenance.page.component/mai
 import { forumResolver } from './resolver/forum-resolver';
 import { PostCreationPageComponent } from './pages/forum/post.creation.page.component/post.creation.page.component';
 import path from 'path';
-import { PostDetailComponent } from './pages/forum/post.detail.component/post.detail.component';
+import { PostDetailPageComponent } from './pages/forum/post.detail.page.component/post.detail.page.component';
 import { postResolver } from './resolver/post-resolver';
 
 export const routes: Routes = [
@@ -88,7 +88,7 @@ export const routes: Routes = [
       },
       {
         path: 'post/:id',
-        component: PostDetailComponent,
+        component: PostDetailPageComponent,
         title: 'Post detail - NeedToBrake',
         resolve: {
           post: postResolver,

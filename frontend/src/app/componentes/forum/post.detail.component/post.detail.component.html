@@ -1,0 +1,104 @@
+<article class="card bg-base-100 shadow-xl border border-base-200">
+  <div class="card-body p-5 md:p-10">
+    <div class="flex justify-between items-start mb-6">
+      <div class="space-y-3">
+        <h1
+          class="text-2xl lg:text-4xl font-black text-base-content italic uppercase tracking-tight leading-tight"
+        >
+          {{ post().title }}
+        </h1>
+
+        <div class="flex items-center gap-2 md:gap-3">
+          <div class="avatar placeholder">
+            <div class="bg-neutral text-neutral-content rounded-full w-8 md:w-10">
+              <span class="text-xs md:text-sm font-bold">
+                {{ post().author.username.charAt(0).toUpperCase() }}
+              </span>
+            </div>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-xs md:text-sm font-bold">@{{ post().author.username }}</span>
+            <span class="text-[10px] md:text-xs opacity-50">{{
+              post().date | date: 'mediumDate'
+            }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    @if (post().car) {
+      <div class="bg-base-200/40 rounded-xl p-3 mb-4 border border-base-300">
+        <div class="flex items-center gap-2 text-xs md:text-sm flex-wrap">
+          <div class="flex items-center gap-1 text-secondary font-bold shrink-0">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <span class="uppercase tracking-tighter text-[9px] md:text-xs">Vehicle:</span>
+          </div>
+
+          <div class="flex items-center gap-1.5 flex-wrap">
+            <span class="font-black italic uppercase text-base-content">
+              {{ post().car!.brand.name }} {{ post().car!.model.name }}
+            </span>
+
+            <span class="opacity-30">•</span>
+
+            <span class="opacity-70 text-[11px] md:text-xs whitespace-nowrap">
+              {{ post().car!.version | formatVersion }}
+            </span>
+          </div>
+
+          <button
+            class="btn btn-ghost btn-xs ml-auto h-6 min-h-0 text-secondary text-[9px] uppercase font-bold px-1"
+          >
+            <!-- TODO enviar a la busqueda por version de posts -->
+            MORE POSTS...
+          </button>
+        </div>
+      </div>
+    }
+
+    <div class="divider my-0 opacity-10"></div>
+
+    <div class="py-6">
+      <p
+        class="text-base lg:text-lg leading-relaxed text-base-content/80 whitespace-pre-wrap min-h-37.5"
+      >
+        {{ post().content }}
+      </p>
+    </div>
+
+    <div class="divider my-0 opacity-10"></div>
+
+    <div class="card-actions justify-start items-center pt-4 opacity-70">
+      <div class="flex items-center gap-2">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 md:h-6 md:w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+          />
+        </svg>
+        <span class="font-bold text-sm md:text-base">{{ post().commentCount }} Comments</span>
+      </div>
+    </div>
+  </div>
+</article>
