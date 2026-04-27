@@ -9,6 +9,7 @@ import { ForumService } from '../../services/forum.service';
 import { postCreation } from '../../interfaces/post/post.creation';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { successMessages } from '../../../utils/successMessages';
+import { ForumStateService } from '../../services/forum.state.service';
 
 @Component({
   selector: 'app-post-creation-component',
@@ -25,6 +26,7 @@ export class PostCreationComponent {
   brands = toSignal(this.cascadeService.getBrands(), { initialValue: [] });
   private snackbar = inject(MatSnackBar);
   isSubmitting = signal<boolean>(false);
+  private forumState = inject(ForumStateService);
   postForm = this.fb.group({
     title: ['', [Validators.required, Validators.minLength(10)]],
     content: ['', [Validators.required, Validators.maxLength(1000)]],
@@ -96,6 +98,7 @@ export class PostCreationComponent {
             duration: 5000,
             panelClass: ['success-snackbar'],
           });
+          this.forumState.resetPage();
           this.router.navigate(['forum']);
         }
       },

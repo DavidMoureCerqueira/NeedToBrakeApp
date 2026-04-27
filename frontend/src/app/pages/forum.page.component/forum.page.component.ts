@@ -13,6 +13,7 @@ import { DatePipe } from '@angular/common';
 import { ForumService } from '../../services/forum.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PaginationComponent } from '../../componentes/pagination.component/pagination.component';
+import { ForumStateService } from '../../services/forum.state.service';
 
 @Component({
   selector: 'forum-page-component',
@@ -24,8 +25,8 @@ import { PaginationComponent } from '../../componentes/pagination.component/pagi
 export class ForumPageComponent {
   private forumService = inject(ForumService);
   private route = inject(ActivatedRoute);
+  private forumState = inject(ForumStateService);
   forum = signal<Pagination<Post>>(this.route.snapshot.data['forum']);
-  // forum = input.required<Pagination<Post>>();
   posts = computed(() => this.forum().items);
 
   constructor() {
@@ -37,6 +38,7 @@ export class ForumPageComponent {
   getItemsByPage(page: number) {
     if (page === this.forum().page) return;
     if (page === this.forum().pages + 1) return;
+    this.forumState.page.set(page);
     this.forumService.getLatestPost(page).subscribe({
       next: (newData) => {
         this.forum.set(newData);
