@@ -7,7 +7,7 @@ import { authGuard } from './guards/auth-guard';
 import { ProfilePageComponent } from './pages/profile.page.component/profile.page.component';
 import { ForumPageComponent } from './pages/forum/forum.page.component/forum.page.component';
 import { profileResolver } from './resolver/profile-resolver';
-import { MaintenancePageComponent } from './pages/mantenance.page.component/maintenance.page.component';
+import { MaintenancePageComponent } from './pages/maintenance.page.component/maintenance.page.component';
 import { forumResolver } from './resolver/forum-resolver';
 import { PostCreationPageComponent } from './pages/forum/post.creation.page.component/post.creation.page.component';
 import path from 'path';

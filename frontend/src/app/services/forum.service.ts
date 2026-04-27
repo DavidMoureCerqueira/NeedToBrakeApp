@@ -26,6 +26,7 @@ export class ForumService {
   private http = inject(HttpClient);
 
   constructor() {}
+
   getLatestPost(page: number = 1, limit = 5): Observable<Pagination<Post>> {
     const URL = `${this.API_URL}/post/latest`;
     const params = new HttpParams().set('page', page).set('limit', limit);
@@ -69,5 +70,8 @@ export class ForumService {
           };
         }),
       );
+  }
+  getPostById(post:Post):Observable<ModelRespComplete<Post>>{
+    const URL= 
   }
 }
