@@ -14,11 +14,11 @@ import { ForumStateService } from '../../../services/forum.state.service';
 @Component({
   selector: 'app-post-creation-component',
   imports: [ReactiveFormsModule, RouterLink, FormatVersionPipe],
-  templateUrl: './post.creation.component.html',
-  styleUrl: './post.creation.component.css',
+  templateUrl: './post.creation.page.component.html',
+  styleUrl: './post.creation.page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PostCreationComponent {
+export class PostCreationPageComponent {
   private fb = inject(FormBuilder);
   private cascadeService = inject(CascadeService);
   private forumService = inject(ForumService);

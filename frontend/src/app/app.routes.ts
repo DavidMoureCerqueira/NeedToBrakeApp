@@ -9,7 +9,7 @@ import { ForumPageComponent } from './pages/forum/forum.page.component/forum.pag
 import { profileResolver } from './resolver/profile-resolver';
 import { MaintenancePageComponent } from './pages/mantenance.page.component/maintenance.page.component';
 import { forumResolver } from './resolver/forum-resolver';
-import { PostCreationComponent } from './pages/forum/post.creation.component/post.creation.component';
+import { PostCreationPageComponent } from './pages/forum/post.creation.page.component/post.creation.page.component';
 import path from 'path';
 import { PostDetailComponent } from './pages/forum/post.detail.component/post.detail.component';
 
@@ -81,7 +81,7 @@ export const routes: Routes = [
 
       {
         path: 'post/create',
-        component: PostCreationComponent,
+        component: PostCreationPageComponent,
         canActivate: [authGuard],
         title: 'Write your experience - NeedToBrake',
       },
