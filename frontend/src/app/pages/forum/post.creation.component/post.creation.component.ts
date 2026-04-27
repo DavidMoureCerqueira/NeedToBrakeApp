@@ -3,13 +3,13 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { map, of, startWith, switchMap } from 'rxjs';
-import { CascadeService } from '../../services/cascade.service';
-import { FormatVersionPipe } from '../../pipes/format.version.pipe';
-import { ForumService } from '../../services/forum.service';
-import { postCreation } from '../../interfaces/post/post.creation';
+import { CascadeService } from '../../../services/cascade.service';
+import { FormatVersionPipe } from '../../../pipes/format.version.pipe';
+import { ForumService } from '../../../services/forum.service';
+import { postCreation } from '../../../interfaces/post/post.creation';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { successMessages } from '../../../utils/successMessages';
-import { ForumStateService } from '../../services/forum.state.service';
+import { successMessages } from '../../../../utils/successMessages';
+import { ForumStateService } from '../../../services/forum.state.service';
 
 @Component({
   selector: 'app-post-creation-component',

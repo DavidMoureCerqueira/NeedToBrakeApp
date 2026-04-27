@@ -1,18 +1,18 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { AuthFormComponent } from '../../componentes/auth.form.component/auth.form.component';
-import { AuthForm } from '../../interfaces/auth/authForm';
-import { AuthService } from '../../services/auth.service';
+import { AuthFormComponent } from '../../../componentes/auth.form.component/auth.form.component';
+import { AuthForm } from '../../../interfaces/auth/authForm';
+import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'singin-page-component',
   imports: [AuthFormComponent],
-  templateUrl: './singin.page.component.html',
-  styleUrl: './singin.page.component.css',
+  templateUrl: './signin.page.component.html',
+  styleUrl: './signin.page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SinginPageComponent {
+export class SigninPageComponent {
   authService = inject(AuthService);
   router = inject(Router);
   error = signal<string>('');

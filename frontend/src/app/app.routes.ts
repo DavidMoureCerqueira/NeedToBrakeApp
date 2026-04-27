@@ -1,17 +1,17 @@
 import { Routes } from '@angular/router';
 import { SelectDiscPageComponent } from './pages/select.disc.page.component/select.disc..page.component';
 import { DiscComparisonPageComponent } from './pages/disc.comparison.page.component/disc.comparison.page.component';
-import { RegisterPageComponent } from './pages/register.page.component/register.page.component';
-import { SinginPageComponent } from './pages/singin.page.component/singin.page.component';
+import { RegisterPageComponent } from './pages/auth/register.page.component/register.page.component';
+import { SigninPageComponent } from './pages/auth/signin.page.component/signin.page.component';
 import { authGuard } from './guards/auth-guard';
 import { ProfilePageComponent } from './pages/profile.page.component/profile.page.component';
-import { ForumPageComponent } from './pages/forum.page.component/forum.page.component';
+import { ForumPageComponent } from './pages/forum/forum.page.component/forum.page.component';
 import { profileResolver } from './resolver/profile-resolver';
 import { MaintenancePageComponent } from './pages/mantenance.page.component/maintenance.page.component';
 import { forumResolver } from './resolver/forum-resolver';
-import { PostCreationComponent } from './pages/post.creation.component/post.creation.component';
+import { PostCreationComponent } from './pages/forum/post.creation.component/post.creation.component';
 import path from 'path';
-import { PostDetailComponent } from './pages/post.detail.component/post.detail.component';
+import { PostDetailComponent } from './pages/forum/post.detail.component/post.detail.component';
 
 export const routes: Routes = [
   // 1. LANDING / HOME
@@ -51,7 +51,7 @@ export const routes: Routes = [
   },
   {
     path: 'sign-in',
-    component: SinginPageComponent,
+    component: SigninPageComponent,
 
     title: 'Welcome Back - NeedToBrake',
     data: {

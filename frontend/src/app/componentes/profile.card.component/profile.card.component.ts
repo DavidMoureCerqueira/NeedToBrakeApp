@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, effect, input } from '@angular/core';
 import { GarageComponent } from '../garage.component/garage.component';
-import { PostListComponent } from '../post.list.component/post.list.component';
+import { PostListComponent } from '../forum/post.list.component/post.list.component';
 import { Profile } from '../../interfaces/users/profile';
 
 @Component({

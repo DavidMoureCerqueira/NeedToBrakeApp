@@ -7,13 +7,13 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { Post } from '../../interfaces/post/post';
-import { Pagination } from '../../interfaces/pagination';
+import { Post } from '../../../interfaces/post/post';
+import { Pagination } from '../../../interfaces/pagination';
 import { DatePipe } from '@angular/common';
-import { ForumService } from '../../services/forum.service';
+import { ForumService } from '../../../services/forum.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { PaginationComponent } from '../../componentes/pagination.component/pagination.component';
-import { ForumStateService } from '../../services/forum.state.service';
+import { PaginationComponent } from '../../../componentes/pagination.component/pagination.component';
+import { ForumStateService } from '../../../services/forum.state.service';
 
 @Component({
   selector: 'forum-page-component',
