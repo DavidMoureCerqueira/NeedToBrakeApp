@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, Subject, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpContext, HttpParams } from '@angular/common/http';
 import {
@@ -8,10 +8,14 @@ import {
 } from '../interfaces/database.responses/modelResp';
 import { REQUIRES_AUTH } from '../auth/auth.context';
 import { Comment } from '../interfaces/post/comment';
-import { mapCommentDatabaseToCommentArray } from '../mappers/mapCommentDatabaseToComment';
+import {
+  mapCommentDatabaseToComment,
+  mapCommentDatabaseToCommentArray,
+} from '../mappers/mapCommentDatabaseToComment';
 import { Pagination } from '../interfaces/pagination';
 import { CommentFromDatabase } from '../interfaces/database.responses/comment.from.database';
 import { mapPaginationDatabaseToPagination } from '../mappers/mapPaginationDatabaseToPagination';
+import { CommentForDatabase } from '../interfaces/database.request/comment.for.database';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +23,11 @@ import { mapPaginationDatabaseToPagination } from '../mappers/mapPaginationDatab
 export class CommentService {
   private API_URL = environment.apiUrl;
   private http = inject(HttpClient);
+  private refreshCommentsSource = new Subject<void>();
+
+  refreshComments = this.refreshCommentsSource.asObservable();
   constructor() {}
+
   getCommentsByPostId(
     postId: number,
     page: number = 1,
@@ -45,5 +53,31 @@ export class CommentService {
           return throwError(() => err);
         }),
       );
+  }
+
+  saveComment(data: CommentForDatabase): Observable<ModelRespComplete<Comment>> {
+    const URL = `${this.API_URL}/comment/create`;
+
+    return this.http
+      .post<ModelRespComplete<CommentFromDatabase>>(URL, data, {
+        context: new HttpContext().set(REQUIRES_AUTH, true),
+      })
+      .pipe(
+        map((data) => {
+          if (data.success && data.data) {
+            return {
+              success: data.success,
+              data: mapCommentDatabaseToComment(data.data),
+            };
+          }
+          return {
+            success: data.success,
+            error: data.error,
+          };
+        }),
+      );
+  }
+  notifyCommentAdded() {
+    this.refreshCommentsSource.next();
   }
 }
