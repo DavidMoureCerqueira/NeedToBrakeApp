@@ -207,6 +207,7 @@ class CommentModify(BaseModel):
 
 
 class PostReadDetail(PostBase):
+    id: int
     is_owner: Optional[bool] = False
     author: Optional[UserPublic] = None
     comment_count: Optional[int] = 0

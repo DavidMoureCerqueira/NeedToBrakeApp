@@ -4,5 +4,5 @@ export interface PostFromDatabase {
   user_id: number;
   id: number;
   date: string;
-  version_id: number;
+  version_id?: number;
 }

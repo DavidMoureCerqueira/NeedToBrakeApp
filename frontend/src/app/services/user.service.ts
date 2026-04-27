@@ -6,7 +6,7 @@ import { ModelRespComplete } from '../interfaces/database.responses/modelResp';
 import { REQUIRES_AUTH } from '../auth/auth.context';
 import { Profile } from '../interfaces/users/profile';
 import { environment } from '../../environments/environment';
-import { ProfileFromDataBase } from '../interfaces/database.responses/profileFromDataBase';
+import { ProfileFromDataBase } from '../interfaces/database.responses/profile.from.dataBase';
 
 @Injectable({
   providedIn: 'root',

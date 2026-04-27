@@ -17,6 +17,9 @@ import {
 import { postCreation } from '../interfaces/post/post.creation';
 import { mapPostCreationToPostToDatabase } from './../mappers/mapPostCreationToPostToDatabase';
 import { REQUIRES_AUTH } from '../auth/auth.context';
+import { PostDetailFromDatabase } from '../interfaces/database.responses/post.detail.from.database';
+import { PostDetail } from '../interfaces/post/post.detail';
+import { mapPostDetailDatabaseToPostDetail } from '../mappers/mapPostDetailDatabaseToPostDetail';
 
 @Injectable({
   providedIn: 'root',
@@ -71,7 +74,22 @@ export class ForumService {
         }),
       );
   }
-  // getPostById(post:Post):Observable<ModelRespComplete<Post>>{
-  //   const URL=
-  // }
+  getPostById(postId: string): Observable<PostDetail> {
+    const URL = `${this.API_URL}/post/${postId}`;
+    return this.http
+      .get<ModelRespComplete<PostDetailFromDatabase>>(URL, {
+        context: new HttpContext().set(REQUIRES_AUTH, true),
+      })
+      .pipe(
+        map((res) => {
+          if (!res.success && !res.data) {
+            throw new Error(res.error || 'Post id failed');
+          }
+          return mapPostDetailDatabaseToPostDetail(res.data!);
+        }),
+        catchError((err) => {
+          return throwError(() => err);
+        }),
+      );
+  }
 }

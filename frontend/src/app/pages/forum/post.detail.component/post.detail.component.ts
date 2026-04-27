@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, input } from '@angular/core';
+import { PostDetail } from '../../../interfaces/post/post.detail';
 
 @Component({
   selector: 'app-post.detail.component',
@@ -7,4 +8,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './post.detail.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PostDetailComponent { }
+export class PostDetailComponent {
+  post = input.required<PostDetail>();
+  constructor() {
+    effect(() => console.log(this.post()));
+  }
+}
