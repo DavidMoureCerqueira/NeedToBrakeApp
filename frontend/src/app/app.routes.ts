@@ -82,6 +82,7 @@ export const routes: Routes = [
       {
         path: 'post/create',
         component: PostCreationComponent,
+        canActivate: [authGuard],
         title: 'Write your experience - NeedToBrake',
       },
       {

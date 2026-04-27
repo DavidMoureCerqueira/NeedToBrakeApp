@@ -92,8 +92,6 @@ export class PostCreationComponent {
     this.forumService.createPost(post).subscribe({
       next: (response) => {
         if (response.success) {
-          //TODO mostrar mensaje de que se ha creado correctamente (no se si aqui o en el servicio)
-          // TODO hacer un is loading que si incorporaria aqui para evitar posts duplicados.
           this.snackbar.open(successMessages.POST_CREATED, 'close', {
             duration: 5000,
             panelClass: ['success-snackbar'],
