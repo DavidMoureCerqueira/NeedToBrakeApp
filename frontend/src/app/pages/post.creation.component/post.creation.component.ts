@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -24,6 +24,7 @@ export class PostCreationComponent {
   private router = inject(Router);
   brands = toSignal(this.cascadeService.getBrands(), { initialValue: [] });
   private snackbar = inject(MatSnackBar);
+  isSubmitting = signal<boolean>(false);
   postForm = this.fb.group({
     title: ['', [Validators.required, Validators.minLength(10)]],
     content: ['', [Validators.required, Validators.maxLength(1000)]],
@@ -76,13 +77,11 @@ export class PostCreationComponent {
       this.postForm.markAllAsTouched();
       return;
     }
+    this.isSubmitting.set(true);
+
     const title = this.postForm.value.title;
     const content = this.postForm.value.content;
-    if (!title || !content) {
-      // TODO mostrar un error
-      console.error('Not valid post');
-      return;
-    }
+    if (!title || !content) return;
     const versionId = Number(this.postForm.value.versionId) || undefined;
     console.log(this.postForm.value);
     const post: postCreation = {
@@ -102,6 +101,7 @@ export class PostCreationComponent {
           this.router.navigate(['forum']);
         }
       },
+      complete: () => this.isSubmitting.set(false),
     });
   }
 }

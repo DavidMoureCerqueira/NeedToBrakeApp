@@ -102,9 +102,12 @@
       <div class="card-actions justify-end mt-4">
         <button
           type="submit"
-          class="btn btn-primary btn-wide shadow-lg"
-          [disabled]="postForm.invalid"
+          class="btn btn-primary btn-wide shadow-lg flex flex-row gap-2"
+          [disabled]="postForm.invalid || isSubmitting()"
         >
+          @if (this.isSubmitting()) {
+            <span class="loading loading-spinner"></span>
+          }
           Post
         </button>
       </div>
