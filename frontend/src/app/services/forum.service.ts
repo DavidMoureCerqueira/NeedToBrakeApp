@@ -71,7 +71,7 @@ export class ForumService {
         }),
       );
   }
-  getPostById(post:Post):Observable<ModelRespComplete<Post>>{
-    const URL= 
-  }
+  // getPostById(post:Post):Observable<ModelRespComplete<Post>>{
+  //   const URL=
+  // }
 }

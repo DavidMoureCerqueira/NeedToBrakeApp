@@ -60,3 +60,10 @@ def get_latest_comment(
     ).all()
 
     return ItemsWithTotal[Comment](items=posts, total=total_count)
+
+
+def get_number_comments(session: Session, post_id: int) -> int:
+
+    count_stmt = select(func.count(Comment.id)).where(Comment.post_id == post_id)
+    count = session.exec(count_stmt).one()
+    return count

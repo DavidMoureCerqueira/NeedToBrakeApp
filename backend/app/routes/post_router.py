@@ -1,7 +1,8 @@
-from fastapi import APIRouter, HTTPException, Query, Request, status
-from models.models import PostCreate
+from fastapi import APIRouter, Depends, HTTPException, Query, Request, status
+from models.models import PostCreate, PostReadDetail
 from models.models import ModelResp
 from services.post_service import (
+    get_post_by_id,
     get_post_by_user,
     get_post_by_version,
     get_latest_post,
@@ -63,3 +64,15 @@ def read_post_by_user(
         session=session, page=page, limit=limit, user_id=user_id
     )
     return ModelResp(success=True, data=posts_and_data)
+
+
+@router.get(
+    "/{post_id}",
+    response_model=ModelResp[PostReadDetail],
+    tags=["Get post by id with user and number of comments"],
+)
+def read_post_by_id(
+    session: SessionDep, post_id: int, user_id: int = Depends(get_authorization)
+):
+    postDetail = get_post_by_id(session=session, post_id=post_id, user_id=user_id)
+    return ModelResp(success=True, data=postDetail)

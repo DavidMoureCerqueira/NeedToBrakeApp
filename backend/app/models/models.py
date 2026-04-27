@@ -182,8 +182,10 @@ class PaginationResponse(ItemsWithTotal):
 
 
 class UserPublic(BaseModel):
+    # TODO: añadir URL de imagen
     id: int
     username: str
+    model_config = {"from_attributes": True}
 
 
 class CommentRead(BaseModel):
@@ -191,6 +193,7 @@ class CommentRead(BaseModel):
     content: str
     created_at: datetime
     author: Optional[UserPublic]
+    model_config = {"from_attributes": True}
 
 
 class CommentCreate(BaseModel):
@@ -201,3 +204,11 @@ class CommentCreate(BaseModel):
 class CommentModify(BaseModel):
     content: str
     comment_id: int
+
+
+class PostReadDetail(PostBase):
+    is_owner: Optional[bool] = False
+    author: Optional[UserPublic] = None
+    comment_count: Optional[int] = 0
+    version: Optional[VersionRead] = None
+    model_config = {"from_attributes": True}

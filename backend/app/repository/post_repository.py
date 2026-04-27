@@ -1,8 +1,9 @@
 from typing import List
 
 from sqlmodel import Session, desc, func, select
+from sqlalchemy.orm import joinedload
 
-from models.models import ItemsWithTotal
+from models.models import ItemsWithTotal, PostReadDetail
 from models.table_models import Post
 
 
@@ -53,3 +54,10 @@ def check_post_by_user(session: Session, user_id: int) -> bool:
         select(Post.id).where(Post.user_id == user_id)
     ).first()
     return is_post
+
+
+def get_post_by_id_detailed(session: Session, post_id: int) -> Post:
+    post = session.exec(
+        select(Post).where(Post.id == post_id).options(joinedload(Post.author))
+    ).first()
+    return post
