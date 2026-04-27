@@ -7,6 +7,8 @@ import { CascadeService } from '../../services/cascade.service';
 import { FormatVersionPipe } from '../../pipes/format.version.pipe';
 import { ForumService } from '../../services/forum.service';
 import { postCreation } from '../../interfaces/post/post.creation';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { successMessages } from '../../../utils/successMessages';
 
 @Component({
   selector: 'app-post-creation-component',
@@ -21,7 +23,7 @@ export class PostCreationComponent {
   private forumService = inject(ForumService);
   private router = inject(Router);
   brands = toSignal(this.cascadeService.getBrands(), { initialValue: [] });
-
+  private snackbar = inject(MatSnackBar);
   postForm = this.fb.group({
     title: ['', [Validators.required, Validators.minLength(10)]],
     content: ['', [Validators.required, Validators.maxLength(1000)]],
@@ -93,15 +95,12 @@ export class PostCreationComponent {
         if (response.success) {
           //TODO mostrar mensaje de que se ha creado correctamente (no se si aqui o en el servicio)
           // TODO hacer un is loading que si incorporaria aqui para evitar posts duplicados.
+          this.snackbar.open(successMessages.POST_CREATED, 'close', {
+            duration: 5000,
+            panelClass: ['success-snackbar'],
+          });
           this.router.navigate(['forum']);
-        } else {
-          // Aquí usas el error que viene del backend
-          alert(`Error: ${response.error || 'No se pudo crear el post'}`);
         }
-      },
-      error: (err) => {
-        // Error de red (404, 500, etc)
-        alert('Error de conexión con el servidor');
       },
     });
   }

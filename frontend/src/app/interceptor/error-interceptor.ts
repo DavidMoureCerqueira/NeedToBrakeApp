@@ -18,9 +18,9 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
     catchError((error: HttpErrorResponse) => {
       console.log(error);
       if (error.status === 0 || error.status >= 500) {
-        // router.navigate(['/maintenance']);
+        router.navigate(['/maintenance']);
       } else if (error.status === 401) {
-        // router.navigate(['/sign-in']);
+        router.navigate(['/sign-in']);
       }
       return throwError(() => error);
     }),

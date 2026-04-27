@@ -31,7 +31,7 @@
             formControlName="brandId"
             class="select select-bordered w-full focus:select-primary"
           >
-            <option value="" disabled selected>Select brand</option>
+            <option value="" selected>Select brand</option>
             @for (brand of brands(); track brand.id) {
               <option [value]="brand.id">{{ brand.name }}</option>
             }
@@ -46,7 +46,7 @@
             formControlName="modelId"
             class="select select-bordered w-full focus:select-primary"
           >
-            <option value="" disabled selected>Select Model</option>
+            <option value="" selected>Select Model</option>
             @for (model of models(); track model.id) {
               <option [value]="model.id">{{ model.name }}</option>
             }
@@ -61,12 +61,20 @@
             formControlName="versionId"
             class="select select-bordered w-full focus:select-primary"
           >
-            <option value="" disabled selected>Select version</option>
+            <option value="" selected>Select version</option>
             @for (version of versions(); track version.id) {
               <option [value]="version.id">{{ version | formatVersion }}</option>
             }
           </select>
         </div>
+        @if (
+          (this.postForm.value.brandId || this.postForm.value.modelId) &&
+          !this.postForm.value.versionId
+        ) {
+          <p class="text-warning md:col-span-2">
+            Post will be associate to your car only if you select a version
+          </p>
+        }
       </div>
 
       <div class="form-control w-full flex flex-col">
