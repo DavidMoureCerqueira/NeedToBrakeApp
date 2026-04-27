@@ -87,7 +87,7 @@ export class AuthFormComponent {
 
     return null;
   }
-  onSave() {
+  onSubmit() {
     if (this.authForm.invalid) {
       this.authForm.markAllAsTouched();
       return;

@@ -4,5 +4,5 @@ export interface Post {
   userId: number;
   id: number;
   date: string;
-  versionId: number;
+  versionId?: number;
 }

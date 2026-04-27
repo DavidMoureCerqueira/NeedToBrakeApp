@@ -80,14 +80,14 @@ export const routes: Routes = [
       },
 
       {
-        path: 'post/:id',
-        component: PostDetailComponent,
-        title: 'Post detail - NeedToBrake',
-      },
-      {
         path: 'post/create',
         component: PostCreationComponent,
         title: 'Write your experience - NeedToBrake',
+      },
+      {
+        path: 'post/:id',
+        component: PostDetailComponent,
+        title: 'Post detail - NeedToBrake',
       },
     ],
   },

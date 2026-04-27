@@ -1,5 +1,5 @@
 import { PostFromDatabase } from '../interfaces/database.responses/post.from.database';
-import { Post } from '../interfaces/post';
+import { Post } from '../interfaces/post/post';
 
 export function mapPostDatabaseToPost(postDB: PostFromDatabase): Post {
   return {

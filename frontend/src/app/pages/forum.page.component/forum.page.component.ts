@@ -7,16 +7,16 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { Post } from '../../interfaces/post';
+import { Post } from '../../interfaces/post/post';
 import { Pagination } from '../../interfaces/pagination';
 import { DatePipe } from '@angular/common';
 import { ForumService } from '../../services/forum.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PaginationComponent } from '../../componentes/pagination.component/pagination.component';
 
 @Component({
   selector: 'forum-page-component',
-  imports: [DatePipe, PaginationComponent],
+  imports: [DatePipe, PaginationComponent, RouterLink],
   templateUrl: './forum.page.component.html',
   styleUrl: './forum.page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
