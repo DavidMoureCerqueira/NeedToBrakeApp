@@ -2,23 +2,18 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  effect,
   inject,
   input,
   linkedSignal,
-  signal,
 } from '@angular/core';
 import { CommentService } from '../../../services/comment.service';
-import { Comment } from '../../../interfaces/post/comment';
-import { Pagination } from '../../../interfaces/pagination';
-import { DatePipe } from '@angular/common';
 import { rxResource, toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { switchMap } from 'rxjs';
 import { PaginationComponent } from '../../pagination.component/pagination.component';
+import { CommentComponent } from '../comment.component/comment.component';
 
 @Component({
   selector: 'comment-list-component',
-  imports: [DatePipe, PaginationComponent],
+  imports: [PaginationComponent, CommentComponent],
   templateUrl: './comment.list.component.html',
   styleUrl: './comment.list.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
