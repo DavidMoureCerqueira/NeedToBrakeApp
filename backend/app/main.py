@@ -29,6 +29,7 @@ app = FastAPI(title="NeedToBrake-Backend", lifespan=lifespan)
 origins = [
     "http://localhost:4200",
     "http://127.0.0.1:4200",
+    "https://needtobrake.netlify.app",
 ]
 app.add_middleware(
     CORSMiddleware,
