@@ -5,11 +5,10 @@ import { AuthForm } from '../interfaces/auth/authForm';
 import { User } from '../interfaces/users/user';
 import { UserForDataBase } from '../interfaces/database.request/user.for.database';
 import { catchError, map, Observable, tap, throwError } from 'rxjs';
-import { mapProfileDataBaseToProfile } from '../mappers/mapProfileDataBaseToProfile';
 import { SessionData } from '../interfaces/auth/session.data';
-import { mapUserDataBaseToUser } from '../mappers/mapUserDataBaseToUserDataBase';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
+import { mapUserDatabaseToUser } from '../mappers/mapUserDataBaseToUserDataBase';
 
 @Injectable({
   providedIn: 'root',
@@ -71,7 +70,7 @@ export class AuthService {
           }
           return {
             token: res.data!.token,
-            user: mapUserDataBaseToUser(res.data!.user),
+            user: mapUserDatabaseToUser(res.data!.user),
           };
         }),
       );
@@ -86,7 +85,7 @@ export class AuthService {
           }
           return {
             token: res.data!.token,
-            user: mapUserDataBaseToUser(res.data!.user),
+            user: mapUserDatabaseToUser(res.data!.user),
           };
         }),
       );

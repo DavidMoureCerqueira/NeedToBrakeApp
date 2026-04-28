@@ -1,6 +1,6 @@
 import { ProfileFromDataBase } from '../interfaces/database.responses/profile.from.dataBase';
 import { Profile } from '../interfaces/users/profile';
-export function mapProfileDataBaseToProfile(user: ProfileFromDataBase): Profile {
+export function mapProfileDatabaseToProfile(user: ProfileFromDataBase): Profile {
   return {
     id: user.id,
     username: user.username,

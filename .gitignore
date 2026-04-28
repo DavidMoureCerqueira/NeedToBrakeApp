@@ -3,4 +3,4 @@ backend/.env
 *.pyc
 *.pyo
 *.pyd
-frontend/src/environments/environment.ts
+
