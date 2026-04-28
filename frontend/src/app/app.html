@@ -3,12 +3,13 @@
     <div class="flex items-center justify-center p-5 flex-1">
       <app-loader-component></app-loader-component>
     </div>
+  } @else {
+    <header-component class="flex-none"></header-component>
+
+    <main class="flex flex-col items-center justify-center p-5 flex-1 w-full">
+      <router-outlet></router-outlet>
+    </main>
+
+    <footer-component class="flex-none"></footer-component>
   }
-  <header-component class="flex-none"></header-component>
-
-  <main class="flex flex-col items-center justify-center p-5 flex-1 w-full">
-    <router-outlet></router-outlet>
-  </main>
-
-  <footer-component class="flex-none"></footer-component>
 </div>
