@@ -3,7 +3,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { DataRespDatabase, ModelRespComplete } from '../interfaces/database.responses/modelResp';
 import { AuthForm } from '../interfaces/auth/authForm';
 import { User } from '../interfaces/users/user';
-import { UserForDataBase } from '../interfaces/database.request/user.for.database';
+import { UserForDatabase } from '../interfaces/database.request/user.for.database';
 import { map, Observable } from 'rxjs';
 import { SessionData } from '../interfaces/auth/session.data';
 import { environment } from '../../environments/environment';
@@ -59,7 +59,7 @@ export class AuthService {
     return !!this.token();
   }
 
-  register(data: UserForDataBase): Observable<SessionData> {
+  register(data: UserForDatabase): Observable<SessionData> {
     return this.http
       .post<ModelRespComplete<DataRespDatabase>>(`${this.URL}/user/register`, data)
       .pipe(
