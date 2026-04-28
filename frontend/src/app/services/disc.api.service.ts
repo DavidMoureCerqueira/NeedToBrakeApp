@@ -8,8 +8,8 @@ import { mapperCarDiscDatabaseToCarDiscCleanArray } from '../mappers/mapCarDiscD
 import { DiscDatabase } from '../interfaces/database.responses/disc.database';
 
 import { environment } from './../../environments/environment';
-import { mapperDiscoToDatabaseSearch } from '../mappers/mapDiscToDataBaseDisc';
-import { mapDiscDatabaseToDisc } from '../mappers/mapDiscDataBaseToDisc';
+import { mapperDiscoToDatabaseSearch } from '../mappers/mapDiscToDatabaseDisc';
+import { mapDiscDatabaseToDisc } from '../mappers/mapDiscDatabaseToDisc';
 
 const API_URL = environment.apiUrl;
 @Injectable({
