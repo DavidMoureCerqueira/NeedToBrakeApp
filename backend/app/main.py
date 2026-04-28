@@ -50,6 +50,6 @@ app.include_router(router=garage_router, prefix="/garage")
 app.include_router(router=comment_router, prefix="/comment")
 
 
-@app.get("/")
+@app.get("/health-check")
 async def read_root():
-    return {"Hello": "World"}
+    return {"status": "ok"}
