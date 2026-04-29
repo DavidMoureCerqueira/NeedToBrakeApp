@@ -9,16 +9,31 @@ from models.table_models import Brand
 load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL")
 
+# engine = create_engine(
+#     DATABASE_URL,
+#     connect_args={
+#         # Al poner "ssl": True, PyMySQL activa la conexión segura
+#         # sin esperar parámetros extraños en la URL.
+#         "ssl": {}
+#     },
+#     echo=True,
+# )
+# #  echo: Para ver las consultas en la consola
+
 engine = create_engine(
     DATABASE_URL,
     connect_args={
-        # Al poner "ssl": True, PyMySQL activa la conexión segura
-        # sin esperar parámetros extraños en la URL.
-        "ssl": {}
+        "ssl": {},
+        "connect_timeout": 10,  # Evita que el backend se quede colgado si la red falla
     },
-    echo=True,
+    # --- CONFIGURACIÓN DE POOLING ---
+    pool_size=5,  # Mantiene 5 conexiones siempre abiertas
+    max_overflow=10,  # Permite hasta 10 más en picos de tráfico
+    pool_recycle=1200,  # Cierra conexiones cada 20 min (Aiven suele cortar a los 30)
+    pool_pre_ping=True,  # ¡CRUCIAL! Verifica si la conexión murió antes de usarla
+    # --------------------------------
+    echo=False,  # Cámbialo a False en producción para no llenar los logs de Render
 )
-#  echo: Para ver las consultas en la consola
 
 
 # Fabrica de sesiones, para conectar a la base de datos y cierre automático.
