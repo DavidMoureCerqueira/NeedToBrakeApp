@@ -1,0 +1,19 @@
+name: Keep render alive
+on:
+  schedule:
+    # Se ejecuta cada 10 minutos para adelantarse a los 15 min de Render
+    - cron: '*/10 * * * *'
+  # Habilita el botón de ejecución manual en la pestaña Actions
+  workflow_dispatch:
+
+jobs:
+  pinger_job:
+    name: A job to ping
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Render Backend
+        id: ping
+        uses: sisodiya2421/pinger@master
+        with:
+          url: ${{ secrets.URL }}
+          method: GET
