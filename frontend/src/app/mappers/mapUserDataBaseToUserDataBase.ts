@@ -1,7 +1,7 @@
 import { User } from '../interfaces/users/user';
-import { UserFromDataBase } from '../interfaces/database.responses/user.from.database';
+import { UserFromDatabase } from '../interfaces/database.responses/user.from.database';
 
-export function mapUserDataBaseToUser(user: UserFromDataBase): User {
+export function mapUserDatabaseToUser(user: UserFromDatabase): User {
   return {
     username: user.username,
     email: user.email,
