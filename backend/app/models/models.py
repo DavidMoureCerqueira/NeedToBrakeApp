@@ -158,7 +158,7 @@ class UserProfile(BaseModel):
     cars: int = 0
     posts: int = 0
     comments: int = 0
-    url_avatar: str = ""
+    url_avatar: str | None = None
     model_config = {"from_attributes": True}
 
 
