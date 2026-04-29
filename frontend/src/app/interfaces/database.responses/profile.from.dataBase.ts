@@ -5,10 +5,11 @@ export interface ProfileFromDatabase {
   is_admin: boolean;
   is_owner: boolean;
   country: string;
-  fav_circuite: string;
   city: string;
+  fav_circuit: string;
+  fav_pads: string;
   cars: number;
   posts: number;
   comments: number;
-  driver_skill: string;
+  url_avatar: string;
 }

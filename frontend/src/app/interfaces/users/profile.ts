@@ -7,8 +7,9 @@ export interface Profile {
   country: string;
   city: string;
   favCircuit: string;
+  favPads: string;
   numCars: number;
   numPosts: number;
   numComments: number;
-  driverSkill: string;
+  urlAvatar: string;
 }
