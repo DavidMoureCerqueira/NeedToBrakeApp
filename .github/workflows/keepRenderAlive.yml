@@ -11,5 +11,5 @@ jobs:
     steps:
       - name: Ping Render Backend
         run: |
-          curl -v -f -X GET "${{ secrets.URL }}" \
+          curl -v -f -X GET "https://needtobrakeapp.onrender.com/health-check" \
           -H "User-Agent: GitHubAction-Pinger"
