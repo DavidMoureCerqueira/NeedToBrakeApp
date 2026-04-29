@@ -1,0 +1,66 @@
+<section>
+  <h3>Disco Actual</h3>
+  <div class="contenedor">
+    <div class="item">
+      <label for="diameter">Diameter</label>
+      <input
+        id="diameter"
+        type="number"
+        placeholder="Medida A"
+        (input)="actualizarDisco('diameter', $event.target.value)"
+      />
+    </div>
+
+    <div class="item">
+      <label for="height">Height</label>
+      <input
+        id="height"
+        type="number"
+        placeholder="Medida B"
+        (input)="actualizarDisco('height', $event.target.value)"
+      />
+    </div>
+
+    <div class="item">
+      <label for="thickness">Thickness</label>
+      <input
+        id="thickness"
+        type="number"
+        placeholder="Medida D"
+        (input)="actualizarDisco('thickness', $event.target.value)"
+      />
+    </div>
+
+    <div class="item">
+      <label for="pcd">Bolt Path</label>
+      <input
+        id="pcd"
+        type="number"
+        placeholder="Medida E"
+        (input)="actualizarDisco('pcd', $event.target.value)"
+      />
+    </div>
+
+    <div class="item">
+      <label for="agujeros">Nº Holes</label>
+      <input
+        id="agujeros"
+        type="number"
+        placeholder="Medida F"
+        (input)="actualizarDisco('holes', $event.target.value)"
+      />
+    </div>
+
+    <div class="item">
+      <label for="buje">Ø CenterBore</label>
+      <input
+        id="buje"
+        type="number"
+        placeholder="Medida G"
+        (input)="actualizarDisco('centerBore', $event.target.value)"
+      />
+    </div>
+
+    <!-- <button class="btn " (click)="crearDisco()">Crear Disco</button> -->
+  </div>
+</section>

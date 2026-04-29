@@ -1,0 +1,30 @@
+services:
+  backend:
+    build: ./backend
+    volumes:
+      - ./backend/app:/code/app
+    ports:
+      - "8000:80"
+    env_file:
+      - ./backend/.env
+    # environment:
+    #   - DATABASE_URL=mysql+pymysql://root:user_password@db:3306/NTB_DB
+    depends_on:
+      - db
+  # mysql es el tipo de base de datos pymysql es la libreria sincrona
+
+  db:
+    image: mysql:8.0
+    container_name: ntb_database
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: user_password
+      MYSQL_DATABASE: NTB_DB
+      MYSQL_USER: user_develop
+      MYSQL_PASSWORD: user_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_ntb:/var/lib/mysql
+volumes:
+  db_ntb:

@@ -1,0 +1,10 @@
+<div class="flex justify-end px-6 mt-4">
+  <button class="btn btn-primary" [routerLink]="['post/create']">New post</button>
+</div>
+
+<post-list-component [forum]="this.forum()"></post-list-component>
+
+<app-pagination-component
+  [pagination]="{ currentPage: forum().page, pages: forum().pages, hasNext: forum().hasNext }"
+  (pageChanger)="getItemsByPage($event)"
+></app-pagination-component>

@@ -1,0 +1,52 @@
+<form
+  class="h-screen flex justify-center items-center"
+  [formGroup]="authForm"
+  (ngSubmit)="onSubmit()"
+>
+  <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+    <legend class="fieldset-legend">{{ title() }}</legend>
+    @if (isRegisterForm()) {
+      <label class="label">Username</label>
+      <input
+        type="text"
+        class="input"
+        placeholder="Username"
+        maxlength="30"
+        formControlName="username"
+      />
+      @if (isValidField('username')) {
+        <span class="text-warning">{{ getFieldError('username') }}</span>
+      }
+    }
+    <label class="label">Email</label>
+    <input type="email" class="input" placeholder="Email" maxlength="30" formControlName="email" />
+    @if (isValidField('email')) {
+      <span class="text-warning">{{ getFieldError('email') }}</span>
+    }
+
+    <label class="label">Password</label>
+    <input
+      type="password"
+      class="input"
+      placeholder="Password"
+      maxlength="20"
+      formControlName="password"
+    />
+    @if (isValidField('password')) {
+      <span class="text-warning">{{ getFieldError('password') }}</span>
+    }
+    <button class="btn btn-neutral mt-4">{{ title() }}</button>
+    @if (!isRegisterForm()) {
+      <p>
+        If you don't have an account you
+        <span class="underline cursor-pointer" [routerLink]="['/register']">create one</span>
+      </p>
+    } @else {
+      <p>
+        If you already have an account you can
+        <span class="underline cursor-pointer" [routerLink]="['/sign-in']"> sign-in</span>
+      </p>
+    }
+    <span class="text-warning">{{ this.error() }}</span>
+  </fieldset>
+</form>

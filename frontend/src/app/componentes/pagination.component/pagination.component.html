@@ -1,0 +1,17 @@
+<div class="join flex flex-row items-center justify-evenly">
+  <button
+    class="join-item btn"
+    [disabled]="pagination().currentPage === 1"
+    (click)="changePage(pagination().currentPage - 1)"
+  >
+    Prev
+  </button>
+  <span class="join-item"> {{ pagination().currentPage }} of {{ pagination().pages }} </span>
+  <button
+    class="join-item btn"
+    [disabled]="!pagination().hasNext"
+    (click)="changePage(pagination().currentPage + 1)"
+  >
+    Next
+  </button>
+</div>

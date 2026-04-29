@@ -1,0 +1,116 @@
+<div class="max-w-3xl w-full card bg-base-100 shadow-xl border border-base-300">
+  <div class="card-body p-6 md:p-8">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="card-title text-3xl font-bold text-primary">Create Post</h2>
+      <button [routerLink]="['/forum']" class="btn btn-ghost btn-sm">✕ Cancel</button>
+    </div>
+
+    <form [formGroup]="postForm" (ngSubmit)="onSubmit()" class="space-y-4">
+      <div class="form-control w-full">
+        <label class="label py-1">
+          <span class="label-text font-bold">Post title</span>
+          @if (postForm.get('title')?.touched && postForm.get('title')?.invalid) {
+            <span class="label-text-alt text-error font-bold">Minimun 10 characters</span>
+          }
+        </label>
+        <input
+          type="text"
+          formControlName="title"
+          placeholder="Ex: Whats the best brake set up for..."
+          class="input input-bordered w-full focus:input-primary"
+          [class.input-error]="postForm.get('title')?.touched && postForm.get('title')?.invalid"
+        />
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+        <div class="form-control w-full">
+          <label class="label py-1">
+            <span class="label-text font-bold">Brand</span>
+          </label>
+          <select
+            formControlName="brandId"
+            class="select select-bordered w-full focus:select-primary"
+          >
+            <option value="" selected>Brand</option>
+            @for (brand of brands(); track brand.id) {
+              <option [value]="brand.id">{{ brand.name }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="form-control w-full">
+          <label class="label py-1">
+            <span class="label-text font-bold">Model</span>
+          </label>
+          <select
+            formControlName="modelId"
+            class="select select-bordered w-full focus:select-primary"
+          >
+            <option value="" selected>Model</option>
+            @for (model of models(); track model.id) {
+              <option [value]="model.id">{{ model.name }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="form-control w-full">
+          <label class="label py-1">
+            <span class="label-text font-bold">Version</span>
+          </label>
+          <select
+            formControlName="versionId"
+            class="select select-bordered w-full focus:select-primary"
+          >
+            <option value="" selected>Version</option>
+            @for (version of versions(); track version.id) {
+              <option [value]="version.id">{{ version | formatVersion }}</option>
+            }
+          </select>
+        </div>
+        @if (
+          (this.postForm.value.brandId || this.postForm.value.modelId) &&
+          !this.postForm.value.versionId
+        ) {
+          <p class="text-warning md:col-span-2">
+            Post will be associate to your car only if you select a version
+          </p>
+        }
+      </div>
+
+      <div class="form-control w-full flex flex-col">
+        <label class="label py-1">
+          <span class="label-text font-bold">Description</span>
+          @if (postForm.get('content')?.touched && postForm.get('content')?.invalid) {
+            <span class="label-text-alt text-error font-bold">Required (Max 1000)</span>
+          }
+        </label>
+        <textarea
+          formControlName="content"
+          class="textarea textarea-bordered h-32 focus:textarea-primary text-base w-full"
+          placeholder="Share an explication..."
+          [class.textarea-error]="
+            postForm.get('content')?.touched && postForm.get('content')?.invalid
+          "
+        ></textarea>
+        <div class="flex justify-end mt-1">
+          <span class="text-[10px] opacity-50">
+            {{ postForm.get('content')?.value?.length || 0 }} / 1000
+          </span>
+        </div>
+      </div>
+
+      <div class="card-actions justify-end mt-4">
+        <button
+          type="submit"
+          class="btn btn-primary btn-wide shadow-lg flex flex-row gap-2"
+          [disabled]="postForm.invalid || isSubmitting()"
+        >
+          @if (this.isSubmitting()) {
+            <span class="loading loading-spinner"></span>
+          }
+          Post
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
