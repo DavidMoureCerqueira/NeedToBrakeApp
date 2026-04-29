@@ -1,5 +1,7 @@
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Depends, File, Request, UploadFile
 
+from services.file_validator_service import validate_file
+from services.file_uploader_service import upload_image
 from models.models import (
     ModelResp,
     RegisterData,
@@ -17,7 +19,6 @@ from services.user_service import (
     singin_user,
 )
 from database import SessionDep
-
 
 router = APIRouter()
 
@@ -52,3 +53,18 @@ def get_my_profile(
 
     user = get_user_by_id_from_db(session=session, user_id=user_id, user_auth=user_auth)
     return ModelResp(success=True, data=user)
+
+
+@router.patch(
+    "/set-avatar",
+    response_model=ModelResp[str],
+    tags=["Sets an avatar for an user"],
+)
+def set_avatar_img(
+    Session: SessionDep,
+    file_envelop: UploadFile = Depends(validate_file),
+    # user_id: int = Depends(get_authorization),
+):
+    url = upload_image(file=file_envelop.file)
+
+    return ModelResp(success=True, data=url)

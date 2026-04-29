@@ -6,6 +6,7 @@ from jwt import ExpiredSignatureError, InvalidTokenError, PyJWTError
 from pydantic import EmailStr
 from sqlalchemy.exc import SQLAlchemyError
 from models.models import ModelResp
+from cloudinary.exceptions import Error as CloudinaryBaseError
 
 
 class NeedToBrakeException(Exception):
@@ -105,6 +106,22 @@ class NoDiscCompatibleWithFiltersException(NeedToBrakeException):
         super().__init__("No disc for that filters", status.HTTP_404_NOT_FOUND)
 
 
+class ImageTooLargeError(NeedToBrakeException):
+    def __init__(self, size: int, limit: int):
+        super().__init__(
+            f"Image to large ({size} bytes). Limit {limit} bytes",
+            status.HTTP_413_CONTENT_TOO_LARGE,
+        )
+
+
+class InvalidImageFormatError(NeedToBrakeException):
+    def __init__(self, format: str):
+        super().__init__(
+            f"Format '{format}' not allowed. Use JPG,JPEG, PNG o WebP.",
+            status.HTTP_400_BAD_REQUEST,
+        )
+
+
 logger = logging.getLogger("uvicorn.error")
 
 
@@ -152,7 +169,15 @@ def add_exception_handlers(app):
         logger.error(f"DB Error: {str(exc)}")
         return create_error_response(request, "Database connection error", 500)
 
-    # 5. El "Catch-all" para bugs no controlados
+    # 5. Errores de Cloudinary
+    @app.exception_handler(CloudinaryBaseError)
+    async def cloudinary_exception_handler(request: Request, exc: CloudinaryBaseError):
+        logger.error(f"Cloudinary Error: {str(exc)}")
+        return create_error_response(
+            request, str(exec) or "Error processing image", 400
+        )
+
+    # 6. El "Catch-all" para bugs no controlados
     @app.exception_handler(Exception)
     async def global_handler(request: Request, exc: Exception):
         logger.error(f"UNEXPECTED ERROR: {str(exc)}")

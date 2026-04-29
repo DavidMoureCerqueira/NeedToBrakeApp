@@ -3,13 +3,11 @@ import { inject, Injectable, signal } from '@angular/core';
 import { DataRespDatabase, ModelRespComplete } from '../interfaces/database.responses/modelResp';
 import { AuthForm } from '../interfaces/auth/authForm';
 import { User } from '../interfaces/users/user';
-import { UserForDataBase } from '../interfaces/database.request/user.for.database';
-import { catchError, map, Observable, tap, throwError } from 'rxjs';
-import { mapProfileDataBaseToProfile } from '../mappers/mapProfileDataBaseToProfile';
+import { UserForDatabase } from '../interfaces/database.request/user.for.database';
+import { map, Observable } from 'rxjs';
 import { SessionData } from '../interfaces/auth/session.data';
-import { mapUserDataBaseToUser } from '../mappers/mapUserDataBaseToUserDataBase';
-import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
+import { mapUserDatabaseToUser } from '../mappers/mapUserDataBaseToUserDataBase';
 
 @Injectable({
   providedIn: 'root',
@@ -61,7 +59,7 @@ export class AuthService {
     return !!this.token();
   }
 
-  register(data: UserForDataBase): Observable<SessionData> {
+  register(data: UserForDatabase): Observable<SessionData> {
     return this.http
       .post<ModelRespComplete<DataRespDatabase>>(`${this.URL}/user/register`, data)
       .pipe(
@@ -71,7 +69,7 @@ export class AuthService {
           }
           return {
             token: res.data!.token,
-            user: mapUserDataBaseToUser(res.data!.user),
+            user: mapUserDatabaseToUser(res.data!.user),
           };
         }),
       );
@@ -86,7 +84,7 @@ export class AuthService {
           }
           return {
             token: res.data!.token,
-            user: mapUserDataBaseToUser(res.data!.user),
+            user: mapUserDatabaseToUser(res.data!.user),
           };
         }),
       );

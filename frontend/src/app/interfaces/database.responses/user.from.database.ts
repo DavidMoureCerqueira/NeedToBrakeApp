@@ -1,4 +1,4 @@
-export interface UserFromDataBase {
+export interface UserFromDatabase {
   email: string;
   id: number;
   username: string;

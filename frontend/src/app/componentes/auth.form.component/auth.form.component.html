@@ -1,8 +1,4 @@
-<form
-  class="h-screen flex justify-center items-center"
-  [formGroup]="authForm"
-  (ngSubmit)="onSubmit()"
->
+<form class="flex justify-center items-center" [formGroup]="authForm" (ngSubmit)="onSubmit()">
   <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
     <legend class="fieldset-legend">{{ title() }}</legend>
     @if (isRegisterForm()) {

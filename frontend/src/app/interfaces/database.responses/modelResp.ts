@@ -1,8 +1,8 @@
-import { UserFromDataBase } from './user.from.database';
+import { UserFromDatabase } from './user.from.database';
 
 export interface DataRespDatabase {
   token: string;
-  user: UserFromDataBase;
+  user: UserFromDatabase;
 }
 
 export interface ModelRespComplete<T> {

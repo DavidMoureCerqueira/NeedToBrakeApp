@@ -146,19 +146,19 @@ class UserSecure(BaseModel):
 
 
 class UserProfile(BaseModel):
-    # TODO corregir cuando se implementen mas campos en la db
     id: int
     email: EmailStr
     username: str
     is_admin: bool
     is_owner: bool
     country: str = ""
-    fav_circuite: str = ""
     city: str = ""
+    fav_circuit: str = ""
+    fav_pads: str = ""
     cars: int = 0
     posts: int = 0
     comments: int = 0
-    driver_skill: str = ""
+    url_avatar: str = ""
     model_config = {"from_attributes": True}
 
 

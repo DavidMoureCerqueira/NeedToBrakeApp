@@ -6,9 +6,9 @@ import { HttpClient } from '@angular/common/http';
 import { CarsDiscDatabase } from '../interfaces/database.responses/cars.discs.database';
 import { mapperCarDiscDatabaseToCarDiscCleanArray } from '../mappers/mapCarDiscDatabaseToCarDiscClean';
 import { DiscDatabase } from '../interfaces/database.responses/disc.database';
-import { mapDiscDataBaseToDisc } from '../mappers/mapDiscDataBaseToDisc';
-import { mapperDiscoToDataBaseSearch } from '../mappers/mapDiscToDataBaseDisc';
 import { environment } from './../../environments/environment';
+import { mapperDiscoToDatabaseSearch } from '../mappers/mapDiscToDatabaseDisc';
+import { mapDiscDatabaseToDisc } from '../mappers/mapDiscDataBaseToDisc';
 
 const API_URL = environment.apiUrl;
 @Injectable({
@@ -21,7 +21,7 @@ export class DiscApiService {
   discByFilter(disc: DiscClean): Observable<CarDisc[]> {
     console.log(disc);
     const url = `${API_URL}/filter/disc`;
-    const discBD = mapperDiscoToDataBaseSearch(disc);
+    const discBD = mapperDiscoToDatabaseSearch(disc);
     console.log(discBD);
 
     return this.http
@@ -30,6 +30,6 @@ export class DiscApiService {
   }
   getDiscByID(id: number): Observable<DiscClean> {
     const url = `${API_URL}/disc/${id}`;
-    return this.http.get<DiscDatabase>(url).pipe(map((resp) => mapDiscDataBaseToDisc(resp)));
+    return this.http.get<DiscDatabase>(url).pipe(map((resp) => mapDiscDatabaseToDisc(resp)));
   }
 }
