@@ -6,10 +6,11 @@ def upload_image(file, folder="avatars"):
         file=file,
         folder=folder,
         resource_type="image",
-        transformation=[
+        transformations=[
             {"width": 500, "height": 500, "crop": "limit"},  # No más de 500px
             {"quality": "auto"},  # Compresión inteligente
-            {"fetch_format": "webp"},
+            {"fetch_format": "auto"},
         ],
     )
+    print(upload_result)
     return upload_result.get("secure_url")
