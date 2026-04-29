@@ -1,5 +1,7 @@
 from contextlib import asynccontextmanager
 import select
+
+from sqlmodel import text
 from exceptions import add_exception_handlers
 from routes.cascade_router import router as cascade_router
 from routes.parent_selector_router import router as parent_selector_router
@@ -61,7 +63,7 @@ async def read_root():
 def git_check(request: Request, session: SessionDep):
     print(f"User-Agent recibido: {request.headers.get('user-agent')}")
     try:
-        session.exec(select(1))
+        session.exec(text("SELECT 1"))
         # Ejecuta la consulta más simple posible
         return {"status": "ok", "database": "connected"}
     except Exception as e:
