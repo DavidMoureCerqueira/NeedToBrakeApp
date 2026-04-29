@@ -4,12 +4,10 @@ import { DataRespDatabase, ModelRespComplete } from '../interfaces/database.resp
 import { AuthForm } from '../interfaces/auth/authForm';
 import { User } from '../interfaces/users/user';
 import { UserForDatabase } from '../interfaces/database.request/user.for.database';
-import { catchError, map, Observable, tap, throwError } from 'rxjs';
-import { mapProfileDatabaseToProfile } from '../mappers/mapProfileDatabaseToProfile';
+import { map, Observable } from 'rxjs';
 import { SessionData } from '../interfaces/auth/session.data';
-import { mapUserDatabaseToUser } from '../mappers/mapUserDatabaseToUserDatabase';
-import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
+import { mapUserDatabaseToUser } from '../mappers/mapUserDataBaseToUserDataBase';
 
 @Injectable({
   providedIn: 'root',

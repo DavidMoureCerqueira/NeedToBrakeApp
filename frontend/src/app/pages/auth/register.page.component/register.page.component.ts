@@ -3,7 +3,7 @@ import { AuthFormComponent } from '../../../componentes/auth.form.component/auth
 import { AuthForm } from '../../../interfaces/auth/authForm';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
-import { mapUserToUserDatabase } from '../../../mappers/mapUserToUserDatabase';
+import { mapUserToUserDatabase } from '../../../mappers/mapUserToUserDataBase';
 
 @Component({
   selector: 'register-page-component',

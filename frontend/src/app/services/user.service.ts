@@ -1,12 +1,12 @@
 import { HttpClient, HttpContext } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { catchError, map, tap, throwError, Observable } from 'rxjs';
-import { mapProfileDatabaseToProfile } from '../mappers/mapProfileDatabaseToProfile';
 import { ModelRespComplete } from '../interfaces/database.responses/modelResp';
 import { REQUIRES_AUTH } from '../auth/auth.context';
 import { Profile } from '../interfaces/users/profile';
 import { environment } from '../../environments/environment';
 import { ProfileFromDatabase } from '../interfaces/database.responses/profile.from.dataBase';
+import { mapProfileDatabaseToProfile } from '../mappers/mapProfileDataBaseToProfile';
 
 @Injectable({
   providedIn: 'root',
