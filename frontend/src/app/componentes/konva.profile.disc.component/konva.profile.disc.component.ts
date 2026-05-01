@@ -8,7 +8,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { DiscClean } from '../../interfaces/disc/disc.clean';
+import { Disc } from '../../interfaces/disc/disc';
 import Konva from 'konva';
 import { DiscKonvaFactory } from '../../factory/disc.konva.factory';
 
@@ -20,7 +20,7 @@ import { DiscKonvaFactory } from '../../factory/disc.konva.factory';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class KonvaProfileDiscComponent {
-  disc = input.required<DiscClean | null>();
+  disc = input.required<Disc | null>();
   private stage?: Konva.Stage;
   private layer?: Konva.Layer;
   private stageReady = signal<boolean>(false);

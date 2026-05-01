@@ -10,7 +10,7 @@ import {
   viewChild,
 } from '@angular/core';
 import Konva from 'konva';
-import { DiscClean } from '../../interfaces/disc/disc.clean';
+import { Disc } from '../../interfaces/disc/disc';
 import { DiscKonvaFactory } from '../../factory/disc.konva.factory';
 
 @Component({
@@ -20,7 +20,7 @@ import { DiscKonvaFactory } from '../../factory/disc.konva.factory';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class KonvaDiscComponent {
-  disc = input.required<DiscClean | null>();
+  disc = input.required<Disc | null>();
   container = viewChild.required<ElementRef<HTMLDivElement>>('konvaContainer');
   bgColor = input<string>('#2b4f47');
   private stage?: Konva.Stage;

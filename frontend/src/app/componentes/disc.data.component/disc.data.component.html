@@ -1,0 +1,111 @@
+<section [attr.data-theme]="themeName()" class="disc-section">
+  <div class="disc-header">
+    <h3>{{ title() }}</h3>
+
+    <button (click)="clearFields()">Reset</button>
+  </div>
+  <div class="disc-container">
+    <div class="disc-item">
+      <label for="diameter">Diameter</label>
+      <input
+        id="diameter"
+        type="number"
+        class="disc-input"
+        placeholder="Medida A"
+        [value]="disc().diameter || ''"
+        (input)="updateDisc('diameter', $event.target.value)"
+      />
+    </div>
+    <div class="disc-item">
+      <label for="height">Height</label>
+      <input
+        id="height"
+        type="number"
+        class="disc-input"
+        placeholder="Medida B"
+        [value]="disc().height || ''"
+        (input)="updateDisc('height', $event.target.value)"
+      />
+    </div>
+
+    <div class="disc-item">
+      <label for="thickness">Thickness</label>
+      <input
+        id="thickness"
+        type="number"
+        class="disc-input"
+        placeholder="Medida D"
+        [value]="disc().thickness || ''"
+        (input)="updateDisc('thickness', $event.target.value)"
+      />
+    </div>
+
+    <div class="disc-item">
+      <label for="pcd">Bolt pattern</label>
+      <input
+        id="pcd"
+        type="number"
+        class="disc-input"
+        placeholder="Medida E"
+        [value]="disc().pcd || ''"
+        (input)="updateDisc('pcd', $event.target.value)"
+      />
+    </div>
+
+    <div class="disc-item">
+      <label for="Agujeros">Nº Holes</label>
+      <input
+        id="Agujeros"
+        type="number"
+        class="disc-input"
+        placeholder="Medida F"
+        [value]="disc().holes || ''"
+        (input)="updateDisc('holes', $event.target.value)"
+      />
+    </div>
+
+    <div class="disc-item">
+      <label for="Buje">Ø Centerbore</label>
+      <input
+        id="Buje"
+        type="number"
+        placeholder="Medida G"
+        class="disc-input"
+        [value]="disc().centerBore || ''"
+        (input)="updateDisc('centerBore', $event.target.value)"
+      />
+    </div>
+    <div class="disc-item">
+      <label for="position">Position</label>
+      <select
+        #pos
+        name="position"
+        id="position"
+        placeholder="Position"
+        class="disc-input"
+        [value]="disc().position || ''"
+        (change)="updateDisc('position', pos.value)"
+      >
+        <option selected value="">Position</option>
+        <option value="front">Front</option>
+        <option value="rear">Rear</option>
+      </select>
+    </div>
+    <div class="disc-item">
+      <label for="style">Style</label>
+      <select
+        #style
+        name="style"
+        id="style"
+        placeholder="Style"
+        class="disc-input"
+        [value]="disc().style || ''"
+        (change)="updateDisc('style', style.value)"
+      >
+        <option selected value="">Style</option>
+        <option value="vented">Vented</option>
+        <option value="solid">Solid</option>
+      </select>
+    </div>
+  </div>
+</section>

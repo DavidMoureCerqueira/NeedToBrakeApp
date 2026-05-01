@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
-import { DiscClean } from '../../interfaces/disc/disc.clean';
+import { Disc } from '../../interfaces/disc/disc';
 
 @Component({
   selector: 'disc-ilustration',
@@ -9,5 +9,5 @@ import { DiscClean } from '../../interfaces/disc/disc.clean';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DiscIlustrationComponent {
-  discoIlustrado = input.required<DiscClean>({});
+  discoIlustrado = input.required<Disc>({});
 }

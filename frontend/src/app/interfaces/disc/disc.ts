@@ -1,4 +1,5 @@
 export interface Disc {
+  [key: string]: number | string;
   id: number;
   position: string;
   holes: number;

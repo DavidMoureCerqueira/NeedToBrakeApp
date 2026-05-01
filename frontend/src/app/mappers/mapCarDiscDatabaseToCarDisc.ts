@@ -32,6 +32,6 @@ export function mapperCarDiscDatabaseToCarDisc(db: CarsDiscDatabase): CarDisc {
   };
   return { car, disc };
 }
-export function mapperCarDiscDatabaseToCarDiscCleanArray(data: CarsDiscDatabase[]): CarDisc[] {
+export function mapperCarDiscDatabaseToCarDiscArray(data: CarsDiscDatabase[]): CarDisc[] {
   return data.map((singleData) => mapperCarDiscDatabaseToCarDisc(singleData));
 }

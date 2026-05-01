@@ -1,7 +1,7 @@
-import { DiscClean } from '../interfaces/disc/disc.clean';
+import { Disc } from '../interfaces/disc/disc';
 import { DiscSearch } from '../interfaces/database.request/disc.search';
 
-export function mapperDiscoToDatabaseSearch(disco: DiscClean): DiscSearch {
+export function mapperDiscoToDatabaseSearch(disco: Disc): DiscSearch {
   const searchDisc: DiscSearch = {
     position: null,
     holes: null,

@@ -1,8 +1,10 @@
-import { DiscClean } from '../interfaces/disc/disc.clean';
+import { Disc } from '../interfaces/disc/disc';
 import { DiscDatabase } from '../interfaces/database.responses/disc.database';
 
-export function mapDiscDatabaseToDisc(disc: DiscDatabase): DiscClean {
+export function mapDiscDatabaseToDisc(disc: DiscDatabase): Disc {
+  disc.id;
   return {
+    id: disc.id,
     position: disc.position,
     holes: disc.holes,
     centerBore: disc.center_bore,

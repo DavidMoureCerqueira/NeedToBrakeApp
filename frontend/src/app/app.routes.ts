@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { SelectDiscPageComponent } from './pages/select.disc.page.component/select.disc..page.component';
+import { SelectDiscPageComponent } from './pages/select.disc.page.component/select.disc.page.component';
 import { DiscComparisonPageComponent } from './pages/disc.comparison.page.component/disc.comparison.page.component';
 import { RegisterPageComponent } from './pages/auth/register.page.component/register.page.component';
 import { SigninPageComponent } from './pages/auth/signin.page.component/signin.page.component';

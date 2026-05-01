@@ -41,3 +41,95 @@
   border-left: 5px solid #16a34a !important; /* Verde */
   border-radius: 8px !important;
 }
+
+@layer base {
+  /* Mapeamos tu objeto THEMES a CSS nativo */
+  [data-theme='desired'] {
+    --color-border: 3px solid #1e3d3d;
+    --color-bg-primary: #486a4e;
+    --color-bg-secondary: #2b4f47;
+    --color-inner-border: 1px solid #599351;
+    --color-text: #ecf0f1;
+    color-scheme: dark;
+  }
+
+  [data-theme='current'] {
+    --color-border: 3px solid #34495e;
+    --color-bg-primary: #2c3e50;
+    --color-bg-secondary: #34495e;
+    --color-inner-border: 1px solid #3f51b5;
+    --color-text: #ecf0f1;
+    color-scheme: dark;
+  }
+}
+
+@layer components {
+  .disc-section {
+    background-color: var(--color-bg-secondary);
+    border: var(--color-border);
+    color: var(--color-text);
+    @apply overflow-hidden rounded-xl shadow-lg transition-all duration-300;
+  }
+
+  .disc-header {
+    background-color: var(--color-bg-primary);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    @apply px-4 w-full;
+  }
+  .disc-header h3 {
+    @apply col-start-2 text-xl p-2 text-center font-semibold tracking-wide m-0 mx-auto whitespace-nowrap;
+  }
+  .disc-header button {
+    background-color: var(--color-bg-secondary);
+    border: var(--color-inner-border);
+    color: var(--color-text);
+
+    @apply col-3 justify-self-end px-3 py-0.5 rounded-full text-xs font-medium transition-all;
+    @apply hover:brightness-125 active:scale-95 flex-none cursor-pointer;
+  }
+  .disc-container {
+    border-top: var(--color-inner-border);
+    @apply grid grid-cols-2 md:grid-cols-4 p-4 gap-3 items-center;
+  }
+
+  .disc-item {
+    @apply flex flex-col gap-1 w-full;
+  }
+
+  .disc-item label {
+    @apply text-[10px] font-bold uppercase tracking-wider opacity-80;
+    color: var(--color-text);
+  }
+
+  /* Estilo unificado para Input y Select */
+  .disc-input::-webkit-outer-spin-button,
+  .disc-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Quitar flechas en Firefox */
+  .disc-input[type='number'] {
+    -moz-appearance: textfield;
+    appearance: textfield; /* Para navegadores modernos */
+  }
+  .disc-input {
+    background-color: rgba(255, 255, 255, 0.05); /* Fondo sutil */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--color-text);
+    @apply text-sm p-1.5 rounded-md outline-none transition-all;
+  }
+
+  .disc-input:focus {
+    border-color: var(--color-text);
+    @apply ring-1 ring-white/20;
+  }
+
+  /* Para arreglar el fondo blanco del select */
+  .disc-input option {
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text);
+  }
+}

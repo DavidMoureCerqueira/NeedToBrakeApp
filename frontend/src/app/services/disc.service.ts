@@ -1,13 +1,13 @@
 import { effect, Injectable, signal, WritableSignal } from '@angular/core';
 
-import { DiscClean } from '../interfaces/disc/disc.clean';
+import { Disc } from '../interfaces/disc/disc';
 import { LocalStorageData } from './types';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DiscoService {
-  existingDiscService = signal<DiscClean | null>(this.getInitialValue());
+  existingDiscService = signal<Disc | null>(this.getInitialValue());
   constructor() {
     effect(() => {
       const disc = this.existingDiscService();
@@ -19,7 +19,7 @@ export class DiscoService {
     });
   }
 
-  private getInitialValue(): DiscClean | null {
+  private getInitialValue(): Disc | null {
     const discString = localStorage.getItem(LocalStorageData.EXISTING_DISC);
     try {
       return discString ? JSON.parse(discString) : null;
@@ -28,22 +28,20 @@ export class DiscoService {
     }
   }
 
-  matchDiscs(discoExistente: DiscClean, discoDeseado: Partial<DiscClean>) {
-    const discoModificado: DiscClean = { ...discoExistente };
-    (Object.entries(discoDeseado) as [keyof DiscClean, string | number][]).forEach(
-      ([key, valor]) => {
-        if (valor != 0 && valor !== null && valor !== undefined && valor !== '') {
-          discoModificado[key] = valor;
-        }
-      },
-    );
+  matchDiscs(discoExistente: Disc, discoDeseado: Partial<Disc>) {
+    const discoModificado: Disc = { ...discoExistente };
+    (Object.entries(discoDeseado) as [keyof Disc, string | number][]).forEach(([key, valor]) => {
+      if (valor != 0 && valor !== null && valor !== undefined && valor !== '') {
+        discoModificado[key] = valor;
+      }
+    });
     return discoModificado;
   }
-  saveExistingDisc(disc: DiscClean) {
+  saveExistingDisc(disc: Disc) {
     this.existingDiscService.set(disc);
   }
 
-  getExistingDisc(): DiscClean | null {
+  getExistingDisc(): Disc | null {
     return this.existingDiscService();
   }
 }
