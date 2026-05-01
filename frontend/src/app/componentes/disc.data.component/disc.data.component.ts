@@ -9,12 +9,6 @@ import { DiscTheme, THEMES } from '../../styles/discThemes';
   styleUrl: './disc.data.component.css',
 })
 export class DiscDataComponent {
-  constructor() {
-    console.log(this.disc().position);
-    effect(() => {
-      this.disc.set(this.modifiedDisc());
-    });
-  }
   title = input.required<string>();
 
   disc = signal<Disc>({} as Disc);
@@ -23,6 +17,12 @@ export class DiscDataComponent {
   theme = computed(() => THEMES[this.themeName()]);
   discEmitter = output<Disc>({});
   modifiedDisc = input<Disc>({} as Disc);
+
+  constructor() {
+    effect(() => {
+      this.disc.set(this.modifiedDisc());
+    });
+  }
 
   updateDisc(key: keyof Disc, value: string | number): void {
     this.disc.update((actualDisc) => ({

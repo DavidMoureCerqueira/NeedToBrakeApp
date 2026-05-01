@@ -13,6 +13,7 @@
         class="disc-input"
         placeholder="Medida A"
         [value]="disc().diameter || ''"
+        [class.valid]="!!disc().diameter"
         (input)="updateDisc('diameter', $event.target.value)"
       />
     </div>
@@ -24,6 +25,7 @@
         class="disc-input"
         placeholder="Medida B"
         [value]="disc().height || ''"
+        [class.valid]="!!disc().height"
         (input)="updateDisc('height', $event.target.value)"
       />
     </div>
@@ -36,6 +38,7 @@
         class="disc-input"
         placeholder="Medida D"
         [value]="disc().thickness || ''"
+        [class.valid]="!!disc().thickness"
         (input)="updateDisc('thickness', $event.target.value)"
       />
     </div>
@@ -48,6 +51,7 @@
         class="disc-input"
         placeholder="Medida E"
         [value]="disc().pcd || ''"
+        [class.valid]="!!disc().pcd"
         (input)="updateDisc('pcd', $event.target.value)"
       />
     </div>
@@ -60,6 +64,7 @@
         class="disc-input"
         placeholder="Medida F"
         [value]="disc().holes || ''"
+        [class.valid]="!!disc().holes"
         (input)="updateDisc('holes', $event.target.value)"
       />
     </div>
@@ -72,6 +77,7 @@
         placeholder="Medida G"
         class="disc-input"
         [value]="disc().centerBore || ''"
+        [class.valid]="!!disc().centerBore"
         (input)="updateDisc('centerBore', $event.target.value)"
       />
     </div>
@@ -84,6 +90,7 @@
         placeholder="Position"
         class="disc-input"
         [value]="disc().position || ''"
+        [class.valid]="!!disc().position"
         (change)="updateDisc('position', pos.value)"
       >
         <option selected value="">Position</option>
@@ -100,6 +107,7 @@
         placeholder="Style"
         class="disc-input"
         [value]="disc().style || ''"
+        [class.valid]="!!disc().style"
         (change)="updateDisc('style', style.value)"
       >
         <option selected value="">Style</option>
