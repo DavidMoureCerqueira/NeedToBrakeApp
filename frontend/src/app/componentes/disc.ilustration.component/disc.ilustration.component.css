@@ -1,13 +1,9 @@
 .plano-container {
   position: relative;
   width: 50%;
-  max-width: 289px; /* opcional */
+  max-width: 289px;
 }
 
-/* .plano {
-  width: 100%;
-  height: auto;
-} */
 .imagen {
   width: 95%;
   border-radius: 2rem;

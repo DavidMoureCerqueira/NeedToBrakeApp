@@ -3,13 +3,12 @@ import { DiscoService } from '../../services/disc.service';
 import { DiscApiService } from '../../services/disc.api.service';
 import { Disc } from '../../interfaces/disc/disc';
 import { CarDisc } from '../../interfaces/disc/car.disc';
-import { DiscIlustrationComponent } from '../../componentes/disc.ilustration.component/disc.ilustration.component';
 import { ListDiscComponent } from '../../componentes/list.disc.component/list.disc.component';
-import { DiscDataComponent } from '../../componentes/disc.data.component/disc.data.component';
+import { DataIlustrationComponent } from '../../componentes/data.ilustration.component/data.ilustration.component';
 
 @Component({
   selector: 'select-disc-page',
-  imports: [DiscIlustrationComponent, ListDiscComponent, DiscDataComponent],
+  imports: [ListDiscComponent, DataIlustrationComponent],
   templateUrl: './select.disc.page.component.html',
   styleUrl: 'select.disc.page.component.css',
 })

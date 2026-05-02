@@ -48,5 +48,26 @@
         }
       </tbody>
     </table>
+    <!-- Vista de Tarjetas (Visible en móvil, oculta en md+) -->
+    <!-- <div class="grid grid-cols-1 gap-4 md:hidden p-4">
+    @for (item of listDiscPerCar(); track item.disc.id) {
+      <div class="bg-slate-800 border-l-4 border-blue-500 p-4 rounded-lg shadow-md flex flex-col gap-2">
+        <div class="flex justify-between items-center border-b border-slate-700 pb-2">
+          <span class="font-bold text-lg text-white">{{ item.car.model }}</span>
+          <span class="badge badge-primary"></span>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-y-2 text-sm">
+          <span class="text-slate-400 uppercase font-bold text-[10px]">Diámetro:</span>
+          <span class="text-right text-white">{{ item.disc.diameter }} mm</span>
+          
+          <span class="text-slate-400 uppercase font-bold text-[10px]">Grosor:</span>
+          <span class="text-right text-white">{{ item.disc.thickness }} mm</span>
+        </div>
+        
+        <button class="btn btn-sm btn-outline btn-info mt-2">Ver detalles</button>
+      </div>
+    }
+  </div> -->
   </div>
 }
