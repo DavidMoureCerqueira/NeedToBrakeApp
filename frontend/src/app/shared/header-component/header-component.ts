@@ -11,7 +11,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
-  imageLogoPath: string = 'images/logo.sf.png';
+  imageLogoPath: string = 'images/logo.sf.webp';
 
   private router = inject(Router);
   authService = inject(AuthService);
