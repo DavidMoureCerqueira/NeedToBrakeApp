@@ -15,11 +15,16 @@
     <button class="btn btn-secondary self-center" (click)="syncEmptyFields()">Igualar</button>
     <button class="btn btn-primary self-center" (click)="searchDiscs()">Buscar</button>
   </div>
-  <section class="overflow-y-scroll">
-    <list-disc
-      [listDiscPerCar]="listDiscCar()"
-      [isError]="isError()"
-      [isLoading]="isLoading()"
-    ></list-disc>
+
+  <section class="overflow-y-scroll flex flex-col justify-center items-center flex-2">
+    @if (isLoading()) {
+      <span class="loading loading-spinner loading-lg"></span>
+    }
+    @if (isError()) {
+      <div class="alert alert-info mt-4">
+        <span>No se encontraron resultados para esta búsqueda.</span>
+      </div>
+    }
+    <list-disc [listDiscPerCar]="listDiscCar()"></list-disc>
   </section>
 </section>

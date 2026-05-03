@@ -45,7 +45,7 @@
 @layer base {
   /* Mapeamos tu objeto THEMES a CSS nativo */
   [data-theme='desired'] {
-    --color-border: 3px solid #1e3d3d;
+    --color-border: 3px solid #2b4f47;
     --color-bg-primary: #486a4e;
     --color-bg-secondary: #2b4f47;
     --color-inner-border: 1px solid #599351;
