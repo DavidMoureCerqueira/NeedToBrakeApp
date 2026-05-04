@@ -15,8 +15,10 @@ from repository.user_repository import (
     get_user_by_email,
     get_user_by_id,
     get_user_by_username,
+    set_avatar,
 )
 from models.models import (
+    ModelResp,
     RegisterData,
     SignInData,
     UserProfile,
@@ -62,8 +64,6 @@ def save_user(session: Session, login_data: RegisterData) -> ValidationModelResp
 def get_user_by_id_from_db(
     session: Session, user_id: int, user_auth: int
 ) -> UserProfile:
-    # TODO corregir cuando esta validado el isOwner
-
     user = get_user_by_id(user_id=user_id, session=session)
     if not user:
         raise WrongUserException()
@@ -78,6 +78,11 @@ def get_user_by_id_from_db(
         posts=posts_count,
         comments=comments_count
     )
+
+
+def set_avatar_to_user(session: Session, user_id: int, url: str) -> User:
+    set_avatar(session=session, user_id=user_id, url=url)
+    return ModelResp(success=True, data="Image saved correctly")
 
 
 def checkIfValidPassword(password: str) -> bool:

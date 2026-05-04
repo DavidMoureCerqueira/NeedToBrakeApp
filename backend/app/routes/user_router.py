@@ -16,6 +16,7 @@ from services.auth_service import get_authorization
 from services.user_service import (
     get_user_by_id_from_db,
     save_user,
+    set_avatar_to_user,
     singin_user,
 )
 from database import SessionDep
@@ -61,10 +62,10 @@ def get_my_profile(
     tags=["Sets an avatar for an user"],
 )
 def set_avatar_img(
-    Session: SessionDep,
+    session: SessionDep,
     file_envelop: UploadFile = Depends(validate_file),
-    # user_id: int = Depends(get_authorization),
+    user_id: int = Depends(get_authorization),
 ):
     url = upload_image(file=file_envelop.file)
-
-    return ModelResp(success=True, data=url)
+    response = set_avatar_to_user(session=session, user_id=user_id, url=url)
+    return response

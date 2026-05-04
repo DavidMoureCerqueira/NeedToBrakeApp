@@ -1,6 +1,17 @@
 import { HttpClient, HttpContext } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
-import { catchError, map, tap, throwError, Observable } from 'rxjs';
+import { inject, Injectable, signal } from '@angular/core';
+import {
+  catchError,
+  map,
+  tap,
+  throwError,
+  Observable,
+  firstValueFrom,
+  of,
+  EMPTY,
+  filter,
+  first,
+} from 'rxjs';
 import { ModelRespComplete } from '../interfaces/database.responses/modelResp';
 import { REQUIRES_AUTH } from '../auth/auth.context';
 import { Profile } from '../interfaces/users/profile';
@@ -11,6 +22,8 @@ import { ProfileFromDatabase } from '../interfaces/database.responses/profile.fr
 import { Garage } from '../interfaces/cars/garage';
 import { mapGarageDatabaseToGarageArray } from '../mappers/mapGarageDatabaseToGarage';
 import { VersionForDatabase } from '../interfaces/database.request/version.for.database';
+import { UserFromDatabase } from '../interfaces/database.responses/user.from.database';
+import { rxResource, toObservable } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +32,22 @@ export class UserService {
   constructor() {}
   private URL = environment.apiUrl;
   private http = inject(HttpClient);
+  currentProfileId = signal<number | null>(null);
+  profileResource = rxResource({
+    params: () => ({ id: this.currentProfileId() }),
+    stream: ({ params }) => {
+      if (!params.id) return EMPTY;
+      return this.getProfile(params.id.toString());
+    },
+  });
 
+  getProfileResourceAsObservable(): Observable<Profile> {
+    return toObservable(this.profileResource.value).pipe(
+      filter((p): p is Profile => !!p),
+      first(),
+      catchError(() => EMPTY),
+    );
+  }
   getProfile(id: string): Observable<Profile> {
     console.log('Getting profile....');
 
@@ -102,5 +130,13 @@ export class UserService {
           return res.data;
         }),
       );
+  }
+  addAvatar(file: File): Observable<ModelRespComplete<string>> {
+    const URL = `${this.URL}/user/set-avatar`;
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.patch<ModelRespComplete<string>>(URL, formData, {
+      context: new HttpContext().set(REQUIRES_AUTH, true),
+    });
   }
 }

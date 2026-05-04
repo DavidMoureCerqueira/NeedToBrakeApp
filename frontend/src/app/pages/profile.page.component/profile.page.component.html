@@ -1,15 +1,19 @@
 <div
   class="flex flex-col gap-6 md:justify-evenly w-full max-w-7xl mx-auto my-auto h-auto md:h-[calc(100vh-220px)] bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 p-5 md:p-8 rounded-[4xl] md:rounded-[3rem] shadow-2xl overflow-y-auto md:overflow-hidden"
 >
-  <profile-card-component [profile]="this.profile()"></profile-card-component>
+  @if (userService.profileResource.value(); as profile) {
+    <profile-card-component [profile]="profile" />
 
-  <div class="flex flex-col md:flex-row gap-6 w-full items-stretch">
-    <div class="flex-1 min-w-0">
-      <garage-component class="h-full w-full" [id]="profile()!.id"></garage-component>
-    </div>
+    <div class="flex flex-col md:flex-row gap-6 w-full items-stretch">
+      <div class="flex-1 min-w-0">
+        <garage-component class="h-full w-full" [id]="profile.id"></garage-component>
+      </div>
 
-    <div class="flex-1 min-w-0">
-      <profile-post-component class="h-full w-full" [id]="profile()!.id"></profile-post-component>
+      <div class="flex-1 min-w-0">
+        <profile-post-component class="h-full w-full" [id]="profile.id"></profile-post-component>
+      </div>
     </div>
-  </div>
+  } @else {
+    <p>Error with profileResource</p>
+  }
 </div>

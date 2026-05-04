@@ -21,8 +21,12 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
         router.navigate(['/maintenance']);
       } else if (error.status === 401) {
         router.navigate(['/sign-in']);
+      } else if (error.status === 404) {
+        router.navigate(['/404']);
+      } else if (error.status === 403) {
+        router.navigate(['/forbidden']);
       }
-      // TODO: Añadir una ruta de 404
+
       return throwError(() => error);
     }),
   );

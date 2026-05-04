@@ -51,7 +51,7 @@ class InvalidPasswordException(NeedToBrakeException):
 
 class WrongUserException(NeedToBrakeException):
     def __init__(self):
-        super().__init__(f"User doesn't exist.", status.HTTP_403_FORBIDDEN)
+        super().__init__(f"User doesn't exist.", status.HTTP_404_NOT_FOUND)
 
 
 class WrongPasswordException(NeedToBrakeException):

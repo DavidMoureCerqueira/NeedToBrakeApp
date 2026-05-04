@@ -13,6 +13,8 @@ import { PostCreationPageComponent } from './pages/forum/post.creation.page.comp
 import path from 'path';
 import { PostDetailPageComponent } from './pages/forum/post.detail.page.component/post.detail.page.component';
 import { postResolver } from './resolver/post-resolver';
+import { NotFoundComponent } from './pages/not.found.page.component/not.found.page.component';
+import { ForbiddenPageComponent } from './pages/forbidden.page.component/forbidden.page.component';
 
 export const routes: Routes = [
   // 1. LANDING / HOME
@@ -101,6 +103,8 @@ export const routes: Routes = [
     component: MaintenancePageComponent,
     title: 'Maintenance - NeedToBrake',
   },
+  { path: '404', component: NotFoundComponent, title: '404 - NeedToBrake' },
+  { path: 'forbidden', component: ForbiddenPageComponent, title: 'Not allowed - NeedToBrake' },
   {
     path: '**',
     redirectTo: '',

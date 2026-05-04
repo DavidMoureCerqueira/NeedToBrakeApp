@@ -33,6 +33,13 @@
                 {{ post.title }}
               </p>
               <p class="text-[11px] text-zinc-500 font-bold uppercase mt-1">
+                @if (post.car) {
+                  {{ post.car | formatCar }}
+                } @else {
+                  No car related
+                }
+              </p>
+              <p class="text-[11px] text-zinc-500 font-bold uppercase mt-1">
                 {{ post.date | date: 'dd MMM yyyy' }}
               </p>
             </td>

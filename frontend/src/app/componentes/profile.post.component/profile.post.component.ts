@@ -13,10 +13,11 @@ import { DatePipe } from '@angular/common';
 import { PaginationComponent } from '../pagination.component/pagination.component';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { FormatCarPipe } from '../../pipes/format.car.pipe';
 
 @Component({
   selector: 'profile-post-component',
-  imports: [DatePipe, PaginationComponent, RouterLink],
+  imports: [DatePipe, PaginationComponent, RouterLink, FormatCarPipe],
   templateUrl: './profile.post.component.html',
   styleUrl: './profile.post.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

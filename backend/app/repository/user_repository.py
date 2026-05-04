@@ -24,3 +24,10 @@ def create_user(session: Session, user: User) -> User:
     session.commit()
     session.refresh(user)
     return user
+
+
+def set_avatar(session: Session, user_id: int, url: str):
+    user = get_user_by_id(session=session, user_id=user_id)
+    user.url_avatar = url
+    session.commit()
+    session.refresh(user)

@@ -1,4 +1,4 @@
-from fastapi import File, HTTPException, UploadFile, status
+from fastapi import File, UploadFile
 
 from exceptions import ImageTooLargeError, InvalidImageFormatError
 
@@ -8,7 +8,7 @@ ALLOWED_EXTENSIONS = {"image/jpeg", "image/png", "image/webp", "image/jpg"}
 
 
 async def validate_file(file: UploadFile = File(...)):
-    # 1. Validar extensión/tipo de archivo (Evita .exe, .pdf, etc.)
+
     if file.content_type not in ALLOWED_EXTENSIONS:
         raise InvalidImageFormatError(format=file.content_type)
 
