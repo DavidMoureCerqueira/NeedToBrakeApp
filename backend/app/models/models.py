@@ -176,7 +176,7 @@ class ItemsWithTotal(BaseModel, Generic[T]):
 
 
 class PaginationResponse(ItemsWithTotal):
-    pages: int = 0
+    pages: int = 1
     page: int = 1
     has_next: bool = False
 
@@ -206,10 +206,17 @@ class CommentModify(BaseModel):
     comment_id: int
 
 
-class PostReadDetail(PostBase):
+class PostReadList(PostBase):
     id: int
-    is_owner: Optional[bool] = False
     author: Optional[UserPublic] = None
     comment_count: Optional[int] = 0
+    model_config = {"from_attributes": True}
+
+
+class PostDetail(PostBase):
+    id: int
+    author: Optional[UserPublic] = None
+    comment_count: Optional[int] = 0
+    is_owner: Optional[bool] = False
     version: Optional[VersionRead] = None
     model_config = {"from_attributes": True}

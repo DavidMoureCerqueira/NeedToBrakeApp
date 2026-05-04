@@ -11,7 +11,7 @@ import { rxResource } from '@angular/core/rxjs-interop';
 import { UserService } from '../../services/user.service';
 import { FormatCarPipe } from '../../pipes/format.car.pipe';
 import { AuthService } from '../../services/auth.service';
-import { CarSelectorComponent } from '../../car.selector.component/car.selector.component';
+import { CarSelectorComponent } from '../car.selector.component/car.selector.component';
 
 @Component({
   selector: 'garage-component',
@@ -24,8 +24,8 @@ export class GarageComponent {
   id = input.required<number>();
   userService = inject(UserService);
   authService = inject(AuthService);
-  isOwner = signal<boolean>(false);
   isAddingNewCar = signal<boolean>(false);
+  isOwner = signal<boolean>(false);
   constructor() {
     effect(() => {
       const currentUserId = this.authService.currentUserId;

@@ -10,8 +10,8 @@ export function mapPostDetailDatabaseToPostDetail(post: PostDetailFromDatabase):
       content: post.content,
       date: post.date,
       author: {
-        id: post.author.id,
-        username: post.author.username,
+        id: post.author?.id,
+        username: post.author?.username,
       },
       commentCount: post.comment_count,
       isOwner: post.is_owner,
@@ -24,8 +24,8 @@ export function mapPostDetailDatabaseToPostDetail(post: PostDetailFromDatabase):
     content: post.content,
     date: post.date,
     author: {
-      id: post.author.id,
-      username: post.author.username,
+      id: post.author?.id,
+      username: post.author?.username,
     },
     commentCount: post.comment_count,
     isOwner: post.is_owner,

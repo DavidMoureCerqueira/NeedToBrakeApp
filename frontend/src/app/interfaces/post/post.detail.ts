@@ -8,9 +8,9 @@ export interface PostDetail {
   date: string;
   isOwner: boolean;
   commentCount: number;
-  author: {
-    id: number;
-    username: string;
+  author?: {
+    id: number | undefined;
+    username: string | undefined;
   };
   car?: CarClean;
 }

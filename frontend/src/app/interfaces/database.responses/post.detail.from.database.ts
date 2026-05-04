@@ -5,7 +5,7 @@ export interface PostDetailFromDatabase extends PostFromDatabase {
   // TODO actualizar cuando se implementen imagenes de perfil
   is_owner: boolean;
   comment_count: number;
-  author: {
+  author?: {
     id: number;
     username: string;
   };

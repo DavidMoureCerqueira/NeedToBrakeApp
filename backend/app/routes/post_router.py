@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, Query, Request, status
-from models.models import PostCreate, PostReadDetail
+from models.models import PaginationResponse, PostCreate, PostDetail, PostReadList
 from models.models import ModelResp
 from services.post_service import (
     get_post_by_id,
@@ -18,7 +18,6 @@ from services.user_service import (
     singin_user,
 )
 from database import SessionDep
-
 
 router = APIRouter()
 
@@ -53,7 +52,11 @@ def read_post_by_version(
     return ModelResp(success=True, data=posts_and_data)
 
 
-@router.get("/by-user/{user_id}", response_model=ModelResp, tags=["Get post by user"])
+@router.get(
+    "/by-user/{user_id}",
+    response_model=ModelResp[PaginationResponse[PostReadList]],
+    tags=["Get post by user"],
+)
 def read_post_by_user(
     session: SessionDep,
     user_id: int,
@@ -68,7 +71,7 @@ def read_post_by_user(
 
 @router.get(
     "/{post_id}",
-    response_model=ModelResp[PostReadDetail],
+    response_model=ModelResp[PostDetail],
     tags=["Get post by id with user and number of comments"],
 )
 def read_post_by_id(

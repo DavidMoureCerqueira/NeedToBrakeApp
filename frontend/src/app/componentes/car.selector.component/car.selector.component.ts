@@ -7,13 +7,14 @@ import {
   output,
   signal,
 } from '@angular/core';
-import { ItemDatalistCarselectorComponent } from '../componentes/item.datalist.carselector.component/item.datalist.carselector.component';
-import { Brand } from '../interfaces/cars/brand';
+
 import { rxResource } from '@angular/core/rxjs-interop';
 import { of } from 'rxjs';
-import { CascadeService } from '../services/cascade.service';
-import { FormatVersionPipe } from '../pipes/format.version.pipe';
-import { Version } from '../interfaces/cars/version';
+import { ItemDatalistCarselectorComponent } from '../item.datalist.carselector.component/item.datalist.carselector.component';
+import { FormatVersionPipe } from '../../pipes/format.version.pipe';
+import { CascadeService } from '../../services/cascade.service';
+import { Version } from '../../interfaces/cars/version';
+import { Brand } from '../../interfaces/cars/brand';
 
 @Component({
   selector: 'car-selector-component',

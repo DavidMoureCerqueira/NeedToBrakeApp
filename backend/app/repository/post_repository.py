@@ -1,10 +1,10 @@
-from typing import List
+from typing import List, Tuple
 
 from sqlmodel import Session, desc, func, select
 from sqlalchemy.orm import joinedload
 
-from models.models import ItemsWithTotal, PostReadDetail
-from models.table_models import Post
+from models.models import ItemsWithTotal, PostDetail
+from models.table_models import Comment, Post
 
 
 def create_post(session: Session, post: Post) -> Post:
@@ -20,9 +20,15 @@ def get_latest_post_by_user_and_version(
     user_id: int = None,
     offset: int = 0,
     limit: int = 10,
-) -> ItemsWithTotal:
-
-    stmt = select(Post)
+) -> Tuple[List[Tuple[Post, int]], int]:
+    comment_count_subquery = (
+        select(func.count(Comment.id))
+        .where(Comment.post_id == Post.id)
+        .scalar_subquery()
+    )
+    stmt = select(Post, comment_count_subquery.label("total_comments")).options(
+        joinedload(Post.author)
+    )
     if user_id:
         stmt = stmt.filter(Post.user_id == user_id)
     if version_id:
@@ -30,11 +36,11 @@ def get_latest_post_by_user_and_version(
 
     counted_stmt = select(func.count()).select_from(stmt.subquery())
     total_count = session.exec(counted_stmt).first() or 0
-    posts = session.exec(
+    results = session.exec(
         stmt.order_by(desc(Post.date)).offset(offset).limit(limit)
     ).all()
 
-    return ItemsWithTotal[Post](items=posts, total=total_count)
+    return results, total_count
 
 
 def get_post_by_id(session: Session, post_id: int):

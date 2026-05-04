@@ -20,6 +20,9 @@ import { REQUIRES_AUTH } from '../auth/auth.context';
 import { PostDetailFromDatabase } from '../interfaces/database.responses/post.detail.from.database';
 import { PostDetail } from '../interfaces/post/post.detail';
 import { mapPostDetailDatabaseToPostDetail } from '../mappers/mapPostDetailDatabaseToPostDetail';
+import { PostListDatabase } from '../interfaces/database.responses/post.list.from.database';
+import { PostList } from '../interfaces/post/post.list';
+import { mapPostListDatabaseToPostListArray } from '../mappers/mapPostListDatabaseToPostList';
 
 @Injectable({
   providedIn: 'root',
@@ -91,17 +94,17 @@ export class ForumService {
         }),
       );
   }
-  getLatestPostByUser(id: number, page: number = 1, limit = 5): Observable<Pagination<Post>> {
+  getLatestPostByUser(id: number, page: number = 1, limit = 5): Observable<Pagination<PostList>> {
     const URL = `${this.API_URL}/post/by-user/${id}`;
     const params = new HttpParams().set('page', page).set('limit', limit);
     return this.http
-      .get<ModelRespComplete<PaginatedDataDatabase<PostFromDatabase>>>(URL, { params })
+      .get<ModelRespComplete<PaginatedDataDatabase<PostListDatabase>>>(URL, { params })
       .pipe(
         map((res) => {
           if (!res.success || !res.data) {
             throw new Error(res.error);
           }
-          const mappedItems = mapPostDatabaseToPostArray(res.data.items);
+          const mappedItems = mapPostListDatabaseToPostListArray(res.data.items);
           const pagination = mapPaginationDatabaseToPagination(res.data);
 
           return { ...pagination, items: mappedItems };

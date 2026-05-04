@@ -3,13 +3,15 @@
 >
   <profile-card-component [profile]="this.profile()"></profile-card-component>
 
-  <div class="flex flex-col gap-6 md:flex-row w-full">
-    <div class="h-full w-full">
-      <garage-component class="h-full" [id]="profile()!.id"></garage-component>
+  <div class="flex flex-col md:flex-row gap-6 w-full items-stretch">
+    <!-- Columna 1 -->
+    <div class="flex-1 min-w-0">
+      <garage-component class="h-full w-full" [id]="profile()!.id"></garage-component>
     </div>
 
-    <div class="h-full w-full">
-      <profile-post-component class="h-full" [id]="profile()!.id"></profile-post-component>
+    <!-- Columna 2 -->
+    <div class="flex-1 min-w-0">
+      <profile-post-component class="h-full w-full" [id]="profile()!.id"></profile-post-component>
     </div>
   </div>
 </div>

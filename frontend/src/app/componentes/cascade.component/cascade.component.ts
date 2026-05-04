@@ -18,7 +18,7 @@ import { rxResource } from '@angular/core/rxjs-interop';
 import { of } from 'rxjs';
 import { FormatVersionPipe } from '../../pipes/format.version.pipe';
 import { DiscApiService } from '../../services/disc.api.service';
-import { CarSelectorComponent } from '../../car.selector.component/car.selector.component';
+import { CarSelectorComponent } from '../car.selector.component/car.selector.component';
 
 @Component({
   selector: 'cascade-component',

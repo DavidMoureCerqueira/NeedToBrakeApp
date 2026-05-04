@@ -14,7 +14,7 @@ from repository.post_repository import (
     get_latest_post_by_user_and_version,
     get_post_by_id_detailed,
 )
-from models.models import PostCreate, PaginationResponse, PostReadDetail
+from models.models import PostCreate, PaginationResponse, PostDetail, PostReadList
 
 
 def save_post(session: Session, post_data: PostCreate, user_id: int) -> Post:
@@ -35,21 +35,26 @@ def get_latest_post(
     limit: int = 10,
     version_id: int = None,
     user_id: int = None,
-) -> PaginationResponse:
+) -> PaginationResponse[PostReadList]:
     offset = (limit * page) - limit
 
-    posts_and_total = get_latest_post_by_user_and_version(
+    raw_post, total = get_latest_post_by_user_and_version(
         session=session,
         offset=offset,
         limit=limit,
         user_id=user_id,
         version_id=version_id,
     )
-    pages = math.ceil(posts_and_total.total / limit)
-
+    pages = math.ceil(total / limit)
+    posts = []
+    for post, count in raw_post:
+        post_with_count = PostReadList.model_validate(
+            post, update={"comment_count": count}
+        )
+        posts.append(post_with_count)
     return PaginationResponse(
-        items=posts_and_total.items,
-        total=posts_and_total.total,
+        items=posts,
+        total=total,
         pages=pages,
         page=page,
         has_next=pages > page,
@@ -78,12 +83,13 @@ def get_post_by_user(
     return get_latest_post(session=session, page=page, limit=limit, user_id=user_id)
 
 
-def get_post_by_id(session: Session, post_id: int, user_id: int) -> PostReadDetail:
+# COMPLETE
+def get_post_by_id(session: Session, post_id: int, user_id: int) -> PostDetail:
     post = get_post_by_id_detailed(session=session, post_id=post_id)
     if not post:
         raise PostDoesNotExistException()
     comment_count = get_number_comments(session=session, post_id=post_id)
-    post_detail = PostReadDetail.model_validate(post)
+    post_detail = PostDetail.model_validate(post)
     full_version = None
     if post.version_id:
         full_version = get_version_full(session=session, version_id=post.version_id)
