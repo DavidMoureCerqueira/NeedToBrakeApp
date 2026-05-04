@@ -40,10 +40,7 @@
       }
     </datalist>
   </div> -->
-  <car-selector-component
-    [brands]="brands()"
-    (idEmitter)="onVersionIDReceiver($event)"
-  ></car-selector-component>
+  <car-selector-component (idEmitter)="onVersionIDReceiver($event)"></car-selector-component>
   <div class="flex gap-4 items-center self-start">
     <label class="flex items-center gap-2 cursor-pointer">
       <input

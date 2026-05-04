@@ -33,7 +33,6 @@ export class CascadeComponent {
   disc = model<Disc>();
   cascadeService = inject(CascadeService);
   discApiService = inject(DiscApiService);
-  brands = signal<Brand[]>(this.cascadeService.brands());
   idVersion = signal<number | null>(null);
   position = signal<'front' | 'rear'>('front');
   discOptions = computed(() => this.discResource.value());

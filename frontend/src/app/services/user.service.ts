@@ -6,11 +6,11 @@ import { REQUIRES_AUTH } from '../auth/auth.context';
 import { Profile } from '../interfaces/users/profile';
 import { environment } from '../../environments/environment';
 import { mapProfileDatabaseToProfile } from '../mappers/mapProfileDataBaseToProfile';
-import { CarClean } from '../interfaces/cars/car';
 import { GarageDatabase } from '../interfaces/database.responses/garage.database';
 import { ProfileFromDatabase } from '../interfaces/database.responses/profile.from.database';
 import { Garage } from '../interfaces/cars/garage';
 import { mapGarageDatabaseToGarageArray } from '../mappers/mapGarageDatabaseToGarage';
+import { VersionForDatabase } from '../interfaces/database.request/version.for.database';
 
 @Injectable({
   providedIn: 'root',
@@ -55,6 +55,51 @@ export class UserService {
             throw new Error(res.error);
           }
           return mapGarageDatabaseToGarageArray(res.data);
+        }),
+      );
+  }
+  addCarGarage(id: number): Observable<Garage[]> {
+    const URL = `${this.URL}/garage/add`;
+    return this.http
+      .post<
+        ModelRespComplete<GarageDatabase[]>
+      >(URL, { version_id: id }, { context: new HttpContext().set(REQUIRES_AUTH, true) })
+      .pipe(
+        map((res) => {
+          if (!res.success || !res.data) {
+            throw new Error(res.error);
+          }
+          return mapGarageDatabaseToGarageArray(res.data);
+        }),
+      );
+  }
+  addCarFavourite(id: number): Observable<Garage[]> {
+    const URL = `${this.URL}/garage/set-favourite`;
+    return this.http
+      .patch<
+        ModelRespComplete<GarageDatabase[]>
+      >(URL, { version_id: id }, { context: new HttpContext().set(REQUIRES_AUTH, true) })
+      .pipe(
+        map((res) => {
+          if (!res.success || !res.data) {
+            throw new Error(res.error);
+          }
+          return mapGarageDatabaseToGarageArray(res.data);
+        }),
+      );
+  }
+  removeCarFavourite(): Observable<String> {
+    const URL = `${this.URL}/garage/unset-garage-fav`;
+    return this.http
+      .patch<
+        ModelRespComplete<String>
+      >(URL, {}, { context: new HttpContext().set(REQUIRES_AUTH, true) })
+      .pipe(
+        map((res) => {
+          if (!res.success || !res.data) {
+            throw new Error(res.error);
+          }
+          return res.data;
         }),
       );
   }

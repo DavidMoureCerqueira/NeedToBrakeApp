@@ -1,9 +1,10 @@
 @if (garageResource.isLoading()) {
-  <p>CARGANDOOOOOOOOOOOOOOO</p>
+  <div class="loading-spinner">CARGANDOOOOOOOOOOOOOOO</div>
 }
 @if (garageResource.error()) {
   <p>{{ garageResource.error()?.message }}</p>
 }
+
 <div
   class="flex flex-col border border-zinc-800 rounded-4xl overflow-hidden bg-zinc-950/40 min-h-0 shadow-lg"
 >
@@ -13,6 +14,7 @@
     >
       Vehicle Garage
     </div>
+
     @if (isOwner()) {
       <div class="col-start-1 row-start-1 h-full flex justify-end">
         <button
@@ -25,7 +27,21 @@
       </div>
     }
   </div>
-  <div class="flex-1 overflow-y-auto min-h-0 scrollbar-thin scrollbar-thumb-zinc-800">
+  <div
+    class="flex-1 overflow-y-auto md:max-h-[30vh] min-h-0 scrollbar-thin scrollbar-thumb-zinc-800"
+  >
+    <div class="relative">
+      @if (isAddingNewCar()) {
+        <div
+          class="flex flex-col gap-2 absolute top-full left-0 z-50 w-full max-w-lg bg-base-200 p-4 rounded-xl shadow-xl border border-white/5 animate-in slide-in-from-top-2 duration-200"
+        >
+          <car-selector-component
+            (idEmitter)="onVersionIdReceived($event)"
+          ></car-selector-component>
+          <button class="btn btn-error" (click)="isAddingNewCar.set(false)">Close</button>
+        </div>
+      }
+    </div>
     <table class="w-full border-collapse">
       <tbody class="divide-y divide-zinc-900/50">
         @for (item of garage(); track item.car.version.id) {
@@ -63,7 +79,7 @@
                 </svg>
               </td>
             } @else {
-              <td class="p-4 text-right pr-6 text-xl" (click)="addFavourite()">
+              <td class="p-4 text-right pr-6 text-xl" (click)="addFavourite(item.car.version.id)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                   <path
                     fill="none"

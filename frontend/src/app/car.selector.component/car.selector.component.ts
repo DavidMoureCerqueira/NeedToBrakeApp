@@ -28,7 +28,7 @@ export class CarSelectorComponent {
   formatVersion = inject(FormatVersionPipe);
   dataId = Math.random().toString(36).substring(2, 9);
 
-  brands = input.required<Brand[]>();
+  brands = signal<Brand[]>(this.cascadeService.brands());
   query = signal<string>('');
   selectedBrandId = signal<number | null>(null);
   selectedModelId = signal<number | null>(null);

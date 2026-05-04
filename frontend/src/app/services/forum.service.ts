@@ -91,4 +91,25 @@ export class ForumService {
         }),
       );
   }
+  getLatestPostByUser(id: number, page: number = 1, limit = 5): Observable<Pagination<Post>> {
+    const URL = `${this.API_URL}/post/by-user/${id}`;
+    const params = new HttpParams().set('page', page).set('limit', limit);
+    return this.http
+      .get<ModelRespComplete<PaginatedDataDatabase<PostFromDatabase>>>(URL, { params })
+      .pipe(
+        map((res) => {
+          if (!res.success || !res.data) {
+            throw new Error(res.error);
+          }
+          const mappedItems = mapPostDatabaseToPostArray(res.data.items);
+          const pagination = mapPaginationDatabaseToPagination(res.data);
+
+          return { ...pagination, items: mappedItems };
+        }),
+        catchError((err) => {
+          console.error('Error in serice', err);
+          return throwError(() => err);
+        }),
+      );
+  }
 }
