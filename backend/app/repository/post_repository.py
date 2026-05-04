@@ -4,7 +4,7 @@ from sqlmodel import Session, desc, func, select
 from sqlalchemy.orm import joinedload
 
 from models.models import ItemsWithTotal, PostDetail
-from models.table_models import Comment, Post
+from models.table_models import Comment, Model, Post, Version
 
 
 def create_post(session: Session, post: Post) -> Post:
@@ -27,8 +27,10 @@ def get_latest_post_by_user_and_version(
         .scalar_subquery()
     )
     stmt = select(Post, comment_count_subquery.label("total_comments")).options(
-        joinedload(Post.author)
+        joinedload(Post.author),
+        joinedload(Post.version).joinedload(Version.model).joinedload(Model.brand),
     )
+
     if user_id:
         stmt = stmt.filter(Post.user_id == user_id)
     if version_id:

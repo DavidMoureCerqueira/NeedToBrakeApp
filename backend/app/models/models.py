@@ -209,6 +209,7 @@ class CommentModify(BaseModel):
 class PostReadList(PostBase):
     id: int
     author: Optional[UserPublic] = None
+    version: Optional[VersionRead] = None
     comment_count: Optional[int] = 0
     model_config = {"from_attributes": True}
 

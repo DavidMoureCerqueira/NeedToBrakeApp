@@ -110,7 +110,7 @@ export class ForumService {
           return { ...pagination, items: mappedItems };
         }),
         catchError((err) => {
-          console.error('Error in serice', err);
+          console.error('Error in service', err);
           return throwError(() => err);
         }),
       );
