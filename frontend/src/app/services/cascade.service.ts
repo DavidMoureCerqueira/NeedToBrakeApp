@@ -1,8 +1,8 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Brand } from '../interfaces/cars/brand';
-import { map, Observable, tap } from 'rxjs';
+import { catchError, map, Observable, of, tap } from 'rxjs';
 import { Model } from '../interfaces/cars/model';
 import { ModelDatabase } from '../interfaces/database.responses/model.database';
 import { mapModelDatabaseToModelArray } from '../mappers/mapModelDatabaseToModel';
@@ -17,10 +17,17 @@ export class CascadeService {
   constructor() {}
   private API_URL = environment.apiUrl;
   private http = inject(HttpClient);
+  brands = signal<Brand[]>([]);
 
   getBrands(): Observable<Brand[]> {
     const URL = `${this.API_URL}/cascade/brands`;
-    return this.http.get<Brand[]>(URL).pipe(tap((data) => console.log(data)));
+    return this.http.get<Brand[]>(URL).pipe(
+      tap((data) => this.brands.set(data)),
+      catchError((err) => {
+        console.error('Error loading brands', err);
+        return of([]);
+      }),
+    );
   }
   getModels(id: number): Observable<Model[]> {
     const URL = `${this.API_URL}/cascade/models/${id}`;

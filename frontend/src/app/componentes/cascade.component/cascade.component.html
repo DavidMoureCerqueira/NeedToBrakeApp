@@ -1,0 +1,68 @@
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3 disc-container">
+  <div class="form-control w-full">
+    <label class="label py-1">
+      <span class="label-text font-bold">Brand</span>
+    </label>
+
+    <item-datalist-carselector-component
+      [items]="brands()"
+      (idEmitter)="onSelectedBrand($event)"
+    ></item-datalist-carselector-component>
+  </div>
+
+  <div class="form-control w-full">
+    <label class="label py-1">
+      <span class="label-text font-bold">Model</span>
+    </label>
+    <item-datalist-carselector-component
+      [items]="models()"
+      (idEmitter)="onSelectedModel($event)"
+    ></item-datalist-carselector-component>
+  </div>
+
+  <div class="form-control w-full">
+    <label class="label py-1">
+      <span class="label-text font-bold">Version</span>
+    </label>
+    <input
+      class="disc-input w-full focus:input-primary"
+      type="text"
+      placeholder="Type to search..."
+      [attr.list]="dataId"
+      (input)="onSearchInput($event)"
+      (change)="onSelectVersion($event)"
+      (keyup.enter)="onEnterPressed($event)"
+      [class.valid]="!!version()"
+    />
+    <datalist [id]="dataId">
+      @for (version of versions(); track version.id) {
+        <option [value]="version | formatVersion"></option>
+      }
+    </datalist>
+  </div>
+  <div class="flex gap-4 items-center">
+    <label class="flex items-center gap-2 cursor-pointer">
+      <input
+        type="checkbox"
+        class="checkbox checkbox-primary"
+        required
+        [checked]="position() === 'front'"
+        (click)="$event.stopPropagation(); togglePosition('front')"
+        (change)="$event.target.checked = position() === 'front'"
+      />
+      <span class="text-sm">Front</span>
+    </label>
+
+    <label class="flex items-center gap-2 cursor-pointer">
+      <input
+        type="checkbox"
+        class="checkbox checkbox-primary"
+        required
+        [checked]="position() === 'rear'"
+        (click)="$event.stopPropagation(); togglePosition('rear')"
+        (change)="$event.target.checked = position() === 'rear'"
+      />
+      <span class="text-sm">Rear</span>
+    </label>
+  </div>
+</div>

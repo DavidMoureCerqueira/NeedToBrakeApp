@@ -16,9 +16,12 @@ export class SelectDiscPageComponent {
   imageLogoPath: string = 'images/logo.sf.png';
   discService = inject(DiscoService);
   discApiService = inject(DiscApiService);
+
   desiredDisc = signal<Disc>({} as Disc);
   existingDisc = signal<Disc>({} as Disc);
+
   listDiscCar = signal<CarDisc[] | []>([]);
+
   isLoading = signal<boolean>(false);
   isError = signal<boolean>(false);
 

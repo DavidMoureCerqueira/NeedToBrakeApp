@@ -33,4 +33,10 @@ export class DiscApiService {
     const url = `${API_URL}/disc/${id}`;
     return this.http.get<DiscDatabase>(url).pipe(map((resp) => mapDiscDatabaseToDisc(resp)));
   }
+  getDiscsByVersionID(id: number): Observable<CarDisc[]> {
+    const url = `${API_URL}/parent-selector/disc-by-version/${id}`;
+    return this.http
+      .get<CarsDiscDatabase[]>(url)
+      .pipe(map((res) => mapperCarDiscDatabaseToCarDiscArray(res)));
+  }
 }

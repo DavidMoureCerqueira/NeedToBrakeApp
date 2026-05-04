@@ -2,13 +2,13 @@
   <data-ilustration-component
     [title]="'Actual Disc'"
     [themeName]="'current'"
-    (discEmitter)="receiveExistingDisc($event)"
+    [(disc)]="existingDisc"
   ></data-ilustration-component>
+
   <data-ilustration-component
     [title]="'Desired Disc'"
     [themeName]="'desired'"
-    (discEmitter)="receiveDesiredDisc($event)"
-    [modifiedDisc]="desiredDisc()"
+    [(disc)]="desiredDisc"
   ></data-ilustration-component>
 
   <div class="flex flex-row flex-wrap justify-evenly items-center">

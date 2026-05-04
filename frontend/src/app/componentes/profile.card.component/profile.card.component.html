@@ -1,104 +1,86 @@
-<div
-  class="relative flex flex-col w-full max-w-7xl mx-auto my-auto h-auto md:h-[calc(100vh-220px)] bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50 p-5 md:p-8 rounded-[4xl] md:rounded-[3rem] shadow-2xl overflow-y-auto md:overflow-hidden"
->
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 h-full min-h-0 items-stretch">
-    <div class="flex justify-center items-center min-h-0 py-4 md:py-0">
-      <img
-        class="w-32 h-32 md:w-48 lg:w-64 aspect-square rounded-full object-cover shadow-2xl border-4 border-zinc-800 shrink-0"
-        src="images/profile_image.webp"
-        alt="Avatar"
-      />
-    </div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 h-full min-h-0 items-stretch">
+  <div class="flex justify-center items-center min-h-0 py-4 md:py-0">
+    <img
+      class="w-32 h-32 md:w-48 lg:w-64 aspect-square rounded-full object-cover shadow-2xl border-4 border-zinc-800 shrink-0"
+      src="images/profile_image.webp"
+      alt="Avatar"
+    />
+  </div>
 
-    <div
-      class="bg-zinc-950/40 p-6 md:p-8 rounded-[4xl] border border-zinc-800/60 flex flex-col justify-between shadow-inner min-h-0"
-    >
-      <div class="flex justify-between items-center">
-        <div class="min-w-0">
-          <h2
-            class="text-2xl md:text-3xl lg:text-4xl font-black text-white uppercase italic tracking-tighter truncate"
-          >
-            {{ this.profile()?.username }}
-          </h2>
-          @if (this.profile()?.favPads) {
-            <p class="text-red-600 text-xs font-black tracking-[0.3em] uppercase">
-              {{ this.profile()?.favPads }}
-            </p>
-          } @else {
-            <button
-              class="flex items-center gap-2 text-zinc-400 hover:text-red-500 transition-colors text-xs italic"
-            >
-              <span>⚠️ UNSET</span>
-            </button>
-          }
-        </div>
-
-        <div
-          class="flex flex-col items-center justify-center bg-zinc-800 border-2 border-zinc-700 px-4 py-2 rounded-2xl shadow-[0_4px_0_0_rgba(0,0,0,0.5)] shrink-0 ml-4"
+  <div
+    class="bg-zinc-950/40 p-6 md:p-8 rounded-[4xl] border border-zinc-800/60 flex flex-col justify-between shadow-inner min-h-0"
+  >
+    <div class="flex justify-between items-center">
+      <div class="min-w-0">
+        <h2
+          class="text-2xl md:text-3xl lg:text-4xl font-black text-white uppercase italic tracking-tighter truncate"
         >
-          <span class="text-xl md:text-2xl">🇪🇸</span>
-          <span class="text-[10px] font-black text-zinc-300">ES</span>
-        </div>
+          {{ this.profile()?.username }}
+        </h2>
+        @if (this.profile()?.favPads) {
+          <p class="text-red-600 text-xs font-black tracking-[0.3em] uppercase">
+            {{ this.profile()?.favPads }}
+          </p>
+        } @else {
+          <button
+            class="flex items-center gap-2 text-zinc-400 hover:text-red-500 transition-colors text-xs italic"
+          >
+            <span>⚠️ UNSET</span>
+          </button>
+        }
       </div>
 
-      <div class="grid grid-cols-2 gap-4 my-6">
-        <div class="border-l-4 border-zinc-800 pl-4">
-          <span
-            class="text-[10px] md:text-[11px] text-zinc-500 uppercase font-black tracking-widest"
-            >Email</span
-          >
-          <span class="text-sm md:text-base lg:text-lg text-zinc-200 block truncate font-bold">
-            {{ this.profile()?.isOwner ? this.profile()?.email : '******@ntb.com' }}
-          </span>
-        </div>
-        <div class="border-l-4 border-zinc-800 pl-4">
-          <span
-            class="text-[10px] md:text-[11px] text-zinc-500 uppercase font-black tracking-widest"
-            >Location</span
-          >
-          @if (this.profile()?.city) {}
-          <span class="text-sm md:text-base lg:text-lg text-zinc-200 block font-bold"
-            >Barcelona</span
-          >
-        </div>
-        <div class="border-l-4 border-red-900/50 pl-4">
-          <span
-            class="text-[10px] md:text-[11px] text-zinc-500 uppercase font-black tracking-widest"
-            >Fav Pads</span
-          >
-          <span class="text-sm md:text-base lg:text-lg text-zinc-200 italic block font-bold"
-            >EBC Yellow</span
-          >
-        </div>
-        <div class="border-l-4 border-zinc-800 pl-4">
-          <span
-            class="text-[10px] md:text-[11px] text-zinc-500 uppercase font-black tracking-widest"
-            >Exp</span
-          >
-          <span class="text-sm md:text-base lg:text-lg text-zinc-200 block font-bold">8 Years</span>
-        </div>
-      </div>
-
-      <div class="flex gap-4">
-        <div
-          class="bg-red-950/30 px-5 py-2 rounded-full border border-red-900/40 text-[10px] text-red-400 font-black uppercase tracking-widest"
-        >
-          🏎️ 4 Cars
-        </div>
-        <div
-          class="bg-zinc-800/60 px-5 py-2 rounded-full border border-zinc-700 text-[10px] text-zinc-300 font-black uppercase tracking-widest"
-        >
-          📝 15 Posts
-        </div>
+      <div
+        class="flex flex-col items-center justify-center bg-zinc-800 border-2 border-zinc-700 px-4 py-2 rounded-2xl shadow-[0_4px_0_0_rgba(0,0,0,0.5)] shrink-0 ml-4"
+      >
+        <span class="text-xl md:text-2xl">🇪🇸</span>
+        <span class="text-[10px] font-black text-zinc-300">ES</span>
       </div>
     </div>
 
-    <div class="min-h-62.5 md:min-h-0 h-full">
-      <garage-component class="h-full"></garage-component>
+    <div class="grid grid-cols-2 gap-4 my-6">
+      <div class="border-l-4 border-zinc-800 pl-4">
+        <span class="text-[10px] md:text-[11px] text-zinc-500 uppercase font-black tracking-widest"
+          >Email</span
+        >
+        <span class="text-sm md:text-base lg:text-lg text-zinc-200 block truncate font-bold">
+          {{ this.profile()?.isOwner ? this.profile()?.email : '******@ntb.com' }}
+        </span>
+      </div>
+      <div class="border-l-4 border-zinc-800 pl-4">
+        <span class="text-[10px] md:text-[11px] text-zinc-500 uppercase font-black tracking-widest"
+          >Location</span
+        >
+        @if (this.profile()?.city) {}
+        <span class="text-sm md:text-base lg:text-lg text-zinc-200 block font-bold">Barcelona</span>
+      </div>
+      <div class="border-l-4 border-red-900/50 pl-4">
+        <span class="text-[10px] md:text-[11px] text-zinc-500 uppercase font-black tracking-widest"
+          >Fav Pads</span
+        >
+        <span class="text-sm md:text-base lg:text-lg text-zinc-200 italic block font-bold"
+          >EBC Yellow</span
+        >
+      </div>
+      <div class="border-l-4 border-zinc-800 pl-4">
+        <span class="text-[10px] md:text-[11px] text-zinc-500 uppercase font-black tracking-widest"
+          >Exp</span
+        >
+        <span class="text-sm md:text-base lg:text-lg text-zinc-200 block font-bold">8 Years</span>
+      </div>
     </div>
 
-    <div class="min-h-62.5 md:min-h-0 h-full">
-      <profile-post-component class="h-full"></profile-post-component>
+    <div class="flex gap-4">
+      <div
+        class="bg-red-950/30 px-5 py-2 rounded-full border border-red-900/40 text-[10px] text-red-400 font-black uppercase tracking-widest"
+      >
+        🏎️ 4 Cars
+      </div>
+      <div
+        class="bg-zinc-800/60 px-5 py-2 rounded-full border border-zinc-700 text-[10px] text-zinc-300 font-black uppercase tracking-widest"
+      >
+        📝 15 Posts
+      </div>
     </div>
   </div>
 </div>

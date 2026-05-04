@@ -1,5 +1,7 @@
 import {
   ApplicationConfig,
+  inject,
+  provideAppInitializer,
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection,
 } from '@angular/core';
@@ -9,6 +11,7 @@ import { routes } from './app.routes';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './interceptor/auth-interceptor';
 import { errorInterceptor } from './interceptor/error-interceptor';
+import { CascadeService } from './services/cascade.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,5 +23,9 @@ export const appConfig: ApplicationConfig = {
       withRouterConfig({ onSameUrlNavigation: 'reload' }),
     ),
     provideHttpClient(withFetch(), withInterceptors([authInterceptor, errorInterceptor])),
+    provideAppInitializer(() => {
+      const cascadeService = inject(CascadeService);
+      return cascadeService.getBrands();
+    }),
   ],
 };

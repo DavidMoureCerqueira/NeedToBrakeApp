@@ -1,4 +1,4 @@
-import { ProfileFromDatabase } from '../interfaces/database.responses/profile.from.dataBase';
+import { ProfileFromDatabase } from '../interfaces/database.responses/profile.from.database';
 import { Profile } from '../interfaces/users/profile';
 export function mapProfileDatabaseToProfile(user: ProfileFromDatabase): Profile {
   return {

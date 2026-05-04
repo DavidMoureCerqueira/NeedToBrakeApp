@@ -5,8 +5,12 @@ import { ModelRespComplete } from '../interfaces/database.responses/modelResp';
 import { REQUIRES_AUTH } from '../auth/auth.context';
 import { Profile } from '../interfaces/users/profile';
 import { environment } from '../../environments/environment';
-import { ProfileFromDatabase } from '../interfaces/database.responses/profile.from.dataBase';
 import { mapProfileDatabaseToProfile } from '../mappers/mapProfileDataBaseToProfile';
+import { CarClean } from '../interfaces/cars/car';
+import { GarageDatabase } from '../interfaces/database.responses/garage.database';
+import { ProfileFromDatabase } from '../interfaces/database.responses/profile.from.database';
+import { Garage } from '../interfaces/cars/garage';
+import { mapGarageDatabaseToGarageArray } from '../mappers/mapGarageDatabaseToGarage';
 
 @Injectable({
   providedIn: 'root',
@@ -36,6 +40,21 @@ export class UserService {
         catchError((err) => {
           console.error('Error in service', err);
           return throwError(() => err);
+        }),
+      );
+  }
+  getGarage(id: number): Observable<Garage[]> {
+    const URL = `${this.URL}/garage/get-all-garage/${id}`;
+    return this.http
+      .get<ModelRespComplete<GarageDatabase[]>>(URL, {
+        context: new HttpContext().set(REQUIRES_AUTH, true),
+      })
+      .pipe(
+        map((res) => {
+          if (!res.success || !res.data) {
+            throw new Error(res.error);
+          }
+          return mapGarageDatabaseToGarageArray(res.data);
         }),
       );
   }

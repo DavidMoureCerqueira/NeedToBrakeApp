@@ -4,116 +4,26 @@
 
     <button (click)="clearFields()">Reset</button>
   </div>
-  <div class="disc-container">
-    <div class="disc-item">
-      <label for="diameter">Diameter</label>
-      <input
-        id="diameter"
-        type="number"
-        class="disc-input"
-        placeholder="Medida A"
-        [value]="disc().diameter || ''"
-        [class.valid]="!!disc().diameter"
-        (input)="updateDisc('diameter', $event.target.value)"
-      />
-    </div>
-    <div class="disc-item">
-      <label for="height">Height</label>
-      <input
-        id="height"
-        type="number"
-        class="disc-input"
-        placeholder="Medida B"
-        [value]="disc().height || ''"
-        [class.valid]="!!disc().height"
-        (input)="updateDisc('height', $event.target.value)"
-      />
-    </div>
-
-    <div class="disc-item">
-      <label for="thickness">Thickness</label>
-      <input
-        id="thickness"
-        type="number"
-        class="disc-input"
-        placeholder="Medida D"
-        [value]="disc().thickness || ''"
-        [class.valid]="!!disc().thickness"
-        (input)="updateDisc('thickness', $event.target.value)"
-      />
-    </div>
-
-    <div class="disc-item">
-      <label for="pcd">Bolt pattern</label>
-      <input
-        id="pcd"
-        type="number"
-        class="disc-input"
-        placeholder="Medida E"
-        [value]="disc().pcd || ''"
-        [class.valid]="!!disc().pcd"
-        (input)="updateDisc('pcd', $event.target.value)"
-      />
-    </div>
-
-    <div class="disc-item">
-      <label for="Agujeros">Nº Holes</label>
-      <input
-        id="Agujeros"
-        type="number"
-        class="disc-input"
-        placeholder="Medida F"
-        [value]="disc().holes || ''"
-        [class.valid]="!!disc().holes"
-        (input)="updateDisc('holes', $event.target.value)"
-      />
-    </div>
-
-    <div class="disc-item">
-      <label for="Buje">Ø Centerbore</label>
-      <input
-        id="Buje"
-        type="number"
-        placeholder="Medida G"
-        class="disc-input"
-        [value]="disc().centerBore || ''"
-        [class.valid]="!!disc().centerBore"
-        (input)="updateDisc('centerBore', $event.target.value)"
-      />
-    </div>
-    <div class="disc-item">
-      <label for="position">Position</label>
-      <select
-        #pos
-        name="position"
-        id="position"
-        placeholder="Position"
-        class="disc-input"
-        [value]="disc().position || ''"
-        [class.valid]="!!disc().position"
-        (change)="updateDisc('position', pos.value)"
-      >
-        <option selected value="">Position</option>
-        <option value="front">Front</option>
-        <option value="rear">Rear</option>
-      </select>
-    </div>
-    <div class="disc-item">
-      <label for="style">Style</label>
-      <select
-        #style
-        name="style"
-        id="style"
-        placeholder="Style"
-        class="disc-input"
-        [value]="disc().style || ''"
-        [class.valid]="!!disc().style"
-        (change)="updateDisc('style', style.value)"
-      >
-        <option selected value="">Style</option>
-        <option value="vented">Vented</option>
-        <option value="solid">Solid</option>
-      </select>
-    </div>
+  <div class="disc-selector">
+    <button
+      (click)="toggleMode(SEARCH_MODES.CAR)"
+      [class.active]="searchMode() === SEARCH_MODES.CAR"
+    >
+      {{ SEARCH_MODES.CAR }}
+    </button>
+    <button
+      (click)="toggleMode(SEARCH_MODES.DISC)"
+      [class.active]="searchMode() === SEARCH_MODES.DISC"
+    >
+      {{ SEARCH_MODES.DISC }}
+    </button>
   </div>
+  @switch (searchMode()) {
+    @case (SEARCH_MODES.CAR) {
+      <cascade-component [(disc)]="disc" [theme]="themeName()"></cascade-component>
+    }
+    @case (SEARCH_MODES.DISC) {
+      <measurement-component [(disc)]="disc"></measurement-component>
+    }
+  }
 </section>

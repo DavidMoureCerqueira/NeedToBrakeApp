@@ -14,7 +14,6 @@ from services.garage_service import (
 )
 from models.models import GarageData, ModelResp, UserVersionGarageRead
 
-
 router = APIRouter()
 
 
@@ -33,7 +32,7 @@ def add_garage(
     return ModelResp(success=True, data=data)
 
 
-@router.put(
+@router.patch(
     "/set-favourite",
     response_model=ModelResp[List[UserVersionGarageRead]],
     tags=["Set a garage item as favourite"],
@@ -65,7 +64,7 @@ def remove_garage_item(
     return ModelResp(success=True, data=result)
 
 
-@router.put(
+@router.patch(
     "/unset-garage-fav",
     response_model=ModelResp[str],
     tags=["Deletes an item from garage"],
@@ -79,10 +78,12 @@ def remove_garage_fav(
 
 
 @router.get(
-    "/get-all-garage",
+    "/get-all-garage/{user_id}",
     response_model=ModelResp[List[UserVersionGarageRead]],
     tags=["Get all garage items for a user"],
 )
-def get_garage(session: SessionDep, user_id: int = Depends(get_authorization)):
+def get_garage(
+    session: SessionDep, user_id: int, user_auth: int = Depends(get_authorization)
+):
     data = get_garage_by_user(session=session, user_id=user_id)
     return ModelResp(success=True, data=data)

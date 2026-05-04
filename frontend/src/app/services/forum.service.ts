@@ -36,7 +36,6 @@ export class ForumService {
     return this.http
       .get<ModelRespComplete<PaginatedDataDatabase<PostFromDatabase>>>(URL, { params })
       .pipe(
-        tap((res) => console.log(res)),
         map((res) => {
           if (!res.success || !res.data) {
             throw new Error(res.error);

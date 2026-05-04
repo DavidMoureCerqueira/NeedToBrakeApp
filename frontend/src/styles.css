@@ -17,29 +17,29 @@
 
 /* 2. Estilo personalizado para el Snackbar de Error */
 .error-snackbar {
-  background-color: #18181b !important; /* zinc-900 */
-  color: #ffffff !important;
-  border-left: 5px solid #dc2626 !important; /* Rojo intenso */
-  border-radius: 8px !important;
-  padding: 0.75rem 1.25rem !important;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5) !important;
+  background-color: #18181b; /* zinc-900 */
+  color: #ffffff;
+  border-left: 5px solid #dc2626; /* Rojo intenso */
+  border-radius: 8px;
+  padding: 0.75rem 1.25rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
   font-family: 'Inter', sans-serif; /* O la que estés usando */
 }
 
 /* Estilo para el botón "CERRAR" */
 .error-snackbar .mat-mdc-snack-bar-action button {
-  color: #ef4444 !important; /* rojo-500 */
-  font-weight: 800 !important;
+  color: #ef4444; /* rojo-500 */
+  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 /* 3. Estilo para el Snackbar de Éxito (opcional) */
 .success-snackbar {
-  background-color: #18181b !important;
-  color: #ffffff !important;
-  border-left: 5px solid #16a34a !important; /* Verde */
-  border-radius: 8px !important;
+  background-color: #18181b;
+  color: #ffffff;
+  border-left: 5px solid #16a34a; /* Verde */
+  border-radius: 8px;
 }
 
 @layer base {
@@ -62,7 +62,9 @@
     color-scheme: dark;
   }
 }
-
+* {
+  --fav-color: #e4f70a;
+}
 @layer components {
   .disc-section {
     background-color: var(--color-bg-secondary);
@@ -103,14 +105,12 @@
     color: var(--color-text);
   }
 
-  /* Estilo unificado para Input y Select */
   .disc-input::-webkit-outer-spin-button,
   .disc-input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
 
-  /* Quitar flechas en Firefox */
   .disc-input[type='number'] {
     -moz-appearance: textfield;
     appearance: textfield; /* Para navegadores modernos */
@@ -127,7 +127,6 @@
     @apply ring-1 ring-white/20;
   }
 
-  /* Para arreglar el fondo blanco del select */
   .disc-input option {
     background-color: var(--color-bg-secondary);
     color: var(--color-text);
@@ -135,5 +134,24 @@
 
   .valid {
     border: var(--color-inner-border);
+  }
+  .disc-selector {
+    border-bottom: var(--color-inner-border);
+    @apply flex w-full;
+  }
+
+  .disc-selector button {
+    background-color: transparent;
+    color: var(--color-text);
+    /* flex-1 hace que ocupen todo el ancho disponible por igual */
+    @apply flex-1 py-2 text-xs font-bold uppercase tracking-widest transition-all;
+    @apply hover:bg-white/5 active:bg-white/10 cursor-pointer;
+  }
+
+  /* Clase opcional para marcar cuál está activo */
+  .disc-selector button.active {
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: inset 0 -2px 0 0 var(--color-text); /* Línea indicadora opcional */
+    @apply opacity-100;
   }
 }

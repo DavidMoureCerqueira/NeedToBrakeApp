@@ -1,0 +1,15 @@
+<input
+  class="disc-input w-full focus:input-primary"
+  type="text"
+  placeholder="Type to search..."
+  [attr.list]="dataId"
+  (input)="onSearchInput($event)"
+  (change)="onSelectOption($event)"
+  [class.valid]="isValid()"
+  (keyup.enter)="onEnterPressed($event)"
+/>
+<datalist [id]="dataId">
+  @for (item of items(); track item.id) {
+    <option [value]="item.name"></option>
+  }
+</datalist>
