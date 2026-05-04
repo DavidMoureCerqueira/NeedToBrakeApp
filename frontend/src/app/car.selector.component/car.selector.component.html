@@ -1,5 +1,5 @@
-<div class="flex flex-col gap-3 disc-container">
-  <!-- <div class="form-control w-full">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+  <div class="form-control w-full">
     <label class="label py-1">
       <span class="label-text font-bold">Brand</span>
     </label>
@@ -39,34 +39,5 @@
         <option [value]="version | formatVersion"></option>
       }
     </datalist>
-  </div> -->
-  <car-selector-component
-    [brands]="brands()"
-    (idEmitter)="onVersionIDReceiver($event)"
-  ></car-selector-component>
-  <div class="flex gap-4 items-center self-start">
-    <label class="flex items-center gap-2 cursor-pointer">
-      <input
-        type="checkbox"
-        class="checkbox checkbox-primary"
-        required
-        [checked]="position() === 'front'"
-        (click)="$event.stopPropagation(); togglePosition('front')"
-        (change)="$event.target.checked = position() === 'front'"
-      />
-      <span class="text-sm">Front</span>
-    </label>
-
-    <label class="flex items-center gap-2 cursor-pointer">
-      <input
-        type="checkbox"
-        class="checkbox checkbox-primary"
-        required
-        [checked]="position() === 'rear'"
-        (click)="$event.stopPropagation(); togglePosition('rear')"
-        (change)="$event.target.checked = position() === 'rear'"
-      />
-      <span class="text-sm">Rear</span>
-    </label>
   </div>
 </div>
