@@ -16,9 +16,11 @@ from repository.user_repository import (
     get_user_by_id,
     get_user_by_username,
     set_avatar,
+    update_user,
 )
 from models.models import (
     ModelResp,
+    ProfileEdit,
     RegisterData,
     SignInData,
     UserProfile,
@@ -83,6 +85,11 @@ def get_user_by_id_from_db(
 def set_avatar_to_user(session: Session, user_id: int, url: str) -> User:
     set_avatar(session=session, user_id=user_id, url=url)
     return ModelResp(success=True, data="Image saved correctly")
+
+
+def update_user_profile(session: Session, user_id: int, data: ProfileEdit):
+    update_user(session=session, user_id=user_id, data=data)
+    return ModelResp(success=True, data="Profile updated correctly")
 
 
 def checkIfValidPassword(password: str) -> bool:

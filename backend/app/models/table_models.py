@@ -40,7 +40,7 @@ class User(SQLModel, table=True):
     is_admin: bool = Field(default=False)
     is_active: bool = Field(default=True)
     country: str = Field(default="")
-    city: str = Field(default="")
+    flag: str = Field(default="")
     fav_circuit: str = Field(default="")
     fav_pads: str = Field(default="")
     url_avatar: str | None = Field(default=None)

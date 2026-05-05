@@ -5,7 +5,7 @@ export interface Profile {
   isAdmin: boolean;
   isOwner: boolean;
   country: string;
-  city: string;
+  flag: string;
   favCircuit: string;
   favPads: string;
   numCars: number;

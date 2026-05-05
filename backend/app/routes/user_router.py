@@ -4,6 +4,7 @@ from services.file_validator_service import validate_file
 from services.file_uploader_service import upload_image
 from models.models import (
     ModelResp,
+    ProfileEdit,
     RegisterData,
     SignInData,
     UserProfile,
@@ -18,6 +19,7 @@ from services.user_service import (
     save_user,
     set_avatar_to_user,
     singin_user,
+    update_user_profile,
 )
 from database import SessionDep
 
@@ -68,4 +70,15 @@ def set_avatar_img(
 ):
     url = upload_image(file=file_envelop.file)
     response = set_avatar_to_user(session=session, user_id=user_id, url=url)
+    return response
+
+
+@router.patch(
+    "/update-profile", response_model=ModelResp[str], tags=["Update an user profile"]
+)
+def update_profile(
+    session: SessionDep, data: ProfileEdit, user_id: int = Depends(get_authorization)
+):
+    print("flag", data)
+    response = update_user_profile(session=session, user_id=user_id, data=data)
     return response

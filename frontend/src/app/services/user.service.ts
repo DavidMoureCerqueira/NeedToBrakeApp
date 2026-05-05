@@ -1,17 +1,6 @@
-import { HttpClient, HttpContext } from '@angular/common/http';
+import { HttpClient, HttpContext, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import {
-  catchError,
-  map,
-  tap,
-  throwError,
-  Observable,
-  firstValueFrom,
-  of,
-  EMPTY,
-  filter,
-  first,
-} from 'rxjs';
+import { catchError, map, tap, throwError, Observable, EMPTY, filter, first } from 'rxjs';
 import { ModelRespComplete } from '../interfaces/database.responses/modelResp';
 import { REQUIRES_AUTH } from '../auth/auth.context';
 import { Profile } from '../interfaces/users/profile';
@@ -21,12 +10,12 @@ import { GarageDatabase } from '../interfaces/database.responses/garage.database
 import { ProfileFromDatabase } from '../interfaces/database.responses/profile.from.database';
 import { Garage } from '../interfaces/cars/garage';
 import { mapGarageDatabaseToGarageArray } from '../mappers/mapGarageDatabaseToGarage';
-import { VersionForDatabase } from '../interfaces/database.request/version.for.database';
-import { UserFromDatabase } from '../interfaces/database.responses/user.from.database';
 import { rxResource, toObservable } from '@angular/core/rxjs-interop';
 import { RestCountry } from '../interfaces/restCountry';
 import { Country } from '../interfaces/Country';
 import { mapResCountryToCountryArray } from '../mappers/mapRestCountryToCountry';
+import { ProfileEdit } from './../interfaces/users/profile.edit';
+import { mapProfileEditToProfileEditDatabase } from '../mappers/mapProfileToProfileDatabase';
 
 @Injectable({
   providedIn: 'root',
@@ -142,12 +131,32 @@ export class UserService {
       context: new HttpContext().set(REQUIRES_AUTH, true),
     });
   }
+  countriesResource = rxResource({
+    stream: () => this.getCountries(),
+  });
+
   getCountries(): Observable<Country[]> {
     return this.http
       .get<RestCountry[]>('https://restcountries.com/v3.1/all?fields=name,flags')
       .pipe(
         map((res) => {
           return mapResCountryToCountryArray(res);
+        }),
+      );
+  }
+  updateProfile(profileEdit: ProfileEdit): Observable<ModelRespComplete<string>> {
+    const URL = `${this.URL}/user/update-profile`;
+    const profileEditDatabase = mapProfileEditToProfileEditDatabase(profileEdit);
+    console.log(profileEditDatabase);
+    return this.http
+      .patch<ModelRespComplete<string>>(URL, profileEditDatabase, {
+        context: new HttpContext().set(REQUIRES_AUTH, true),
+      })
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          return throwError(
+            () => err.error.error || err.message || 'Unexpected error updating profile',
+          );
         }),
       );
   }

@@ -3,7 +3,7 @@ import { RestCountry } from '../interfaces/restCountry';
 
 export function mapRestCountryToCountry(restCountry: RestCountry): Country {
   return {
-    flags: restCountry.flags.svg,
+    flag: restCountry.flags.svg,
     name: restCountry.name.common,
   };
 }

@@ -152,7 +152,7 @@ class UserProfile(BaseModel):
     is_admin: bool
     is_owner: bool
     country: str = ""
-    city: str = ""
+    flag: str = ""
     fav_circuit: str = ""
     fav_pads: str = ""
     cars: int = 0
@@ -221,3 +221,10 @@ class PostDetail(PostBase):
     is_owner: Optional[bool] = False
     version: Optional[VersionRead] = None
     model_config = {"from_attributes": True}
+
+
+class ProfileEdit(SQLModel):
+    country: Optional[str] = ""
+    flag: Optional[str] = ""
+    fav_pads: Optional[str] = ""
+    fav_circuit: Optional[str] = ""

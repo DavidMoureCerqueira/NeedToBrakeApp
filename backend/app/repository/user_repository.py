@@ -1,6 +1,7 @@
 from pydantic import EmailStr
 from sqlmodel import Session, insert, select
 
+from models.models import ProfileEdit
 from models.table_models import User
 
 
@@ -29,5 +30,15 @@ def create_user(session: Session, user: User) -> User:
 def set_avatar(session: Session, user_id: int, url: str):
     user = get_user_by_id(session=session, user_id=user_id)
     user.url_avatar = url
+    session.commit()
+    session.refresh(user)
+
+
+def update_user(session: Session, user_id: int, data: ProfileEdit):
+    user = get_user_by_id(session=session, user_id=user_id)
+    user.country = data.country
+    user.flag = data.flag
+    user.fav_circuit = data.fav_circuit
+    user.fav_pads = data.fav_pads
     session.commit()
     session.refresh(user)

@@ -3,17 +3,19 @@ import { Profile } from '../../interfaces/users/profile';
 import { MAX_FILE_SIZE } from '../../interfaces/image.filter';
 import { ALLOWED_EXTENSIONS } from '../../interfaces/image.filter';
 import { UserService } from '../../services/user.service';
+import { PersonalDataComponent } from '../personal.data.component/personal.data.component';
 @Component({
   selector: 'profile-card-component',
-  imports: [],
+  imports: [PersonalDataComponent],
   templateUrl: './profile.card.component.html',
   styleUrl: './profile.card.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileCardComponent {
   userService = inject(UserService);
-  profile = input.required<Profile | null>();
+  profile = input.required<Profile>();
   error = signal<string>('');
+
   constructor() {
     effect(() => {});
   }
