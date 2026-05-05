@@ -24,6 +24,9 @@ import { mapGarageDatabaseToGarageArray } from '../mappers/mapGarageDatabaseToGa
 import { VersionForDatabase } from '../interfaces/database.request/version.for.database';
 import { UserFromDatabase } from '../interfaces/database.responses/user.from.database';
 import { rxResource, toObservable } from '@angular/core/rxjs-interop';
+import { RestCountry } from '../interfaces/restCountry';
+import { Country } from '../interfaces/Country';
+import { mapResCountryToCountryArray } from '../mappers/mapRestCountryToCountry';
 
 @Injectable({
   providedIn: 'root',
@@ -138,5 +141,14 @@ export class UserService {
     return this.http.patch<ModelRespComplete<string>>(URL, formData, {
       context: new HttpContext().set(REQUIRES_AUTH, true),
     });
+  }
+  getCountries(): Observable<Country[]> {
+    return this.http
+      .get<RestCountry[]>('https://restcountries.com/v3.1/all?fields=name,flags')
+      .pipe(
+        map((res) => {
+          return mapResCountryToCountryArray(res);
+        }),
+      );
   }
 }

@@ -15,7 +15,7 @@ export class ProfileCardComponent {
   profile = input.required<Profile | null>();
   error = signal<string>('');
   constructor() {
-    effect(() => console.log(this.profile()));
+    effect(() => {});
   }
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
