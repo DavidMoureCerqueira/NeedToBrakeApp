@@ -4,12 +4,11 @@ import { map, Observable } from 'rxjs';
 import { CarDisc } from '../interfaces/disc/car.disc';
 import { HttpClient } from '@angular/common/http';
 import { CarsDiscDatabase } from '../interfaces/database.responses/cars.discs.database';
-
 import { DiscDatabase } from '../interfaces/database.responses/disc.database';
 import { environment } from './../../environments/environment';
 import { mapperDiscoToDatabaseSearch } from '../mappers/mapDiscToDatabaseDisc';
-import { mapDiscDatabaseToDisc } from '../mappers/mapDiscDataBaseToDisc';
 import { mapperCarDiscDatabaseToCarDiscArray } from '../mappers/mapCarDiscDatabaseToCarDisc';
+import { mapDiscDatabaseToDisc } from '../mappers/mapDiscDatabaseToDisc';
 
 const API_URL = environment.apiUrl;
 @Injectable({

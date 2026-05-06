@@ -4,10 +4,7 @@ import { catchError, map, tap, throwError, Observable, EMPTY, filter, first } fr
 import { ModelRespComplete } from '../interfaces/database.responses/modelResp';
 import { REQUIRES_AUTH } from '../auth/auth.context';
 import { Profile } from '../interfaces/users/profile';
-import { environment } from '../../environments/environment';
-import { mapProfileDatabaseToProfile } from '../mappers/mapProfileDataBaseToProfile';
 import { GarageDatabase } from '../interfaces/database.responses/garage.database';
-import { ProfileFromDatabase } from '../interfaces/database.responses/profile.from.database';
 import { Garage } from '../interfaces/cars/garage';
 import { mapGarageDatabaseToGarageArray } from '../mappers/mapGarageDatabaseToGarage';
 import { rxResource, toObservable } from '@angular/core/rxjs-interop';
@@ -16,6 +13,9 @@ import { Country } from '../interfaces/Country';
 import { mapResCountryToCountryArray } from '../mappers/mapRestCountryToCountry';
 import { ProfileEdit } from './../interfaces/users/profile.edit';
 import { mapProfileEditToProfileEditDatabase } from '../mappers/mapProfileToProfileDatabase';
+import { environment } from '../../environments/environment';
+import { mapProfileDatabaseToProfile } from '../mappers/mapProfileDatabaseToProfile';
+import { ProfileFromDatabase } from '../interfaces/database.responses/profile.from.database';
 
 @Injectable({
   providedIn: 'root',
