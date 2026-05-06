@@ -42,17 +42,18 @@
         </g>
       </svg>
     </div>
-    <div
-      class="flex flex-col items-center justify-center bg-zinc-800 border-2 border-zinc-700 px-4 py-2 rounded-2xl shrink-0 ml-4"
-    >
-      <!-- Bandera -->
+    @if (this.profile().flag) {
+      <div
+        class="flex flex-col items-center justify-center bg-zinc-800 border-2 border-zinc-700 px-4 py-2 rounded-2xl shrink-0 ml-4"
+      >
+        <!-- Bandera -->
 
-      <img class="w-5 h-3 md:w-8 md:h-6" [src]="this.profile().flag" alt="" />
-      <!-- Abreviatura -->
-      <!-- <span class="text-[10px] font-black text-zinc-300">ES</span> -->
-    </div>
+        <img class="w-5 h-3 md:w-8 md:h-6" [src]="this.profile().flag" alt="" />
+        <!-- Abreviatura -->
+        <!-- <span class="text-[10px] font-black text-zinc-300">ES</span> -->
+      </div>
+    }
   </div>
-
   <div class="grid grid-cols-2 gap-4 my-6">
     <div class="border-l-4 border-zinc-800 pl-4">
       <span class="text-[10px] md:text-[11px] text-zinc-500 uppercase font-black tracking-widest"

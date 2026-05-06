@@ -21,7 +21,11 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
         router.navigate(['/maintenance']);
       } else if (error.status === 401) {
         router.navigate(['/sign-in']);
-      } else if (error.status === 404) {
+      } else if (
+        (error.status === 404 && req.url.includes('/users/profile/')) ||
+        req.url.includes('disc-comparison/') ||
+        req.url.includes('forum/post/')
+      ) {
         router.navigate(['/404']);
       } else if (error.status === 403) {
         router.navigate(['/forbidden']);

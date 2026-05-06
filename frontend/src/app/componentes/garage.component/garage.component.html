@@ -8,7 +8,7 @@
 <div class="relative">
   @if (isAddingNewCar()) {
     <div
-      class="flex flex-col gap-2 absolute top-full w-full left-0 z-50 w-full max-w-lg bg-base-200 p-4 rounded-xl shadow-xl border border-white/5 animate-in slide-in-from-top-2 duration-200"
+      class="flex flex-col gap-2 absolute px-5 top-full w-full md:right-10 z-50 max-w-lg bg-base-200 p-4 rounded-xl shadow-xl border border-white/5 animate-in slide-in-from-top-2 duration-200"
     >
       <car-selector-component (idEmitter)="onVersionIdReceived($event)"></car-selector-component>
       <button class="btn btn-error" (click)="isAddingNewCar.set(false)">Close</button>
