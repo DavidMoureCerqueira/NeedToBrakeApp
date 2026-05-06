@@ -55,7 +55,6 @@ export class PersonalDataComponent {
         flag: found.flag,
       });
     } else {
-      // Si el usuario borra el texto o no hay coincidencia, limpiamos la selección
       this.profileForm.patchValue({
         country: '',
         flag: '',

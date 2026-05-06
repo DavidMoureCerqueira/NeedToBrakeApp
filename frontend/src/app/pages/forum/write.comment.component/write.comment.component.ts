@@ -13,7 +13,7 @@ export class WriteCommentComponent {
   onSubmit = output<string>();
   onCancel = output();
   commentForm = this.fb.group({
-    text: ['', [Validators.required, Validators.minLength(3)]],
+    text: ['', [Validators.required, Validators.minLength(1)]],
   });
   sendComment() {
     if (this.commentForm.invalid) return;
