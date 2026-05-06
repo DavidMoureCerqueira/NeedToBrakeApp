@@ -5,5 +5,6 @@ export interface CommentFromDatabase {
   author: {
     id: number;
     username: string;
+    url_avatar: string;
   };
 }

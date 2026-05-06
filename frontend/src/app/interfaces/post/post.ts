@@ -1,8 +1,16 @@
+import { CarClean } from '../cars/car';
+
 export interface Post {
   title: string;
   content: string;
+  author?: {
+    id?: number;
+    username?: string;
+    urlAvatar?: string;
+  };
   userId?: number;
   id: number;
   date: string;
-  versionId?: number;
+  car?: CarClean;
+  comments: number;
 }

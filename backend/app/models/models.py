@@ -185,6 +185,7 @@ class UserPublic(BaseModel):
     # TODO: añadir URL de imagen
     id: int
     username: str
+    url_avatar: str | None
     model_config = {"from_attributes": True}
 
 

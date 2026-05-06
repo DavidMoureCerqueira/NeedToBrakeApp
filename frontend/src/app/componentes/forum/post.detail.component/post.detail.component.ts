@@ -2,10 +2,11 @@ import { ChangeDetectionStrategy, Component, input, output, signal } from '@angu
 import { FormatVersionPipe } from '../../../pipes/format.version.pipe';
 import { DatePipe } from '@angular/common';
 import { PostDetail } from '../../../interfaces/post/post.detail';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'post-detail-component',
-  imports: [FormatVersionPipe, DatePipe],
+  imports: [FormatVersionPipe, DatePipe, RouterLink],
   templateUrl: './post.detail.component.html',
   styleUrl: './post.detail.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

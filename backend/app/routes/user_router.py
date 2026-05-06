@@ -8,7 +8,6 @@ from models.models import (
     RegisterData,
     SignInData,
     UserProfile,
-    UserSecure,
     ValidationModelResponse,
 )
 from services.auth_service import get_authorization

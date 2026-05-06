@@ -1,8 +1,17 @@
+import { VersionDatabase } from './version.database';
+
 export interface PostFromDatabase {
   title: string;
   content: string;
   user_id?: number;
-  id: number;
-  date: string;
   version_id?: number;
+  id: number;
+  author?: {
+    id: number;
+    url_avatar: string;
+    username: string;
+  };
+  date: string;
+  version?: VersionDatabase;
+  comment_count: number;
 }

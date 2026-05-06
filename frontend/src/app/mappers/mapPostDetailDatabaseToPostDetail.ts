@@ -12,6 +12,7 @@ export function mapPostDetailDatabaseToPostDetail(post: PostDetailFromDatabase):
       author: {
         id: post.author?.id,
         username: post.author?.username,
+        urlAvatar: post.author?.url_avatar,
       },
       commentCount: post.comment_count,
       isOwner: post.is_owner,
@@ -26,6 +27,7 @@ export function mapPostDetailDatabaseToPostDetail(post: PostDetailFromDatabase):
     author: {
       id: post.author?.id,
       username: post.author?.username,
+      urlAvatar: post.author?.url_avatar,
     },
     commentCount: post.comment_count,
     isOwner: post.is_owner,

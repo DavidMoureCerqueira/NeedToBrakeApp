@@ -24,7 +24,6 @@ from models.models import (
     RegisterData,
     SignInData,
     UserProfile,
-    UserSecure,
     ValidationModelResponse,
 )
 

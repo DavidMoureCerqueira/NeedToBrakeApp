@@ -11,6 +11,7 @@ export interface PostDetail {
   author?: {
     id: number | undefined;
     username: string | undefined;
+    urlAvatar: string | undefined;
   };
   car?: CarClean;
 }

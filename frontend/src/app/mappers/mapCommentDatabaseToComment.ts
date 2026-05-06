@@ -9,6 +9,7 @@ export function mapCommentDatabaseToComment(comment: CommentFromDatabase): Comme
     author: {
       id: comment.author.id,
       username: comment.author.username,
+      urlAvatar: comment.author.url_avatar,
     },
   };
 }
