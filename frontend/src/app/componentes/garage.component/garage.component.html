@@ -5,43 +5,40 @@
   <p>{{ garageResource.error()?.message }}</p>
 }
 
-<div
-  class="flex flex-col border border-zinc-800 rounded-4xl overflow-hidden bg-zinc-950/40 min-h-0 shadow-lg"
->
-  <div class="grid items-center border-b border-zinc-800 bg-zinc-900/80">
+<div class="relative">
+  @if (isAddingNewCar()) {
     <div
-      class="col-start-1 row-start-1 py-3 text-center font-black text-xs text-zinc-400 uppercase tracking-[0.3em]"
+      class="flex flex-col gap-2 absolute top-full w-full left-0 z-50 w-full max-w-lg bg-base-200 p-4 rounded-xl shadow-xl border border-white/5 animate-in slide-in-from-top-2 duration-200"
     >
-      Garage
+      <car-selector-component (idEmitter)="onVersionIdReceived($event)"></car-selector-component>
+      <button class="btn btn-error" (click)="isAddingNewCar.set(false)">Close</button>
     </div>
-
-    @if (isOwner()) {
-      <div class="col-start-1 row-start-1 h-full flex justify-end">
-        <button
-          class="h-full flex items-center px-6 gap-2 bg-zinc-900/40 hover:bg-zinc-800 transition-all group"
-          (click)="addToGarage()"
-        >
-          <span class="text-zinc-500 group-hover:text-lime-400 font-bold">+</span>
-          <span class="text-zinc-500 uppercase group-hover:text-zinc-200"> Add </span>
-        </button>
-      </div>
-    }
-  </div>
+  }
   <div
-    class="flex-1 overflow-y-auto md:max-h-[30vh] min-h-0 scrollbar-thin scrollbar-thumb-zinc-800"
+    class="flex flex-col border border-zinc-800 rounded-4xl overflow-hidden bg-zinc-950/40 min-h-0 shadow-lg"
   >
-    <div class="relative">
-      @if (isAddingNewCar()) {
-        <div
-          class="flex flex-col gap-2 absolute top-full left-0 z-50 w-full max-w-lg bg-base-200 p-4 rounded-xl shadow-xl border border-white/5 animate-in slide-in-from-top-2 duration-200"
-        >
-          <car-selector-component
-            (idEmitter)="onVersionIdReceived($event)"
-          ></car-selector-component>
-          <button class="btn btn-error" (click)="isAddingNewCar.set(false)">Close</button>
+    <div class="grid items-center border-b border-zinc-800 bg-zinc-900/80">
+      <div
+        class="col-start-1 row-start-1 py-3 text-center font-black text-xs text-zinc-400 uppercase tracking-[0.3em]"
+      >
+        Garage
+      </div>
+
+      @if (isOwner()) {
+        <div class="col-start-1 row-start-1 h-full flex justify-end">
+          <button
+            class="h-full flex items-center px-6 gap-2 bg-zinc-900/40 hover:bg-zinc-800 transition-all group"
+            (click)="addToGarage()"
+          >
+            <span class="text-zinc-500 group-hover:text-lime-400 font-bold">+</span>
+            <span class="text-zinc-500 uppercase group-hover:text-zinc-200"> Add </span>
+          </button>
         </div>
       }
     </div>
+    <div
+      class="flex-1 overflow-y-auto md:max-h-[30vh] min-h-0 scrollbar-thin scrollbar-thumb-zinc-800"
+    ></div>
     <table class="w-full border-collapse">
       <tbody class="divide-y divide-zinc-900/50">
         @for (item of garage(); track item.car.version.id) {
