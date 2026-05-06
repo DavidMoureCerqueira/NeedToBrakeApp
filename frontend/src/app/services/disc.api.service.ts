@@ -6,10 +6,10 @@ import { HttpClient } from '@angular/common/http';
 import { CarsDiscDatabase } from '../interfaces/database.responses/cars.discs.database';
 
 import { DiscDatabase } from '../interfaces/database.responses/disc.database';
+
 import { environment } from './../../environments/environment';
 import { mapperDiscoToDatabaseSearch } from '../mappers/mapDiscToDatabaseDisc';
-import { mapDiscDatabaseToDisc } from '../mappers/mapDiscDataBaseToDisc';
-import { mapperCarDiscDatabaseToCarDiscArray } from '../mappers/mapCarDiscDatabaseToCarDisc';
+import { mapDiscDatabaseToDisc } from '../mappers/mapDiscDatabaseToDisc';
 
 const API_URL = environment.apiUrl;
 @Injectable({
@@ -32,11 +32,5 @@ export class DiscApiService {
   getDiscByID(id: number): Observable<Disc> {
     const url = `${API_URL}/disc/${id}`;
     return this.http.get<DiscDatabase>(url).pipe(map((resp) => mapDiscDatabaseToDisc(resp)));
-  }
-  getDiscsByVersionID(id: number): Observable<CarDisc[]> {
-    const url = `${API_URL}/parent-selector/disc-by-version/${id}`;
-    return this.http
-      .get<CarsDiscDatabase[]>(url)
-      .pipe(map((res) => mapperCarDiscDatabaseToCarDiscArray(res)));
   }
 }

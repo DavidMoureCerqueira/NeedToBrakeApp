@@ -1,8 +1,7 @@
 import { Disc } from '../interfaces/disc/disc';
 import { DiscDatabase } from '../interfaces/database.responses/disc.database';
 
-export function mapDiscDatabaseToDisc(disc: DiscDatabase): Disc {
-  disc.id;
+export function mapDiscDataBaseToDisc(disc: DiscDatabase): DiscClean {
   return {
     id: disc.id,
     position: disc.position,

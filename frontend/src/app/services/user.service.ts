@@ -1,21 +1,12 @@
-import { HttpClient, HttpContext, HttpErrorResponse } from '@angular/common/http';
-import { inject, Injectable, signal } from '@angular/core';
-import { catchError, map, tap, throwError, Observable, EMPTY, filter, first } from 'rxjs';
+import { HttpClient, HttpContext } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { catchError, map, tap, throwError, Observable } from 'rxjs';
+import { mapProfileDatabaseToProfile } from '../mappers/mapProfileDatabaseToProfile';
 import { ModelRespComplete } from '../interfaces/database.responses/modelResp';
 import { REQUIRES_AUTH } from '../auth/auth.context';
 import { Profile } from '../interfaces/users/profile';
 import { environment } from '../../environments/environment';
-import { mapProfileDatabaseToProfile } from '../mappers/mapProfileDataBaseToProfile';
-import { GarageDatabase } from '../interfaces/database.responses/garage.database';
-import { ProfileFromDatabase } from '../interfaces/database.responses/profile.from.database';
-import { Garage } from '../interfaces/cars/garage';
-import { mapGarageDatabaseToGarageArray } from '../mappers/mapGarageDatabaseToGarage';
-import { rxResource, toObservable } from '@angular/core/rxjs-interop';
-import { RestCountry } from '../interfaces/restCountry';
-import { Country } from '../interfaces/Country';
-import { mapResCountryToCountryArray } from '../mappers/mapRestCountryToCountry';
-import { ProfileEdit } from './../interfaces/users/profile.edit';
-import { mapProfileEditToProfileEditDatabase } from '../mappers/mapProfileToProfileDatabase';
+import { ProfileFromDatabase } from '../interfaces/database.responses/profile.from.dataBase';
 
 @Injectable({
   providedIn: 'root',
