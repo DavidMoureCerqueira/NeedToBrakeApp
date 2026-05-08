@@ -5,9 +5,9 @@ import { Brand } from '../interfaces/cars/brand';
 import { catchError, map, Observable, of, tap } from 'rxjs';
 import { Model } from '../interfaces/cars/model';
 import { ModelDatabase } from '../interfaces/database.responses/model.database';
-import { mapModelDatabaseToModelArray } from '../mappers/mapModelDatabaseToModel';
+import { mapModelDatabaseToModelArray } from '../mappers/map.model.database.to.model';
 import { VersionDatabase } from '../interfaces/database.responses/version.database';
-import { mapVersionDatabaseToVersionArray } from '../mappers/mapVersionDatabaseToVersion';
+import { mapVersionDatabaseToVersionArray } from '../mappers/map.version.database.to.version';
 import { Version } from '../interfaces/cars/version';
 
 @Injectable({

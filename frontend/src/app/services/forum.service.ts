@@ -9,20 +9,20 @@ import { PostFromDatabase } from '../interfaces/database.responses/post.from.dat
 import { Observable, tap, map, catchError, throwError } from 'rxjs';
 import { Post } from '../interfaces/post/post';
 import { Pagination } from '../interfaces/pagination';
-import { mapPaginationDatabaseToPagination } from './../mappers/mapPaginationDatabaseToPagination';
+import { mapPaginationDatabaseToPagination } from '../mappers/map.pagination.database.to.pagination';
 import {
   mapPostDatabaseToPost,
   mapPostDatabaseToPostArray,
-} from './../mappers/mapPostDatabaseToPost';
+} from '../mappers/map.post.database.to.post';
 import { postCreation } from '../interfaces/post/post.creation';
-import { mapPostCreationToPostToDatabase } from './../mappers/mapPostCreationToPostToDatabase';
+import { mapPostCreationToPostToDatabase } from '../mappers/map.post.creation.to.post.to.database';
 import { REQUIRES_AUTH } from '../auth/auth.context';
 import { PostDetailFromDatabase } from '../interfaces/database.responses/post.detail.from.database';
 import { PostDetail } from '../interfaces/post/post.detail';
-import { mapPostDetailDatabaseToPostDetail } from '../mappers/mapPostDetailDatabaseToPostDetail';
+import { mapPostDetailDatabaseToPostDetail } from '../mappers/map.post.detail.database.to.post.detail';
 import { PostListDatabase } from '../interfaces/database.responses/post.list.from.database';
 import { PostList } from '../interfaces/post/post.list';
-import { mapPostListDatabaseToPostListArray } from '../mappers/mapPostListDatabaseToPostList';
+import { mapPostListDatabaseToPostListArray } from '../mappers/map.post.list.database.to.post.list';
 
 @Injectable({
   providedIn: 'root',

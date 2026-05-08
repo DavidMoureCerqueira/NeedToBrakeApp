@@ -1,6 +1,6 @@
 import { Garage } from '../interfaces/cars/garage';
 import { GarageDatabase } from '../interfaces/database.responses/garage.database';
-import { mapVersionCompleteToCarClean } from './mapVersionCompleteToCarClean';
+import { mapVersionCompleteToCarClean } from './map.version.complete.to.carclean';
 
 export function mapGarageDatabaseToGarage(garageItem: GarageDatabase): Garage {
   return {

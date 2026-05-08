@@ -1,6 +1,6 @@
 import { PostFromDatabase } from '../interfaces/database.responses/post.from.database';
 import { Post } from '../interfaces/post/post';
-import { mapVersionCompleteToCarClean } from './mapVersionCompleteToCarClean';
+import { mapVersionCompleteToCarClean } from './map.version.complete.to.carclean';
 
 export function mapPostDatabaseToPost(postDB: PostFromDatabase): Post {
   if (postDB.version) {
