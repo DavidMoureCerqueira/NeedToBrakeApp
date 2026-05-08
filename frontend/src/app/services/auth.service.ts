@@ -7,7 +7,7 @@ import { UserForDatabase } from '../interfaces/database.request/user.for.databas
 import { map, Observable } from 'rxjs';
 import { SessionData } from '../interfaces/auth/session.data';
 import { environment } from '../../environments/environment';
-import { mapUserDatabaseToUser } from '../mappers/mapUserDatabaseToUserDatabase';
+import { mapUserDatabaseToUser } from '../mappers/map.user.database.to.user.database';
 
 @Injectable({
   providedIn: 'root',

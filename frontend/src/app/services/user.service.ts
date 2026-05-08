@@ -6,15 +6,15 @@ import { REQUIRES_AUTH } from '../auth/auth.context';
 import { Profile } from '../interfaces/users/profile';
 import { GarageDatabase } from '../interfaces/database.responses/garage.database';
 import { Garage } from '../interfaces/cars/garage';
-import { mapGarageDatabaseToGarageArray } from '../mappers/mapGarageDatabaseToGarage';
+import { mapGarageDatabaseToGarageArray } from '../mappers/map.garage.database.to.garage';
 import { rxResource, toObservable } from '@angular/core/rxjs-interop';
 import { RestCountry } from '../interfaces/restCountry';
 import { Country } from '../interfaces/Country';
-import { mapResCountryToCountryArray } from '../mappers/mapRestCountryToCountry';
+import { mapResCountryToCountryArray } from '../mappers/map.rest.country.to.country';
 import { ProfileEdit } from './../interfaces/users/profile.edit';
-import { mapProfileEditToProfileEditDatabase } from '../mappers/mapProfileToProfileDatabase';
+import { mapProfileEditToProfileEditDatabase } from '../mappers/map.profile.to.profile.database';
 import { environment } from '../../environments/environment';
-import { mapProfileDatabaseToProfile } from '../mappers/mapProfileDatabaseToProfile';
+import { mapProfileDatabaseToProfile } from '../mappers/map.profile.database.to.profile';
 import { ProfileFromDatabase } from '../interfaces/database.responses/profile.from.database';
 
 @Injectable({

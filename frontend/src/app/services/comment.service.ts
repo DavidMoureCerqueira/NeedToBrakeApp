@@ -11,10 +11,10 @@ import { Comment } from '../interfaces/post/comment';
 import {
   mapCommentDatabaseToComment,
   mapCommentDatabaseToCommentArray,
-} from '../mappers/mapCommentDatabaseToComment';
+} from '../mappers/map.comment.database.to.comment';
 import { Pagination } from '../interfaces/pagination';
 import { CommentFromDatabase } from '../interfaces/database.responses/comment.from.database';
-import { mapPaginationDatabaseToPagination } from '../mappers/mapPaginationDatabaseToPagination';
+import { mapPaginationDatabaseToPagination } from '../mappers/map.pagination.database.to.pagination';
 import { CommentForDatabase } from '../interfaces/database.request/comment.for.database';
 
 @Injectable({

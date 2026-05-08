@@ -6,9 +6,9 @@ import { HttpClient } from '@angular/common/http';
 import { CarsDiscDatabase } from '../interfaces/database.responses/cars.discs.database';
 import { DiscDatabase } from '../interfaces/database.responses/disc.database';
 import { environment } from './../../environments/environment';
-import { mapperDiscoToDatabaseSearch } from '../mappers/mapDiscToDatabaseDisc';
-import { mapperCarDiscDatabaseToCarDiscArray } from '../mappers/mapCarDiscDatabaseToCarDisc';
-import { mapDiscDatabaseToDisc } from '../mappers/mapDiscDatabaseToDisc';
+import { mapperDiscoToDatabaseSearch } from '../mappers/map.disc.to.database.disc';
+import { mapperCarDiscDatabaseToCarDiscArray } from '../mappers/map.car.disc.database.to.car.disc';
+import { mapDiscDatabaseToDisc } from '../mappers/map.disc.database.to.disc';
 
 const API_URL = environment.apiUrl;
 @Injectable({
