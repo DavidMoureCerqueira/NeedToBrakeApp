@@ -15,11 +15,7 @@ import {
   mapPostDatabaseToPostArray,
 } from '../mappers/map.post.database.to.post';
 import { postCreation } from '../interfaces/post/post.creation';
-<<<<<<< HEAD
-import { mapPostCreationToPostToDatabase } from '../mappers/map.post.creation.to.post.database';
-=======
-import { mapPostCreationToPostToDatabase } from '../mappers/map.post.creation.to.post.to.database';
->>>>>>> main
+
 import { REQUIRES_AUTH } from '../auth/auth.context';
 import { PostDetailFromDatabase } from '../interfaces/database.responses/post.detail.from.database';
 import { PostDetail } from '../interfaces/post/post.detail';
@@ -27,6 +23,7 @@ import { mapPostDetailDatabaseToPostDetail } from '../mappers/map.post.detail.da
 import { PostListDatabase } from '../interfaces/database.responses/post.list.from.database';
 import { PostList } from '../interfaces/post/post.list';
 import { mapPostListDatabaseToPostListArray } from '../mappers/map.post.list.database.to.post.list';
+import { mapPostCreationToPostToDatabase } from '../mappers/map.post.creation.to.post.database';
 
 @Injectable({
   providedIn: 'root',
