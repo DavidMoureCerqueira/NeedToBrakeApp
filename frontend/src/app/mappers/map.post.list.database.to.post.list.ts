@@ -1,6 +1,6 @@
 import { PostListDatabase } from '../interfaces/database.responses/post.list.from.database';
 import { PostList } from '../interfaces/post/post.list';
-import { mapVersionCompleteToCarClean } from './map.version.complete.to.car.clean';
+import { mapVersionCompleteToCarClean } from './map.version.complete.to.carclean';
 
 export function mapPostListDatabaseToPostList(postDB: PostListDatabase): PostList {
   if (postDB.version) {
