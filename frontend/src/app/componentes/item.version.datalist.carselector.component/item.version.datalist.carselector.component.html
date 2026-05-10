@@ -3,14 +3,14 @@
   type="text"
   placeholder="Type to search..."
   [attr.list]="dataId"
-  [value]="item() && item().name ? item().name : ''"
+  [value]="item() ? (item() | formatVersion) : ''"
   (input)="onSearchInput($event)"
   (change)="onSelectOption($event)"
-  [class.valid]="item() ? !!item().id : false"
   (keyup.enter)="onEnterPressed($event)"
+  [class.valid]="item() ? !!item().id : false"
 />
 <datalist [id]="dataId">
-  @for (item of items(); track item.id) {
-    <option [value]="item.name"></option>
+  @for (version of items(); track version.id) {
+    <option [value]="version | formatVersion"></option>
   }
 </datalist>

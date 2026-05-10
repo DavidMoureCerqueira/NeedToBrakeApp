@@ -1,12 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  effect,
-  input,
-  model,
-  output,
-  signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output, signal } from '@angular/core';
 import { Brand } from '../../interfaces/cars/brand';
 import { Model } from '../../interfaces/cars/model';
 
@@ -19,12 +11,10 @@ import { Model } from '../../interfaces/cars/model';
 })
 export class ItemDatalistCarselectorComponent {
   items = input.required<Brand[] | Model[]>();
-
+  itemChange = output<Brand | Model | null>();
   query = signal<string>('');
-
-  item = model<Brand | Model>();
+  item = input.required<Brand | Model>();
   dataId = Math.random().toString(36).substring(2, 9);
-  isValid = signal<boolean>(false);
 
   onSearchInput(event: Event) {
     const queryData = event.target as HTMLInputElement;
@@ -42,12 +32,13 @@ export class ItemDatalistCarselectorComponent {
 
   private validateAndLoad(value: string) {
     const selectedName = value.trim();
-    const itemFound = this.items().find((item) => item.name === selectedName);
+    const itemFound = this.items().find(
+      (item) => item.name.toLowerCase() === selectedName.toLowerCase(),
+    );
     if (itemFound) {
-      this.item.set(itemFound);
-      this.isValid.set(true);
+      this.itemChange.emit(itemFound);
       return;
     }
-    this.isValid.set(false);
+    this.itemChange.emit(null);
   }
 }

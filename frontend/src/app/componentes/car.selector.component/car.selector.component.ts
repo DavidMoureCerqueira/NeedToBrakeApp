@@ -19,10 +19,15 @@ import { Version } from '../../interfaces/cars/version';
 import { Brand } from '../../interfaces/cars/brand';
 import { CarClean } from '../../interfaces/cars/car';
 import { Model } from '../../interfaces/cars/model';
+import { ItemVersionDatalistCarselectorComponent } from '../item.version.datalist.carselector.component/item.version.datalist.carselector.component';
 
 @Component({
   selector: 'car-selector-component',
-  imports: [ItemDatalistCarselectorComponent, FormatVersionPipe],
+  imports: [
+    ItemDatalistCarselectorComponent,
+    FormatVersionPipe,
+    ItemVersionDatalistCarselectorComponent,
+  ],
   templateUrl: './car.selector.component.html',
   styleUrl: './car.selector.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -43,19 +48,12 @@ export class CarSelectorComponent {
 
   car = model<CarClean>({} as CarClean);
 
-  selectedBrand = signal<Brand>(this.car().brand || ({} as Brand));
+  selectedBrand = computed(() => this.car().brand || ({} as Brand));
 
-  selectedModel = signal<Model>(this.car().model || ({} as Model));
+  selectedModel = computed(() => this.car().model || ({} as Model));
 
-  version = signal<Version>(this.car().version || ({} as Version));
+  version = computed(() => this.car().version || ({} as Version));
 
-  constructor() {
-    effect(() => {
-      this.selectedBrand.set(this.car().brand || ({} as Brand));
-      this.selectedModel.set(this.car().model || ({} as Model));
-      this.version.set(this.car().version || ({} as Version));
-    });
-  }
   modelResource = rxResource({
     params: () => ({ id: this.selectedBrand().id }),
     stream: ({ params }) => {
@@ -76,38 +74,27 @@ export class CarSelectorComponent {
     },
   });
 
-  onSearchInput(event: Event) {
-    const queryData = event.target as HTMLInputElement;
-    this.query.set(queryData.value);
+  onBrandSelected(brand: Brand | null) {
+    this.car.update((current) => ({
+      ...current,
+      brand: brand || ({} as Brand),
+      model: {} as Model,
+      version: {} as Version,
+    }));
   }
-
-  onSelectVersion(event: Event) {
-    const input = event.target as HTMLInputElement;
-    this.validateAndLoad(input.value);
+  onModelSelected(model: Model | null) {
+    this.car.update((current) => ({
+      ...current,
+      model: model || ({} as Model),
+      version: {} as Version,
+    }));
   }
-
-  onEnterPressed(event: Event) {
-    const input = event.target as HTMLInputElement;
-    this.validateAndLoad(input.value);
-    input.blur();
-  }
-
-  private validateAndLoad(value: string) {
-    const selectedName = value.trim();
-    const versionFound = this.versions().find(
-      (version) => this.formatVersion.transform(version) === selectedName,
-    );
-    if (versionFound) {
-      this.car.set({
-        brand: this.selectedBrand(),
-        model: this.selectedModel(),
-        version: versionFound,
-      });
-
-      this.carEmitter.emit(this.car());
-
-      return;
-    }
-    this.version.set({} as Version);
+  onVersionSelected(version: Version | null) {
+    this.car.update((current) => ({
+      ...current,
+      version: version || ({} as Version),
+    }));
+    this.carEmitter.emit(this.car());
+    console.log(this.car());
   }
 }
