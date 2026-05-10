@@ -3,6 +3,7 @@
   type="text"
   placeholder="Type to search..."
   [attr.list]="dataId"
+  [value]="item() && item()?.name ? item()?.name : ''"
   (input)="onSearchInput($event)"
   (change)="onSelectOption($event)"
   [class.valid]="isValid()"

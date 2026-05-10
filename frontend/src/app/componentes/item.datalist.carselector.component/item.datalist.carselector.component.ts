@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, input, output, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  input,
+  model,
+  output,
+  signal,
+} from '@angular/core';
 import { Brand } from '../../interfaces/cars/brand';
 import { Model } from '../../interfaces/cars/model';
 
@@ -11,8 +19,14 @@ import { Model } from '../../interfaces/cars/model';
 })
 export class ItemDatalistCarselectorComponent {
   items = input.required<Brand[] | Model[]>();
+
   query = signal<string>('');
-  idEmitter = output<number>();
+  constructor() {
+    effect(() => {
+      console.log('PRUEBA', this.item());
+    });
+  }
+  item = model<Brand | Model>();
   dataId = Math.random().toString(36).substring(2, 9);
   isValid = signal<boolean>(false);
   onSearchInput(event: Event) {
@@ -33,8 +47,8 @@ export class ItemDatalistCarselectorComponent {
     const selectedName = value.trim();
     const itemFound = this.items().find((item) => item.name === selectedName);
     if (itemFound) {
+      this.item.set(itemFound);
       this.isValid.set(true);
-      this.idEmitter.emit(itemFound.id);
       return;
     }
     this.isValid.set(false);

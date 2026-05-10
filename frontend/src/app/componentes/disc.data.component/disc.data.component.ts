@@ -4,6 +4,7 @@ import { DiscTheme, THEMES } from '../../styles/discThemes';
 import { MeasurementComponent } from '../measurement.component/measurement.component';
 import { SearchMode, searchModeTypes } from './../../interfaces/searchModeTypes';
 import { CascadeComponent } from '../cascade.component/cascade.component';
+import { CarClean } from '../../interfaces/cars/car';
 
 @Component({
   selector: 'disc-data',
@@ -15,6 +16,7 @@ export class DiscDataComponent {
   protected readonly SEARCH_MODES = searchModeTypes;
   title = input.required<string>();
   disc = model.required<Disc>();
+  car = model.required<CarClean>();
   themeName = input.required<DiscTheme>();
   theme = computed(() => THEMES[this.themeName()]);
   searchMode = signal<SearchMode>(searchModeTypes.CAR);
@@ -25,5 +27,6 @@ export class DiscDataComponent {
   }
   clearFields() {
     this.disc.set({} as Disc);
+    this.car.set({} as CarClean);
   }
 }

@@ -19,6 +19,7 @@ import { of } from 'rxjs';
 import { FormatVersionPipe } from '../../pipes/format.version.pipe';
 import { DiscApiService } from '../../services/disc.api.service';
 import { CarSelectorComponent } from '../car.selector.component/car.selector.component';
+import { CarClean } from '../../interfaces/cars/car';
 
 @Component({
   selector: 'cascade-component',
@@ -31,11 +32,13 @@ import { CarSelectorComponent } from '../car.selector.component/car.selector.com
 export class CascadeComponent {
   theme = input.required<DiscTheme>();
   disc = model<Disc>();
+  car = model.required<CarClean>();
   cascadeService = inject(CascadeService);
   discApiService = inject(DiscApiService);
-  idVersion = signal<number | null>(null);
+  // idVersion = signal<number | null>(null);
   position = signal<'front' | 'rear'>('front');
   discOptions = computed(() => this.discResource.value());
+
   constructor() {
     effect(() => {
       const list = this.discOptions();
@@ -49,6 +52,12 @@ export class CascadeComponent {
     });
   }
 
+  idVersion = computed(() => {
+    const car = this.car();
+    if (!car.brand || !car.model || !car.version) return null;
+    return car.version.id;
+  });
+
   discResource = rxResource({
     params: () => ({ idVersion: this.idVersion() }),
     stream: ({ params }) => {
@@ -59,9 +68,10 @@ export class CascadeComponent {
     },
   });
 
-  onVersionIDReceiver(id: number) {
-    this.idVersion.set(id);
-  }
+  // onVersionIDReceiver(car: CarClean) {
+  //   this.car.set(car);
+  //   this.idVersion.set(car.version.id);
+  // }
 
   togglePosition(pos: 'front' | 'rear') {
     if (this.position() !== pos) {

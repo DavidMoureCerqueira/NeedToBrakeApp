@@ -1,46 +1,5 @@
 <div class="flex flex-col gap-3 disc-container">
-  <!-- <div class="form-control w-full">
-    <label class="label py-1">
-      <span class="label-text font-bold">Brand</span>
-    </label>
-
-    <item-datalist-carselector-component
-      [items]="brands()"
-      (idEmitter)="onSelectedBrand($event)"
-    ></item-datalist-carselector-component>
-  </div>
-
-  <div class="form-control w-full">
-    <label class="label py-1">
-      <span class="label-text font-bold">Model</span>
-    </label>
-    <item-datalist-carselector-component
-      [items]="models()"
-      (idEmitter)="onSelectedModel($event)"
-    ></item-datalist-carselector-component>
-  </div>
-
-  <div class="form-control w-full">
-    <label class="label py-1">
-      <span class="label-text font-bold">Version</span>
-    </label>
-    <input
-      class="disc-input w-full focus:input-primary"
-      type="text"
-      placeholder="Type to search..."
-      [attr.list]="dataId"
-      (input)="onSearchInput($event)"
-      (change)="onSelectVersion($event)"
-      (keyup.enter)="onEnterPressed($event)"
-      [class.valid]="!!version()"
-    />
-    <datalist [id]="dataId">
-      @for (version of versions(); track version.id) {
-        <option [value]="version | formatVersion"></option>
-      }
-    </datalist>
-  </div> -->
-  <car-selector-component (idEmitter)="onVersionIDReceiver($event)"></car-selector-component>
+  <car-selector-component [(car)]="car"></car-selector-component>
   <div class="flex gap-4 items-center self-start">
     <label class="flex items-center gap-2 cursor-pointer">
       <input

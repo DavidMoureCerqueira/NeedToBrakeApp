@@ -6,7 +6,7 @@
 
     <item-datalist-carselector-component
       [items]="brands()"
-      (idEmitter)="onSelectedBrand($event)"
+      [(item)]="selectedBrand"
     ></item-datalist-carselector-component>
   </div>
 
@@ -16,7 +16,7 @@
     </label>
     <item-datalist-carselector-component
       [items]="models()"
-      (idEmitter)="onSelectedModel($event)"
+      [(item)]="selectedModel"
     ></item-datalist-carselector-component>
   </div>
 

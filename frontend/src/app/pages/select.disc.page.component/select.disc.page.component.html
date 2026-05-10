@@ -1,30 +1,42 @@
-<section class="flex flex-col gap-20 justify-evenly flex-1 overflow-hidden">
+<section class="flex flex-col gap-20 justify-evenly flex-1">
   <data-ilustration-component
     [title]="'Actual Disc'"
     [themeName]="'current'"
     [(disc)]="existingDisc"
+    [(car)]="existingCar"
   ></data-ilustration-component>
 
   <data-ilustration-component
     [title]="'Desired Disc'"
     [themeName]="'desired'"
     [(disc)]="desiredDisc"
+    [(car)]="desiredCar"
   ></data-ilustration-component>
 
-  <div class="flex flex-row flex-wrap justify-evenly items-center">
-    <button class="btn btn-secondary self-center" (click)="syncEmptyFields()">Igualar</button>
-    <button class="btn btn-primary self-center" (click)="searchDiscs()">Buscar</button>
-  </div>
-
-  <section class="overflow-y-scroll flex flex-col justify-center items-center flex-2">
-    @if (isLoading()) {
-      <span class="loading loading-spinner loading-lg"></span>
-    }
-    @if (isError()) {
-      <div class="alert alert-info mt-4">
-        <span>No se encontraron resultados para esta búsqueda.</span>
+  <div class="relative flex flex-row flex-wrap justify-evenly items-center">
+    <button class="btn btn-secondary self-center" (click)="syncEmptyFields()">Match</button>
+    <button class="btn btn-primary self-center" (click)="searchDiscs()">Search</button>
+    @if (isFilters()) {
+      <div
+        class="md:absolute md:z-50 border border-base-200 p-4 bg-warning-content rounded-4xl shadow-xl min-w-max"
+      >
+        Please select any disc field for searching
       </div>
     }
-    <list-disc [listDiscPerCar]="listDiscCar()"></list-disc>
-  </section>
+    @if (this.discApiService.filteredDiscResource.error() && !isFilters()) {
+      <div
+        class="md:absolute md:z-50 border border-base-200 p-4 bg-warning-content rounded-4xl shadow-xl min-w-max"
+      >
+        There is no results found for this filters
+      </div>
+    }
+  </div>
+  @if (hasData()) {
+    <section class="flex flex-col justify-center items-center flex-2">
+      @if (this.discApiService.filteredDiscResource.isLoading()) {
+        <span class="loading loading-spinner loading-lg"></span>
+      }
+      <list-disc></list-disc>
+    </section>
+  }
 </section>

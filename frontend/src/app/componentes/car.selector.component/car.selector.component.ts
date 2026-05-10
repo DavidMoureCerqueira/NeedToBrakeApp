@@ -2,8 +2,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  effect,
   inject,
   input,
+  model,
   output,
   signal,
 } from '@angular/core';
@@ -15,6 +17,8 @@ import { FormatVersionPipe } from '../../pipes/format.version.pipe';
 import { CascadeService } from '../../services/cascade.service';
 import { Version } from '../../interfaces/cars/version';
 import { Brand } from '../../interfaces/cars/brand';
+import { CarClean } from '../../interfaces/cars/car';
+import { Model } from '../../interfaces/cars/model';
 
 @Component({
   selector: 'car-selector-component',
@@ -30,15 +34,20 @@ export class CarSelectorComponent {
   dataId = Math.random().toString(36).substring(2, 9);
 
   brands = signal<Brand[]>(this.cascadeService.brands());
+
   query = signal<string>('');
-  selectedBrandId = signal<number | null>(null);
-  selectedModelId = signal<number | null>(null);
-  idEmitter = output<number>();
+
+  carEmitter = output<CarClean>();
   models = computed(() => this.modelResource.value() ?? []);
   versions = computed(() => this.versionResource.value() ?? []);
-  version = signal<Version | null>(null);
+
+  version = signal<Version>({} as Version);
+  car = model<CarClean>({} as CarClean);
+  selectedBrand = signal<Brand>(this.car().brand || ({} as Brand));
+  selectedModel = signal<Model>(this.car().model || ({} as Model));
+
   modelResource = rxResource({
-    params: () => ({ id: this.selectedBrandId() }),
+    params: () => ({ id: this.selectedBrand().id }),
     stream: ({ params }) => {
       if (!params.id) {
         return of([]);
@@ -47,18 +56,8 @@ export class CarSelectorComponent {
     },
   });
 
-  onSelectedBrand(brandId: number) {
-    if (brandId === 0) {
-      this.selectedBrandId.set(null);
-      return;
-    }
-    this.selectedBrandId.set(brandId);
-  }
-  onSelectedModel(modelId: number) {
-    this.selectedModelId.set(modelId);
-  }
   versionResource = rxResource({
-    params: () => ({ id: this.selectedModelId() }),
+    params: () => ({ id: this.selectedModel().id }),
     stream: ({ params }) => {
       if (!params.id) {
         return of([]);
@@ -71,25 +70,37 @@ export class CarSelectorComponent {
     const queryData = event.target as HTMLInputElement;
     this.query.set(queryData.value);
   }
+
   onSelectVersion(event: Event) {
     const input = event.target as HTMLInputElement;
     this.validateAndLoad(input.value);
   }
+
   onEnterPressed(event: Event) {
     const input = event.target as HTMLInputElement;
     this.validateAndLoad(input.value);
     input.blur();
   }
+
   private validateAndLoad(value: string) {
     const selectedName = value.trim();
     const versionFound = this.versions().find(
       (version) => this.formatVersion.transform(version) === selectedName,
     );
     if (versionFound) {
-      this.version.set(versionFound);
-      this.idEmitter.emit(versionFound.id);
+      this.car.set({
+        brand: this.selectedBrand(),
+        model: this.selectedModel(),
+        version: versionFound,
+      });
+
+      this.carEmitter.emit(this.car());
+
       return;
     }
-    this.version.set(null);
+    this.version.set({} as Version);
+  }
+  constructor() {
+    effect(() => console.log('Car Selector:', this.car()));
   }
 }

@@ -12,10 +12,12 @@ import { UserService } from '../../services/user.service';
 import { FormatCarPipe } from '../../pipes/format.car.pipe';
 import { AuthService } from '../../services/auth.service';
 import { CarSelectorComponent } from '../car.selector.component/car.selector.component';
+import { CarClean } from '../../interfaces/cars/car';
 
 @Component({
   selector: 'garage-component',
   imports: [FormatCarPipe, CarSelectorComponent],
+
   templateUrl: './garage.component.html',
   styleUrl: './garage.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -44,9 +46,8 @@ export class GarageComponent {
   addToGarage() {
     this.isAddingNewCar.set(true);
   }
-  onVersionIdReceived(id: number) {
-    console.log(id);
-    this.userService.addCarGarage(id).subscribe({
+  onVersionIdReceived(car: CarClean) {
+    this.userService.addCarGarage(car.version.id).subscribe({
       next: () => {
         this.garageResource.reload();
         this.isAddingNewCar.set(false);

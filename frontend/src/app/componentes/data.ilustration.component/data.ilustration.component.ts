@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, input, model } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, input, model } from '@angular/core';
 import { DiscDataComponent } from '../disc.data.component/disc.data.component';
 import { DiscIlustrationComponent } from '../disc.ilustration.component/disc.ilustration.component';
 import { Disc } from '../../interfaces/disc/disc';
 import { DiscTheme } from '../../styles/discThemes';
+import { CarClean } from '../../interfaces/cars/car';
 
 @Component({
   selector: 'data-ilustration-component',
@@ -15,6 +16,9 @@ export class DataIlustrationComponent {
   title = input.required<string>();
   themeName = input.required<DiscTheme>();
   disc = model.required<Disc>();
+  car = model.required<CarClean>();
 
-  constructor() {}
+  constructor() {
+    effect(() => console.log('Data Ilustration:', this.disc()));
+  }
 }

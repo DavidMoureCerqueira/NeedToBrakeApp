@@ -7,7 +7,8 @@ import { LocalStorageData } from './types';
   providedIn: 'root',
 })
 export class DiscoService {
-  existingDiscService = signal<Disc | null>(this.getInitialValue());
+  existingDiscService = signal<Disc | null>(this.getInitialExistingDiscValue());
+  desiredDiscService = signal<Disc | null>(this.getInitialDesiredDiscValue());
   constructor() {
     effect(() => {
       const disc = this.existingDiscService();
@@ -17,10 +18,26 @@ export class DiscoService {
         localStorage.removeItem(LocalStorageData.EXISTING_DISC);
       }
     });
+    effect(() => {
+      const disc = this.desiredDiscService();
+      if (disc) {
+        localStorage.setItem(LocalStorageData.DESIRED_DISC, JSON.stringify(disc));
+      } else {
+        localStorage.removeItem(LocalStorageData.DESIRED_DISC);
+      }
+    });
   }
 
-  private getInitialValue(): Disc | null {
+  private getInitialExistingDiscValue(): Disc | null {
     const discString = localStorage.getItem(LocalStorageData.EXISTING_DISC);
+    try {
+      return discString ? JSON.parse(discString) : null;
+    } catch {
+      return null;
+    }
+  }
+  private getInitialDesiredDiscValue(): Disc | null {
+    const discString = localStorage.getItem(LocalStorageData.DESIRED_DISC);
     try {
       return discString ? JSON.parse(discString) : null;
     } catch {
@@ -40,8 +57,14 @@ export class DiscoService {
   saveExistingDisc(disc: Disc) {
     this.existingDiscService.set(disc);
   }
+  saveDesiredDisc(disc: Disc) {
+    this.desiredDiscService.set(disc);
+  }
 
   getExistingDisc(): Disc | null {
     return this.existingDiscService();
+  }
+  getResiredDisc(): Disc | null {
+    return this.desiredDiscService();
   }
 }
