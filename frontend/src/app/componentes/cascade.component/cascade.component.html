@@ -1,5 +1,8 @@
 <div class="flex flex-col gap-3 disc-container">
-  <car-selector-component [(car)]="car"></car-selector-component>
+  <car-selector-component
+    [car]="selectedCar()"
+    (carEmitter)="carReceiver($event)"
+  ></car-selector-component>
   <div class="flex gap-4 items-center self-start">
     <label class="flex items-center gap-2 cursor-pointer">
       <input

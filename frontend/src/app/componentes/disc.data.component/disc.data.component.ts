@@ -1,10 +1,11 @@
-import { Component, computed, input, model, signal } from '@angular/core';
+import { Component, computed, inject, input, model, signal } from '@angular/core';
 import { Disc } from '../../interfaces/disc/disc';
 import { DiscTheme, THEMES } from '../../styles/discThemes';
 import { MeasurementComponent } from '../measurement.component/measurement.component';
 import { SearchMode, searchModeTypes } from './../../interfaces/searchModeTypes';
 import { CascadeComponent } from '../cascade.component/cascade.component';
 import { CarClean } from '../../interfaces/cars/car';
+import { CarService, DISC_CONTEXT } from '../../services/car.service';
 
 @Component({
   selector: 'disc-data',
@@ -16,10 +17,12 @@ export class DiscDataComponent {
   protected readonly SEARCH_MODES = searchModeTypes;
   title = input.required<string>();
   disc = model.required<Disc>();
-  car = model.required<CarClean>();
+  token = input.required<'existing' | 'desired'>();
+  private carService = inject(CarService);
   themeName = input.required<DiscTheme>();
   theme = computed(() => THEMES[this.themeName()]);
   searchMode = signal<SearchMode>(searchModeTypes.CAR);
+
   constructor() {}
 
   toggleMode(mode: SearchMode) {
@@ -27,6 +30,6 @@ export class DiscDataComponent {
   }
   clearFields() {
     this.disc.set({} as Disc);
-    this.car.set({} as CarClean);
+    this.carService.resetCar(this.token());
   }
 }

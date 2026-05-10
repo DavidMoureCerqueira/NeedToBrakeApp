@@ -6,6 +6,7 @@ import { CarDisc } from '../../interfaces/disc/car.disc';
 import { ListDiscComponent } from '../../componentes/list.disc.component/list.disc.component';
 import { DataIlustrationComponent } from '../../componentes/data.ilustration.component/data.ilustration.component';
 import { CarClean } from '../../interfaces/cars/car';
+import { CarService } from '../../services/car.service';
 
 @Component({
   selector: 'select-disc-page',
@@ -22,15 +23,7 @@ export class SelectDiscPageComponent {
   existingDisc = signal<Disc>({} as Disc);
   isFilters = signal<Boolean>(false);
   listDiscCar = signal<CarDisc[] | []>([]);
-  existingCar = signal<CarClean>({} as CarClean);
-  desiredCar = signal<CarClean>({} as CarClean);
-
-  constructor() {
-    effect(() => {
-      console.log('Existing car:', this.existingCar());
-      console.log('Desired Car', this.desiredCar());
-    });
-  }
+  carService = inject(CarService);
 
   receiveDesiredDisc(disco: Disc) {
     this.desiredDisc.set(disco);
@@ -55,7 +48,7 @@ export class SelectDiscPageComponent {
   syncEmptyFields() {
     const discoModificado = this.discService.matchDiscs(this.existingDisc(), this.desiredDisc());
     this.desiredDisc.set(discoModificado);
-    this.desiredCar.set(this.existingCar());
+    this.carService.matchCars();
   }
   hasData = computed(() => {
     const listResource = this.discApiService.filteredDiscResource;

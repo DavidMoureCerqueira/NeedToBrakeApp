@@ -20,7 +20,7 @@
   </div>
   @switch (searchMode()) {
     @case (SEARCH_MODES.CAR) {
-      <cascade-component [(disc)]="disc" [(car)]="car" [theme]="themeName()"></cascade-component>
+      <cascade-component [(disc)]="disc" [theme]="themeName()"></cascade-component>
     }
     @case (SEARCH_MODES.DISC) {
       <measurement-component [(disc)]="disc"></measurement-component>

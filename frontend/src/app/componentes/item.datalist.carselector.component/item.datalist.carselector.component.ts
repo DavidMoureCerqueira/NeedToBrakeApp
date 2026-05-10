@@ -21,14 +21,11 @@ export class ItemDatalistCarselectorComponent {
   items = input.required<Brand[] | Model[]>();
 
   query = signal<string>('');
-  constructor() {
-    effect(() => {
-      console.log('PRUEBA', this.item());
-    });
-  }
+
   item = model<Brand | Model>();
   dataId = Math.random().toString(36).substring(2, 9);
   isValid = signal<boolean>(false);
+
   onSearchInput(event: Event) {
     const queryData = event.target as HTMLInputElement;
     this.query.set(queryData.value);

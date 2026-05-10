@@ -41,11 +41,21 @@ export class CarSelectorComponent {
   models = computed(() => this.modelResource.value() ?? []);
   versions = computed(() => this.versionResource.value() ?? []);
 
-  version = signal<Version>({} as Version);
   car = model<CarClean>({} as CarClean);
+
   selectedBrand = signal<Brand>(this.car().brand || ({} as Brand));
+
   selectedModel = signal<Model>(this.car().model || ({} as Model));
 
+  version = signal<Version>(this.car().version || ({} as Version));
+
+  constructor() {
+    effect(() => {
+      this.selectedBrand.set(this.car().brand || ({} as Brand));
+      this.selectedModel.set(this.car().model || ({} as Model));
+      this.version.set(this.car().version || ({} as Version));
+    });
+  }
   modelResource = rxResource({
     params: () => ({ id: this.selectedBrand().id }),
     stream: ({ params }) => {
@@ -99,8 +109,5 @@ export class CarSelectorComponent {
       return;
     }
     this.version.set({} as Version);
-  }
-  constructor() {
-    effect(() => console.log('Car Selector:', this.car()));
   }
 }

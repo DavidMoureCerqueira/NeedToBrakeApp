@@ -29,10 +29,11 @@
       type="text"
       placeholder="Type to search..."
       [attr.list]="dataId"
+      [value]="version() ? (version() | formatVersion) : ''"
       (input)="onSearchInput($event)"
       (change)="onSelectVersion($event)"
       (keyup.enter)="onEnterPressed($event)"
-      [class.valid]="!!version()"
+      [class.valid]="!!version().id"
     />
     <datalist [id]="dataId">
       @for (version of versions(); track version.id) {
