@@ -8,7 +8,7 @@
 <div class="relative">
   @if (isAddingNewCar()) {
     <div
-      class="flex flex-col gap-2 absolute px-5 top-full w-full md:right-10 z-50 max-w-lg bg-base-200 p-4 rounded-xl shadow-xl border border-white/5 animate-in slide-in-from-top-2 duration-200"
+      class="flex flex-col gap-2 absolute px-5 bottom-full left-0 w-full md:right-10 z-50 max-w-lg bg-base-200 p-4 rounded-xl shadow-xl border border-white/5"
     >
       <car-selector-component (carEmitter)="onVersionIdReceived($event)"></car-selector-component>
       <button class="btn btn-error" (click)="isAddingNewCar.set(false)">Close</button>
@@ -38,68 +38,79 @@
     </div>
     <div
       class="flex-1 overflow-y-auto md:max-h-[30vh] min-h-0 scrollbar-thin scrollbar-thumb-zinc-800"
-    ></div>
-    <table class="w-full border-collapse">
-      <tbody class="divide-y divide-zinc-900/50">
-        @for (item of garage(); track item.car.version.id) {
-          <tr class="hover:bg-zinc-800/40 transition-colors group">
-            <td class="p-4 text-base font-bold text-zinc-300 pl-6 uppercase tracking-tight">
-              {{ item.car | formatCar }}
-            </td>
-            @if (item.isFavourite) {
-              <td class="p-4 text-right pr-6 text-xl" (click)="removeFavourite()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                  <path
-                    fill="var(--fav-color)"
-                    fill-opacity="0"
-                    stroke="var(--fav-color)"
-                    stroke-dasharray="66"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 3l2.35 5.76l6.21 0.46l-4.76 4.02l1.49 6.04l-5.29 -3.28l-5.29 3.28l1.49 -6.04l-4.76 -4.02l6.21 -0.46Z"
-                  >
-                    <animate
-                      fill="freeze"
-                      attributeName="stroke-dashoffset"
-                      dur="0.6s"
-                      values="66;0"
-                    />
-                    <animate
-                      fill="freeze"
-                      attributeName="fill-opacity"
-                      begin="0.6s"
-                      dur="0.4s"
-                      to="1"
-                    />
-                  </path>
-                </svg>
+    >
+      <table class="w-full border-collapse">
+        <tbody class="divide-y divide-zinc-900/50">
+          @for (item of garage(); track item.car.version.id) {
+            <tr class="hover:bg-zinc-800/40 transition-colors group">
+              <td class="p-4 text-base font-bold text-zinc-300 pl-6 uppercase tracking-tight">
+                {{ item.car | formatCar }}
               </td>
-            } @else {
-              <td class="p-4 text-right pr-6 text-xl" (click)="addFavourite(item.car.version.id)">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                  <path
-                    fill="none"
-                    stroke="var(--fav-color)"
-                    stroke-dasharray="66"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 3l2.35 5.76l6.21 0.46l-4.76 4.02l1.49 6.04l-5.29 -3.28l-5.29 3.28l1.49 -6.04l-4.76 -4.02l6.21 -0.46Z"
+              @if (item.isFavourite) {
+                <td class="p-4 text-right pr-6 text-xl" (click)="removeFavourite()">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
                   >
-                    <animate
-                      fill="freeze"
-                      attributeName="stroke-dashoffset"
-                      dur="0.6s"
-                      values="66;0"
-                    />
-                  </path>
-                </svg>
-              </td>
-            }
-          </tr>
-        }
-      </tbody>
-    </table>
+                    <path
+                      fill="var(--fav-color)"
+                      fill-opacity="0"
+                      stroke="var(--fav-color)"
+                      stroke-dasharray="66"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 3l2.35 5.76l6.21 0.46l-4.76 4.02l1.49 6.04l-5.29 -3.28l-5.29 3.28l1.49 -6.04l-4.76 -4.02l6.21 -0.46Z"
+                    >
+                      <animate
+                        fill="freeze"
+                        attributeName="stroke-dashoffset"
+                        dur="0.6s"
+                        values="66;0"
+                      />
+                      <animate
+                        fill="freeze"
+                        attributeName="fill-opacity"
+                        begin="0.6s"
+                        dur="0.4s"
+                        to="1"
+                      />
+                    </path>
+                  </svg>
+                </td>
+              } @else {
+                <td class="p-4 text-right pr-6 text-xl" (click)="addFavourite(item.car.version.id)">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="none"
+                      stroke="var(--fav-color)"
+                      stroke-dasharray="66"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 3l2.35 5.76l6.21 0.46l-4.76 4.02l1.49 6.04l-5.29 -3.28l-5.29 3.28l1.49 -6.04l-4.76 -4.02l6.21 -0.46Z"
+                    >
+                      <animate
+                        fill="freeze"
+                        attributeName="stroke-dashoffset"
+                        dur="0.6s"
+                        values="66;0"
+                      />
+                    </path>
+                  </svg>
+                </td>
+              }
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
