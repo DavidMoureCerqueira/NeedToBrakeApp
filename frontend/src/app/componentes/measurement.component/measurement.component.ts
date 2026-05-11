@@ -2,12 +2,14 @@ import {
   ChangeDetectionStrategy,
   Component,
   effect,
+  inject,
   input,
   model,
   output,
   signal,
 } from '@angular/core';
 import { Disc } from '../../interfaces/disc/disc';
+import { CarService } from '../../services/car.service';
 
 @Component({
   selector: 'measurement-component',
@@ -18,6 +20,8 @@ import { Disc } from '../../interfaces/disc/disc';
 })
 export class MeasurementComponent {
   disc = model.required<Disc>();
+  token = input.required<'desired' | 'existing'>();
+  carService = inject(CarService);
   constructor() {
     effect(() => {
       console.log('style:', this.disc().style);
@@ -28,5 +32,6 @@ export class MeasurementComponent {
       ...actualDisc,
       [key]: value === '' ? '' : value,
     }));
+    this.carService.resetCar(this.token());
   }
 }

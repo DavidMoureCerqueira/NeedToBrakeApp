@@ -15,51 +15,37 @@ import { PostDetailPageComponent } from './pages/forum/post.detail.page.componen
 import { postResolver } from './resolver/post-resolver';
 import { NotFoundComponent } from './pages/not.found.page.component/not.found.page.component';
 import { ForbiddenPageComponent } from './pages/forbidden.page.component/forbidden.page.component';
+import { LandingPageComponent } from './pages/landing.page.component/landing.page.component';
 
 export const routes: Routes = [
-  // 1. LANDING / HOME
-  // {
-  //   path: '',
-  //   component: MainPageComponent,
-  //   data: {
-  //     title: 'NeedToBrake - Comparador de Discos',
-  //     searchPost: false,
-  //     showLogout:false,
-  //   },
-  // },
+  {
+    path: '',
+    component: LandingPageComponent,
+    data: {
+      title: 'NeedToBrake - Comparador de Discos',
+    },
+  },
   {
     // TODO:cambiar el path para que no sea la principal
-    path: '',
+    path: 'select',
     component: SelectDiscPageComponent,
     title: 'Choose disc - NeedToBrake',
-    data: {
-      searchPost: false,
-    },
   },
   {
     path: 'disc-comparison/:id',
     component: DiscComparisonPageComponent,
     title: 'Comparing... - NeedToBrake',
-    data: {
-      searchPost: false,
-    },
   },
   {
     path: 'register',
     component: RegisterPageComponent,
     title: 'Register - NeedToBrake',
-    data: {
-      searchPost: false,
-    },
   },
   {
     path: 'sign-in',
     component: SigninPageComponent,
 
     title: 'Welcome Back - NeedToBrake',
-    data: {
-      searchPost: false,
-    },
   },
   {
     path: 'profile/:id',

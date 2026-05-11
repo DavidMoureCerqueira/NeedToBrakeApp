@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import {
   NavigationCancel,
   NavigationEnd,
@@ -20,7 +20,7 @@ import { LoaderComponent } from './componentes/loader.component/loader.component
 })
 export class App {
   protected readonly title = signal('NeedToBrakeApp');
-  private readonly router = inject(Router);
+  protected readonly router = inject(Router);
   isNavigating = toSignal(
     this.router.events.pipe(
       map(

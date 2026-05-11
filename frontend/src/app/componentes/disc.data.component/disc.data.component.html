@@ -1,4 +1,4 @@
-<section [attr.data-theme]="themeName()" class="disc-section">
+<section [attr.data-theme]="themeName()" class="disc-section md:w-190 md:h-60">
   <div class="disc-header">
     <h3>{{ title() }}</h3>
 
@@ -23,7 +23,7 @@
       <cascade-component [(disc)]="disc" [theme]="themeName()"></cascade-component>
     }
     @case (SEARCH_MODES.DISC) {
-      <measurement-component [(disc)]="disc"></measurement-component>
+      <measurement-component [(disc)]="disc" [token]="token()"></measurement-component>
     }
   }
 </section>

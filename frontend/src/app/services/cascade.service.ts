@@ -17,7 +17,7 @@ export class CascadeService {
   constructor() {}
   private API_URL = environment.apiUrl;
   private http = inject(HttpClient);
-  brands = signal<Brand[]>([]);
+  brands = signal<Brand[]>([] as Brand[]);
 
   getBrands(): Observable<Brand[]> {
     const URL = `${this.API_URL}/cascade/brands`;
