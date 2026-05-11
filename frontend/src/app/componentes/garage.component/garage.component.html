@@ -1,10 +1,3 @@
-@if (garageResource.isLoading()) {
-  <div class="loading-spinner">CARGANDOOOOOOOOOOOOOOO</div>
-}
-@if (garageResource.error()) {
-  <p>{{ garageResource.error()?.message }}</p>
-}
-
 <div class="relative">
   @if (isAddingNewCar()) {
     <div
@@ -41,6 +34,18 @@
     >
       <table class="w-full border-collapse">
         <tbody class="divide-y divide-zinc-900/50">
+          <tr>
+            @if (garageResource.isLoading()) {
+              <td colspan="100%" class="text-center py-4">
+                <span class="loading loading-spinner loading-sm"></span>
+              </td>
+            }
+            @if (garageResource.error()) {
+              <td colspan="100%" class="text-center py-4">
+                <span>{{ garageResource.error()?.message }}</span>
+              </td>
+            }
+          </tr>
           @for (item of garage(); track item.car.version.id) {
             <tr class="hover:bg-zinc-800/40 transition-colors group">
               <td class="p-4 text-base font-bold text-zinc-300 pl-6 uppercase tracking-tight">

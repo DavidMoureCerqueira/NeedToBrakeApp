@@ -24,9 +24,21 @@
   >
     <table class="w-full border-collapse">
       <tbody class="divide-y divide-zinc-900/50">
+        <tr>
+          @if (postResource.isLoading()) {
+            <td colspan="100%" class="text-center py-4">
+              <span class="loading loading-spinner loading-sm"></span>
+            </td>
+          }
+          @if (postResource.error()) {
+            <td colspan="100%" class="text-center py-4">
+              <span>{{ postResource.error()?.message }}</span>
+            </td>
+          }
+        </tr>
         @for (post of userPosts().items; track post.id) {
-          <tr class="group hover:bg-zinc-800/40 transition-colors">
-            <td class="p-4 pl-6">
+          <tr class="group hover:bg-zinc-800/40 transition-colors cursor-pointer">
+            <td class="p-4 pl-6" [routerLink]="[`/forum/post/${post.id}`]">
               <p
                 class="text-base font-bold text-zinc-200 group-hover:text-red-500 transition-colors italic uppercase tracking-tight"
               >
