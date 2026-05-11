@@ -26,17 +26,7 @@
     <label class="label py-1">
       <span class="label-text font-bold">Version</span>
     </label>
-    <!-- <input
-      class="disc-input w-full focus:input-primary"
-      type="text"
-      placeholder="Type to search..."
-      [attr.list]="dataId"
-      [value]="version() ? (version() | formatVersion) : ''"
-      (input)="onSearchInput($event)"
-      (change)="onSelectVersion($event)"
-      (keyup.enter)="onEnterPressed($event)"
-      [class.valid]="!!version().id"
-    /> -->
+
     <app-item-version-datalist-carselector-component
       [items]="versions()"
       [item]="car().version"

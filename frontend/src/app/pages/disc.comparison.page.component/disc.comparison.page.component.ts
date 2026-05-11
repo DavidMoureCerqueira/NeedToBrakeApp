@@ -4,18 +4,19 @@ import { DiscoService } from '../../services/disc.service';
 import { Disc } from '../../interfaces/disc/disc';
 import { CardDiscComponent } from '../../componentes/card.disc.component/card.disc.component';
 import { DiscApiService } from '../../services/disc.api.service';
+import { ComparerResultComponent } from '../../comparer.result.component/comparer.result.component';
 
 @Component({
-  selector: 'app-disc.comparison.component',
-  imports: [CardDiscComponent],
+  selector: 'app-disc-comparison-component',
+  imports: [CardDiscComponent, ComparerResultComponent],
   templateUrl: './disc.comparison.page.component.html',
   styleUrl: './disc.comparison.page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DiscComparisonPageComponent {
   constructor() {}
-  desiredDisc = signal<Disc | null>(null);
-  existingDisc = signal<Disc | null>(null);
+  desiredDisc = signal<Disc>({} as Disc);
+  existingDisc = signal<Disc>({} as Disc);
   private route = inject(ActivatedRoute);
   private discService = inject(DiscoService);
   private discApiService = inject(DiscApiService);

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, input, signal } from '@angular/core';
 import { Disc } from '../../interfaces/disc/disc';
 import { KeyValuePipe, TitleCasePipe } from '@angular/common';
 import { KonvaDiscComponent } from '../konva.disc.component/konva.disc.component';
@@ -15,7 +15,11 @@ import { DiscTheme, THEMES } from '../../styles/discThemes';
 export class CardDiscComponent {
   title = input.required<string>();
   disc = input.required<Disc>();
+
   isWarning = signal<boolean>(false);
   themeName = input.required<DiscTheme>();
   theme = computed(() => THEMES[this.themeName()]);
+  constructor() {
+    effect(() => console.log(this.disc()));
+  }
 }

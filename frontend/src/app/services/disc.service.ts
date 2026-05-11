@@ -7,8 +7,8 @@ import { LocalStorageData } from './types';
   providedIn: 'root',
 })
 export class DiscoService {
-  existingDiscService = signal<Disc | null>(this.getInitialExistingDiscValue());
-  desiredDiscService = signal<Disc | null>(this.getInitialDesiredDiscValue());
+  existingDiscService = signal<Disc>(this.getInitialExistingDiscValue());
+  desiredDiscService = signal<Disc>(this.getInitialDesiredDiscValue());
   constructor() {
     effect(() => {
       const disc = this.existingDiscService();
@@ -28,20 +28,20 @@ export class DiscoService {
     });
   }
 
-  private getInitialExistingDiscValue(): Disc | null {
+  private getInitialExistingDiscValue(): Disc {
     const discString = localStorage.getItem(LocalStorageData.EXISTING_DISC);
     try {
-      return discString ? JSON.parse(discString) : null;
+      return discString ? JSON.parse(discString) : ({} as Disc);
     } catch {
-      return null;
+      return {} as Disc;
     }
   }
-  private getInitialDesiredDiscValue(): Disc | null {
+  private getInitialDesiredDiscValue(): Disc {
     const discString = localStorage.getItem(LocalStorageData.DESIRED_DISC);
     try {
-      return discString ? JSON.parse(discString) : null;
+      return discString ? JSON.parse(discString) : ({} as Disc);
     } catch {
-      return null;
+      return {} as Disc;
     }
   }
 
@@ -61,10 +61,10 @@ export class DiscoService {
     this.desiredDiscService.set(disc);
   }
 
-  getExistingDisc(): Disc | null {
+  getExistingDisc(): Disc {
     return this.existingDiscService();
   }
-  getResiredDisc(): Disc | null {
+  getResiredDisc(): Disc {
     return this.desiredDiscService();
   }
 }

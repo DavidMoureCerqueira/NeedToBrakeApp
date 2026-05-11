@@ -1,12 +1,30 @@
-<div class="flex flex-row justify-evenly p-4">
-  <card-disc-component
-    [title]="'Desired Disc'"
-    [disc]="desiredDisc()!"
-    [themeName]="'desired'"
-  ></card-disc-component>
-  <card-disc-component
-    [title]="'Actual Disc'"
-    [disc]="existingDisc()!"
-    [themeName]="'current'"
-  ></card-disc-component>
+<div class="flex flex-col gap-5 w-full items-center justify-center">
+  <div class="max-w-2xl text-center my-6 px-4">
+    <p class="text-zinc-300 leading-relaxed italic">
+      "We know that you are looking for your perfect disc. To assist you, we evaluate potential
+      <span class="text-error font-bold">modifications</span> versus a
+      <span class="text-success font-bold">direct fit</span> based on your current setup."
+    </p>
+  </div>
+  <app-comparer-result-component
+    [existingDisc]="existingDisc()"
+    [desiredDisc]="desiredDisc()"
+  ></app-comparer-result-component>
+  <div
+    class="grid grid-cols-1 lg:flex lg:flex-row lg:justify-evenly gap-8 p-4 w-full max-w-5xl mx-auto justify-items-center items-start"
+  >
+    <card-disc-component
+      [title]="'Actual Disc'"
+      [disc]="existingDisc()!"
+      [themeName]="'current'"
+      class="w-full"
+    ></card-disc-component>
+
+    <card-disc-component
+      [title]="'Desired Disc'"
+      [disc]="desiredDisc()!"
+      [themeName]="'desired'"
+      class="w-full"
+    ></card-disc-component>
+  </div>
 </div>
