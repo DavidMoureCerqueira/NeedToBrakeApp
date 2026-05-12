@@ -31,7 +31,11 @@
     @if (isValidField('password')) {
       <span class="text-warning">{{ getFieldError('password') }}</span>
     }
-    <button class="btn btn-neutral mt-4">{{ title() }}</button>
+    @if (isLoading() && !error()) {
+      <div class="self-center justify-self-center text-center loading loading-spinner"></div>
+    } @else {
+      <button class="btn btn-neutral mt-4">{{ title() }}</button>
+    }
     @if (!isRegisterForm()) {
       <p>
         If you don't have an account you

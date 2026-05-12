@@ -25,7 +25,7 @@ export class RegisterPageComponent {
 
         this.authService.setSession(res.token, res.user);
 
-        this.router.navigate(['/']);
+        this.router.navigate(['/profile', res.user.id]);
       },
       error: (err) => {
         this.error.set(err.error.error || err.message || 'Unexpected error');

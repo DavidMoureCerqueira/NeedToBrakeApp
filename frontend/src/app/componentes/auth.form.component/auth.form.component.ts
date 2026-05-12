@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, effect, inject, input, output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  inject,
+  input,
+  output,
+  signal,
+} from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthForm } from '../../interfaces/auth/authForm';
 import { RouterLink } from '@angular/router';
@@ -15,6 +23,7 @@ export class AuthFormComponent {
   title = input.required<string>();
   formEmitter = output<AuthForm>();
   error = input<string>('');
+  isLoading = signal<boolean>(false);
 
   private fb = inject(FormBuilder);
 
@@ -92,7 +101,7 @@ export class AuthFormComponent {
       this.authForm.markAllAsTouched();
       return;
     }
-
+    this.isLoading.set(true);
     this.formEmitter.emit(this.authForm.value);
   }
 }

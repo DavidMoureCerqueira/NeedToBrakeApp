@@ -4,8 +4,7 @@
 @import '@angular/cdk/overlay-prebuilt.css';
 @plugin "daisyui" {
   themes:
-    aqua --default,
-    dark --prefersdark;
+    /* aqua --default, */ dark --default;
   /* business */
 }
 * {
