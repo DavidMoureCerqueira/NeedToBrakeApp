@@ -3,12 +3,13 @@ import {
   Component,
   computed,
   effect,
+  ElementRef,
   inject,
   input,
   signal,
+  viewChild,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { CarDisc } from '../../interfaces/disc/car.disc';
 import { FormatPCDPipe } from '../../pipes/format.pcd.pipe';
 import { FormatMMPipe } from '../../pipes/format.mm.pipe';
 import { TitleCasePipe } from '@angular/common';
@@ -25,6 +26,23 @@ export class ListDiscComponent {
   discApiService = inject(DiscApiService);
   querySearch = signal<string>('');
   carPipe = inject(FormatCarPipe);
+
+  resultsList = viewChild<ElementRef>('resultsList');
+
+  constructor() {
+    effect(() => {
+      const element = this.resultsList()?.nativeElement;
+
+      if (element) {
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+
+        element.focus();
+      }
+    });
+  }
 
   filteredDiscList = computed(() => {
     const listResource = this.discApiService.filteredDiscResource;

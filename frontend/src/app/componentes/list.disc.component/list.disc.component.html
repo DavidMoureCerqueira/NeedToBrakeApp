@@ -7,7 +7,7 @@
     (input)="querySearch.set(text.value)"
   />
 </div>
-<div class="flex flex-col gap-4 md:grid md:grid-cols-2 lg:grid-cols-3">
+<div #resultsList class="flex flex-col gap-4 md:grid md:grid-cols-2 lg:grid-cols-3">
   @for (item of filteredDiscList(); track item.disc.id) {
     <div
       class="bg-base-100 shadow-md rounded-xl border border-base-300 overflow-hidden cursor-pointer"
