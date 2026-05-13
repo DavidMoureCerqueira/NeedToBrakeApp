@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { Disc } from '../interfaces/disc/disc';
-import { KeyValuePipe, TitleCasePipe } from '@angular/common';
+import { TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-comparer-result-component',
-  imports: [TitleCasePipe, KeyValuePipe],
+  imports: [TitleCasePipe],
   templateUrl: './comparer.result.component.html',
   styleUrl: './comparer.result.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
