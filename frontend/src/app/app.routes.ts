@@ -79,7 +79,7 @@ export const routes: Routes = [
         component: PostDetailPageComponent,
         title: 'Post detail - NeedToBrake',
         resolve: {
-          post: postResolver,
+          postData: postResolver,
         },
       },
     ],

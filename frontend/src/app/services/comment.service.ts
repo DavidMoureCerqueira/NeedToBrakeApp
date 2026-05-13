@@ -16,6 +16,7 @@ import { Pagination } from '../interfaces/pagination';
 import { CommentFromDatabase } from '../interfaces/database.responses/comment.from.database';
 import { mapPaginationDatabaseToPagination } from '../mappers/map.pagination.database.to.pagination';
 import { CommentForDatabase } from '../interfaces/database.request/comment.for.database';
+import { rxResource } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root',
@@ -23,10 +24,29 @@ import { CommentForDatabase } from '../interfaces/database.request/comment.for.d
 export class CommentService {
   private API_URL = environment.apiUrl;
   private http = inject(HttpClient);
-  private refreshCommentsSource = new Subject<void>();
-
-  refreshComments = this.refreshCommentsSource.asObservable();
   constructor() {}
+
+  getCommentsResource(
+    postId: () => number,
+    page: () => number = () => 1,
+    limit: () => number = () => 5,
+  ) {
+    return rxResource({
+      params: () => ({
+        postId: postId(),
+        page: page(),
+        limit: limit(),
+      }),
+      defaultValue: {
+        items: [],
+        total: 0,
+        page: 1,
+        pages: 1,
+        hasNext: false,
+      },
+      stream: ({ params }) => this.getCommentsByPostId(params.postId, params.page, params.limit),
+    });
+  }
 
   getCommentsByPostId(
     postId: number,
@@ -77,7 +97,30 @@ export class CommentService {
         }),
       );
   }
-  notifyCommentAdded() {
-    this.refreshCommentsSource.next();
+
+  modifyComment(content: string, id: number): Observable<ModelRespComplete<Comment>> {
+    const URL = `${this.API_URL}/comment/modify`;
+    return this.http
+      .put<ModelRespComplete<CommentFromDatabase>>(
+        URL,
+        { content, comment_id: id },
+        {
+          context: new HttpContext().set(REQUIRES_AUTH, true),
+        },
+      )
+      .pipe(
+        map((response) => {
+          if (!response.success || !response.data) {
+            throw new Error(response.error || 'Error modifying comment');
+          }
+          return {
+            success: response.success,
+            data: mapCommentDatabaseToComment(response.data),
+          };
+        }),
+        catchError((err: Error) => {
+          return throwError(() => err.message);
+        }),
+      );
   }
 }

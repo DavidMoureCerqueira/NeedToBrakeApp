@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpContext, HttpParams } from '@angular/common/http';
 import {
@@ -24,6 +24,7 @@ import { PostListDatabase } from '../interfaces/database.responses/post.list.fro
 import { PostList } from '../interfaces/post/post.list';
 import { mapPostListDatabaseToPostListArray } from '../mappers/map.post.list.database.to.post.list';
 import { mapPostCreationToPostToDatabase } from '../mappers/map.post.creation.to.post.database';
+import { rxResource } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +33,18 @@ export class ForumService {
   private API_URL = environment.apiUrl;
   private http = inject(HttpClient);
 
+  dataFromResolver = signal<PostDetail>({} as PostDetail);
   constructor() {}
+
+  postDetailResource = rxResource({
+    params: () => this.dataFromResolver().id,
+    defaultValue: this.dataFromResolver(),
+    stream: ({ params }) => this.getPostById(params),
+  });
+
+  setInitialData(post: PostDetail) {
+    this.dataFromResolver.set(post);
+  }
 
   getLatestPost(page: number = 1, limit = 5): Observable<Pagination<Post>> {
     const URL = `${this.API_URL}/post/latest`;
@@ -77,7 +89,7 @@ export class ForumService {
         }),
       );
   }
-  getPostById(postId: string): Observable<PostDetail> {
+  getPostById(postId: number): Observable<PostDetail> {
     const URL = `${this.API_URL}/post/${postId}`;
     return this.http
       .get<ModelRespComplete<PostDetailFromDatabase>>(URL, {

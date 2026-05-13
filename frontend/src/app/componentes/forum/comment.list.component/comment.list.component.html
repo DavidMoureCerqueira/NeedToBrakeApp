@@ -5,7 +5,7 @@
     </div>
   } @else {
     @for (comment of paginationComments().items; track comment.id) {
-      <comment-component [comment]="comment"></comment-component>
+      <comment-component [comment]="comment" [resource]="resource()"></comment-component>
     }
     @if (paginationComments().pages > 1) {
       <app-pagination-component

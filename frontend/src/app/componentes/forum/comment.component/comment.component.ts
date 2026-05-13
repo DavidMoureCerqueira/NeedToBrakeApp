@@ -1,9 +1,21 @@
-import { ChangeDetectionStrategy, Component, effect, inject, input, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  inject,
+  input,
+  ResourceRef,
+  signal,
+} from '@angular/core';
 import { Comment } from '../../../interfaces/post/comment';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
+import { CommentService } from '../../../services/comment.service';
+import { successMessages } from '../../../../utils/successMessages';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Pagination } from '../../../interfaces/pagination';
 
 @Component({
   selector: 'comment-component',
@@ -16,7 +28,13 @@ export class CommentComponent {
   isEditing = signal<boolean>(false);
   authService = inject(AuthService);
   comment = input.required<Comment>();
-  editContent = new FormControl('', [Validators.required, Validators.minLength(1)]);
+  commentService = inject(CommentService);
+  resource = input.required<ResourceRef<Pagination<Comment>>>();
+  private snackbar = inject(MatSnackBar);
+
+  editForm = new FormGroup({
+    content: new FormControl('', [Validators.required, Validators.minLength(1)]),
+  });
   isOwner = signal<boolean>(false);
   constructor() {
     effect(() => {
@@ -24,43 +42,32 @@ export class CommentComponent {
     });
   }
   startEdit() {
-    this.editContent.setValue(this.comment().content);
+    this.editForm.patchValue({
+      content: this.comment().content,
+    });
     this.isEditing.set(true);
   }
-  // private fb = inject(FormBuilder);
 
-  // profileForm = this.fb.group({
-  //   content: [''],
-  //   : [''],
-  //   favPads: [''],
-  //   favCircuit: [''],
-  // });
-
-  // toggleIsEditing() {
-  //   if (!this.isEditing()) {
-  //     const current = this.comment();
-  //     if (current) {
-  //       this.profileForm.patchValue({
-  //         country: current.country,
-  //         flag: current.flag,
-  //         favCircuit: current.favCircuit,
-  //         favPads: current.favPads,
-  //       });
-  //     }
-  //   }
-  //   this.isEditing.set(!this.isEditing());
-  // }
-
-  // onSaveChanges() {
-  //   if (this.profileForm.invalid) return;
-  //   this.userService.updateProfile(this.profileForm.value as ProfileEdit).subscribe({
-  //     next: () => {
-  //       this.userService.profileResource.reload();
-  //     },
-  //     error: (msg: string) => {
-  //       console.log('ERROR:', msg);
-  //     },
-  //   });
-  //   this.isEditing.set(false);
-  // }
+  saveEdit() {
+    const form = this.editForm;
+    if (form && form.value.content) {
+      const content = form.value.content;
+      this.commentService.modifyComment(content, this.comment().id).subscribe({
+        next: () => {
+          this.snackbar.open(successMessages.COMMENT_MODIFIED, 'close', {
+            duration: 5000,
+            panelClass: ['success-snackbar'],
+          });
+          this.isEditing.set(false);
+          this.resource().reload();
+        },
+        error: (err) => {
+          this.snackbar.open(err, 'close', {
+            duration: 5000,
+            panelClass: ['error-snackbar'],
+          });
+        },
+      });
+    }
+  }
 }

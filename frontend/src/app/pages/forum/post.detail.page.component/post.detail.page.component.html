@@ -3,7 +3,7 @@
     [post]="this.post()"
     (showCommentInput)="handleShowCommentinInput()"
     [isCommenting]="isCommenting()"
-    [commentCount]="this.commentCount()"
+    [commentCount]="this.post().commentCount"
   ></post-detail-component>
   @if (this.isCommenting()) {
     <write-comment-component
@@ -13,9 +13,6 @@
   }
   <section class="mt-8 md:mt-12">
     <h3 class="text-xl md:text-2xl font-bold mb-6">Comments</h3>
-    <comment-list-component
-      [postId]="this.post().id"
-      (totalCommentsChanged)="updateCount($event)"
-    ></comment-list-component>
+    <comment-list-component [resource]="commentsResource"></comment-list-component>
   </section>
 </div>
