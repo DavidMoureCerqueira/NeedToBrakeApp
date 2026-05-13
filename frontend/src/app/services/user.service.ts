@@ -123,6 +123,25 @@ export class UserService {
         }),
       );
   }
+  removeCarGarage(id: number): Observable<ModelRespComplete<string>> {
+    const URL = `${this.URL}/garage/delete-garage-item/version/${id}`;
+    return this.http
+      .delete<
+        ModelRespComplete<string>
+      >(URL, { context: new HttpContext().set(REQUIRES_AUTH, true) })
+      .pipe(
+        map((response) => {
+          if (!response.success) {
+            throw new Error(response.error || 'Imposible to remove car from garage');
+          }
+          return response;
+        }),
+        catchError((err) => {
+          return throwError(() => err.message);
+        }),
+      );
+  }
+
   addAvatar(file: File): Observable<ModelRespComplete<string>> {
     const URL = `${this.URL}/user/set-avatar`;
     const formData = new FormData();

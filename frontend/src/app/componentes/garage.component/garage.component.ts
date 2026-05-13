@@ -13,6 +13,8 @@ import { FormatCarPipe } from '../../pipes/format.car.pipe';
 import { AuthService } from '../../services/auth.service';
 import { CarSelectorComponent } from '../car.selector.component/car.selector.component';
 import { CarClean } from '../../interfaces/cars/car';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { successMessages } from '../../../utils/successMessages';
 
 @Component({
   selector: 'garage-component',
@@ -23,6 +25,7 @@ import { CarClean } from '../../interfaces/cars/car';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GarageComponent {
+  private snackbar = inject(MatSnackBar);
   id = input.required<number>();
   userService = inject(UserService);
   authService = inject(AuthService);
@@ -78,5 +81,23 @@ export class GarageComponent {
       },
     });
     throw new Error('Method not implemented.');
+  }
+  deleteCar(versionId: number) {
+    this.userService.removeCarGarage(versionId).subscribe({
+      next: (res) => {
+        if (res.success) {
+          this.snackbar.open(successMessages.CAR_DELETED, 'close', {
+            duration: 5000,
+            panelClass: ['success-snackbar'],
+          });
+          this.garageResource.reload();
+        } else {
+          this.snackbar.open(res.error!, 'close', {
+            duration: 5000,
+            panelClass: ['error-snackbar'],
+          });
+        }
+      },
+    });
   }
 }
