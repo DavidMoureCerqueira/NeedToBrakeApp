@@ -5,8 +5,8 @@ import { Disc } from '../../interfaces/disc/disc';
 import { CarDisc } from '../../interfaces/disc/car.disc';
 import { ListDiscComponent } from '../../componentes/list.disc.component/list.disc.component';
 import { DataIlustrationComponent } from '../../componentes/data.ilustration.component/data.ilustration.component';
-import { CarClean } from '../../interfaces/cars/car';
 import { CarService } from '../../services/car.service';
+import { LoaderComponent } from '../../componentes/loader.component/loader.component';
 
 @Component({
   selector: 'select-disc-page',

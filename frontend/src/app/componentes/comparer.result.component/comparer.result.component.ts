@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { Disc } from '../interfaces/disc/disc';
+import { Disc } from '../../interfaces/disc/disc';
 import { TitleCasePipe } from '@angular/common';
 
 @Component({

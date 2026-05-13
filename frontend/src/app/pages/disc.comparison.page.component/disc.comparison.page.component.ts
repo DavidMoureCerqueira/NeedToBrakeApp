@@ -4,7 +4,7 @@ import { DiscoService } from '../../services/disc.service';
 import { Disc } from '../../interfaces/disc/disc';
 import { CardDiscComponent } from '../../componentes/card.disc.component/card.disc.component';
 import { DiscApiService } from '../../services/disc.api.service';
-import { ComparerResultComponent } from '../../comparer.result.component/comparer.result.component';
+import { ComparerResultComponent } from '../../componentes/comparer.result.component/comparer.result.component';
 
 @Component({
   selector: 'app-disc-comparison-component',
