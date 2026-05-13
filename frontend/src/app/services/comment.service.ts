@@ -123,4 +123,22 @@ export class CommentService {
         }),
       );
   }
+  deleteComment(id: number): Observable<ModelRespComplete<string>> {
+    const URL = `${this.API_URL}/comment/delete/${id}`;
+    return this.http
+      .delete<ModelRespComplete<string>>(URL, {
+        context: new HttpContext().set(REQUIRES_AUTH, true),
+      })
+      .pipe(
+        map((response) => {
+          if (!response.success || !response.data) {
+            throw new Error(response.error || 'Error deleting comment');
+          }
+          return response;
+        }),
+        catchError((err: Error) => {
+          return throwError(() => err.message);
+        }),
+      );
+  }
 }

@@ -21,12 +21,15 @@ import { Comment } from '../../../interfaces/post/comment';
 })
 export class CommentListComponent {
   pageChange = output<number>();
-  resource = input.required<ResourceRef<Pagination<Comment>>>();
-  paginationComments = computed(() => this.resource().value());
-
+  commentResource = input.required<ResourceRef<Pagination<Comment>>>();
+  paginationComments = computed(() => this.commentResource().value());
+  commentListUpdate = output<void>();
   getItemsByPage(page: number) {
     if (page === this.paginationComments().page) return;
     if (page === this.paginationComments().pages + 1) return;
     this.pageChange.emit(page);
+  }
+  commentUpdate() {
+    this.commentListUpdate.emit();
   }
 }

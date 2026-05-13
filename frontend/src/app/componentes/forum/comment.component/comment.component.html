@@ -33,6 +33,14 @@
             ></textarea>
           </div>
           <div class="flex justify-end gap-2">
+            <div class="justify-self-start">
+              <button
+                class="text-[10px] bg-error font-black uppercase text-black px-4 py-1 rounded-full cursor-pointer"
+                (click)="deleteComment()"
+              >
+                Delete comment
+              </button>
+            </div>
             <button
               type="button"
               (click)="isEditing.set(false)"

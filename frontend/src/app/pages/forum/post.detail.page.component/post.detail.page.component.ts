@@ -32,14 +32,16 @@ export class PostDetailPageComponent {
   private snackbar = inject(MatSnackBar);
   currentPage = signal(1);
   commentsResource = this.commentService.getCommentsResource(this.postId, this.currentPage);
-  constructor() {}
+
   postResource = this.forumService.postDetailResource;
   post = computed(() => this.forumService.postDetailResource.value());
 
   handleShowCommentinInput() {
     this.isCommenting.update((value) => !value);
   }
-
+  handlePageChange(page: number) {
+    this.currentPage.set(page);
+  }
   createComment(comment: string) {
     this.commentService.saveComment({ content: comment, post_id: this.post().id }).subscribe({
       next: (res) => {
@@ -59,5 +61,8 @@ export class PostDetailPageComponent {
         }
       },
     });
+  }
+  updateData() {
+    this.postResource.reload();
   }
 }

@@ -4,6 +4,7 @@ import {
   effect,
   inject,
   input,
+  output,
   ResourceRef,
   signal,
 } from '@angular/core';
@@ -30,6 +31,7 @@ export class CommentComponent {
   comment = input.required<Comment>();
   commentService = inject(CommentService);
   resource = input.required<ResourceRef<Pagination<Comment>>>();
+  commentUpdate = output<void>();
   private snackbar = inject(MatSnackBar);
 
   editForm = new FormGroup({
@@ -60,6 +62,7 @@ export class CommentComponent {
           });
           this.isEditing.set(false);
           this.resource().reload();
+          this.commentUpdate.emit();
         },
         error: (err) => {
           this.snackbar.open(err, 'close', {
@@ -69,5 +72,24 @@ export class CommentComponent {
         },
       });
     }
+  }
+
+  deleteComment() {
+    this.commentService.deleteComment(this.comment().id).subscribe({
+      next: () => {
+        this.snackbar.open(successMessages.COMMENT_DELETED, 'close', {
+          duration: 5000,
+          panelClass: ['success-snackbar'],
+        });
+        this.isEditing.set(false);
+        this.resource().reload();
+      },
+      error: (err) => {
+        this.snackbar.open(err, 'close', {
+          duration: 5000,
+          panelClass: ['error-snackbar'],
+        });
+      },
+    });
   }
 }
