@@ -21,8 +21,12 @@
         tabindex="-1"
         class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-4 shadow"
       >
-        <li><a [routerLink]="['/']">Disc Comparer</a></li>
-        <li><a [routerLink]="['/forum']">Forum</a></li>
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a [routerLink]="['/select']">Disc Comparer</a>
+        </li>
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a [routerLink]="['/forum']">Forum</a>
+        </li>
       </ul>
     </div>
     <a class="pl-4 hover:cursor-pointer" [routerLink]="['/']">
@@ -31,8 +35,12 @@
   </div>
   <div class="navbar-center hidden lg:flex">
     <ul class="menu menu-horizontal px-1">
-      <li><a [routerLink]="['/select']">Disc Comparer</a></li>
-      <li><a [routerLink]="['/forum']">Forum</a></li>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a [routerLink]="['/select']">Disc Comparer</a>
+      </li>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a [routerLink]="['/forum']">Forum</a>
+      </li>
     </ul>
   </div>
   @if (!this.authService.isAuthenticated()) {
@@ -42,14 +50,63 @@
     </div>
   }
   @if (this.authService.isAuthenticated()) {
-    <div class="navbar-end flex flex-row gap-5">
-      <p>Welcome {{ this.authService.currentUser()?.username }}</p>
+    <div class="navbar-end">
+      <div class="dropdown dropdown-end">
+        <div
+          tabindex="0"
+          role="button"
+          class="btn btn-ghost flex items-center gap-3 px-2 sm:px-4 hover:bg-base-content/5 rounded-xl"
+        >
+          <div class="flex flex-col items-end">
+            <span class="text-[10px] opacity-50 uppercase font-black tracking-widest">Driver</span>
+            <span class="text-sm font-bold">{{ this.authService.currentUser()?.username }}</span>
+          </div>
 
-      @if (isProfile()) {
-        <button class="btn" (click)="logOut()">Log-out</button>
-      } @else {
-        <button class="btn" (click)="goToMyProfile()">Profile</button>
-      }
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4 opacity-50"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+        </div>
+
+        <ul
+          tabindex="0"
+          class="dropdown-content menu p-2 shadow-2xl bg-base-200 rounded-box w-52 mt-4 border border-base-content/10 z-100"
+        >
+          <li class="menu-title px-4 py-2 text-[10px] opacity-50 uppercase font-black">
+            Control Panel
+          </li>
+          @if (!isProfile()) {
+            <li>
+              <a (click)="goToMyProfile()" class="flex justify-between items-center py-3">
+                My Profile
+                <i class="fa-solid fa-user-gear opacity-50"></i>
+              </a>
+            </li>
+          }
+
+          <div class="divider my-0 opacity-10"></div>
+
+          <li>
+            <a
+              (click)="logOut()"
+              class="text-error flex justify-between items-center py-3 active:bg-error active:text-error-content"
+            >
+              Logout
+              <i class="fa-solid fa-right-from-bracket"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
   }
 </div>

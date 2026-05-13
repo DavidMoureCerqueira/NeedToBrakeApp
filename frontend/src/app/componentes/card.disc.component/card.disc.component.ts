@@ -7,7 +7,7 @@ import { DiscTheme, THEMES } from '../../styles/discThemes';
 
 @Component({
   selector: 'card-disc-component',
-  imports: [KeyValuePipe, TitleCasePipe, KonvaDiscComponent, KonvaProfileDiscComponent],
+  imports: [KeyValuePipe, KonvaDiscComponent, KonvaProfileDiscComponent],
   templateUrl: './card.disc.component.html',
   styleUrl: './card.disc.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -6,7 +6,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'header-component',
-  imports: [RouterLink],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './header-component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
