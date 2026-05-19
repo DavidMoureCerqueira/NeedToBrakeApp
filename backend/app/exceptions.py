@@ -122,6 +122,26 @@ class InvalidImageFormatError(NeedToBrakeException):
         )
 
 
+class PostAlreadyLikedException(NeedToBrakeException):
+    def __init__(
+        self,
+    ):
+        super().__init__(
+            f"You already like that post",
+            status.HTTP_400_BAD_REQUEST,
+        )
+
+
+class PostAlreadyDidNotLikedException(NeedToBrakeException):
+    def __init__(
+        self,
+    ):
+        super().__init__(
+            f"You didn't like that post",
+            status.HTTP_400_BAD_REQUEST,
+        )
+
+
 logger = logging.getLogger("uvicorn.error")
 
 

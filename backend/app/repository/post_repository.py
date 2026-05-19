@@ -4,7 +4,7 @@ from sqlmodel import Session, desc, func, select
 from sqlalchemy.orm import joinedload
 
 from models.models import ItemsWithTotal, PostDetail
-from models.table_models import Comment, Model, Post, Version
+from models.table_models import Comment, Model, Post, PostLike, Version
 
 
 def create_post(session: Session, post: Post) -> Post:
@@ -69,3 +69,17 @@ def get_post_by_id_detailed(session: Session, post_id: int) -> Post:
         select(Post).where(Post.id == post_id).options(joinedload(Post.author))
     ).first()
     return post
+
+
+def get_number_likes(session: Session, post_id: int) -> int:
+    count = session.exec(
+        select(func.count(PostLike.post_id)).where(PostLike.post_id == post_id)
+    ).one()
+    return count
+
+
+def check_user_liked_post(session: Session, post_id: int, user_id: int) -> bool:
+    stmt = select(PostLike).where(
+        PostLike.post_id == post_id, PostLike.user_id == user_id
+    )
+    return session.exec(stmt).first() is not None

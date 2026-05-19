@@ -221,6 +221,8 @@ class PostDetail(PostBase):
     comment_count: Optional[int] = 0
     is_owner: Optional[bool] = False
     version: Optional[VersionRead] = None
+    likes_count: int = 0
+    is_liked: bool = False
     model_config = {"from_attributes": True}
 
 

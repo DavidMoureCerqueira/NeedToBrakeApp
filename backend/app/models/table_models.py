@@ -47,6 +47,9 @@ class User(SQLModel, table=True):
     posts: List["Post"] = Relationship(back_populates="author")
     garage_cars: List["UserVersionGarage"] = Relationship(back_populates="user")
     comments: List["Comment"] = Relationship(back_populates="author")
+    liked_posts: List["PostLike"] = Relationship(
+        back_populates="user", sa_relationship_kwargs={"cascade": "all, delete-orphan"}
+    )
 
     @staticmethod
     def hashPassword(password: str):
@@ -67,6 +70,9 @@ class Post(PostBase, table=True):
         back_populates="posts", sa_relationship_kwargs={"passive_deletes": True}
     )
     comments: List["Comment"] = Relationship(
+        back_populates="post", sa_relationship_kwargs={"cascade": "all, delete-orphan"}
+    )
+    likes: List["PostLike"] = Relationship(
         back_populates="post", sa_relationship_kwargs={"cascade": "all, delete-orphan"}
     )
 
@@ -93,3 +99,11 @@ class Comment(SQLModel, table=True):
 
     author: "User" = Relationship(back_populates="comments")
     post: "Post" = Relationship(back_populates="comments")
+
+
+class PostLike(SQLModel, table=True):
+    user_id: int = Field(foreign_key="user.id", primary_key=True, ondelete="CASCADE")
+    post_id: int = Field(foreign_key="post.id", primary_key=True, ondelete="CASCADE")
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    user: "User" = Relationship(back_populates="liked_posts")
+    post: "Post" = Relationship(back_populates="likes")

@@ -10,8 +10,10 @@ from models.table_models import Post
 from repository.post_repository import (
     check_post_by_user,
     check_post_by_version,
+    check_user_liked_post,
     create_post,
     get_latest_post_by_user_and_version,
+    get_number_likes,
     get_post_by_id_detailed,
 )
 from models.models import PostCreate, PaginationResponse, PostDetail, PostReadList
@@ -93,7 +95,11 @@ def get_post_by_id(session: Session, post_id: int, user_id: int) -> PostDetail:
     full_version = None
     if post.version_id:
         full_version = get_version_full(session=session, version_id=post.version_id)
+    likes_count = get_number_likes(session=session, post_id=post_id)
+    is_liked = check_user_liked_post(session=session, post_id=post_id, user_id=user_id)
     post_detail.is_owner = post.user_id == user_id
     post_detail.comment_count = comment_count
     post_detail.version = full_version
+    post_detail.likes_count = likes_count
+    post_detail.is_liked = is_liked
     return post_detail
