@@ -1,12 +1,12 @@
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 h-full min-h-0 items-stretch">
   <div class="relative group flex justify-center items-center min-h-0 py-4 md:py-0">
     <img
-      class="w-32 h-32 md:w-48 md:h-48 lg:w-64 lg:h-64 aspect-square rounded-full object-cover shadow-2xl border-4 border-zinc-800 shrink-0"
+      class="w-32 h-32 md:w-48 md:h-48 lg:w-64 lg:h-64 aspect-square rounded-full object-cover shadow-2xl border-4 color-border shrink-0"
       src="{{ profile().urlAvatar || 'images/profile_image.webp' }}"
       alt="Avatar"
     />
     <div
-      class="absolute bottom-1 right-1 bg-primary text-white p-2 rounded-full shadow-lg md:hidden"
+      class="absolute bottom-1 right-1 bg-primary main-text p-2 rounded-full shadow-lg md:hidden"
       (click)="fileInput.click()"
     >
       <svg
@@ -23,13 +23,13 @@
       </svg>
     </div>
     <div
-      class="absolute w-32 h-32 md:w-48 md:h-48 lg:w-64 lg:h-64 aspect-square rounded-full bg-black/50 hidden group-hover:flex flex-col items-center justify-center gap-2 transition-all duration-300"
+      class="absolute w-32 h-32 md:w-48 md:h-48 lg:w-64 lg:h-64 aspect-square rounded-full color-surface hidden group-hover:flex flex-col items-center justify-center gap-2 transition-all duration-300"
     >
       <button class="btn btn-active" (click)="fileInput.click()">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
           <path
             fill="none"
-            stroke="currentColor"
+            stroke="#3b82f6"
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-miterlimit="10"
@@ -49,7 +49,7 @@
   </div>
 
   <div
-    class="relative bg-zinc-950/40 p-6 md:p-8 rounded-[4xl] border border-zinc-800/60 flex flex-col justify-between gap-4 shadow-inner min-h-0"
+    class="relative color-surface p-6 md:p-8 rounded-2xl border color-border flex flex-col justify-between gap-4 shadow-inner min-h-0"
   >
     <app-personal-data-component [profile]="profile()"></app-personal-data-component>
 
@@ -60,12 +60,12 @@
         🏎️ {{ profile().numCars }} Cars
       </div>
       <div
-        class="bg-zinc-800/60 px-4 py-2 rounded-full border border-zinc-700 text-[10px] text-zinc-300 font-black uppercase tracking-widest"
+        class="bg-zinc-800/60 px-4 py-2 rounded-full border color-border text-[10px] secondary-text font-black uppercase tracking-widest"
       >
         📝 {{ profile().numPosts }} Posts
       </div>
       <div
-        class="bg-zinc-800/60 px-5 py-2 rounded-full border border-zinc-700 text-[10px] text-zinc-300 font-black uppercase tracking-widest"
+        class="bg-zinc-800/60 px-5 py-2 rounded-full border color-border text-[10px] secondary-text font-black uppercase tracking-widest"
       >
         💬 {{ profile().numComments }} Comments
       </div>

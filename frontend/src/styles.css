@@ -9,12 +9,9 @@
 }
 * {
   margin: 0;
-  /* padding: 0; */
   box-sizing: border-box;
 }
-/* 1. Importante: Esto permite que el Snackbar se posicione correctamente */
 
-/* 2. Estilo personalizado para el Snackbar de Error */
 .error-snackbar {
   background-color: #18181b; /* zinc-900 */
   color: #ffffff;
@@ -25,7 +22,6 @@
   font-family: 'Inter', sans-serif; /* O la que estés usando */
 }
 
-/* Estilo para el botón "CERRAR" */
 .error-snackbar .mat-mdc-snack-bar-action button {
   color: #ef4444; /* rojo-500 */
   font-weight: 800;
@@ -33,7 +29,6 @@
   letter-spacing: 0.05em;
 }
 
-/* 3. Estilo para el Snackbar de Éxito (opcional) */
 .success-snackbar {
   background-color: #18181b;
   color: #ffffff;
@@ -42,7 +37,6 @@
 }
 
 @layer base {
-  /* Mapeamos tu objeto THEMES a CSS nativo */
   [data-theme='desired'] {
     --color-border: 3px solid #2b4f47;
     --color-bg-primary: #486a4e;
@@ -142,20 +136,67 @@
   .disc-selector button {
     background-color: transparent;
     color: var(--color-text);
-    /* flex-1 hace que ocupen todo el ancho disponible por igual */
     @apply flex-1 py-2 text-xs font-bold uppercase tracking-widest transition-all;
     @apply hover:bg-white/5 active:bg-white/10 cursor-pointer;
   }
 
-  /* Clase opcional para marcar cuál está activo */
   .disc-selector button.active {
     background-color: rgba(255, 255, 255, 0.05);
-    box-shadow: inset 0 -2px 0 0 var(--color-text); /* Línea indicadora opcional */
+    box-shadow: inset 0 -2px 0 0 var(--color-text);
     @apply opacity-100;
   }
-  /* Para el menu con routerlinkactive */
   .menu li.active {
     @apply bg-white/10 backdrop-blur-sm border border-white/5 rounded-xl;
     color: inherit;
   }
+  .base-bg {
+    background-color: hsl(240 5% 16%);
+    /* //bg-zinc-900 */
+  }
+  .color-surface {
+    background-color: hsla(240, 5%, 11%, 0.3);
+    backdrop-filter: blur(12px);
+    /* bg-zinc-900/30 */
+  }
+
+  .color-border {
+    border-color: hsl(240, 5%, 16%);
+    /* //border-zinc-800 */
+  }
+  .bg-title-table {
+    background-color: hsl(0, 0%, 0%);
+  }
+  .main-text {
+    color: hsl(0, 0%, 100%);
+  }
+
+  .title-text {
+    color: hsl(240, 5%, 84%);
+    /* text-zinc-200 */
+  }
+  .secondary-text {
+    color: hsl(240, 5%, 80%);
+    /* text-zinc-300 */
+  }
+  .terciary-text {
+    color: hsl(240, 5%, 34%);
+    /* text-zinc-600 */
+  }
+  .hover-white {
+    background-color: hsl(0 0% 100% / 0.05);
+    /* bg-white/5 */
+  }
+
+  .hover-button {
+    background-color: hsl(240, 5%, 15%);
+    /* zinc-800 */
+  }
+
+  .focus-border {
+    border-color: hsl(217 91% 60%);
+    /* blue-500 */
+  }
+
+  /*  fill="true"
+          stroke="#3b82f6" */
 }

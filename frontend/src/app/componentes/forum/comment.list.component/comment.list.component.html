@@ -1,16 +1,18 @@
 <div class="space-y-6 md:space-y-8">
   @if (paginationComments().items.length === 0) {
-    <div class="text-center py-10 bg-base-200/20 rounded-2xl border border-dashed border-base-300">
+    <div class="text-center py-10 color-surface rounded-2xl border border-dashed color-border">
       <p class="text-xs md:text-sm opacity-40 italic">No comments yet. Start the conversation!</p>
     </div>
   } @else {
-    @for (comment of paginationComments().items; track comment.id) {
-      <comment-component
-        [comment]="comment"
-        [resource]="commentResource()"
-        (commentUpdate)="commentUpdate()"
-      ></comment-component>
-    }
+    <div class="flex flex-col gap-4 py-4">
+      @for (comment of paginationComments().items; track comment.id) {
+        <comment-component
+          [comment]="comment"
+          [resource]="commentResource()"
+          (commentUpdate)="commentUpdate()"
+        ></comment-component>
+      }
+    </div>
     @if (paginationComments().pages > 1) {
       <app-pagination-component
         [pagination]="{

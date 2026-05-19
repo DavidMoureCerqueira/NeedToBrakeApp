@@ -16,14 +16,14 @@
   <div class="relative flex flex-row flex-wrap justify-center items-center gap-10">
     @if (isFilters()) {
       <div
-        class="md:absolute md:z-50 bottom-12 border border-base-200 p-4 bg-warning-content rounded-4xl shadow-xl min-w-max"
+        class="md:absolute md:z-50 bottom-12 border color-border p-4 bg-warning-content rounded-4xl shadow-xl min-w-max"
       >
         Please select any disc field for searching
       </div>
     }
     @if (this.discApiService.filteredDiscResource.error() && !isFilters()) {
       <div
-        class="md:absolute md:z-50 bottom-12 border border-base-200 p-4 bg-warning-content rounded-4xl shadow-xl min-w-max"
+        class="md:absolute md:z-50 bottom-12 border color-border p-4 bg-warning-content rounded-4xl shadow-xl min-w-max"
       >
         There is no results found for this filters
       </div>

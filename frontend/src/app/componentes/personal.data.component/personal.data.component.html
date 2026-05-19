@@ -10,8 +10,8 @@
     <div class="absolute top-0 right-0 cursor-pointer" (click)="toggleIsEditing()">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
         <g
-          fill="none"
-          stroke="#27272a"
+          fill="true"
+          stroke="#3b82f6"
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-width="1"
@@ -44,32 +44,30 @@
     </div>
     @if (this.profile().flag) {
       <div
-        class="flex flex-col items-center justify-center bg-zinc-800 border-2 border-zinc-700 px-4 py-2 rounded-2xl shrink-0 ml-4"
+        class="flex flex-col items-center justify-center color-surface border-2 color-border px-4 py-2 rounded-2xl shrink-0 ml-4"
       >
         <!-- Bandera -->
 
         <img class="w-5 h-3 md:w-8 md:h-6" [src]="this.profile().flag" alt="" />
-        <!-- Abreviatura -->
-        <!-- <span class="text-[10px] font-black text-zinc-300">ES</span> -->
       </div>
     }
   </div>
   <div class="grid grid-cols-2 gap-4 my-6">
-    <div class="border-l-4 border-zinc-800 pl-4">
+    <div class="border-l-4 color-border pl-4">
       <span class="text-[10px] md:text-[11px] text-zinc-500 uppercase font-black tracking-widest"
         >Email</span
       >
-      <span class="text-sm md:text-base lg:text-lg text-zinc-200 block truncate font-bold">
+      <span class="text-sm md:text-base lg:text-lg title-text block truncate font-bold">
         {{ this.profile().isOwner ? this.profile().email : '******@ntb.com' }}
       </span>
     </div>
-    <div class="border-l-4 border-zinc-800 pl-4">
+    <div class="border-l-4 color-border pl-4">
       <span class="text-[10px] md:text-[11px] text-zinc-500 uppercase font-black tracking-widest"
         >Country</span
       >
       <!-- City -->
 
-      <span class="text-sm md:text-base lg:text-lg text-zinc-200 block font-bold">
+      <span class="text-sm md:text-base lg:text-lg title-text block font-bold">
         {{ this.profile().country ? this.profile().country : 'Country  not set' }}</span
       >
     </div>
@@ -79,16 +77,16 @@
         >Fav Pads</span
       >
 
-      <span class="text-sm md:text-base lg:text-lg text-zinc-200 italic block font-bold"
+      <span class="text-sm md:text-base lg:text-lg title-text italic block font-bold"
         >{{ profile().favPads ? profile().favPads : 'FavPads not set' }}
       </span>
     </div>
     <!-- Circuit -->
-    <div class="border-l-4 border-zinc-800 pl-4">
+    <div class="border-l-4 color-border pl-4">
       <span class="text-[10px] md:text-[11px] text-zinc-500 uppercase font-black tracking-widest"
         >Fav Circuit</span
       >
-      <span class="text-sm md:text-base lg:text-lg text-zinc-200 block font-bold">{{
+      <span class="text-sm md:text-base lg:text-lg title-text block font-bold">{{
         profile().favCircuit ? profile().favCircuit : 'FavCircuit not set'
       }}</span>
     </div>
@@ -106,7 +104,7 @@
       </div>
       @if (profileForm.get('flagUrl')?.value) {
         <div
-          class="flex flex-col items-center justify-center bg-zinc-800 border-2 border-zinc-700 px-4 py-2 rounded-2xl shadow-[0_4px_0_0_rgba(0,0,0,0.5)] shrink-0 ml-4"
+          class="flex flex-col items-center justify-center color-surface border-2 color-border px-4 py-2 rounded-2xl shadow-[0_4px_0_0_rgba(0,0,0,0.5)] shrink-0 ml-4"
         >
           <img
             [src]="profileForm.get('flagUrl')?.value"
@@ -118,11 +116,11 @@
 
     <div class="grid grid-cols-2 gap-4 my-6">
       <!-- Email (Suele ser no editable, pero mantenemos el espacio) -->
-      <div class="border-l-4 border-zinc-800/30 pl-4 opacity-50">
+      <div class="border-l-4 color-border/30 pl-4 opacity-50">
         <span class="text-[10px] md:text-[11px] text-zinc-500 uppercase font-black tracking-widest"
           >Email</span
         >
-        <span class="text-sm block text-zinc-400 italic">No editable</span>
+        <span class="text-sm block secondary-text italic">No editable</span>
       </div>
 
       <!-- Input Country con datalist -->
@@ -135,7 +133,7 @@
           (input)="onCountryInput($event)"
           [value]="profileForm.get('country')?.value"
           placeholder="Busca..."
-          class="w-full bg-transparent text-sm md:text-base text-white font-bold outline-none border-b border-zinc-800 focus:border-primary"
+          class="w-full bg-transparent text-sm md:text-base text-white font-bold outline-none border-b color-border focus:border-primary"
         />
         <datalist id="countriesList">
           @for (c of userService.countriesResource.value(); track c.name) {
@@ -151,7 +149,7 @@
         >
         <input
           formControlName="favPads"
-          class="w-full bg-transparent text-sm md:text-base text-white font-bold outline-none border-b border-zinc-800 focus:border-primary italic"
+          class="w-full bg-transparent text-sm md:text-base text-white font-bold outline-none border-b color-border focus:border-blue-500 italic"
         />
       </div>
 
@@ -162,7 +160,7 @@
         >
         <input
           formControlName="favCircuit"
-          class="w-full bg-transparent text-sm md:text-base text-white font-bold outline-none border-b border-zinc-800 focus:border-primary"
+          class="w-full bg-transparent text-sm md:text-base text-white font-bold outline-none border-b color-border focus:border-primary"
         />
       </div>
     </div>

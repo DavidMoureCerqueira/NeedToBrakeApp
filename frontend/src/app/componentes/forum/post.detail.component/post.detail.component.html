@@ -1,4 +1,4 @@
-<article class="card bg-base-100 shadow-xl border border-base-200">
+<article class="card color-surface shadow-xl border color-border">
   <div class="card-body p-5 md:p-10">
     <div class="flex justify-between items-start mb-6">
       <div class="space-y-3">
@@ -13,7 +13,7 @@
           [routerLink]="[`/profile/${post().author?.id}`]"
         >
           <div class="avatar placeholder">
-            <div class="bg-neutral text-neutral-content rounded-full w-8">
+            <div class="base-bg text-neutral-content rounded-full w-8">
               <img [src]="post().author?.urlAvatar || 'images/profile_image.webp'" alt="Avatar" />
             </div>
           </div>
@@ -28,7 +28,7 @@
     </div>
 
     @if (post().car) {
-      <div class="bg-base-200/40 rounded-xl p-3 mb-4 border border-base-300">
+      <div class="color-surface rounded-xl p-3 mb-4 border color-border">
         <div class="flex items-center gap-2 text-xs md:text-sm flex-wrap">
           <div class="flex items-center gap-1 text-secondary font-bold shrink-0">
             <svg
@@ -99,7 +99,7 @@
           />
         </svg>
 
-        <span class="font-bold text-sm md:text-base">{{ commentCount() }} Comments</span>
+        <span class="font-bold text-sm md:text-base py-4">{{ commentCount() }} Comments</span>
       </div>
       @if (!isCommenting()) {
         <button class="btn btn-primary" (click)="emitCommentingInput()">Comment</button>
