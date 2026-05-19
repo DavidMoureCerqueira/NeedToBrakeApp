@@ -36,6 +36,10 @@ export class PostDetailPageComponent {
   postResource = this.forumService.postDetailResource;
   post = computed(() => this.forumService.postDetailResource.value());
 
+  constructor() {
+    effect(() => console.log(this.postData()));
+  }
+
   handleShowCommentinInput() {
     this.isCommenting.update((value) => !value);
   }
@@ -64,5 +68,44 @@ export class PostDetailPageComponent {
   }
   updateData() {
     this.postResource.reload();
+  }
+  handleLike(isLiked: boolean) {
+    if (isLiked) {
+      console.log('Vamos a darle like');
+      this.forumService.likeToPost(this.post().id).subscribe({
+        next: (res) => {
+          if (res.success && res.data) {
+            this.snackbar.open(res.data, 'close', {
+              duration: 5000,
+              panelClass: ['success-snackbar'],
+            });
+            this.forumService.postDetailResource.reload();
+          } else {
+            this.snackbar.open(res.error!, 'close', {
+              duration: 5000,
+              panelClass: ['error-snackbar'],
+            });
+          }
+        },
+      });
+    } else {
+      console.log('Vamos a quitar el like');
+      this.forumService.unLikeToPost(this.post().id).subscribe({
+        next: (res) => {
+          if (res.success && res.data) {
+            this.snackbar.open(res.data, 'close', {
+              duration: 5000,
+              panelClass: ['success-snackbar'],
+            });
+            this.forumService.postDetailResource.reload();
+          } else {
+            this.snackbar.open(res.error!, 'close', {
+              duration: 5000,
+              panelClass: ['error-snackbar'],
+            });
+          }
+        },
+      });
+    }
   }
 }

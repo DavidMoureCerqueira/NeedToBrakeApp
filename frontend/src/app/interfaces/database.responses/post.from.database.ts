@@ -14,4 +14,6 @@ export interface PostFromDatabase {
   date: string;
   version?: VersionDatabase;
   comment_count: number;
+  likes_count?: number;
+  is_liked?: boolean;
 }

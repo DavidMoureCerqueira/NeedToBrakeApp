@@ -4,6 +4,7 @@
     (showCommentInput)="handleShowCommentinInput()"
     [isCommenting]="isCommenting()"
     [commentCount]="this.post().commentCount"
+    (likeEmitter)="handleLike($event)"
   ></post-detail-component>
   @if (this.isCommenting()) {
     <write-comment-component

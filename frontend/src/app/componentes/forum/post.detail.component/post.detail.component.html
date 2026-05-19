@@ -83,23 +83,79 @@
     <div class="divider my-0 opacity-10"></div>
 
     <div class="card-actions justify-between w-full items-center pt-4 opacity-70">
-      <div class="flex items-center gap-2">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-5 w-5 md:h-6 md:w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
-          />
-        </svg>
-
-        <span class="font-bold text-sm md:text-base py-4">{{ commentCount() }} Comments</span>
+      <div class="flex flex-col">
+        <div class="flex items-center gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 md:h-6 md:w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+            />
+          </svg>
+          <span class="font-bold text-sm md:text-base py-2">{{ commentCount() }} Comments</span>
+        </div>
+        <div class="flex items-center gap-2 cursor-pointer" (click)="handleLike()">
+          @if (post().isLiked) {
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              class="h-5 w-5 md:h-6 md:w-6"
+            >
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path
+                fill="#f71616"
+                fill-opacity="0"
+                d="M12 8c0 0 0 0 0.76 -1c0.88 -1.16 2.18 -2 3.74 -2c2.49 0 4.5 2.01 4.5 4.5c0 0.93 -0.28 1.79 -0.76 2.5c-0.81 1.21 -8.24 9 -8.24 9c0 0 -7.43 -7.79 -8.24 -9c-0.48 -0.71 -0.76 -1.57 -0.76 -2.5c0 -2.49 2.01 -4.5 4.5 -4.5c1.56 0 2.87 0.84 3.74 2c0.76 1 0.76 1 0.76 1Z"
+              >
+                <animate
+                  fill="freeze"
+                  attributeName="fill-opacity"
+                  begin="0.6s"
+                  dur="0.4s"
+                  to="1"
+                />
+              </path>
+              <path
+                fill="none"
+                stroke="#f71616"
+                stroke-dasharray="30"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 8c0 0 0 0 -0.76 -1c-0.88 -1.16 -2.18 -2 -3.74 -2c-2.49 0 -4.5 2.01 -4.5 4.5c0 0.93 0.28 1.79 0.76 2.5c0.81 1.21 8.24 9 8.24 9M12 8c0 0 0 0 0.76 -1c0.88 -1.16 2.18 -2 3.74 -2c2.49 0 4.5 2.01 4.5 4.5c0 0.93 -0.28 1.79 -0.76 2.5c-0.81 1.21 -8.24 9 -8.24 9"
+              >
+                <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.6s" values="30;0" />
+              </path>
+            </svg>
+          } @else {
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              class="h-5 w-5 md:h-6 md:w-6"
+            >
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path
+                fill="none"
+                stroke="#f71616"
+                stroke-dasharray="30"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 8c0 0 0 0 -0.76 -1c-0.88 -1.16 -2.18 -2 -3.74 -2c-2.49 0 -4.5 2.01 -4.5 4.5c0 0.93 0.28 1.79 0.76 2.5c0.81 1.21 8.24 9 8.24 9M12 8c0 0 0 0 0.76 -1c0.88 -1.16 2.18 -2 3.74 -2c2.49 0 4.5 2.01 4.5 4.5c0 0.93 -0.28 1.79 -0.76 2.5c-0.81 1.21 -8.24 9 -8.24 9"
+              >
+                <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.6s" values="30;0" />
+              </path>
+            </svg>
+          }
+          <span class="font-bold text-sm md:text-base py-2">{{ post().likes }} Likes</span>
+        </div>
       </div>
       @if (!isCommenting()) {
         <button class="btn btn-primary" (click)="emitCommentingInput()">Comment</button>

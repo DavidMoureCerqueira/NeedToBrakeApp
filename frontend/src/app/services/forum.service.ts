@@ -128,4 +128,20 @@ export class ForumService {
         }),
       );
   }
+  likeToPost(postId: number) {
+    const URL = `${this.API_URL}/like/${postId}/like`;
+    return this.http.post<ModelRespComplete<string>>(
+      URL,
+      {},
+      {
+        context: new HttpContext().set(REQUIRES_AUTH, true),
+      },
+    );
+  }
+  unLikeToPost(postId: number) {
+    const URL = `${this.API_URL}/like/${postId}/unlike`;
+    return this.http.delete<ModelRespComplete<string>>(URL, {
+      context: new HttpContext().set(REQUIRES_AUTH, true),
+    });
+  }
 }

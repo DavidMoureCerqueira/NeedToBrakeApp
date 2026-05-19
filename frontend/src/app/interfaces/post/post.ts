@@ -13,4 +13,6 @@ export interface Post {
   date: string;
   car?: CarClean;
   comments: number;
+  likes?: number;
+  isLiked?: boolean;
 }

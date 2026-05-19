@@ -16,6 +16,8 @@ export function mapPostDatabaseToPost(postDB: PostFromDatabase): Post {
         urlAvatar: postDB.author?.url_avatar,
       },
       comments: postDB.comment_count,
+      likes: postDB.likes_count,
+      isLiked: postDB.is_liked,
     };
   } else {
     return {
@@ -29,6 +31,8 @@ export function mapPostDatabaseToPost(postDB: PostFromDatabase): Post {
         urlAvatar: postDB.author?.url_avatar,
       },
       comments: postDB.comment_count,
+      likes: postDB.likes_count,
+      isLiked: postDB.is_liked,
     };
   }
 }

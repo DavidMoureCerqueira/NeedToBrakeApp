@@ -16,8 +16,17 @@ export class PostDetailComponent {
   showCommentInput = output();
   isCommenting = input.required<boolean>();
   commentCount = input.required<number>();
+  likeEmitter = output<boolean>();
 
   emitCommentingInput() {
     this.showCommentInput.emit();
+  }
+  handleLike() {
+    console.log('click');
+    if (this.post().isLiked) {
+      this.likeEmitter.emit(false);
+    } else {
+      this.likeEmitter.emit(true);
+    }
   }
 }

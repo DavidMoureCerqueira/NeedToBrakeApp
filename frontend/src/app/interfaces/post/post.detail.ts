@@ -1,5 +1,4 @@
 import { CarClean } from '../cars/car';
-import { Post } from './post';
 
 export interface PostDetail {
   title: string;
@@ -14,4 +13,6 @@ export interface PostDetail {
     urlAvatar: string | undefined;
   };
   car?: CarClean;
+  likes?: number;
+  isLiked?: boolean;
 }

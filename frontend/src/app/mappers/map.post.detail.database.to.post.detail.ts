@@ -17,6 +17,8 @@ export function mapPostDetailDatabaseToPostDetail(post: PostDetailFromDatabase):
       commentCount: post.comment_count,
       isOwner: post.is_owner,
       car: mapVersionCompleteToCarClean(post.version),
+      isLiked: post.is_liked,
+      likes: post.likes_count,
     };
   }
   return {
@@ -31,5 +33,7 @@ export function mapPostDetailDatabaseToPostDetail(post: PostDetailFromDatabase):
     },
     commentCount: post.comment_count,
     isOwner: post.is_owner,
+    isLiked: post.is_liked,
+    likes: post.likes_count,
   };
 }
