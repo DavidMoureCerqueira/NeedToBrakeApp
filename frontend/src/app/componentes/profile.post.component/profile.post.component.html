@@ -44,18 +44,18 @@
               >
                 {{ post.title }}
               </p>
-              <p class="text-[11px] text-zinc-500 font-bold uppercase mt-1">
+              <p class="text-[11px] terciary-text font-bold uppercase mt-1">
                 @if (post.car) {
                   {{ post.car | formatCar }}
                 } @else {
                   No car related
                 }
               </p>
-              <p class="text-[11px] text-zinc-500 font-bold uppercase mt-1">
+              <p class="text-[11px] terciary-text font-bold uppercase mt-1">
                 {{ post.date | date: 'dd MMM yyyy' }}
               </p>
             </td>
-            <td class="p-4 text-right pr-6 text-base text-zinc-500 font-mono">
+            <td class="p-4 text-right pr-6 text-base terciary-text font-mono">
               💬 {{ post.comments }}
             </td>
           </tr>

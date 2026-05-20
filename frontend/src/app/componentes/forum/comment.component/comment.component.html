@@ -34,24 +34,15 @@
           </div>
           <div class="flex justify-end gap-2">
             <div class="justify-self-start">
-              <button
-                class="text-[10px] bg-error font-black uppercase text-black px-4 py-1 rounded-full cursor-pointer"
-                (click)="deleteComment()"
-              >
-                Delete comment
-              </button>
+              <button class="button-delete" (click)="deleteComment()">Delete comment</button>
             </div>
-            <button
-              type="button"
-              (click)="isEditing.set(false)"
-              class="text-[10px] font-black uppercase text-zinc-500 cursor-pointer"
-            >
+            <button type="button" (click)="isEditing.set(false)" class="button-cancel">
               Cancel
             </button>
             <button
               type="submit"
               [disabled]="editForm.invalid || editForm.pristine"
-              class="bg-white text-black px-4 py-1 rounded-full text-[10px] font-black uppercase italic cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              class="button-save"
             >
               Save
             </button>

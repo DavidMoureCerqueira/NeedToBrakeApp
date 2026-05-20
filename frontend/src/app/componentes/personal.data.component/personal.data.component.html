@@ -2,7 +2,7 @@
   <div class="flex justify-between items-center">
     <div class="min-w-0">
       <h2
-        class="text-2xl md:text-3xl lg:text-4xl font-black text-white uppercase italic tracking-tighter truncate"
+        class="text-2xl md:text-3xl lg:text-4xl px-4 font-black text-white uppercase italic tracking-tighter truncate"
       >
         {{ this.profile().username }}
       </h2>
@@ -132,7 +132,7 @@
           list="countriesList"
           (input)="onCountryInput($event)"
           [value]="profileForm.get('country')?.value"
-          placeholder="Busca..."
+          placeholder="Search..."
           class="w-full bg-transparent text-sm md:text-base text-white font-bold outline-none border-b color-border focus:border-primary"
         />
         <datalist id="countriesList">
@@ -166,20 +166,8 @@
     </div>
 
     <div class="flex justify-end gap-2">
-      <button
-        type="button"
-        (click)="isEditing.set(false)"
-        class="text-[10px] font-black uppercase text-zinc-500"
-      >
-        Cancel
-      </button>
-      <button
-        type="submit"
-        [disabled]="profileForm.invalid"
-        class="bg-white text-black px-4 py-1 rounded-full text-[10px] font-black uppercase italic disabled:opacity-50"
-      >
-        Save
-      </button>
+      <button type="button" (click)="isEditing.set(false)" class="button-cancel">Cancel</button>
+      <button type="submit" [disabled]="profileForm.invalid" class="button-save">Save</button>
     </div>
   </form>
 }
