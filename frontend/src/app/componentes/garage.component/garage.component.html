@@ -48,7 +48,7 @@
           </tr>
           @for (item of garage(); track item.car.version.id) {
             <tr class="hover:bg-zinc-800 transition-colors group">
-              <td class="p-4 text-base font-bold secondary-text pl-6 uppercase tracking-tight">
+              <td class="p-4 text-base font-bold title-text pl-6 uppercase tracking-tight">
                 {{ item.car | formatCar }}
               </td>
               @if (item.isFavourite) {

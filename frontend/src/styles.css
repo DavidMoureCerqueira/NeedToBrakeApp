@@ -18,16 +18,6 @@
   color: #ffffff;
   border-left: 5px solid #dc2626; /* Rojo intenso */
   border-radius: 8px;
-  padding: 0.75rem 1.25rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
-  font-family: 'Inter', sans-serif; /* O la que estés usando */
-}
-
-.error-snackbar .mat-mdc-snack-bar-action button {
-  color: #ef4444; /* rojo-500 */
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
 
 .success-snackbar {
@@ -105,7 +95,7 @@
 
   .disc-input[type='number'] {
     -moz-appearance: textfield;
-    appearance: textfield; /* Para navegadores modernos */
+    appearance: textfield;
   }
   .disc-input {
     background-color: rgba(255, 255, 255, 0.05); /* Fondo sutil */
@@ -184,7 +174,7 @@
     /* text-zinc-200 */
   }
   .secondary-text {
-    color: hsl(240, 5%, 80%);
+    color: hsl(240, 5%, 50%);
     /* text-zinc-300 */
   }
   .terciary-text {

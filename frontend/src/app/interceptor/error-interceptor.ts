@@ -21,12 +21,15 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
         router.navigate(['/maintenance']);
       } else if (error.status === 401) {
         router.navigate(['/sign-in']);
-      } else if (
-        (error.status === 404 && req.url.includes('/users/profile/')) ||
-        req.url.includes('disc-comparison/') ||
-        req.url.includes('forum/post/')
-      ) {
-        router.navigate(['/404']);
+      } else if (error.status === 404) {
+        const browserUrl = router.url;
+        const apiUrl = req.url;
+        const isProfile = browserUrl.includes('/profile/') || apiUrl.includes('user/profile/');
+        const isComparison = browserUrl.includes('/disc-comparison/') || apiUrl.includes('/disc/');
+        const isPost = browserUrl.includes('/forum/post/') || apiUrl.includes('/post/');
+        if (isPost || isComparison || isProfile) {
+          router.navigate(['/404']);
+        }
       } else if (error.status === 403) {
         router.navigate(['/forbidden']);
       }
