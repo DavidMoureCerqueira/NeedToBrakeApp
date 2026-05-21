@@ -34,7 +34,9 @@
           </div>
           <div class="flex justify-end gap-2">
             <div class="justify-self-start">
-              <button class="button-delete" (click)="deleteComment()">Delete comment</button>
+              <button type="button" class="button-delete" (click)="deleteComment()">
+                Delete comment
+              </button>
             </div>
             <button type="button" (click)="isEditing.set(false)" class="button-cancel">
               Cancel
