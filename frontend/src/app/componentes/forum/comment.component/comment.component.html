@@ -1,6 +1,6 @@
 <div class="flex gap-2.5 md:gap-3.5 items-start">
   <div class="flex-1">
-    <div class="bg-base-200/60 rounded-2xl p-3.5 md:p-4 border color-border">
+    <div class="bg-base-200/60 rounded-2xl p-3.5 md:p-4 border border-border">
       <div class="flex justify-between items-center gap-3 mb-2.5">
         <div
           class="flex flex-row items-center cursor-pointer"
@@ -8,7 +8,7 @@
         >
           <div class="avatar placeholder shrink-0 mt-0.5">
             <div
-              class="bg-neutral text-neutral-content rounded-full w-8 md:w-10 border color-border"
+              class="bg-neutral text-neutral-content rounded-full w-8 md:w-10 border border-border"
             >
               <img [src]="comment().author.urlAvatar || 'images/profile_image.webp'" alt="Avatar" />
             </div>
@@ -17,7 +17,7 @@
             @{{ comment().author.username }}
           </span>
         </div>
-        <span class="text-[10px] md:text-xs text-base-content/40 whitespace-nowrap">
+        <span class="text-2xs md:text-xs text-base-content/40 whitespace-nowrap">
           {{ comment().createdAt | date: 'short' }}
         </span>
       </div>
@@ -28,7 +28,7 @@
             class="text-sm md:text-base text-base-content/80 leading-relaxed whitespace-pre-wrap wrap-break-word"
           >
             <textarea
-              class="w-full border-2 rounded-2xl px-4 b-blue-400"
+              class="w-full border-2 rounded-2xl px-4 border-(--contrast-color)"
               formControlName="content"
             ></textarea>
           </div>
@@ -62,7 +62,7 @@
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <g
                   fill="true"
-                  stroke="#3b82f6"
+                  stroke="var(--contrast-color)"
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="1"

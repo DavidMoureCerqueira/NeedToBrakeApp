@@ -7,10 +7,36 @@
     /* aqua --default, */ dark --default;
   /* business */
 }
+@theme {
+  --text-2xs: 0.625rem; /* Esto equivale a 10px */
+  --red-icon: #f71616;
+  --fav-color: #e4f70a;
+  --contrast-color: #3b5bf6;
+  --layout-color: #181a1f;
+  --main-text-color: #ffffff;
+  --primary-text-color: #d4d4d8;
+  --secondary-text-color: #7f7f8c;
+  --tertiary-text-color: #52525b;
+  --hover-option-color: #242426;
+  --base-bg: #262629;
+  --color-border: #303033;
+  --dark-contrast: #000000;
+}
 * {
   margin: 0;
   box-sizing: border-box;
   font-family: sans-serif;
+  --red-icon: #f71616;
+  --fav-color: #e4f70a;
+  --contrast-color: #3b5bf6;
+  --layout-color: #181a1f;
+  --main-text-color: #ffffff;
+  --primary-text-color: #d4d4d8;
+  --secondary-text-color: #7f7f8c;
+  --tertiary-text-color: #52525b;
+  --hover-option-color: #242426;
+  --base-bg: #262629;
+  --color-border: #303033;
 }
 
 .error-snackbar {
@@ -44,9 +70,7 @@
     --color-text: #ecf0f1;
   }
 }
-* {
-  --fav-color: #e4f70a;
-}
+
 @layer components {
   .disc-section {
     background-color: var(--color-bg-secondary);
@@ -83,7 +107,7 @@
   }
 
   .disc-item label {
-    @apply text-[10px] font-bold uppercase tracking-wider opacity-80;
+    @apply text-2xs font-bold uppercase tracking-wider opacity-80;
     color: var(--color-text);
   }
 
@@ -139,66 +163,17 @@
     color: inherit;
   }
   .button-save {
-    @apply bg-white text-black px-4 py-1 rounded-full text-[10px] font-black uppercase italic cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply bg-white text-black px-4 py-1 rounded-full text-2xs font-black uppercase italic cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
   .button-cancel {
-    @apply text-[10px] font-black uppercase text-zinc-500 cursor-pointer;
+    @apply text-2xs font-black uppercase text-zinc-500 cursor-pointer;
   }
   .button-delete {
-    @apply text-[10px] bg-error font-black uppercase text-black px-4 py-1 rounded-full cursor-pointer;
-  }
-  .base-bg {
-    background-color: hsl(240 5% 16%);
-    /* //bg-zinc-900 */
+    @apply text-2xs bg-error font-black uppercase text-black px-4 py-1 rounded-full cursor-pointer;
   }
   .color-surface {
     background-color: hsla(240, 5%, 11%, 0.3);
     backdrop-filter: blur(12px);
-    /* bg-zinc-900/30 */
   }
-
-  .color-border {
-    border-color: hsl(240, 5%, 16%);
-    /* //border-zinc-800 */
-  }
-  .bg-title-table {
-    background-color: hsl(0, 0%, 0%);
-  }
-  .main-text {
-    color: hsl(0, 0%, 100%);
-  }
-
-  .title-text {
-    color: hsl(240, 5%, 84%);
-    /* text-zinc-200 */
-  }
-  .secondary-text {
-    color: hsl(240, 5%, 50%);
-    /* text-zinc-300 */
-  }
-  .terciary-text {
-    color: hsl(240, 5%, 34%);
-    /* text-zinc-600 */
-  }
-  .hover-white {
-    background-color: hsl(0 0% 100% / 0.05);
-    /* bg-white/5 */
-  }
-
-  .hover-button {
-    background-color: hsl(240, 5%, 15%);
-    /* zinc-800 */
-  }
-
-  .focus-border {
-    border-color: hsl(217 91% 60%);
-    /* blue-500 */
-  }
-  .layout-color {
-    background-color: hsla(222, 13%, 11%, 1);
-  }
-  /*  fill="true"
-          stroke="#3b82f6" */
-  /* #f71616 */
 }

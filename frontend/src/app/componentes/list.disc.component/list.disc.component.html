@@ -1,6 +1,6 @@
 <div class="sticky top-0 z-50 w-full p-4">
   <input
-    class="input input-bordered w-full shadow-md focus:border-blue-500"
+    class="input input-bordered w-full shadow-md focus:border-(--contrast-color)"
     placeholder="Filter by car data..."
     #text
     type="text"
@@ -10,42 +10,42 @@
 <div #resultsList class="flex flex-col gap-4 md:grid md:grid-cols-2 lg:grid-cols-3">
   @for (item of filteredDiscList(); track item.disc.id) {
     <div
-      class="color-surface shadow-md rounded-xl border color-border overflow-hidden cursor-pointer hover:bg-zinc-800 transition-all group"
+      class="color-surface shadow-md rounded-xl border border-border overflow-hidden cursor-pointer hover:bg-(--hover-option-color) transition-all group"
       [routerLink]="['/disc-comparison', item.disc.id]"
     >
-      <div class="color-surface p-3 flex justify-between items-center border-b color-border">
+      <div class="color-surface p-3 flex justify-between items-center border-b border-border">
         <span class="font-bold text-sm">{{ item.car | formatCar }}</span>
         <span class="badge badge-primary badge-sm">{{ item.disc.position }}</span>
       </div>
 
-      <div class="grid grid-cols-2 sm:grid-cols-3 gap-0 border-b color-border">
-        <div class="p-2 border-r border-b color-border">
-          <p class="text-[10px] uppercase opacity-50 font-bold">Diameter</p>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-0 border-b border-border">
+        <div class="p-2 border-r border-b border-border">
+          <p class="text-2xs uppercase opacity-50 font-bold">Diameter</p>
           <p class="text-sm">{{ item.disc.diameter | mm }}</p>
         </div>
 
-        <div class="p-2 border-r border-b color-border">
-          <p class="text-[10px] uppercase opacity-50 font-bold">Height</p>
+        <div class="p-2 border-r border-b border-border">
+          <p class="text-2xs uppercase opacity-50 font-bold">Height</p>
           <p class="text-sm">{{ item.disc.height | mm }}</p>
         </div>
 
-        <div class="p-2 border-b color-border sm:border-r">
-          <p class="text-[10px] uppercase opacity-50 font-bold">PCD</p>
+        <div class="p-2 border-b border-border sm:border-r">
+          <p class="text-2xs uppercase opacity-50 font-bold">PCD</p>
           <p class="text-sm">{{ item.disc | formatPCD }}</p>
         </div>
 
-        <div class="p-2 border-r border-b color-border">
-          <p class="text-[10px] uppercase opacity-50 font-bold">Centerbore</p>
+        <div class="p-2 border-r border-b border-border">
+          <p class="text-2xs uppercase opacity-50 font-bold">Centerbore</p>
           <p class="text-sm">{{ item.disc.centerBore | mm }}</p>
         </div>
 
-        <div class="p-2 border-r border-b color-border">
-          <p class="text-[10px] uppercase opacity-50 font-bold">Thickness</p>
+        <div class="p-2 border-r border-b border-border">
+          <p class="text-2xs uppercase opacity-50 font-bold">Thickness</p>
           <p class="text-sm">{{ item.disc.thickness | mm }}</p>
         </div>
 
-        <div class="p-2 border-b color-border">
-          <p class="text-[10px] uppercase opacity-50 font-bold">Style</p>
+        <div class="p-2 border-b border-border">
+          <p class="text-2xs uppercase opacity-50 font-bold">Style</p>
           <p class="text-xs">{{ item.disc.style | titlecase }}</p>
         </div>
       </div>

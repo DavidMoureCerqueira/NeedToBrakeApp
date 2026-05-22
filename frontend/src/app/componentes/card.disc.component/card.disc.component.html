@@ -5,7 +5,7 @@
   [style.color]="theme().text"
 >
   <div
-    class="w-full h-48 flex flex-row relative overflow-hidden rounded-t-xl border-b color-border"
+    class="w-full h-48 flex flex-row relative overflow-hidden rounded-t-xl border-b border-border"
     [style.background]="theme().backGroundSecondary"
   >
     @if (isWarning()) {
@@ -59,10 +59,10 @@
               </g>
             </mask>
           </defs>
-          <path fill="#e4f70a" d="M0 0h24v24H0z" mask="url(#SVGG1he6d3K)" />
+          <path fill="var(--fav-color)" d="M0 0h24v24H0z" mask="url(#SVGG1he6d3K)" />
           <g
             fill="none"
-            stroke="#e4f70a"
+            stroke="var(--fav-color)"
             stroke-dasharray="20"
             stroke-dashoffset="20"
             stroke-linecap="round"
@@ -108,7 +108,7 @@
     ></konva-disc-component>
 
     <konva-profile-disc-component
-      class="h-full w-[30%] border-l color-border"
+      class="h-full w-[30%] border-l border-border"
       [disc]="disc()"
       [bgColor]="theme().backGroundSecondary"
     ></konva-profile-disc-component>
@@ -124,11 +124,11 @@
     <div class="space-y-1">
       @for (item of disc() | keyvalue; track item.key) {
         @if (item.key !== 'id') {
-          <div class="flex justify-between items-center py-1 border-b color-border last:border-0">
-            <span class="text-[12px] font-bold secondary-text uppercase tracking-widest">
+          <div class="flex justify-between items-center py-1 border-b border-border last:border-0">
+            <span class="text-xs font-bold text-(--secondary-text-color)uppercase tracking-widest">
               {{ item.key }}
             </span>
-            <span class="text-sm font-mono font-semibold">
+            <span class="text-sm font-semibold">
               {{ item.value || '---' }}
             </span>
           </div>

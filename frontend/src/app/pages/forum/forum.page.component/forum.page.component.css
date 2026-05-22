@@ -2,4 +2,11 @@
   display: block;
   width: 100%;
   flex: 1;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (min-width: 768px) {
+  :host {
+    width: 75%;
+  }
 }

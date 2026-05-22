@@ -1,4 +1,4 @@
-<div class="navbar layout-color shadow-sm">
+<div class="navbar bg-(--layout-color) shadow-sm">
   <div class="navbar-start">
     <div class="dropdown">
       <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
@@ -58,7 +58,7 @@
           class="btn btn-ghost flex items-center gap-3 px-2 sm:px-4 hover:bg-base-content/5 rounded-xl"
         >
           <div class="flex flex-col items-end">
-            <span class="text-[10px] opacity-50 uppercase font-black tracking-widest">Driver</span>
+            <span class="text-2xs opacity-50 uppercase font-black tracking-widest">Driver</span>
             <span class="text-sm font-bold">{{ this.authService.currentUser()?.username }}</span>
           </div>
 
@@ -82,7 +82,7 @@
           tabindex="0"
           class="dropdown-content menu p-2 shadow-2xl bg-base-200 rounded-box w-52 mt-4 border border-base-content/10 z-100"
         >
-          <li class="menu-title px-4 py-2 text-[10px] opacity-50 uppercase font-black">
+          <li class="menu-title px-4 py-2 text-2xs opacity-50 uppercase font-black">
             Control Panel
           </li>
           @if (!isProfile()) {

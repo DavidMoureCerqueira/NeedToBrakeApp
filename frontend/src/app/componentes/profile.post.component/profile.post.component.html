@@ -1,27 +1,29 @@
 <div
-  class="flex flex-col border color-border rounded-4xl overflow-hidden color-surface min-h-0 shadow-lg"
+  class="flex flex-col border border-border rounded-4xl overflow-hidden color-surface min-h-0 shadow-lg"
 >
-  <div class="grid items-center border-b color-border color-surface">
+  <div class="grid items-center border-b border-border color-surface">
     <div
-      class="col-start-1 row-start-1 py-3 text-center font-black text-xs secondary-text uppercase tracking-[0.3em]"
+      class="col-start-1 row-start-1 py-3 text-center font-black text-xs text-(--primary-text-color) uppercase tracking-[0.3em]"
     >
       Posts
     </div>
     @if (isOwner()) {
       <div class="col-start-1 row-start-1 h-full flex justify-end">
         <a
-          class="h-full flex items-center px-6 gap-2 color-surface hover:bg-zinc-800 transition-all group"
+          class="h-full flex items-center px-6 gap-2 color-surface hover:bg-(--hover-option-color) transition-all group"
           [routerLink]="['/forum/post/create']"
         >
-          <span class="terciary-text group-hover:text-lime-400 font-bold">+</span>
-          <span class="terciary-text uppercase group-hover:title-text"> Add </span>
+          <span class="text-(--tertiary-text-color) group-hover:text-lime-400 font-bold">+</span>
+          <span
+            class="text-(--tertiary-text-color) uppercase group-hover:var(--hover-option-color)"
+          >
+            Add
+          </span>
         </a>
       </div>
     }
   </div>
-  <div
-    class="flex-1 overflow-y-auto md:max-h-[25vh] min-h-0 scrollbar-thin scrollbar-thumb-zinc-800"
-  >
+  <div class="flex-1 overflow-y-auto md:max-h-[25vh] min-h-0">
     <table class="w-full border-collapse">
       <tbody class="divide-y divide-zinc-900/50">
         <tr>
@@ -37,26 +39,117 @@
           }
         </tr>
         @for (post of userPosts().items; track post.id) {
-          <tr class="group hover:bg-zinc-800/40 transition-colors cursor-pointer">
+          <tr class="group hover:bg-(--hover-option-color) transition-colors cursor-pointer">
             <td class="p-4 pl-6" [routerLink]="[`/forum/post/${post.id}`]">
               <p
-                class="text-base font-bold title-text group-hover:text-red-500 transition-colors italic uppercase tracking-tight"
+                class="text-base font-bold text-(--primary-text-color) group-hover:text-(--contrast-color) transition-colors italic uppercase tracking-tight"
               >
                 {{ post.title }}
               </p>
-              <p class="text-[11px] terciary-text font-bold uppercase mt-1">
+              <p class="text-2xs text-(--tertiary-text-color) font-bold uppercase mt-1">
                 @if (post.car) {
                   {{ post.car | formatCar }}
                 } @else {
                   No car related
                 }
               </p>
-              <p class="text-[11px] terciary-text font-bold uppercase mt-1">
+              <p class="text-2xs text-(--tertiary-text-color) font-bold uppercase mt-1">
                 {{ post.date | date: 'dd MMM yyyy' }}
               </p>
             </td>
-            <td class="p-4 text-right pr-6 text-base terciary-text font-mono">
-              💬 {{ post.comments }}
+            <td class="p-4 text-right pr-6 text-base text-(--tertiary-text-color)">
+              <div class="flex flex-row items-center gap-2 justify-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  class="h-5 w-5 md:h-6 md:w-6"
+                >
+                  <path d="M0 0h24v24H0z" fill="none" />
+                  <defs>
+                    <mask id="SVGm3548dEM">
+                      <g fill="#fff">
+                        <path
+                          fill-opacity="0"
+                          stroke="#fff"
+                          stroke-dasharray="54"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M7 16.82c-2.41 -1.25 -4 -3.39 -4 -5.82c0 -3.87 4.03 -7 9 -7c4.97 0 9 3.13 9 7c0 3.87 -4.03 7 -9 7c-1.85 0 -3.57 -0.43 -5 -1.18Z"
+                        >
+                          <animate
+                            fill="freeze"
+                            attributeName="stroke-dashoffset"
+                            dur="0.6s"
+                            values="54;0"
+                          />
+                          <animate
+                            fill="freeze"
+                            attributeName="fill-opacity"
+                            begin="0.9s"
+                            dur="0.4s"
+                            to="1"
+                          />
+                        </path>
+                        <path
+                          d="M5 15.5c1 1 2.5 2 4 2.5c-2 2 -5 3 -7 3c2 -2 3 -3.5 3 -5.5Z"
+                          opacity="0"
+                        >
+                          <set fill="freeze" attributeName="opacity" begin="0.7s" to="1" />
+                          <animate
+                            fill="freeze"
+                            attributeName="d"
+                            begin="0.7s"
+                            dur="0.2s"
+                            values="M5 15.5c1 1 2.5 2 4 2.5c-0.71 -0.24 -1.43 -0.59 -2.09 -1c-0.72 -0.45 -1.39 -0.98 -1.91 -1.5Z;M5 15.5c1 1 2.5 2 4 2.5c-2 2 -5 3 -7 3c2 -2 3 -3.5 3 -5.5Z"
+                          />
+                        </path>
+                      </g>
+                      <g
+                        fill="none"
+                        stroke="#000"
+                        stroke-dasharray="4"
+                        stroke-dashoffset="4"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                      >
+                        <path d="M8 11h0.01">
+                          <animate
+                            fill="freeze"
+                            attributeName="stroke-dashoffset"
+                            begin="1.4s"
+                            dur="0.2s"
+                            to="0"
+                          />
+                        </path>
+                        <path d="M12 11h0.01">
+                          <animate
+                            fill="freeze"
+                            attributeName="stroke-dashoffset"
+                            begin="1.5s"
+                            dur="0.2s"
+                            to="0"
+                          />
+                        </path>
+                        <path d="M16 11h0.01">
+                          <animate
+                            fill="freeze"
+                            attributeName="stroke-dashoffset"
+                            begin="1.6s"
+                            dur="0.2s"
+                            to="0"
+                          />
+                        </path>
+                      </g>
+                    </mask>
+                  </defs>
+                  <path fill="currentColor" d="M0 0h24v24H0z" mask="url(#SVGm3548dEM)" />
+                </svg>
+                <span>
+                  {{ post.comments }}
+                </span>
+              </div>
             </td>
           </tr>
         }

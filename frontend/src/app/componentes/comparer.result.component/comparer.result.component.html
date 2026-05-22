@@ -1,9 +1,9 @@
 <div class="w-full lg:max-w-5xl mx-auto mt-8 px-2 sm:px-4 justify-self-center">
   <div
-    class="rounded-xl border color-border color-surface backdrop-blur-md overflow-hidden shadow-2xl"
+    class="rounded-xl border border-border color-surface backdrop-blur-md overflow-hidden shadow-2xl"
   >
     <div
-      class="hidden lg:grid lg:grid-cols-5 bg-title-table title-text uppercase text-[10px] tracking-widest py-4 px-6 border-b color-border"
+      class="hidden lg:grid lg:grid-cols-5 bg-(--dark-contrast) text-(--primary-text-color) uppercase text-2xs tracking-widest py-4 px-6 border-b border-border"
     >
       <div>Specification</div>
       <div class="text-center">Current</div>
@@ -17,37 +17,43 @@
         @let res = differenceQuantity(key);
         @if (res) {
           <div
-            class="grid grid-cols-3 lg:grid-cols-5 items-center p-4 lg:py-4 lg:px-6 border-b color-border hover:hover-white transition-colors gap-y-3 lg:gap-y-0"
+            class="grid grid-cols-3 lg:grid-cols-5 items-center p-4 lg:py-4 lg:px-6 border-b border-border hover:bg-(--hover-option-color) transition-colors gap-y-3 lg:gap-y-0"
           >
-            <div class="col-span-3 lg:col-span-1 border-b color-border lg:border-0 pb-1 lg:pb-0">
-              <span class="text-xs font-black title-text uppercase tracking-tight">
+            <div class="col-span-3 lg:col-span-1 border-b border-border lg:border-0 pb-1 lg:pb-0">
+              <span class="text-xs font-black text-(--primary-text-color) uppercase tracking-tight">
                 {{ key === 'centerBore' ? 'Center Bore' : (key | titlecase) }}
               </span>
             </div>
 
             <div class="flex flex-col items-start lg:items-center">
-              <span class="lg:hidden text-[8px] uppercase terciary-text font-bold mb-0.5"
+              <span
+                class="lg:hidden text-[8px] uppercase text-(--tertiary-text-color) font-bold mb-0.5"
                 >Current</span
               >
-              <span class="font-mono secondary-text text-sm italic">{{ existingDisc()[key] }}</span>
+              <span class="text-(--secondary-text-color)text-sm italic">{{
+                existingDisc()[key]
+              }}</span>
             </div>
 
             <div class="flex flex-col items-center">
               <span
-                class="lg:hidden text-[8px] uppercase terciary-text font-bold mb-0.5 text-center"
+                class="lg:hidden text-[8px] uppercase text-(--tertiary-text-color) font-bold mb-0.5 text-center"
                 >Desired</span
               >
-              <span class="font-mono font-bold title-text text-sm">{{ desiredDisc()[key] }}</span>
+              <span class="font-bold text-(--primary-text-color) text-sm">{{
+                desiredDisc()[key]
+              }}</span>
             </div>
 
             <div class="flex flex-col items-end lg:items-center">
-              <span class="lg:hidden text-[8px] uppercase terciary-text font-bold mb-0.5 text-right"
+              <span
+                class="lg:hidden text-[8px] uppercase text-(--tertiary-text-color) font-bold mb-0.5 text-right"
                 >Difference</span
               >
               <div class="flex flex-col items-end lg:items-center">
                 <span
-                  [class]="res.value === 0 ? 'terciary-text' : 'secondary-text'"
-                  class="text-xs font-mono"
+                  [class]="res.value === 0 ? 'text-(--tertiary-text-color)' : 'secondary-text'"
+                  class="text-xs"
                 >
                   {{ res.value !== 0 ? res.symbol + res.value : '--' }}
                 </span>
@@ -55,11 +61,11 @@
             </div>
 
             <div
-              class="col-span-3 lg:col-span-1 flex justify-end pt-2 lg:pt-0 border-t color-border lg:border-0"
+              class="col-span-3 lg:col-span-1 flex justify-end pt-2 lg:pt-0 border-t border-border lg:border-0"
             >
               <span
                 [class]="res.class"
-                class="text-[11px] font-black uppercase italic tracking-tighter base-bg px-2 py-0.5 rounded"
+                class="text-2xs font-black uppercase italic tracking-tighter bg-(--base-bg)px-2 py-0.5 rounded"
               >
                 {{ res.fit }}
               </span>

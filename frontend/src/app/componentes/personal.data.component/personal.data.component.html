@@ -7,11 +7,14 @@
         {{ this.profile().username }}
       </h2>
     </div>
-    <div class="absolute top-0 right-0 cursor-pointer" (click)="toggleIsEditing()">
+    <div
+      class="absolute top-1 right-1 md:top-2 md:right-2 cursor-pointer"
+      (click)="toggleIsEditing()"
+    >
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
         <g
           fill="true"
-          stroke="#3b82f6"
+          stroke="var(--contrast-color)"
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-width="1"
@@ -44,7 +47,7 @@
     </div>
     @if (this.profile().flag) {
       <div
-        class="flex flex-col items-center justify-center color-surface border-2 color-border px-4 py-2 rounded-2xl shrink-0 ml-4"
+        class="flex flex-col items-center justify-center color-surface border-2 border-border px-4 py-2 rounded-2xl shrink-0 ml-4"
       >
         <!-- Bandera -->
 
@@ -53,40 +56,43 @@
     }
   </div>
   <div class="grid grid-cols-2 gap-4 my-6">
-    <div class="border-l-4 color-border pl-4">
-      <span class="text-[10px] md:text-[11px] terciary-text uppercase font-black tracking-widest"
+    <div class="border-l-4 border-border pl-4">
+      <span class="text-2xs text-(--tertiary-text-color) uppercase font-black tracking-widest"
         >Email</span
       >
-      <span class="text-sm md:text-base lg:text-lg title-text block truncate font-bold">
+      <span
+        class="text-sm md:text-base lg:text-lg text-(--primary-text-color) block truncate font-bold"
+      >
         {{ this.profile().isOwner ? this.profile().email : '******@ntb.com' }}
       </span>
     </div>
-    <div class="border-l-4 color-border pl-4">
-      <span class="text-[10px] md:text-[11px] terciary-text uppercase font-black tracking-widest"
+    <div class="border-l-4 border-border pl-4">
+      <span class="text-2xs text-(--tertiary-text-color) uppercase font-black tracking-widest"
         >Country</span
       >
       <!-- City -->
 
-      <span class="text-sm md:text-base lg:text-lg title-text block font-bold">
+      <span class="text-sm md:text-base lg:text-lg text-(--primary-text-color) block font-bold">
         {{ this.profile().country ? this.profile().country : 'Country  not set' }}</span
       >
     </div>
     <!-- Pads -->
     <div class="border-l-4 border-red-900/50 pl-4">
-      <span class="text-[10px] md:text-[11px] terciary-text uppercase font-black tracking-widest"
+      <span class="text-2xs text-(--tertiary-text-color) uppercase font-black tracking-widest"
         >Fav Pads</span
       >
 
-      <span class="text-sm md:text-base lg:text-lg title-text italic block font-bold"
+      <span
+        class="text-sm md:text-base lg:text-lg text-(--primary-text-color) italic block font-bold"
         >{{ profile().favPads ? profile().favPads : 'FavPads not set' }}
       </span>
     </div>
     <!-- Circuit -->
-    <div class="border-l-4 color-border pl-4">
-      <span class="text-[10px] md:text-[11px] terciary-text uppercase font-black tracking-widest"
+    <div class="border-l-4 border-border pl-4">
+      <span class="text-2xs text-(--tertiary-text-color) uppercase font-black tracking-widest"
         >Fav Circuit</span
       >
-      <span class="text-sm md:text-base lg:text-lg title-text block font-bold">{{
+      <span class="text-sm md:text-base lg:text-lg text-(--primary-text-color) block font-bold">{{
         profile().favCircuit ? profile().favCircuit : 'FavCircuit not set'
       }}</span>
     </div>
@@ -97,14 +103,14 @@
     <div class="flex justify-between items-center">
       <div class="min-w-0">
         <h2
-          class="text-2xl md:text-3xl lg:text-4xl font-black text-white uppercase italic tracking-tighter truncate"
+          class="text-2xl md:text-3xl lg:text-4xl px-4 font-black text-white uppercase italic tracking-tighter truncate"
         >
           {{ this.profile().username }}
         </h2>
       </div>
       @if (profileForm.get('flagUrl')?.value) {
         <div
-          class="flex flex-col items-center justify-center color-surface border-2 color-border px-4 py-2 rounded-2xl shadow-[0_4px_0_0_rgba(0,0,0,0.5)] shrink-0 ml-4"
+          class="flex flex-col items-center justify-center color-surface border-2 border-border px-4 py-2 rounded-2xl shadow-[0_4px_0_0_rgba(0,0,0,0.5)] shrink-0 ml-4"
         >
           <img
             [src]="profileForm.get('flagUrl')?.value"
@@ -115,17 +121,16 @@
     </div>
 
     <div class="grid grid-cols-2 gap-4 my-6">
-      <!-- Email (Suele ser no editable, pero mantenemos el espacio) -->
-      <div class="border-l-4 color-border/30 pl-4 opacity-50">
-        <span class="text-[10px] md:text-[11px] terciary-text uppercase font-black tracking-widest"
+      <div class="border-l-4 border-border/30 pl-4 opacity-50">
+        <span class="text-2xs text-(--tertiary-text-color) uppercase font-black tracking-widest"
           >Email</span
         >
-        <span class="text-sm block secondary-text italic">No editable</span>
+        <span class="text-sm block text-(--secondary-text-color)italic">No editable</span>
       </div>
 
       <!-- Input Country con datalist -->
       <div class="border-l-4 border-zinc-700 pl-4">
-        <span class="text-[10px] md:text-[11px] terciary-text uppercase font-black tracking-widest"
+        <span class="text-2xs text-(--tertiary-text-color) uppercase font-black tracking-widest"
           >Country</span
         >
         <input
@@ -133,7 +138,7 @@
           (input)="onCountryInput($event)"
           [value]="profileForm.get('country')?.value"
           placeholder="Search..."
-          class="w-full bg-transparent text-sm md:text-base text-white font-bold outline-none border-b color-border focus:border-primary"
+          class="w-full bg-transparent text-sm md:text-base text-white font-bold outline-none border-b border-border focus:border-(--contrast-color)"
         />
         <datalist id="countriesList">
           @for (c of userService.countriesResource.value(); track c.name) {
@@ -144,23 +149,23 @@
 
       <!-- Input Fav Pads -->
       <div class="border-l-4 border-red-900/50 pl-4">
-        <span class="text-[10px] md:text-[11px] terciary-text uppercase font-black tracking-widest"
+        <span class="text-2xs text-(--tertiary-text-color) uppercase font-black tracking-widest"
           >Fav Pads</span
         >
         <input
           formControlName="favPads"
-          class="w-full bg-transparent text-sm md:text-base text-white font-bold outline-none border-b color-border focus:border-blue-500 italic"
+          class="w-full bg-transparent text-sm md:text-base text-white font-bold outline-none border-b border-border focus:border-(--contrast-color) italic"
         />
       </div>
 
       <!-- Input Fav Circuit -->
       <div class="border-l-4 border-zinc-700 pl-4">
-        <span class="text-[10px] md:text-[11px] terciary-text uppercase font-black tracking-widest"
+        <span class="text-2xs text-(--tertiary-text-color) uppercase font-black tracking-widest"
           >Fav Circuit</span
         >
         <input
           formControlName="favCircuit"
-          class="w-full bg-transparent text-sm md:text-base text-white font-bold outline-none border-b color-border focus:border-primary"
+          class="w-full bg-transparent text-sm md:text-base text-white font-bold outline-none border-b border-border focus:border-(--contrast-color)"
         />
       </div>
     </div>
