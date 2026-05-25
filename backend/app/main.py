@@ -1,5 +1,5 @@
 from contextlib import asynccontextmanager
-from pydoc import text
+from sqlalchemy import text
 from exceptions import add_exception_handlers
 from routes.cascade_router import router as cascade_router
 from routes.parent_selector_router import router as parent_selector_router
@@ -19,8 +19,6 @@ from database import SessionDep, check_data_exists, init_db
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     init_db()
-    # if not check_data_exists():
-    #     load_json_data()
 
     yield
     print("Connection Close")
@@ -64,10 +62,8 @@ def git_check(request: Request, session: SessionDep):
     print(f"User-Agent recibido: {request.headers.get('user-agent')}")
     try:
         session.exec(text("SELECT 1"))
-        # Ejecuta la consulta más simple posible
         return {"status": "ok", "database": "connected"}
     except Exception as e:
-        # Si falla, devolvemos un 500 para que Render/GitHub lo sepan
         raise HTTPException(
             status_code=500, detail=f"Database connection failed: {str(e)}"
         )
