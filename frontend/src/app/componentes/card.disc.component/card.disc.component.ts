@@ -1,13 +1,19 @@
 import { ChangeDetectionStrategy, Component, computed, effect, input, signal } from '@angular/core';
 import { Disc } from '../../interfaces/disc/disc';
-import { KeyValuePipe, TitleCasePipe } from '@angular/common';
+import { KeyValuePipe, LowerCasePipe, TitleCasePipe } from '@angular/common';
 import { KonvaDiscComponent } from '../konva.disc.component/konva.disc.component';
 import { KonvaProfileDiscComponent } from '../konva.profile.disc.component/konva.profile.disc.component';
 import { DiscTheme, THEMES } from '../../styles/discThemes';
 
 @Component({
   selector: 'card-disc-component',
-  imports: [KeyValuePipe, KonvaDiscComponent, KonvaProfileDiscComponent],
+  imports: [
+    KeyValuePipe,
+    KonvaDiscComponent,
+    KonvaProfileDiscComponent,
+    LowerCasePipe,
+    TitleCasePipe,
+  ],
   templateUrl: './card.disc.component.html',
   styleUrl: './card.disc.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

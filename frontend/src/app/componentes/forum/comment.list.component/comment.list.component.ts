@@ -24,12 +24,16 @@ export class CommentListComponent {
   commentResource = input.required<ResourceRef<Pagination<Comment>>>();
   paginationComments = computed(() => this.commentResource().value());
   commentListUpdate = output<void>();
+  commentDeleteUpdate = output<void>();
   getItemsByPage(page: number) {
     if (page === this.paginationComments().page) return;
     if (page === this.paginationComments().pages + 1) return;
     this.pageChange.emit(page);
   }
   commentUpdate() {
+    this.commentListUpdate.emit();
+  }
+  commentDelete() {
     this.commentListUpdate.emit();
   }
 }

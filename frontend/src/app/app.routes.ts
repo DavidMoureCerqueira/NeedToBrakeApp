@@ -26,7 +26,6 @@ export const routes: Routes = [
     },
   },
   {
-    // TODO:cambiar el path para que no sea la principal
     path: 'select',
     component: SelectDiscPageComponent,
     title: 'Choose disc - NeedToBrake',

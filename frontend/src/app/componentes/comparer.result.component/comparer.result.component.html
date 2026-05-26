@@ -21,7 +21,7 @@
           >
             <div class="col-span-3 lg:col-span-1 border-b border-border lg:border-0 pb-1 lg:pb-0">
               <span class="text-xs font-black text-(--primary-text-color) uppercase tracking-tight">
-                {{ key === 'centerBore' ? 'Center Bore' : (key | titlecase) }}
+                {{ key === 'centerBore' ? 'Center Bore' : (key | lowercase | titlecase) }}
               </span>
             </div>
 

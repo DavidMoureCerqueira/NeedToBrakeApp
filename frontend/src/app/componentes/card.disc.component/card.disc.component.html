@@ -126,7 +126,7 @@
         @if (item.key !== 'id') {
           <div class="flex justify-between items-center py-1 border-b border-border last:border-0">
             <span class="text-xs font-bold text-(--secondary-text-color)uppercase tracking-widest">
-              {{ item.key }}
+              {{ item.key | lowercase | titlecase }}
             </span>
             <span class="text-sm font-semibold">
               {{ item.value || '---' }}

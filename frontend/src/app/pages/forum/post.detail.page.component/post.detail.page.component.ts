@@ -89,7 +89,6 @@ export class PostDetailPageComponent {
         },
       });
     } else {
-      console.log('Vamos a quitar el like');
       this.forumService.unLikeToPost(this.post().id).subscribe({
         next: (res) => {
           if (res.success && res.data) {

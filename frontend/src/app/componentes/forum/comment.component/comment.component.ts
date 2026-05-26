@@ -32,6 +32,7 @@ export class CommentComponent {
   commentService = inject(CommentService);
   resource = input.required<ResourceRef<Pagination<Comment>>>();
   commentUpdate = output<void>();
+  commentDelete = output<void>();
   private snackbar = inject(MatSnackBar);
 
   editForm = new FormGroup({
@@ -83,6 +84,7 @@ export class CommentComponent {
         });
         this.isEditing.set(false);
         this.resource().reload();
+        this.commentDelete.emit();
       },
       error: (err) => {
         this.snackbar.open(err, 'close', {
