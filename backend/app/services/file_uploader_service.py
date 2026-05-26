@@ -7,8 +7,8 @@ def upload_image(file, folder="avatars"):
         folder=folder,
         resource_type="image",
         transformations=[
-            {"width": 500, "height": 500, "crop": "limit"},  # No más de 500px
-            {"quality": "auto"},  # Compresión inteligente
+            {"width": 500, "height": 500, "crop": "limit"},
+            {"quality": "auto"},
             {"fetch_format": "auto"},
         ],
     )

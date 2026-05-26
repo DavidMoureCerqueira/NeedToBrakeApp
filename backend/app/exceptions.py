@@ -150,11 +150,7 @@ def create_error_response(request: Request, message: str, status_code: int):
         status_code=status_code,
         content=ModelResp(success=False, error=message).model_dump(),
     )
-
-    # CORS Dinámico: Leemos el origin de la petición
     origin = request.headers.get("origin")
-    # origins debería ser tu lista de ["http://localhost:4200", ...]
-    # Si no quieres importar la lista, puedes ser menos estricto con: if origin:
     response.headers["Access-Control-Allow-Origin"] = origin or "*"
     response.headers["Access-Control-Allow-Credentials"] = "true"
     response.headers["Access-Control-Allow-Methods"] = "*"
@@ -165,7 +161,7 @@ def create_error_response(request: Request, message: str, status_code: int):
 
 def add_exception_handlers(app):
 
-    # 1. Tus excepciones personalizadas (todas caen aquí)
+    # 1. Excepciones personalizadas
     @app.exception_handler(NeedToBrakeException)
     async def custom_exception_handler(request: Request, exc: NeedToBrakeException):
         return create_error_response(request, exc.message, exc.status_code)
