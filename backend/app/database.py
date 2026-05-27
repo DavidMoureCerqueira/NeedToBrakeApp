@@ -11,38 +11,24 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 
 engine = create_engine(
     DATABASE_URL,
-    connect_args={
-        # Al poner "ssl": True, PyMySQL activa la conexión segura
-        # sin esperar parámetros extraños en la URL.
-        "ssl": {}
-    },
+    connect_args={"ssl": {}},
     echo=True,
 )
-#  echo: Para ver las consultas en la consola
 
 
-# Fabrica de sesiones, para conectar a la base de datos y cierre automático.
 def get_session():
     with Session(engine) as session:
         yield session
 
 
 SessionDep = Annotated[Session, Depends(get_session)]
-# Annotated es un tipo que proporciona una instrucción para obtener ese tipo
 
 
 def init_db():
-    # from models.table_models import Brand
-    # from models.table_models import Model
-    # from models.table_models import Version
-    # from models.table_models import Disc
-
-    # SQLModel.metadata.create_all(engine)
     pass
 
 
 def check_data_exists() -> bool:
-    """It is used to check if its needed to make the initial seeding"""
     with Session(engine) as session:
         exist_data = session.exec(select(Brand)).first()
         if exist_data:
